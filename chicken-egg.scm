@@ -1,0 +1,116 @@
+;;;;
+;;;; genturfahi - lo la .ckim. ke pe'a jajgau ratcu ke'e genturfa'i
+;;;;            `-> A Scheme packrat parser.
+;;;;
+;;;; Copyright (c) 2010 ".alyn.post." <alyn.post@lodockikumazvati.org>
+;;;;
+;;;; Permission to use, copy, modify, and/or distribute this software for any
+;;;; purpose with or without fee is hereby granted, provided that the above
+;;;; copyright notice and this permission notice appear in all copies.
+;;;;
+;;;; THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+;;;; WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+;;;; MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+;;;; ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+;;;; WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+;;;; ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+;;;;
+
+(module genturfahi
+  (genturfahi
+   genturfahi*
+   genturfahi-version
+   genturfahi-version-major
+   genturfahi-version-minor
+   genturfahi-version-patch
+
+   ; lerfu-porsi
+   ;
+   make-lerfu-porsi
+   make-lerfu-porsi-string
+   make-lerfu-porsi-port
+   make-lerfu-porsi-pabalvi-lerfu
+   lerfu-porsi?
+   lerfu-porsi-zva
+   lerfu-porsi-poi
+   lerfu-porsi-string
+
+   lerfu-porsi->string
+
+   lerfu-porsi-lerfu
+   lerfu-porsi-fanmo?
+
+
+   ; javni-valsi
+   ;
+   make-javni-valsi
+   javni-valsi?
+   javni-valsi-cme
+   javni-valsi-val
+
+   javni-valsi->string
+
+   ; javni-valsi-syntax
+   make-javni-valsi-nacmene
+
+
+   ; nunjavni
+   ;
+   nunjavni-lerfu
+   ;XXX: nunjavni-re
+   nunjavni-fanmo
+   nunjavni-e
+   nunjavni-*
+   nunjavni-+
+   nunjavni-?
+   nunjavni-&
+   nunjavni-!
+   nunjavni-je
+   nunjavni-jonai
+
+   genturfahi-tolmohi
+   nunjavni-morji
+
+   ; nunjavni syntax
+   nunjavni-naselci
+   nunjavni-samselpla
+   nunjavni-samselpla-fanmo
+   nunjavni-samselpla-midju
+   nunjavni-cmene
+
+   ; syntax helpers
+   nunjavni-samselpla-mapti
+   nunjavni-cmene*)
+
+(import chicken)
+(import scheme)
+
+(require-extension utf8)
+
+(require-extension srfi-1)
+;(require-extension srfi-6)  ; built-in
+;(require-extension srfi-9)  ; built-in
+(require-extension srfi-13)
+;(require-extension srfi-28) ; built-in
+;(require-extension extras)  ; only needed when I'm debugging
+(require-extension ports)
+
+(import srfi-1)  ; filter
+;(import srfi-6)  ; string ports
+;(import srfi-9)  ; define-record-type
+;(import srfi-28) ; basic format strings
+;(import extras)  ; pretty-print (only needed when I'm debugging)
+(import srfi-13)  ; string-copy
+(import ports)    ; Chicken Scheme srfi-6 and port extensions
+
+;(declare (unsafe))
+;(declare fixnum)
+
+(include "version.scm")
+(include "lerfu-porsi.scm")
+(include "javni-valsi.scm")
+(include "javni-valsi-syntax.scm")
+(include "nunjavni.scm")
+(include "nunjavni-syntax.scm")
+(include "genturfahi.scm"))

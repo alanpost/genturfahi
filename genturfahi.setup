@@ -1,0 +1,23 @@
+(include "version.scm")
+
+(define (dynld-name fn)		
+  (make-pathname #f fn ##sys#load-dynamic-extension))	
+
+; dynamic library
+(compile -s -O2 -d1 -o ,(dynld-name "genturfahi") -j genturfahi chicken-egg.scm)
+(compile -s -O2 -d1 genturfahi.import.scm)
+
+; static library
+(compile -c -O2 -d1 -o "genturfahi.o" "chicken-egg.scm" -unit genturfahi)
+
+(install-extension
+  ; lo cmene vi pagbu
+  'genturfahi
+
+  ; lo datnyvei vi pagbu
+  `("genturfahi.o"
+    ,(dynld-name "genturfahi")
+    ,(dynld-name "genturfahi.import"))
+
+  ; lo se ckaji vi pagbu
+  `((version genturfahi-version)))

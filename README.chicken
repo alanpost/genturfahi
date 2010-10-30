@@ -1,0 +1,5 @@
+chicken-egg.scm is the wrapper file containing Chicken Scheme
+specific code.
+
+Everything else here is intended to run on other suitably featured
+Scheme implementations.
