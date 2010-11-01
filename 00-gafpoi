@@ -1,0 +1,113 @@
+ni'o lo gafpoi
+==============
+
+.i detri fa li renopano pi'e papa pi'e nopa
+-------------------------------------------
+
+ * I've added project documentation, 00-*, to the repository.
+ * I've converted this repository to git.
+
+
+.i detri fa li renopano pi'e pano pi'e cipa
+-------------------------------------------
+
+ * I've fixed a bug where with any sufficiently complex grammar I
+   would not return the proper abstract syntax tree.  I was walking
+   the val member of javni-valsi as if it were a flat list, when it
+   fact it could be returned as a tree.
+ * I've added nunjavni-re and nunjavni-. rule generators.  "re" is
+   regular expression, and "." is the match any single character
+   rule.
+
+
+.i detri fa li renopano pi'e pano pi'e cino
+-------------------------------------------
+
+ * The salmonella report indicates my egg didn't build today:
+
+     http://tests.call-cc.org/current/salmonella-report/genturfahi.html
+
+   I was missing a dependency on utf8.  I've corrected this in the
+   repository.
+
+.i detri fa li renopano pi'e pano pi'e cino
+-------------------------------------------
+
+ * [.alyn.post.] I have released the initial version of this
+   package.  I made an announcement on the chicken-users mailing
+   list:
+
+     http://lists.nongnu.org/archive/html/chicken-users/2012-10/msg00184.html
+
+ * I've added full documentation for this package to the Chicken
+   wiki:
+
+     http://wiki.call-cc.org/eggref/4/genturfahi
+
+ * I've added test cases for every feature of this package.  The
+   places that could use more testing:
+
+     * samselpla: It works, but I don't verify the code doesn't
+                  execute until the end of the parse.
+     * morji:     I use the memoization code, but I haven't verified
+                  I'm using every code path in it, nor have I tested
+                  it is behaving as I expect it to.
+
+ * I found a bug in the handling of #!optional parameters to
+   functions, and filed a ticket:
+
+     https://bugs.call-cc.org/ticket/421
+
+   The bug is fixed in commit bcea30312d1c4f3c6815dcb73b79a2ad9d08e288,
+   and I've converted my code to use #!key, which doesn't have this
+   issue.  By using #!key rather than #!optional, this module won't
+   depend on the experimental branch of chicken.
+
+
+.i detri fa li renopano pi'e pano pi'e reze
+-------------------------------------------
+
+ * [.alyn.post.] genturfa'i is now feature compatible with Tony
+   Garnock-Jones' packrat parser.
+
+
+.i detri fa li renopano pi'e pano pi'e paze
+-------------------------------------------
+
+ * [.alyn.post.] Enable utf8 text input.  Some Lojban text uses
+   the guillemot and other non-ASCII punctuation.  utf8 is not
+   currently tested.
+ * [.alyn.post.] Converted (! nonterminal-id) parts to () parts,
+   matching the empty set.  I discovered how to parse the empty
+   set after reading the uri-generic parser.  I didn't previously
+   believe the feature was supported.
+
+
+.i detri fa li renopano pi'e pano pi'e paxa
+-------------------------------------------
+
+ * [.alyn.post.] Added --help and --version command-line options
+   using args-fold from srfi-37.
+ * [.alyn.post.] This packaged is officially version 0.0.1.
+
+
+.i detri fa li renopano pi'e pano pi'e pano
+-------------------------------------------
+
+ * [.alyn.post.] Added this file 00-gafpoi (.i.e., ChangeLog),
+   describing jbogi'e, a Lojban parser. 
+ * [.alyn.post.] This software is available under an ISC license, as
+   stated in the file LICENSE.
+ * [.alyn.post.] Added the file 00-ci'arfi'i (i.e., AUTHORS), with my
+   name in it.
+ * [.alyn.post.] Added the file 00-selgu'a (.i.e., TODO),
+   describing the sprint and product backlogs.
+ * [.alyn.post.] Added the file 00-tisetcidu (.i.e., README),
+   describing genturfa'i, a packrat parser. 
+ * [.alyn.post.] I've created the basic project infrastructure for my
+   packrat parser, genturfa'i.  This is a PEG parser written in
+   Scheme.
+
+|------------------------------------------------------------(fa'o)--|
+                                                                 ..__
+                                                                 `' "

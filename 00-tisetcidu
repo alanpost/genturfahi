@@ -1,0 +1,41 @@
+ni'o la genturfa'i
+==================
+
+.i lo la .ckim. ke pe'a jajgau ratcu ke'e genturfa'i
+
+
+Installation
+------------
+
+ $ cd $WA/chicken-eggs/genturfahi/trunk
+ $ chicken-install -s -test
+
+
+Source Code
+-----------
+
+  00-ci'arfi'i            - AUTHORS
+  00-gafpoi               - ChangeLog
+  00-selgu'a              - TODO
+  00-tisetcidu            - README
+  chicken-egg.scm         - Chicken Scheme 'egg' package support.
+  genturfahi.scm          - main program.
+  javni-valsi-syntax.scm  - syntax for abstract syntax tree.
+  javni-valsi.scm         - abstract syntax tree.
+  lerfu-porsi.scm         - parse input.
+  nunjavni-syntax.scm     - syntax for rule generators.
+  nunjavni.scm            - rule generators.
+  version.scm             - version information for library.
+  tests                   - unit test.
+
+
+About
+-----
+
+Please see the documentation at:
+
+  http://wiki.call-cc.org/eggref/4/genturfahi
+
+|------------------------------------------------------------(fa'o)--|
+                                                                 ..__
+                                                                 `' "

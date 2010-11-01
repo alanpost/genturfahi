@@ -1,0 +1,40 @@
+Backlog
+=======
+
+Sprint Backlog
+--------------
+
+ * [open] Create grammar for PEG file parsing.
+
+
+Product Backlog
+---------------
+
+ * [] Create a wrapper to export English translations of the API
+      code.
+ * [] Optimize compiler settings based on performance test.
+ * [] Performance testing on code.
+ * [] Write tests for PEG file parser.
+ * [] Write PEG parser application manpage. 
+ * [] Create a PEG file parser application.
+ * [open] Create bootstrap compiler for file parser.
+ * [open] Create grammar for PEG file parser.
+ * [done] Add full API documentation.
+ * [done] Add test cases for each syntax element in the parser. 
+ * [done] Create a Chicken Scheme egg for this project.
+ * [done] Implement code for each syntactic element in packrat
+          parsers:
+   * [done] terminals
+   * [done] empty string
+   * [done] end of input
+   * [done] sequence
+   * [done] ordered-choice
+   * [done] zero-or-more
+   * [done] one-or-more
+   * [done] optional
+   * [done] and-predicate
+   * [done] not-predicate
+
+|------------------------------------------------------------(fa'o)--|
+                                                                 ..__
+                                                                 `' "
