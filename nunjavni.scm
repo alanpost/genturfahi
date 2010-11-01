@@ -54,17 +54,6 @@
                  (make-javni-valsi-nacmene (lerfu-porsi-lerfu porsi)))))))
 
 
-;; selci: parse any single character. 
-;;
-(define (nunjavni-.)
-  (lambda (porsi mapti namapti)
-    (if (lerfu-porsi-fanmo? porsi)
-        (namapti porsi)
-        (mapti (make-lerfu-porsi-pabalvi-lerfu porsi)
-               (lambda ()
-                 (make-javni-valsi-nacmene (lerfu-porsi-lerfu porsi)))))))
-
-
 ;; empty-string: parse the empty string, which always succeeds without
 ;;               advancing input.
 ;;
@@ -73,7 +62,7 @@
     (mapti porsi (lambda () (make-javni-valsi-nacmene "")))))
 
 
-;; regular expression: match the provided regular expression pattern
+;; regular expression: match the provided in regular expression
 ;;
 (define (nunjavni-re pattern)
   (let ((re (regexp (string-append "^" pattern))))
