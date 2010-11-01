@@ -18,13 +18,17 @@ Source Code
   00-gafpoi               - ChangeLog
   00-selgu'a              - TODO
   00-tisetcidu            - README
+  bootstrap.scm           - PEG parser bootstrap.
   chicken-egg.scm         - Chicken Scheme 'egg' package support.
   genturfahi.scm          - main program.
+  genturfahi.peg          - main program.
   javni-valsi-syntax.scm  - syntax for abstract syntax tree.
   javni-valsi.scm         - abstract syntax tree.
   lerfu-porsi.scm         - parse input.
   nunjavni-syntax.scm     - syntax for rule generators.
   nunjavni.scm            - rule generators.
+  samselpla.scm           - code shared between bootstrap compiler
+                            and genturfahi.peg.
   version.scm             - version information for library.
   tests                   - unit test.
 
