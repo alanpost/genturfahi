@@ -98,24 +98,24 @@
 (require-extension utf8)
 
 (require-extension srfi-1)
-;(require-extension srfi-6)  ; built-in
-;(require-extension srfi-9)  ; built-in
+;(require-extension srfi-6)         ; built-in
+;(require-extension srfi-9)         ; built-in
 (require-extension srfi-13)
-;(require-extension srfi-28) ; built-in
-;(require-extension srfi-61) ; built-in
-;(require-extension extras)  ; only needed when I'm debugging
+;(require-extension srfi-28)        ; built-in
+;(require-extension srfi-61)        ; built-in
+(require-extension extras)         ; only needed when I'm debugging
 (require-extension ports)
 (require-extension data-structures)
 (require-library regex)
 
-(import srfi-1)  ; filter
-;(import srfi-6)  ; string ports
-;(import srfi-9)  ; define-record-type
-(import srfi-13)  ; string-copy
-;(import srfi-28) ; basic format strings
-;(import srfi-69)  ; A more general cond clause
-;(import extras)  ; pretty-print (only needed when I'm debugging)
-(import ports)    ; Chicken Scheme srfi-6 and port extensions
+(import srfi-1)          ; filter
+;(import srfi-6)          ; string ports
+;(import srfi-9)          ; define-record-type
+(import srfi-13)         ; string-copy
+;(import srfi-28)         ; basic format strings
+;(import srfi-69)         ; A more general cond clause
+(import extras)         ; pretty-print (only needed when I'm debugging)
+(import ports)           ; Chicken Scheme srfi-6 and port extensions
 (import data-structures) ; flatten
 (import regex)           ; Irregular expressions
 

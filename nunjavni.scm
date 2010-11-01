@@ -21,26 +21,26 @@
 ;;; nunjavni - javni generators
 ;;;
 
-;; selci: parse a single character.
+;; selci: parse a single specified character.
 ;;
 (define (nunjavni-lerfu lerfu)
   (lambda (porsi mapti namapti)
     (if (char=? lerfu (lerfu-porsi-lerfu porsi))
-        (let ((pabalvi (make-lerfu-porsi-pabalvi-lerfu porsi)))
-          (mapti pabalvi (lambda () (make-javni-valsi-nacmene lerfu))))
+        (mapti (make-lerfu-porsi-pabalvi-lerfu porsi)
+               (lambda () (make-javni-valsi-nacmene lerfu)))
         (namapti porsi))))
 
-;; like |nunjavni-lerfu|, but we don't advance the |lerfu-porsi| on success.
+
+;; selci: parse the end of input.
 ;;
 ;; Should this rule return the sentinel character, or should there
 ;; be a separate option for the value to return at the end of the file?
 ;;
 (define (nunjavni-fanmo)
   (lambda (porsi mapti namapti)
-    (if (and (char=? #\nul (lerfu-porsi-lerfu porsi))
-             (lerfu-porsi-fanmo? porsi))
-      (mapti porsi (lambda () (make-javni-valsi-nacmene #\nul)))
-      (namapti porsi))))
+    (if (lerfu-porsi-fanmo? porsi)
+        (mapti porsi (lambda () (make-javni-valsi-nacmene #\nul)))
+        (namapti porsi))))
 
 
 ;; selci: parse any single character. 
@@ -62,7 +62,7 @@
     (mapti porsi (lambda () (make-javni-valsi-nacmene "")))))
 
 
-;; regular expression: match the provided regular expression pattern
+;; regular expression: match the provided in regular expression
 ;;
 (define (nunjavni-re pattern)
   (let ((re (regexp (string-append "^" pattern))))
@@ -153,11 +153,13 @@
 ;;
 (define (nunjavni-& javni)
   (lambda (porsi mapti namapti)
-    (let ((mapti-& (lambda (ignore-porsi nunvalsi)
-                      (mapti porsi nunvalsi)))
-          (namapti-& (lambda (ignore-porsi)
-                      (namapti porsi))))
-      (javni porsi mapti-& namapti-&))))
+    (define (mapti-& ignore-porsi nunvalsi)
+      (mapti porsi nunvalsi))
+
+    (define (namapti-& ignore-porsi)
+      (namapti porsi))
+
+    (javni porsi mapti-& namapti-&)))
 
 
 ;; not-predicate: require that javni is not able to be parsed from
@@ -203,23 +205,23 @@
       (let ((javni (car rodajavni))
             (rest (cdr rodajavni)))
         (if (null? rest)
-          ; called at the end of the list
-          (let ((mapti-je (lambda (porsi nunvalsi)
-                             (set-cdr! fanmo (list nunvalsi))
-                             (mapti porsi
-                                    (apply vejmina-nunvalsi (cdr cfari))))))
-            (javni porsi mapti-je namapti-je))
+            ; called at the end of the list
+            (let ((mapti-je (lambda (porsi nunvalsi)
+                               (set-cdr! fanmo (list nunvalsi))
+                               (mapti porsi
+                                      (apply vejmina-nunvalsi (cdr cfari))))))
+              (javni porsi mapti-je namapti-je))
 
-          ; called when there are still elements in the list
-          (let ((mapti-je (lambda (porsi nunvalsi)
-                             (set-cdr! fanmo (list nunvalsi))
-                             (javni-je porsi
-                                       mapti
-                                       namapti
-                                       rest
-                                       cfari: cfari
-                                       fanmo: (cdr fanmo)))))
-            (javni porsi mapti-je namapti-je)))))
+            ; called when there are still elements in the list
+            (let ((mapti-je (lambda (porsi nunvalsi)
+                               (set-cdr! fanmo (list nunvalsi))
+                               (javni-je porsi
+                                         mapti
+                                         namapti
+                                         rest
+                                         cfari: cfari
+                                         fanmo: (cdr fanmo)))))
+              (javni porsi mapti-je namapti-je)))))
 
     (javni-je porsi mapti namapti rodajavni)))
 
@@ -235,13 +237,14 @@
     (let ((javni (car rodajavni))
           (rest (cdr rodajavni)))
       (if (null? rest)
-        ; called at the end of the list
-        (javni porsi mapti namapti)
+          ; called at the end of the list
+          (javni porsi mapti namapti)
 
-        ; called when there are still elements in the list
-        (let ((namapti-jonai (lambda (porsi)
-                              (javni-jonai porsi mapti namapti rest))))
-          (javni porsi mapti namapti-jonai)))))
+          ; called when there are still elements in the list
+          (let ((namapti-jonai (lambda (porsi)
+                                (javni-jonai porsi mapti namapti rest))))
+            (javni porsi mapti namapti-jonai)))))
+
   javni-jonai)
 
 
@@ -292,19 +295,23 @@
               (apply namapti (cdr assv-valsi)))
 
             (define (javni-morji)
-              (let ((mapti-morji (lambda (porsi nunvalsi)
-                                     (set-mapti-cache! cache-porsi
-                                                       porsi
-                                                       nunvalsi)
-                                     (mapti porsi nunvalsi)))
-                    (namapti-morji (lambda (porsi)
-                                       (set-namapti-cache! cache-porsi
-                                                           porsi)
-                                      (namapti porsi))))
-                (javni cache-porsi mapti-morji namapti-morji)))
+              (define (mapti-morji porsi nunvalsi)
+                (set-mapti-cache! cache-porsi
+                                  porsi
+                                  nunvalsi)
+                (mapti porsi nunvalsi))
 
+              (define (namapti-morji porsi)
+                (set-namapti-cache! cache-porsi porsi)
+                (namapti porsi))
+
+              (javni cache-porsi mapti-morji namapti-morji))
+
+                   ; search the match results
             (cond ((assv cache-porsi mapti-cache) => mapti-morji)
+                   ; search the non-match results
                   ((assv cache-porsi namapti-cache) => namapti-morji)
+                   ; run the rule.
                   (else (javni-morji)))))))))
 
 (define (nunjavni-samselpla-mapti samselpla javni)

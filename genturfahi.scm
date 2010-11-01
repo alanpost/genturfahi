@@ -47,8 +47,8 @@
 
   (lambda (lefpoi)
     (let ((porsi (if (port? lefpoi)
-                   (make-lerfu-porsi-port lefpoi)
-                   (make-lerfu-porsi-string lefpoi))))
+                     (make-lerfu-porsi-port lefpoi)
+                     (make-lerfu-porsi-string lefpoi))))
       (javni porsi mapti namapti))))
 
 (define (genturfahi* javni)
