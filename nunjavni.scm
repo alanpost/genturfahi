@@ -68,7 +68,8 @@
   (let ((re (regexp (string-append "^" pattern))))
     (lambda (porsi mapti namapti)
       (define (javni-re lefpoi)
-        (mapti (make-lerfu-porsi-pabalvi-valsi porsi (car lefpoi))
+        (mapti (make-lerfu-porsi-pabalvi-valsi porsi
+                                               (string-length (car lefpoi)))
                (lambda () (make-javni-valsi-nacmene (car lefpoi)))))
 
       (let ((zva (lerfu-porsi-zva porsi))
