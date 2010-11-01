@@ -68,4 +68,5 @@
   (test '(#f "dc") (genturfahi-jonai "dc"))
   0)
 
-(jonai)
+(test-group "jonai"
+  (jonai))

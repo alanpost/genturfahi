@@ -81,4 +81,5 @@
   (test '(() "") (genturfahi-re ""))
   0))
 
-(re)
+(test-group "re"
+  (re))

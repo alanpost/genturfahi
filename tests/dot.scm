@@ -37,4 +37,5 @@
   (test '(#f "") (genturfahi-. ""))
   0)
 
-(dot)
+(test-group "dot"
+  (dot))

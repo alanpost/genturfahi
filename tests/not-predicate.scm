@@ -54,4 +54,5 @@
   (test '("" "cc") (genturfahi-not-predicate "cc"))
   0)
 
-(not-predicate)
+(test-group "not-predicate"
+  (not-predicate))

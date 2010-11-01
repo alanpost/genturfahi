@@ -35,4 +35,5 @@
   (test '("" "abc") (genturfahi-empty-string "abc"))
   0)
 
-(empty-string)
+(test-group "empty-string"
+  (empty-string))

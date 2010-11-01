@@ -61,4 +61,5 @@
   (test '("" "da") (genturfahi-optional "da"))
   0)
 
-(optional?)
+(test-group "optional?"
+  (optional?))

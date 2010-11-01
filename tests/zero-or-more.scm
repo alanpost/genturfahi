@@ -71,4 +71,5 @@
   (test '(() "daaa") (genturfahi-zero-or-more "daaa"))
   0)
 
-(zero-or-more)
+(test-group "zero-or-more"
+  (zero-or-more))

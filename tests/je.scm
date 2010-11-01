@@ -77,4 +77,5 @@
   (test '(#f "dabc") (genturfahi-je "dabc"))
   0)
 
-(je)
+(test-group "je"
+  (je))

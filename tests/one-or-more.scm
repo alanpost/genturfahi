@@ -65,4 +65,5 @@
   (test '(#f "daaa") (genturfahi-one-or-more "daaa"))
   0)
 
-(one-or-more)
+(test-group "one-or-more"
+  (one-or-more))

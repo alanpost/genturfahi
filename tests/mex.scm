@@ -93,4 +93,5 @@
     (test 42 (mex "3*4+5*6")))
     0)
 
-(mex)
+(test-group "mex"
+  (mex))

@@ -77,4 +77,5 @@
   (test '(#f "dc") (genturfahi-jonai-naselci "dc"))
   0)
 
-(jonai-naselci)
+(test-group "naselci"
+  (jonai-naselci))

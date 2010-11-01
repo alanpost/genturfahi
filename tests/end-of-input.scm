@@ -41,4 +41,5 @@
   (test `(#f ,(make-string 1 #\nul)) (genturfahi-eof (make-string 1 #\nul)))
   0)
 
-(end-of-input)
+(test-group "end-of-input"
+  (end-of-input))

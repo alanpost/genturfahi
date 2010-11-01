@@ -59,4 +59,5 @@
   (test '(#f "da") (genturfahi-lerfu "da"))
   0)
 
-(lerfu)
+(test-group "lerfu"
+  (lerfu))

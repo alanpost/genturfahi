@@ -71,4 +71,5 @@
   (test '("abc" "c") (genturfahi-samselpla "abcc"))
   0)
 
-(samselpla)
+(test-group "samselpla"
+  (samselpla))

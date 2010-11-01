@@ -60,4 +60,5 @@
   (test '(#f "da") (genturfahi-and-predicate "da"))
   0)
 
-(and-predicate)
+(test-group "and-predicate"
+  (and-predicate))

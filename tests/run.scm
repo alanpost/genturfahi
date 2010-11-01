@@ -15,3 +15,5 @@
 (include "samselpla.scm")
 (include "re.scm")
 (include "mex.scm")
+
+(test-exit)
