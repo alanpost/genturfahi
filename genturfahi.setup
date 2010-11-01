@@ -20,4 +20,4 @@
     ,(dynld-name "genturfahi.import"))
 
   ; lo se ckaji vi pagbu
-  `((version genturfahi-version)))
+  `((version trunk)))
