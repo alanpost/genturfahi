@@ -35,10 +35,8 @@
     ; always clear memoizations, which aren't valid when we get
     ; a new |porsi|.
     (genturfahi-tolmohi)
-    (values (if (list? nunvalsi)
-              (map (lambda (nunvalsi) (javni-valsi-val (nunvalsi)))
-                   nunvalsi)
-              (javni-valsi-val (nunvalsi)))
+
+    (values (javni-nunvalsi-val nunvalsi)
             (lerfu-porsi-string porsi)))
 
   (define (namapti porsi)

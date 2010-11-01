@@ -18,26 +18,8 @@
 ;;;;
 
 ;;;
-;;; javni-valsi
+;;; nunvalsi - valsi generators
 ;;;
-(define-record-type javni-valsi
-  (make-javni-valsi cme val)
-  javni-valsi?
-  (cme javni-valsi-cme)
-  (val javni-valsi-val))
 
-(define (javni-nunvalsi-val nunvalsi)
-  (let ((valsi (nunvalsi)))
-    (if (javni-valsi? valsi)
-        (javni-valsi-val valsi)
-        (map javni-rodavalsi-val valsi))))
-
-(define (javni-rodavalsi-val valsi)
-  (if (javni-valsi? valsi)
-      (javni-valsi-val valsi)
-      (map javni-rodavalsi-val valsi)))
-
-(define (javni-valsi->string valsi)
-  (format "{cmene:~a valsi:~s}"
-          (javni-valsi-cme valsi)
-          (javni-valsi-val valsi)))
+(define (vejmina-nunvalsi . rodanunvalsi)
+  (lambda () (map (lambda (nunvalsi) (nunvalsi)) rodanunvalsi)))

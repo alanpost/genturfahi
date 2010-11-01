@@ -49,11 +49,18 @@
    javni-valsi-cme
    javni-valsi-val
 
+   javni-nunvalsi-val
+   javni-rodavalsi-val
+
    javni-valsi->string
 
    ; javni-valsi-syntax
    make-javni-valsi-nacmene
 
+
+   ; nunvalsi
+   ;
+   vejmina-nunvalsi
 
    ; nunjavni
    ;
@@ -96,6 +103,7 @@
 ;(require-extension srfi-61) ; built-in
 ;(require-extension extras)  ; only needed when I'm debugging
 (require-extension ports)
+(require-extension data-structures)
 
 (import srfi-1)  ; filter
 ;(import srfi-6)  ; string ports
@@ -105,6 +113,7 @@
 ;(import srfi-69)  ; A more general cond clause
 ;(import extras)  ; pretty-print (only needed when I'm debugging)
 (import ports)    ; Chicken Scheme srfi-6 and port extensions
+(import data-structures) ; flatten
 
 ;(declare (unsafe))
 ;(declare fixnum)
@@ -113,6 +122,7 @@
 (include "lerfu-porsi.scm")
 (include "javni-valsi.scm")
 (include "javni-valsi-syntax.scm")
+(include "nunvalsi.scm")
 (include "nunjavni.scm")
 (include "nunjavni-syntax.scm")
 (include "genturfahi.scm"))

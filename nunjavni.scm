@@ -81,7 +81,7 @@
       ; on failure, so we can use it, capturing any
       ; cases that did succeed.
       ;
-      (mapti porsi (cdr cfari)))
+      (mapti porsi (apply vejmina-nunvalsi (cdr cfari))))
 
     (javni porsi mapti-* namapti-*))
   javni-*)
@@ -175,7 +175,8 @@
           ; called at the end of the list
           (let ((mapti-je (lambda (porsi nunvalsi)
                              (set-cdr! fanmo (list nunvalsi))
-                             (mapti porsi (cdr cfari)))))
+                             (mapti porsi
+                                    (apply vejmina-nunvalsi (cdr cfari))))))
             (javni porsi mapti-je namapti-je))
 
           ; called when there are still elements in the list
@@ -279,10 +280,11 @@
   (lambda (porsi mapti namapti)
     (define (mapti-samselpla porsi nunvalsi)
       (define (nunvalsi-samselpla)
-        (let* ((rodavalsi (if (list? nunvalsi)
-                            (map (lambda (nunvalsi) (nunvalsi)) nunvalsi)
-                                 (list (nunvalsi))))
-               (rodacme   (filter javni-valsi-cme rodavalsi))
+        (let* ((rodavalsi (nunvalsi))
+               (rodacme   (filter javni-valsi-cme
+                                  (flatten (if (list? rodavalsi)
+                                               rodavalsi
+                                               (list rodavalsi)))))
                (rodaval   (map javni-valsi-val rodacme))
                (valsi     (apply samselpla rodaval)))
           (make-javni-valsi-nacmene valsi)))
@@ -293,10 +295,6 @@
   (lambda (porsi mapti namapti)
     (define (mapti-cmene porsi nunvalsi)
       (define (nunvalsi-cmene)
-        (let ((valsi (if (list? nunvalsi)
-                       (map (lambda (nunvalsi) (javni-valsi-val (nunvalsi)))
-                            nunvalsi)
-                       (javni-valsi-val (nunvalsi)))))
-          (make-javni-valsi cmene valsi)))
+        (make-javni-valsi cmene (javni-nunvalsi-val nunvalsi)))
       (mapti porsi nunvalsi-cmene))
     (javni porsi mapti-cmene namapti)))
