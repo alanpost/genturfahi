@@ -69,6 +69,7 @@
    nunjavni-.
    nunjavni-e
    nunjavni-fanmo
+   nunjavni-valsi
    nunjavni-re
    nunjavni-*
    nunjavni-+

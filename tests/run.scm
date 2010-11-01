@@ -4,6 +4,7 @@
 (include "end-of-input.scm")
 (include "lerfu.scm")
 (include "dot.scm")
+(include "valsi.scm")
 (include "optional.scm")
 (include "zero-or-more.scm")
 (include "one-or-more.scm")

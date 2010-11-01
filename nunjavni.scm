@@ -62,6 +62,24 @@
         (namapti porsi))))
 
 
+;; selci: parse the specified string
+;;
+(define (nunjavni-valsi valsi)
+  (let ((nilcla (string-length valsi)))
+    (lambda (porsi mapti namapti)
+      (let ((poi (lerfu-porsi-poi porsi))
+            (zva (lerfu-porsi-zva porsi)))
+        (if (string-prefix? valsi
+                            poi
+                            0
+                            nilcla
+                            zva
+                            (- (string-length poi) 1))
+            (mapti (make-lerfu-porsi-pabalvi-valsi porsi nilcla)
+                   (lambda () (make-javni-valsi-nacmene valsi)))
+            (namapti porsi))))))
+
+
 ;; regular expression: match the provided in regular expression
 ;;
 (define (nunjavni-re pattern)
