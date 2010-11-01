@@ -66,10 +66,10 @@
    ; nunjavni
    ;
    nunjavni-lerfu
-   nunjavni-fanmo
-   nunjavni-e
-   nunjavni-re
    nunjavni-.
+   nunjavni-e
+   nunjavni-fanmo
+   nunjavni-re
    nunjavni-*
    nunjavni-+
    nunjavni-?

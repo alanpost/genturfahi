@@ -31,18 +31,6 @@
         (namapti porsi))))
 
 
-;; selci: parse the end of input.
-;;
-;; Should this rule return the sentinel character, or should there
-;; be a separate option for the value to return at the end of the file?
-;;
-(define (nunjavni-fanmo)
-  (lambda (porsi mapti namapti)
-    (if (lerfu-porsi-fanmo? porsi)
-        (mapti porsi (lambda () (make-javni-valsi-nacmene #\nul)))
-        (namapti porsi))))
-
-
 ;; selci: parse any single character. 
 ;;
 (define (nunjavni-.)
@@ -60,6 +48,18 @@
 (define (nunjavni-e)
   (lambda (porsi mapti namapti)
     (mapti porsi (lambda () (make-javni-valsi-nacmene "")))))
+
+
+;; selci: parse the end of input.
+;;
+;; Should this rule return the sentinel character, or should there
+;; be a separate option for the value to return at the end of the file?
+;;
+(define (nunjavni-fanmo)
+  (lambda (porsi mapti namapti)
+    (if (lerfu-porsi-fanmo? porsi)
+        (mapti porsi (lambda () (make-javni-valsi-nacmene #\nul)))
+        (namapti porsi))))
 
 
 ;; regular expression: match the provided in regular expression
