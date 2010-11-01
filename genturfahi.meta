@@ -2,5 +2,5 @@
  (category parsing)
  (doc-from-wiki)
  (license "ISC")
- (needs utf8)
+ (needs regex utf8)
  (synopsis "lo ke pe'a jajgau ratcu ke'e genturfa'i"))

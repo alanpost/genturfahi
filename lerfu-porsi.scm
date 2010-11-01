@@ -82,6 +82,17 @@
     (make-lerfu-porsi (+ zva 1) poi)))
 
 
+;; return a new lerfu-porsi with the position advanced by
+;; the length of the string.
+;;
+(define (make-lerfu-porsi-pabalvi-valsi porsi lefpoi)
+  (let ((zva (lerfu-porsi-zva porsi))
+        (poi (lerfu-porsi-poi porsi)))
+    ; create a new lerfu-porsi incrementing |zva| by
+    ; the length of |lefpoi|.
+    (make-lerfu-porsi (+ zva (string-length lefpoi)) poi)))
+
+
 ;; convert a lerfu-porsi to a string.
 ;;
 (define (lerfu-porsi->string porsi)

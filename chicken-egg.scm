@@ -31,6 +31,7 @@
    make-lerfu-porsi-string
    make-lerfu-porsi-port
    make-lerfu-porsi-pabalvi-lerfu
+   make-lerfu-porsi-pabalvi-valsi
    lerfu-porsi?
    lerfu-porsi-zva
    lerfu-porsi-poi
@@ -65,9 +66,10 @@
    ; nunjavni
    ;
    nunjavni-lerfu
-   ;XXX: nunjavni-re
    nunjavni-fanmo
    nunjavni-e
+   nunjavni-re
+   nunjavni-.
    nunjavni-*
    nunjavni-+
    nunjavni-?
@@ -104,6 +106,7 @@
 ;(require-extension extras)  ; only needed when I'm debugging
 (require-extension ports)
 (require-extension data-structures)
+(require-library regex)
 
 (import srfi-1)  ; filter
 ;(import srfi-6)  ; string ports
@@ -114,6 +117,7 @@
 ;(import extras)  ; pretty-print (only needed when I'm debugging)
 (import ports)    ; Chicken Scheme srfi-6 and port extensions
 (import data-structures) ; flatten
+(import regex)           ; Irregular expressions
 
 ;(declare (unsafe))
 ;(declare fixnum)

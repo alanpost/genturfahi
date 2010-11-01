@@ -43,6 +43,17 @@
       (namapti porsi))))
 
 
+;; selci: parse any single character. 
+;;
+(define (nunjavni-.)
+  (lambda (porsi mapti namapti)
+    (if (lerfu-porsi-fanmo? porsi)
+        (namapti porsi)
+        (mapti (make-lerfu-porsi-pabalvi-lerfu porsi)
+               (lambda ()
+                 (make-javni-valsi-nacmene (lerfu-porsi-lerfu porsi)))))))
+
+
 ;; empty-string: parse the empty string, which always succeeds without
 ;;               advancing input.
 ;;
@@ -50,7 +61,27 @@
   (lambda (porsi mapti namapti)
     (mapti porsi (lambda () (make-javni-valsi-nacmene "")))))
 
-;; XXX: create a nunjavni-re terminal.
+
+;; regular expression: match the provided regular expression pattern
+;;
+(define (nunjavni-re pattern)
+  (let ((re (regexp (string-append "^" pattern))))
+    (lambda (porsi mapti namapti)
+      (define (javni-re lefpoi)
+        (mapti (make-lerfu-porsi-pabalvi-valsi porsi (car lefpoi))
+               (lambda () (make-javni-valsi-nacmene (car lefpoi)))))
+
+      (let ((zva (lerfu-porsi-zva porsi))
+            (poi (lerfu-porsi-poi porsi)))
+                ; search the parse input, being careful to avoid
+                ; the sentinel and already matched parse input.
+        (cond ((string-search
+                 re
+                 poi
+                 zva
+                 (- (string-length poi) zva 1)) => javni-re)
+              (else (namapti porsi)))))))
+
 
 ;; zero-or-more: parse zero or more javni out of the |lerfu-porsi|.
 ;;
