@@ -3,4 +3,5 @@
  (doc-from-wiki)
  (license "ISC")
  (needs regex utf8)
+ (test-depends test)
  (synopsis "lo ke pe'a jajgau ratcu ke'e genturfa'i"))
