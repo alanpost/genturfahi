@@ -58,9 +58,9 @@
      ; javni.
      ;
     ((nunjavni-samselpla-midju ((rodacmene ...) samselpla javni)
-                           (nunjavni-cmene symbol next) rest ...)
+                               (nunjavni-cmene symbol next) rest ...)
      (nunjavni-samselpla-midju ((rodacmene ... symbol) samselpla javni)
-                           next rest ...))
+                               next rest ...))
 
      ; pull apart any non-cmene forms and continue searching.
      ;

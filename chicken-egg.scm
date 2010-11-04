@@ -89,7 +89,7 @@
    nunjavni-samselpla-midju
    nunjavni-cmene
 
-   ; syntax helpers
+   ; nunjavni syntax helpers
    nunjavni-samselpla-mapti
    nunjavni-cmene*)
 
