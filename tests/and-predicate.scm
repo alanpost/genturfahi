@@ -20,7 +20,7 @@
 ;;;
 ;;; and-predicate: &e
 ;;;
-;;; a <- &\#a
+;;; and-predicate <- &\#a
 ;;;
 (define (and-predicate)
   (set! genturfahi-and-predicate

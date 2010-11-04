@@ -20,10 +20,10 @@
 ;;;
 ;;; execute code on syntax tree.
 ;;;
-;;; grammar <- a b c
-;;; a       <- #\a
-;;; b       <- #\b
-;;; c       <- #\c
+;;; gerna <- a b c
+;;; a     <- #\a
+;;; b     <- #\b
+;;; c     <- #\c
 ;;;
 (define (samselpla)
   (set! genturfahi-samselpla

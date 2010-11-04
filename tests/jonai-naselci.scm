@@ -22,10 +22,10 @@
 ;;; this test is identical to the ordered choice file, though the
 ;;; grammar differs.
 ;;;
-;;; grammar <- a / b / c
-;;; a       <- #\a
-;;; b       <- #\a
-;;; c       <- #\a
+;;; jonai <- a / b / c
+;;; a     <- #\a
+;;; b     <- #\a
+;;; c     <- #\a
 ;;;
 (define (jonai-naselci)
   (set! genturfahi-jonai-naselci

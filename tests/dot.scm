@@ -20,7 +20,7 @@
 ;;;
 ;;; dot expression: match any single character.
 ;;;
-;;; a <- .
+;;; dot <- .
 ;;;
 (define (dot)
   (set! genturfahi-.

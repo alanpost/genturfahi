@@ -20,7 +20,7 @@
 ;;;
 ;;; empty-string:
 ;;;
-;;; empty-string <- [empty-string]
+;;; empty-string <- ""
 ;;;
 (define (empty-string)
   (set! genturfahi-empty-string (genturfahi* (nunjavni-e)))

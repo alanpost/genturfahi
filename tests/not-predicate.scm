@@ -20,7 +20,7 @@
 ;;;
 ;;; not-predicate: !e
 ;;;
-;;; a <- !\#a
+;;; not-predicate <- !\#a
 ;;;
 (define (not-predicate)
   (set! genturfahi-not-predicate

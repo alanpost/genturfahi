@@ -20,7 +20,7 @@
 ;;;
 ;;; optional: e?
 ;;;
-;;; a <- \#a?
+;;; optional <- \#a?
 ;;;
 (define (optional?)
   (set! genturfahi-optional

@@ -20,7 +20,7 @@
 ;;;
 ;;; terminal:
 ;;;
-;;; a <- \#a
+;;; lerfu <- \#a
 ;;;
 (define (lerfu)
   (set! genturfahi-lerfu

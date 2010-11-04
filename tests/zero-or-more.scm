@@ -20,7 +20,7 @@
 ;;;
 ;;; zero-or-more: e*
 ;;;
-;;; a <- \#a*
+;;; zero-or-more <- \#a*
 ;;;
 (define (zero-or-more)
   (set! genturfahi-zero-or-more

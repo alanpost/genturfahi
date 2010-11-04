@@ -20,7 +20,7 @@
 ;;;
 ;;; terminal:
 ;;;
-;;; abc <- "abc"
+;;; valsi <- "abc"
 ;;;
 (define (valsi)
   (set! genturfahi-valsi

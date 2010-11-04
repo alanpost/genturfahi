@@ -20,7 +20,7 @@
 ;;;
 ;;; one-or-more: e+
 ;;;
-;;; a <- \#a+
+;;; one-or-more <- \#a+
 ;;;
 (define (one-or-more)
   (set! genturfahi-one-or-more
