@@ -20,8 +20,8 @@
 ;;;
 ;;; regular expression:
 ;;;
-;;; gerna <- (num / alpha)* FAhO
-;;; num   <- [0-9]+
+;;; gerna <- (digit / alpha)* FAhO
+;;; digit <- [0-9]+
 ;;; alpha <- [A-Za-z]+
 ;;; FAhO  <- !.
 ;;;
@@ -34,10 +34,10 @@
                     (nunjavni-cmene x
                       (nunjavni-*
                         (nunjavni-jonai
-                          (nunjavni-naselci num)
+                          (nunjavni-naselci digit)
                           (nunjavni-naselci alpha))))
                   (nunjavni-fanmo)))))
-       (num   (nunjavni-morji
+       (digit (nunjavni-morji
                 (nunjavni-re "[0-9]+")))
        (alpha (nunjavni-morji
                 (nunjavni-re "[A-Za-z]+")))
