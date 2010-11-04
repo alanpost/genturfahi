@@ -26,21 +26,6 @@
 ;;; It is here ported to genturfa'i.
 ;;;
 (define (mex)
-  (set! javni-lerfu-0 (nunjavni-lerfu #\0))
-  (set! javni-lerfu-1 (nunjavni-lerfu #\1))
-  (set! javni-lerfu-2 (nunjavni-lerfu #\2))
-  (set! javni-lerfu-3 (nunjavni-lerfu #\3))
-  (set! javni-lerfu-4 (nunjavni-lerfu #\4))
-  (set! javni-lerfu-5 (nunjavni-lerfu #\5))
-  (set! javni-lerfu-6 (nunjavni-lerfu #\6))
-  (set! javni-lerfu-7 (nunjavni-lerfu #\7))
-  (set! javni-lerfu-8 (nunjavni-lerfu #\8))
-  (set! javni-lerfu-9 (nunjavni-lerfu #\9))
-  (set! javni-lerfu-+ (nunjavni-lerfu #\+))
-  (set! javni-lerfu-* (nunjavni-lerfu #\*))
-  (set! javni-lerfu-lparen (nunjavni-lerfu #\())
-  (set! javni-lerfu-rparen (nunjavni-lerfu #\)))
-
   (let ((mex
     (letrec
       ((expr   (nunjavni-morji
@@ -48,7 +33,7 @@
                    (nunjavni-samselpla (+ a b)
                      (nunjavni-je
                        (nunjavni-cmene a (nunjavni-naselci mulexp))
-                       javni-lerfu-+
+                       (nunjavni-lerfu #\+)
                        (nunjavni-cmene b (nunjavni-naselci mulexp))))
                    (nunjavni-naselci mulexp))))
        (mulexp (nunjavni-morji
@@ -56,7 +41,7 @@
                    (nunjavni-samselpla (* a b)
                      (nunjavni-je
                        (nunjavni-cmene a (nunjavni-naselci simple))
-                       javni-lerfu-*
+                       (nunjavni-lerfu #\*)
                        (nunjavni-cmene b (nunjavni-naselci simple))))
                    (nunjavni-naselci simple))))
        (simple (nunjavni-morji
@@ -64,24 +49,24 @@
                    (nunjavni-naselci num)
                    (nunjavni-samselpla a
                      (nunjavni-je
-                       javni-lerfu-lparen
+                       (nunjavni-lerfu #\()
                        (nunjavni-cmene a (nunjavni-naselci expr))
-                       javni-lerfu-rparen)))))
+                       (nunjavni-lerfu #\)))))))
        (num    (nunjavni-morji
                  (nunjavni-samselpla (string->number (list->string a))
                    (nunjavni-cmene a (nunjavni-+ (nunjavni-naselci digit))))))
        (digit  (nunjavni-morji
                  (nunjavni-jonai
-                   javni-lerfu-0
-                   javni-lerfu-1
-                   javni-lerfu-2
-                   javni-lerfu-3
-                   javni-lerfu-4
-                   javni-lerfu-5
-                   javni-lerfu-6
-                   javni-lerfu-7
-                   javni-lerfu-8
-                   javni-lerfu-9))))
+                   (nunjavni-lerfu #\0)
+                   (nunjavni-lerfu #\1)
+                   (nunjavni-lerfu #\2)
+                   (nunjavni-lerfu #\3)
+                   (nunjavni-lerfu #\4)
+                   (nunjavni-lerfu #\5)
+                   (nunjavni-lerfu #\6)
+                   (nunjavni-lerfu #\7)
+                   (nunjavni-lerfu #\8)
+                   (nunjavni-lerfu #\9)))))
       (genturfahi expr))))
 
     (test 2  (mex "2"))
