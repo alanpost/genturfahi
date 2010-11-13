@@ -55,13 +55,6 @@
 
    javni-valsi->string
 
-   ; javni-valsi-syntax
-   make-javni-valsi-nacmene
-
-
-   ; nunvalsi
-   ;
-   vejmina-nunvalsi
 
    ; nunjavni
    ;
@@ -81,17 +74,23 @@
 
    genturfahi-tolmohi
    nunjavni-morji
+   nunjavni-samselpla
+   nunjavni-cmene
 
    ; nunjavni syntax
    nunjavni-naselci
-   nunjavni-samselpla
-   nunjavni-samselpla-fanmo
-   nunjavni-samselpla-midju
-   nunjavni-cmene
 
-   ; nunjavni syntax helpers
-   nunjavni-samselpla-mapti
-   nunjavni-cmene*)
+
+   ; nunvalsi
+   ;
+   venunjmina-nunvalsi
+   vejmina-nunvalsi
+   vejmina-nunvalsi-nacmene
+
+   venunjmina-rodanunvalsi
+   vejmina-rodanunvalsi
+   vejmina-rodanunvalsi-nacmene)
+
 
 (import chicken)
 (import scheme)
@@ -126,8 +125,7 @@
 (include "version.scm")
 (include "lerfu-porsi.scm")
 (include "javni-valsi.scm")
-(include "javni-valsi-syntax.scm")
-(include "nunvalsi.scm")
 (include "nunjavni.scm")
 (include "nunjavni-syntax.scm")
+(include "nunvalsi.scm")
 (include "genturfahi.scm"))

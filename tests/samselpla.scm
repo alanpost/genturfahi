@@ -29,24 +29,25 @@
   (set! genturfahi-samselpla
     (letrec ((gerna (nunjavni-morji
                ; concatenate the strings
-               (nunjavni-samselpla (string-append a b c)
+               (nunjavni-samselpla
+                 (lambda (#!key a b c) (string-append a b c))
                  (nunjavni-je
-                   (nunjavni-cmene a (nunjavni-naselci a))
-                   (nunjavni-cmene b (nunjavni-naselci b))
-                   (nunjavni-cmene c (nunjavni-naselci c))))))
+                   (nunjavni-cmene (nunjavni-naselci a) cmene: 'a:)
+                   (nunjavni-cmene (nunjavni-naselci b) cmene: 'b:)
+                   (nunjavni-cmene (nunjavni-naselci c) cmene: 'c:)))))
              (a (nunjavni-morji
                ; convert each character to a string.
-               (nunjavni-samselpla (make-string 1 x)
-                 (nunjavni-cmene x
-                   (nunjavni-lerfu #\a)))))
+               (nunjavni-samselpla
+                 (lambda (#!key lerfu) (make-string 1 lerfu))
+                 (nunjavni-lerfu #\a cmene: 'lerfu:))))
              (b (nunjavni-morji
-               (nunjavni-samselpla (make-string 1 x)
-                 (nunjavni-cmene x
-                   (nunjavni-lerfu #\b)))))
+               (nunjavni-samselpla
+                 (lambda (#!key lerfu) (make-string 1 lerfu))
+                 (nunjavni-lerfu #\b cmene: 'lerfu:))))
              (c (nunjavni-morji
-               (nunjavni-samselpla (make-string 1 x)
-                 (nunjavni-cmene x
-                   (nunjavni-lerfu #\c))))))
+               (nunjavni-samselpla
+                 (lambda (#!key lerfu) (make-string 1 lerfu))
+                 (nunjavni-lerfu #\c cmene: 'lerfu:)))))
       (genturfahi* gerna)))
 
   ; The code runs only after a a syntax tree is successfully

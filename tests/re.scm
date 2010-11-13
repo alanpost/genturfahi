@@ -29,14 +29,15 @@
   (let ((genturfahi-re
     (letrec
       ((gerna (nunjavni-morji
-                (nunjavni-samselpla x
+                (nunjavni-samselpla
+                  (lambda (#!key x) x)
                   (nunjavni-je
-                    (nunjavni-cmene x
-                      (nunjavni-*
-                        (nunjavni-jonai
-                          (nunjavni-naselci digit)
-                          (nunjavni-naselci alpha))))
-                  (nunjavni-fanmo)))))
+                    (nunjavni-*
+                      (nunjavni-jonai
+                        (nunjavni-naselci digit)
+                        (nunjavni-naselci alpha))
+                      cmene: 'x:)
+                    (nunjavni-fanmo)))))
        (digit (nunjavni-morji
                 (nunjavni-re "[0-9]+")))
        (alpha (nunjavni-morji

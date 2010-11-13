@@ -32,14 +32,18 @@
 (let ((genturfahi-bootstrap
   (letrec
     ((cfari     (nunjavni-morji
-                  (nunjavni-samselpla (samselpla-cfari gerna)
+                  (nunjavni-samselpla
+                    (lambda (#!key gerna) (samselpla-cfari gerna))
                     (nunjavni-je
-                      (nunjavni-cmene gerna (nunjavni-naselci gerna))
+                      (nunjavni-cmene (nunjavni-naselci gerna) cmene: 'gerna:)
                       (nunjavni-naselci FAhO)))))
      (gerna     (nunjavni-morji
-                  (nunjavni-* (nunjavni-naselci totoi))))
+                  (nunjavni-samselpla
+                    (lambda () '())
+                  (nunjavni-* (nunjavni-naselci totoi)))))
      (totoi     (nunjavni-morji
-                  (nunjavni-samselpla (samselpla-totoi)
+                  (nunjavni-samselpla
+                    (lambda () (samselpla-totoi))
                     (nunjavni-je
                       (nunjavni-naselci SEMICOLON)
                       (nunjavni-*

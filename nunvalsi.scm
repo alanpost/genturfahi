@@ -21,5 +21,36 @@
 ;;; nunvalsi - valsi generators
 ;;;
 
-(define (vejmina-nunvalsi . rodanunvalsi)
-  (lambda () (map (lambda (nunvalsi) (nunvalsi)) rodanunvalsi)))
+;; merge a single nunvalsi with or without a cmene
+;;
+(define (venunjmina-nunvalsi cmene)
+  (if cmene
+      (lambda (nunvalsi)
+        (vejmina-nunvalsi cmene nunvalsi))
+      (lambda (nunvalsi)
+        (vejmina-nunvalsi-nacmene nunvalsi))))
+
+(define (vejmina-nunvalsi cmene nunvalsi)
+  (lambda ()
+    (make-javni-valsi cmene (javni-nunvalsi-val nunvalsi))))
+
+(define (vejmina-nunvalsi-nacmene nunvalsi)
+  nunvalsi)
+
+
+;; merge multiple nunvalsi with or without a cmene
+;;
+(define (venunjmina-rodanunvalsi cmene)
+  (if cmene
+      (lambda (rodanunvalsi)
+        (apply vejmina-rodanunvalsi cmene rodanunvalsi))
+      (lambda (rodanunvalsi)
+        (apply vejmina-rodanunvalsi-nacmene rodanunvalsi))))
+
+(define (vejmina-rodanunvalsi cmene . rodanunvalsi)
+  (lambda ()
+    (make-javni-valsi cmene (map javni-nunvalsi-val rodanunvalsi))))
+
+(define (vejmina-rodanunvalsi-nacmene . rodanunvalsi)
+  (lambda ()
+    (map (lambda (nunvalsi) (nunvalsi)) rodanunvalsi)))

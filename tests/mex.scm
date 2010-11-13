@@ -30,31 +30,35 @@
     (letrec
       ((expr   (nunjavni-morji
                  (nunjavni-jonai
-                   (nunjavni-samselpla (+ a b)
+                   (nunjavni-samselpla
+                     (lambda (#!key a b) (+ a b))
                      (nunjavni-je
-                       (nunjavni-cmene a (nunjavni-naselci mulexp))
+                       (nunjavni-cmene (nunjavni-naselci mulexp) cmene: 'a:)
                        (nunjavni-lerfu #\+)
-                       (nunjavni-cmene b (nunjavni-naselci mulexp))))
+                       (nunjavni-cmene (nunjavni-naselci mulexp) cmene: 'b:)))
                    (nunjavni-naselci mulexp))))
        (mulexp (nunjavni-morji
                  (nunjavni-jonai
-                   (nunjavni-samselpla (* a b)
+                   (nunjavni-samselpla
+                     (lambda (#!key a b) (* a b))
                      (nunjavni-je
-                       (nunjavni-cmene a (nunjavni-naselci simple))
+                       (nunjavni-cmene (nunjavni-naselci simple) cmene: 'a:)
                        (nunjavni-lerfu #\*)
-                       (nunjavni-cmene b (nunjavni-naselci simple))))
+                       (nunjavni-cmene (nunjavni-naselci simple) cmene: 'b:)))
                    (nunjavni-naselci simple))))
        (simple (nunjavni-morji
                  (nunjavni-jonai
                    (nunjavni-naselci num)
-                   (nunjavni-samselpla a
+                   (nunjavni-samselpla
+                     (lambda (#!key a) a)
                      (nunjavni-je
                        (nunjavni-lerfu #\()
-                       (nunjavni-cmene a (nunjavni-naselci expr))
+                       (nunjavni-cmene (nunjavni-naselci expr) cmene: 'a:)
                        (nunjavni-lerfu #\)))))))
        (num    (nunjavni-morji
-                 (nunjavni-samselpla (string->number (list->string a))
-                   (nunjavni-cmene a (nunjavni-+ (nunjavni-naselci digit))))))
+                 (nunjavni-samselpla
+                   (lambda (#!key x) (string->number (list->string x)))
+                   (nunjavni-+ (nunjavni-naselci digit) cmene: 'x:))))
        (digit  (nunjavni-morji
                  (nunjavni-jonai
                    (nunjavni-lerfu #\0)
