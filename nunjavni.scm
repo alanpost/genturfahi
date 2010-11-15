@@ -312,8 +312,8 @@
         (clear-namapti-caches '()))
     (values
       (lambda ()
-        (map (lambda (x) (x)) clear-mapti-caches)
-        (map (lambda (x) (x)) clear-namapti-caches)
+        (for-each (lambda (x) (x)) clear-mapti-caches)
+        (for-each (lambda (x) (x)) clear-namapti-caches)
         '())
 
       (lambda (javni)
