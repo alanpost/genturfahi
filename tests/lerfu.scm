@@ -20,12 +20,20 @@
 ;;;
 ;;; terminal:
 ;;;
-;;; lerfu <- \#a
+;;; lerfu <- #\a
 ;;;
 (define (lerfu)
   (set! genturfahi-lerfu
         (genturfahi* (nunjavni-lerfu #\a)))
+  (lerfu-test genturfahi-lerfu))
 
+(define (lerfu-peg)
+  (set! genturfahi-lerfu
+        (begin (eval (call-with-input-file "lerfu.peg" genturfahi-peg))
+               (genturfahi-bootstrap*)))
+  (lerfu-test genturfahi-lerfu))
+
+(define (lerfu-test genturfahi-lerfu)
   ; match the only character this parser matches.
   ;
   (test '(#\a "") (genturfahi-lerfu "a"))
@@ -61,3 +69,6 @@
 
 (test-group "lerfu"
   (lerfu))
+
+(test-group "lerfu (PEG)"
+  (lerfu-peg))

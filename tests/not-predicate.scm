@@ -20,12 +20,20 @@
 ;;;
 ;;; not-predicate: !e
 ;;;
-;;; not-predicate <- !\#a
+;;; not-predicate <- !#\a
 ;;;
 (define (not-predicate)
   (set! genturfahi-not-predicate
         (genturfahi* (nunjavni-! (nunjavni-lerfu #\a))))
+  (not-predicate-test genturfahi-not-predicate))
 
+(define (not-predicate-peg)
+  (set! genturfahi-not-predicate
+        (begin (eval (call-with-input-file "not-predicate.peg" genturfahi-peg))
+               (genturfahi-bootstrap*)))
+  (not-predicate-test genturfahi-not-predicate))
+
+(define (not-predicate-test genturfahi-not-predicate)
   ; this not-predicate matches everything *but* \#a.
   ; not-predicate never advances the input.
   ;
@@ -56,3 +64,6 @@
 
 (test-group "not-predicate"
   (not-predicate))
+
+(test-group "not-predicate (PEG)"
+  (not-predicate-peg))

@@ -20,6 +20,8 @@
 (module genturfahi
   (genturfahi
    genturfahi*
+   genturfahi-peg
+   genturfahi-peg*
    genturfahi-version
    genturfahi-version-major
    genturfahi-version-minor
@@ -89,8 +91,31 @@
 
    venunjmina-rodanunvalsi
    vejmina-rodanunvalsi
-   vejmina-rodanunvalsi-nacmene)
+   vejmina-rodanunvalsi-nacmene
 
+
+   ; samselpla
+   samselpla-gerna
+   samselpla-smuni
+   samselpla-naselci
+   samselpla-selci-naselci
+   samselpla-lerfu-selci
+   samselpla-valsi-selci
+   samselpla-klesi-selci
+   samselpla-denpabu
+   samselpla-cfari
+   samselpla-canlu
+   samselpla-*
+   samselpla-+
+   samselpla-?
+   samselpla-&
+   samselpla-!
+   samselpla-je
+   samselpla-jonai
+
+   ; secuxna
+   genturfahi-bootstrap
+   genturfahi-bootstrap*)
 
 (import chicken)
 (import scheme)
@@ -102,6 +127,7 @@
 ;(require-extension srfi-9)         ; built-in
 (require-extension srfi-13)
 ;(require-extension srfi-28)        ; built-in
+;(require-extension srfi-39)        ; built-in
 ;(require-extension srfi-61)        ; built-in
 (require-extension extras)         ; only needed when I'm debugging
 (require-extension ports)
@@ -113,6 +139,7 @@
 ;(import srfi-9)          ; define-record-type
 (import srfi-13)         ; string-copy
 ;(import srfi-28)         ; basic format strings
+;(import srfi-39)         ; parameter objects
 ;(import srfi-69)         ; A more general cond clause
 (import extras)         ; pretty-print (only needed when I'm debugging)
 (import ports)           ; Chicken Scheme srfi-6 and port extensions
@@ -128,4 +155,7 @@
 (include "nunjavni.scm")
 (include "nunjavni-syntax.scm")
 (include "nunvalsi.scm")
-(include "genturfahi.scm"))
+(include "genturfahi.scm")
+(include "secuxna.scm")
+(include "samselpla.scm")
+(include "bootstrap.scm"))

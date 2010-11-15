@@ -25,7 +25,15 @@
 (define (valsi)
   (set! genturfahi-valsi
         (genturfahi* (nunjavni-valsi "abc")))
+  (valsi-test genturfahi-valsi))
 
+(define (valsi-peg)
+  (set! genturfahi-valsi
+        (begin (eval (call-with-input-file "valsi.peg" genturfahi-peg))
+               (genturfahi-bootstrap*)))
+  (valsi-test genturfahi-valsi))
+
+(define (valsi-test genturfahi-valsi)
   ; match the only word this parser matches.
   ;
   (test '("abc" "") (genturfahi-valsi "abc"))
@@ -64,3 +72,6 @@
 
 (test-group "valsi"
   (valsi))
+
+(test-group "valsi (PEG)"
+  (valsi-peg))

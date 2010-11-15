@@ -17,34 +17,5 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
-;;;
-;;; empty-string:
-;;;
-;;; empty-string <- ""
-;;;
-(define (empty-string)
-  (set! genturfahi-empty-string (genturfahi* (nunjavni-e)))
-  (empty-string-test genturfahi-empty-string))
-
-(define (empty-string-peg)
-  (set! genturfahi-empty-string
-        (begin (eval (call-with-input-file "empty-string.peg" genturfahi-peg))
-               (genturfahi-bootstrap*)))
-  (empty-string-test genturfahi-empty-string))
-
-(define (empty-string-test genturfahi-empty-string)
-  ; the empty string is zero characters long, so
-  ; it always matches.
-  ;
-  (test '("" "") (genturfahi-empty-string ""))
-  (test '("" "a") (genturfahi-empty-string "a"))
-  (test '("" "b") (genturfahi-empty-string "b"))
-  (test '("" "c") (genturfahi-empty-string "c"))
-  (test '("" "abc") (genturfahi-empty-string "abc"))
-  0)
-
-(test-group "empty-string"
-  (empty-string))
-
-(test-group "empty-string (PEG)"
-  (empty-string-peg))
+(define genturfahi-bootstrap  (make-parameter #f))
+(define genturfahi-bootstrap* (make-parameter #f))

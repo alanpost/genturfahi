@@ -20,12 +20,20 @@
 ;;;
 ;;; zero-or-more: e*
 ;;;
-;;; zero-or-more <- \#a*
+;;; zero-or-more <- #\a*
 ;;;
 (define (zero-or-more)
   (set! genturfahi-zero-or-more
         (genturfahi* (nunjavni-* (nunjavni-lerfu #\a))))
+  (zero-or-more-test genturfahi-zero-or-more))
 
+(define (zero-or-more-peg)
+  (set! genturfahi-zero-or-more
+        (begin (eval (call-with-input-file "zero-or-more.peg" genturfahi-peg))
+               (genturfahi-bootstrap*)))
+  (zero-or-more-test genturfahi-zero-or-more))
+
+(define (zero-or-more-test genturfahi-zero-or-more)
   ; match the only character this parser matches.
   ; notice that it returns a list of characters,
   ; even if it only matches a single character.
@@ -73,3 +81,6 @@
 
 (test-group "zero-or-more"
   (zero-or-more))
+
+(test-group "zero-or-more (PEG)"
+  (zero-or-more-peg))

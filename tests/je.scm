@@ -20,14 +20,22 @@
 ;;;
 ;;; ordered sequence: e_1 e_2
 ;;;
-;;; je <- \#a \#b \#c
+;;; je <- #\a #\b #\c
 ;;;
 (define (je)
   (set! genturfahi-je
         (genturfahi* (nunjavni-je (nunjavni-lerfu #\a)
                                   (nunjavni-lerfu #\b)
                                   (nunjavni-lerfu #\c))))
+  (je-test genturfahi-je))
 
+(define (je-peg)
+  (set! genturfahi-je
+        (begin (eval (call-with-input-file "je.peg" genturfahi-peg))
+               (genturfahi-bootstrap*)))
+  (je-test genturfahi-je))
+
+(define (je-test genturfahi-je)
   ; matches each lerfu in sequence 
   ;
   (test '((#\a #\b #\c) "") (genturfahi-je "abc"))
@@ -79,3 +87,6 @@
 
 (test-group "je"
   (je))
+
+(test-group "je (PEG)"
+  (je-peg))

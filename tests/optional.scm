@@ -20,12 +20,20 @@
 ;;;
 ;;; optional: e?
 ;;;
-;;; optional <- \#a?
+;;; optional <- #\a?
 ;;;
 (define (optional?)
   (set! genturfahi-optional
         (genturfahi* (nunjavni-? (nunjavni-lerfu #\a))))
+  (optional?-test genturfahi-optional))
 
+(define (optional?-peg)
+  (set! genturfahi-optional
+        (begin (eval (call-with-input-file "optional.peg" genturfahi-peg))
+               (genturfahi-bootstrap*)))
+  (optional?-test genturfahi-optional))
+
+(define (optional?-test genturfahi-optional)
   ; match the only character this parser matches.
   ;
   (test '(#\a "") (genturfahi-optional "a"))
@@ -63,3 +71,6 @@
 
 (test-group "optional?"
   (optional?))
+
+(test-group "optional? (PEG)"
+  (optional?-peg))

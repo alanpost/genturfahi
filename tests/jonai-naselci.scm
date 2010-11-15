@@ -24,8 +24,8 @@
 ;;;
 ;;; jonai <- a / b / c
 ;;; a     <- #\a
-;;; b     <- #\a
-;;; c     <- #\a
+;;; b     <- #\b
+;;; c     <- #\c
 ;;;
 (define (jonai-naselci)
   (set! genturfahi-jonai-naselci
@@ -36,7 +36,15 @@
              (b (nunjavni-morji (nunjavni-lerfu #\b)))
              (c (nunjavni-morji (nunjavni-lerfu #\c))))
       (genturfahi* gerna)))
+  (jonai-naselci-test genturfahi-jonai-naselci))
 
+(define (jonai-naselci-peg)
+  (set! genturfahi-jonai-naselci
+        (begin (eval (call-with-input-file "jonai-naselci.peg" genturfahi-peg))
+               (genturfahi-bootstrap*)))
+  (jonai-naselci-test genturfahi-jonai-naselci))
+
+(define (jonai-naselci-test genturfahi-jonai-naselci)
   ; matches (nunjavni-jonai-naselci (nunjavni-lerfu #\a) ...)
   ;
   (test '(#\a "") (genturfahi-jonai-naselci "a"))
@@ -77,5 +85,8 @@
   (test '(#f "dc") (genturfahi-jonai-naselci "dc"))
   0)
 
-(test-group "naselci"
+(test-group "jonai naselci"
   (jonai-naselci))
+
+(test-group "jonai naselci (PEG)"
+  (jonai-naselci-peg))

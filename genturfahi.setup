@@ -1,14 +1,64 @@
 (include "version.scm")
+(include "conf.scm")
 
-(define (dynld-name fn)		
-  (make-pathname #f fn ##sys#load-dynamic-extension))	
+       ; genturfahi executable
+       ;
+(make (("genturfahi-peg" ("main.scm"
+                          "genturfahi.meta"
+                          "genturfahi.setup")
+       (compile ,@genturfahi-cscflags
+                -o "genturfahi-peg"
+                "main.scm"))
 
-; dynamic library
-(compile -s -O2 -d1 -o ,(dynld-name "genturfahi") -j genturfahi chicken-egg.scm)
-(compile -s -O2 -d1 genturfahi.import.scm)
+       ; dynamic library
+       ;
+       ((dynld-name "genturfahi") ("bootstrap.scm"
+                                   "chicken-egg.scm"
+                                   "debug.scm"
+                                   "genturfahi.scm"
+                                   "javni-valsi.scm"
+                                   "lerfu-porsi.scm"
+                                   "nunjavni-syntax.scm"
+                                   "nunjavni.scm"
+                                   "nunvalsi.scm"
+                                   "samselpla.scm"
+                                   "secuxna.scm"
+                                   "version.scm"
+                                   "genturfahi.meta"
+                                   "genturfahi.setup")
+       (begin (compile -s
+                       ,@genturfahi-cscflags
+                       -j genturfahi
+                       -o ,(dynld-name "genturfahi")
+                       chicken-egg.scm)
+              (compile -s
+                       ,@genturfahi-cscflags
+                       -o ,(dynld-name "genturfahi.import")
+                       genturfahi.import.scm)))
 
-; static library
-(compile -c -O2 -d1 -o "genturfahi.o" "chicken-egg.scm" -unit genturfahi)
+       ; static library
+       ;
+       ("genturfahi.o" ("bootstrap.scm"
+                        "chicken-egg.scm"
+                        "debug.scm"
+                        "genturfahi.scm"
+                        "javni-valsi.scm"
+                        "lerfu-porsi.scm"
+                        "nunjavni-syntax.scm"
+                        "nunjavni.scm"
+                        "nunvalsi.scm"
+                        "samselpla.scm"
+                        "secuxna.scm"
+                        "version.scm"
+                        "genturfahi.meta"
+                        "genturfahi.setup")
+       (compile -c
+                ,@genturfahi-cscflags
+                -unit genturfahi
+                -o "genturfahi.o"
+                "chicken-egg.scm")))
+
+      `("genturfahi-peg" ,(dynld-name "genturfahi") "genturfahi.o"))
 
 (install-extension
   ; lo cmene vi pagbu
@@ -20,4 +70,15 @@
     ,(dynld-name "genturfahi.import"))
 
   ; lo se ckaji vi pagbu
-  `((version trunk)))
+  `((static "genturfahi.o")
+    (version ,genturfahi-version)))
+
+(install-program
+  ; lo cmene vi pagbu
+  'genturfahi-peg
+
+  ; lo datnyvei vi pagbu
+  `("genturfahi-peg")
+
+  ; lo se ckaji vi pagbu
+  `((version ,genturfahi-version)))

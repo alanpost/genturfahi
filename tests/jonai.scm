@@ -20,14 +20,22 @@
 ;;;
 ;;; ordered-choice: e_1 / e_2
 ;;;
-;;; jonai <- \#a / \#b / \#c
+;;; jonai <- #\a / #\b / #\c
 ;;;
 (define (jonai)
   (set! genturfahi-jonai
         (genturfahi* (nunjavni-jonai (nunjavni-lerfu #\a)
                                      (nunjavni-lerfu #\b)
                                      (nunjavni-lerfu #\c))))
+  (jonai-test genturfahi-jonai))
 
+(define (jonai-peg)
+  (set! genturfahi-jonai
+        (begin (eval (call-with-input-file "jonai.peg" genturfahi-peg))
+               (genturfahi-bootstrap*)))
+  (jonai-test genturfahi-jonai))
+
+(define (jonai-test genturfahi-jonai)
   ; matches (nunjavni-jonai (nunjavni-lerfu #\a) ...)
   ;
   (test '(#\a "") (genturfahi-jonai "a"))
@@ -70,3 +78,6 @@
 
 (test-group "jonai"
   (jonai))
+
+(test-group "jonai (PEG)"
+  (jonai-peg))

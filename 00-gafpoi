@@ -1,6 +1,17 @@
 ni'o lo gafpoi
 ==============
 
+.i detri fa li renopano pi'e papa pi'e pamu
+-------------------------------------------
+
+ * I've checked in the first version of the bootstrap PEG parser.
+   It isn't feature complete yet, it does not support code blocks
+   in the grammar yet.
+
+   For every test that does not use code, the bootstrap PEG parser
+   is now tested against a PEG grammar version of that test.
+
+
 .i detri fa li renopano pi'e papa pi'e nopa
 -------------------------------------------
 

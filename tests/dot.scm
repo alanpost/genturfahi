@@ -25,7 +25,15 @@
 (define (dot)
   (set! genturfahi-.
         (genturfahi* (nunjavni-.)))
+  (dot-test genturfahi-.))
 
+(define (dot-peg)
+  (set! genturfahi-.
+        (begin (eval (call-with-input-file "dot.peg" genturfahi-peg))
+               (genturfahi-bootstrap*)))
+  (dot-test genturfahi-.))
+
+(define (dot-test genturfahi-.)
   (test '(#\a "") (genturfahi-. "a"))
   (test '(#\b "") (genturfahi-. "b"))
   (test '(#\c "") (genturfahi-. "c"))
@@ -39,3 +47,6 @@
 
 (test-group "dot"
   (dot))
+
+(test-group "dot (PEG)"
+  (dot-peg))
