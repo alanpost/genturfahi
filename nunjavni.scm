@@ -186,8 +186,8 @@
 ;;
 (define (nunjavni-& javni)
   (define (javni-& porsi mapti namapti)
-    (define (mapti-& ignore-porsi nunvalsi)
-      (mapti porsi nunvalsi))
+    (define (mapti-& ignore-porsi ignore-nunvalsi)
+      (mapti porsi (lambda () (make-javni-valsi #f ""))))
 
     (define (namapti-& ignore-porsi)
       (namapti porsi))
@@ -198,8 +198,6 @@
 
 ;; not-predicate: require that javni is not able to be parsed from
 ;;                the |lerfu-porsi|.
-;;
-;; XXX: don't generate a nunvalsi.
 ;;
 (define (nunjavni-! javni)
   (define (javni-! porsi mapti namapti)

@@ -34,9 +34,9 @@
 
 (define (and-predicate-test genturfahi-and-predicate)
   ; the and-predicate matches as normal, but does not advance
-  ; the input.
+  ; the input or return the parse result.
   ;
-  (test '(#\a "a") (genturfahi-and-predicate "a"))
+  (test '("" "a") (genturfahi-and-predicate "a"))
 
   ; It behaves like all other rules when there is no match,
   ; indicating no match.
@@ -56,9 +56,9 @@
   ; this rule won't even match two #\a,
   ; only one.
   ;
-  (test '(#\a "aa") (genturfahi-and-predicate "aa"))
-  (test '(#\a "ab") (genturfahi-and-predicate "ab"))
-  (test '(#\a "ac") (genturfahi-and-predicate "ac"))
+  (test '("" "aa") (genturfahi-and-predicate "aa"))
+  (test '("" "ab") (genturfahi-and-predicate "ab"))
+  (test '("" "ac") (genturfahi-and-predicate "ac"))
 
   ; later characters that would match
   ; don't if there is no rule to match
