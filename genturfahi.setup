@@ -15,7 +15,6 @@
        ;
        ((dynld-name "genturfahi") ("bootstrap.scm"
                                    "chicken-egg.scm"
-                                   "debug.scm"
                                    "genturfahi.scm"
                                    "javni-valsi.scm"
                                    "lerfu-porsi.scm"
@@ -41,7 +40,6 @@
        ;
        ("genturfahi.o" ("bootstrap.scm"
                         "chicken-egg.scm"
-                        "debug.scm"
                         "genturfahi.scm"
                         "javni-valsi.scm"
                         "lerfu-porsi.scm"
