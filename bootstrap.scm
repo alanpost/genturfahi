@@ -281,15 +281,28 @@
 
      (klesi-selci    (nunjavni-morji
                        (nunjavni-samselpla
-                         (lambda (#!key klesi-lerfu)
+                         (lambda (#!key klesi-lerfu repeat)
                            (samselpla-klesi-selci
-                             (string-append "[" klesi-lerfu "]")))
+                             (string-append
+                               "["
+                               (apply
+                                 (lambda (klesi-lerfu)
+                                   (string-append "[" klesi-lerfu "]"))
+                                 klesi-lerfu)
+                               "]"
+                               repeat)))
                          (nunjavni-je
                            (nunjavni-lerfu #\[)
-                           (nunjavni-cmene
+                           (nunjavni-+
                              (nunjavni-naselci klesi-lerfu)
-                             cmene: 'klesi-lerfu)
+                             cmene: 'klesi-lerfu:)
+
                            (nunjavni-lerfu #\])
+                           (nunjavni-?
+                             (nunjavni-jonai
+                               (nunjavni-valsi "*")
+                               (nunjavni-valsi "+"))
+                             cmene: 'repeat:)
                            (nunjavni-naselci canlu)))))
 
      (klesi-lerfu    (nunjavni-morji
@@ -297,29 +310,29 @@
                          (nunjavni-naselci klesi-cmene)
                          (nunjavni-samselpla
                            (lambda (#!key klesi-lerfu)
-                             (apply string-append klesi-lerfu))
-                           (nunjavni-*
-                             (nunjavni-samselpla
-                               (lambda (#!key lerfu) klesi-lerfu)
-                               (nunjavni-je
-                                 (nunjavni-! (nunjavni-lerfu #\[))
-                                 (nunjavni-. cmene: 'klesi-lerfu:)))
-                             cmene: 'klesi-lerfu)))))
+                             (string klesi-lerfu))
+                           (nunjavni-je
+                             (nunjavni-! (nunjavni-lerfu #\]))
+                             (nunjavni-. cmene: 'klesi-lerfu:))))))
 
      (klesi-cmene    (nunjavni-morji
                        (nunjavni-jonai
                          (nunjavni-valsi ":alnum:")
                          (nunjavni-valsi ":alpha:")
+                         (nunjavni-valsi ":ascii:")
                          (nunjavni-valsi ":blank:")
                          (nunjavni-valsi ":cntrl:")
                          (nunjavni-valsi ":digit:")
                          (nunjavni-valsi ":graph:")
                          (nunjavni-valsi ":lower:")
-                         (nunjavni-valsi ":odigit:")
+                         (nunjavni-samselpla
+                           (lambda () "0-7")
+                           (nunjavni-valsi ":odigit:"))
                          (nunjavni-valsi ":print:")
                          (nunjavni-valsi ":punct:")
                          (nunjavni-valsi ":space:")
                          (nunjavni-valsi ":upper:")
+                         (nunjavni-valsi ":word:")
                          (nunjavni-valsi ":xdigit:"))))
 
      (denpabu        (nunjavni-morji

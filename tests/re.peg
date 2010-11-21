@@ -1,0 +1,4 @@
+gerna <- #gerna: (digit / alpha)* FAhO {test-samselpla-re}
+digit <- [:digit:]+
+alpha <- [:alpha:]+
+FAhO  <- !.

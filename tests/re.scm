@@ -21,22 +21,25 @@
 ;;; regular expression:
 ;;;
 ;;; gerna <- (digit / alpha)* FAhO
-;;; digit <- [0-9]+
-;;; alpha <- [A-Za-z]+
+;;; digit <- [:digit:]+
+;;; alpha <- [:alpha:]+
 ;;; FAhO  <- !.
 ;;;
+(define (test-samselpla-re #!key gerna)
+  gerna)
+
 (define (re)
   (let ((genturfahi-re
     (letrec
       ((gerna (nunjavni-morji
                 (nunjavni-samselpla
-                  (lambda (#!key x) x)
+                  test-samselpla-re
                   (nunjavni-je
                     (nunjavni-*
                       (nunjavni-jonai
                         (nunjavni-naselci digit)
                         (nunjavni-naselci alpha))
-                      cmene: 'x:)
+                      cmene: 'gerna:)
                     (nunjavni-fanmo)))))
        (digit (nunjavni-morji
                 (nunjavni-re "[0-9]+")))
@@ -45,7 +48,25 @@
        (FAhO  (nunjavni-morji
                 (nunjavni-fanmo))))
       (genturfahi* gerna))))
+  (re-test genturfahi-re)))
 
+(define (re-read)
+  (let* ((samselpla
+          (call-with-input-file "re.peg" genturfahi-peg))
+         (port
+          (with-output-to-string (lambda () (write samselpla))))
+         (genturfahi-re
+          (genturfahi* (eval (call-with-input-string port read)))))
+    (re-test genturfahi-re)))
+
+(define (re-peg)
+  (let* ((samselpla
+         (call-with-input-file "re.peg" genturfahi-peg))
+         (genturfahi-re
+          (genturfahi* (eval samselpla))))
+    (re-test genturfahi-re)))
+
+(define (re-test genturfahi-re)
   (test '(("a") "") (genturfahi-re "a"))
   (test '(("b") "") (genturfahi-re "b"))
   (test '(("c") "") (genturfahi-re "c"))
@@ -80,7 +101,13 @@
   (test '(("abc" "123" "XYZ")    "") (genturfahi-re "abc123XYZ"))
 
   (test '(() "") (genturfahi-re ""))
-  0))
+  0)
 
 (test-group "re"
   (re))
+
+(test-group "re (read)"
+  (re-read))
+
+;(test-group "re (PEG)"
+;  (re-peg))
