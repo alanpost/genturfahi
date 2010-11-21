@@ -51,19 +51,117 @@
 
 ;{(include "samselpa.scm")}
 
-;start           <- gerna: FAhO {(samselpla-gerna gerna)}
-;
-;gerna           <- totoi*
-;
-;totoi           <- SEMICOLON (!CRLF .)* (CRLF / &FAhO) {(samselpla-totoi)}
-;
-;SEMICOLON       <- #\;
-;CR              <- #\linefeed
-;LF              <- #\newline
-;
-;CRLF            <- CR LF
-;                /  CR
-;                /  LF
-;
-; in the compiler, convert this rule into an EOF check.
-;FAhO            <- !.
+cfari           <- canlu gerna FAhO
+                   ;{(samselpla-gerna gerna)}
+
+gerna           <- smuni*
+
+smuni           <- naselci "<-" canlu javni samselpla?
+                   ;{(samselpla-smuni naselci javni samselpla)}
+
+; this really doesn't need to be so strict.
+naselci         <- [:alpha:_-] [:alnum:_-]* canlu
+                   ;{(apply samselpla-naselci cfari fanmo)}
+
+javni           <- jonai
+                 / je
+
+jonai           <- je (#\/ canlu je)+
+                   ;{(samselpla-jonai cfari fanmo)}
+je              <- unary_rule+
+                   ;{(samselpla-je rodajavni)}
+
+unary_rule      <- optional
+                 / repetition0
+                 / repetition1
+                 / and-predicate
+                 / end-of-input
+                 / not-predicate
+                 / selci-javni
+
+optional        <- cmene-sumti? selci-javni #\? canlu
+                   ;{(samselpa-? selci-javni)}
+repetition0     <- cmene-sumti? selci-javni #\* canlu
+                   ;{(samselpa-* selci-javni)}
+repetition1     <- cmene-sumti? selci-javni #\+ canlu
+                   ;{(samselpa-+ selci-javni)}
+and-predicate   <- #\& canlu selci-javni
+                   ;{(samselpa-& selci-javni)}
+end-of-input    <- #\! canlu #\. canlu
+                   ;{(samselpa-fanmo)}
+not-predicate   <- #\! canlu selci-javni
+                   ;{(samselpa-! selci-javni)}
+
+cmene-sumti     <- #\# [:alpha:_-] [:alnum:_-]* #\: canlu
+
+selci-javni     <- selci-naselci
+                 / lerfu-selci
+                 / valsi-selci
+                 / klesi-selci
+                 / denpabu
+                 / girzu-javni
+
+selci-naselci   <- naselci !"<-"
+                   ;{(samselpla-selci-naselci naselci)}
+
+lerfu-selci     <- "#\\" lerfu-cmene canlu
+                 / "#\\" .           canlu
+                   ;{(samselpa-lerfu-selci lerfu)}
+
+lerfu-cmene     <- "space"
+                   ;{#\space}
+                 / "linefeed"
+                   ;{#\linefeed}
+                 / "newline"
+                   ;{#\newline}
+                 / "return"
+                   ;{#\return}
+                 / "tab"
+                   ;{#\tab}
+
+valsi-selci     <- #\" (!#\" valsi-lerfu)* #\" canlu
+                   ;{(list->string valsi-lerfu)
+valsi-lerfu     <- "\n"
+                 / "\r"
+                 / "\t"
+                 / "\\"
+                 / "\'"
+                 / "\""
+                 / !#\\ .
+
+klesi-selci      <- #\[ klesi-lerfu+ #\] (#\* / #\+)? canlu
+klesi-lerfu      <- klesi-cmene
+                  / (!#\[ .)
+klesi-cmene     <- ":alnum:"
+                 / ":alpha:"
+                 / ":blank:"
+                 / ":cntrl:"
+                 / ":digit:"
+                 / ":graph:"
+                 / ":lower:"
+                 / ":odigit:"
+                 / ":print:"
+                 / ":punct:"
+                 / ":space:"
+                 / ":upper:"
+                 / ":xdigit:"
+
+denpabu         <- #\. canlu
+
+samselpla       <- #\{ canlu (!#\} .)* #\} canlu
+
+girzu-javni     <- #\( canlu javni #\) canlu
+
+canlu           <- (canlubu / totoi)*
+                   ;{(samselpla-canlu)}
+
+canlubu         <- (#\space #\tab CR LF)
+totoi           <- #\; (!CRLF .)* (CRLF / &FAhO)
+
+CR              <- #\return
+LF              <- #\linefeed
+CRLF            <- CR LF
+                /  CR
+                /  LF
+
+FAhO            <- !.
