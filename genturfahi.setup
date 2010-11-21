@@ -3,12 +3,13 @@
 
        ; genturfahi executable
        ;
-(make (("genturfahi-peg" ("main.scm"
+(make (("genturfahi-peg" ("chicken-exe.scm"
+                          "main.scm"
                           "genturfahi.meta"
                           "genturfahi.setup")
        (compile ,@genturfahi-cscflags
                 -o "genturfahi-peg"
-                "main.scm"))
+                "chicken-exe.scm"))
 
        ; dynamic library
        ;

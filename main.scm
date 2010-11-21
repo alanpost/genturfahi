@@ -17,14 +17,6 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
-(use srfi-28)    ; Basic Format Strings
-(use srfi-37)    ; args-fold
-(use srfi-39)    ; parameter objects
-(use genturfahi)
-(use extras)     ; pretty-print
-
-(define status (make-parameter 0))
-
 (define (cmene option name arg . seeds)
   (genturfahi-gerna (string->symbol arg)))
 
@@ -47,12 +39,8 @@
 (define (args name . seeds)
   (let ((jalge (call-with-input-file name (genturfahi-bootstrap))))
     (if (not jalge)
-        (status 1))
+        (genturfahi-status 1))
     (pretty-print jalge)))
 
-
 (define (main)
-  (args-fold (cdr (argv)) options usage args)
-  (exit (status)))
-
-(main)
+  (args-fold (cdr (argv)) options usage args))

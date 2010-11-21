@@ -17,7 +17,12 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
-(define genturfahi-status (make-parameter 0))
+(use srfi-28)    ; Basic Format Strings
+(use srfi-37)    ; args-fold
+(use extras)     ; pretty-print
+(use genturfahi)
 
-(define genturfahi-bootstrap  (make-parameter #f))
-(define genturfahi-bootstrap* (make-parameter #f))
+(include "main.scm")
+
+(main)
+(exit (genturfahi-status))
