@@ -58,6 +58,10 @@
    javni-valsi->string
 
 
+   ; nunvalsi
+   ;
+   vejmina-nunvalsi
+
    ; nunjavni
    ;
    nunjavni-lerfu
@@ -132,7 +136,6 @@
 (require-extension extras)         ; only needed when I'm debugging
 (require-extension ports)
 (require-extension data-structures)
-(require-library regex)
 
 (import srfi-1)          ; filter
 ;(import srfi-6)          ; string ports
