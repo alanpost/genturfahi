@@ -38,17 +38,22 @@
       ;;
       ;; we assume we're in a letrec.
       ;;
-      (lambda (naselci javni #!optional (samselpla '()))
+      (lambda (naselci javni samselpla)
         ; if this is the first non-terminal we've seen, it is the
         ; initial rule of the grammar.
         (if (not cfari)
             (set! cfari naselci))
 
-        (if (null? samselpla)
+        (if (equal? "" samselpla)
+
             `(,(string->symbol naselci)
                (nunjavni-morji ,javni))
+
             `(,(string->symbol naselci)
-               (nunjavni-morji (nunjavni-samselpla ,samselpla ,javni))))))))
+               (nunjavni-morji
+                 (nunjavni-samselpla
+                   ,(string->symbol samselpla)
+                   ,javni))))))))
 
 
 (define (samselpla-naselci cfari fanmo)
@@ -62,14 +67,20 @@
 (define (samselpla-jonai . rodajavni)
   `(nunjavni-jonai ,@rodajavni))
 
-(define (samselpla-? javni)
-  `(nunjavni-? ,javni))
+(define (samselpla-? cmene javni)
+  (if (equal? "" cmene)
+      `(nunjavni-? ,javni)
+      `(nunjavni-? ,javni cmene: ',cmene)))
 
-(define (samselpla-* javni)
-  `(nunjavni-* ,javni))
+(define (samselpla-* cmene javni)
+  (if (equal? "" cmene)
+      `(nunjavni-* ,javni)
+      `(nunjavni-* ,javni cmene: ',cmene)))
 
-(define (samselpla-+ javni)
-  `(nunjavni-+ ,javni))
+(define (samselpla-+ cmene javni)
+  (if (equal? "" cmene)
+      `(nunjavni-+ ,javni)
+      `(nunjavni-+ ,javni cmene: ',cmene)))
 
 (define (samselpla-& javni)
   `(nunjavni-& ,javni))
@@ -80,11 +91,19 @@
 (define (samselpla-! javni)
   `(nunjavni-! ,javni))
 
+(define (samselpla-cmene-sumti #!key cfari fanmo)
+  `,(string->symbol (string-append cfari fanmo ":")))
+
 ;; A naselci that appears on the right side of a definition.
 ;;
-(define (samselpla-selci-naselci naselci)
-  `(lambda (porsi mapti namapti)
-     (,(string->symbol naselci) porsi mapti namapti)))
+(define (samselpla-selci-naselci cmene naselci)
+  (if cmene
+      `(nunjavni-cmene
+         (nunjavni-naselci ,(string->symbol naselci))
+         cmene: ',cmene)
+      `(nunjavni-cmene
+         (nunjavni-naselci ,(string->symbol naselci))
+         cmene: ',(string->symbol (string-append naselci ":")))))
 
 (define (samselpla-lerfu-selci lerfu)
   `(nunjavni-lerfu ,lerfu))

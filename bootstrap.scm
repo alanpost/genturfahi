@@ -42,8 +42,8 @@
 
      (smuni          (nunjavni-morji
                        (nunjavni-samselpla
-                         (lambda (#!key naselci javni)
-                           (samselpla-smuni naselci javni))
+                         (lambda (#!key naselci javni samselpla)
+                           (samselpla-smuni naselci javni samselpla))
                          (nunjavni-je
                            (nunjavni-cmene
                              (nunjavni-naselci naselci)
@@ -52,11 +52,10 @@
                            (nunjavni-naselci canlu)
                            (nunjavni-cmene
                              (nunjavni-naselci javni)
-                             cmene: 'javni:)))))
-                           ;((((
-                           ;(nunjavni-?
-                           ;  (nunjavni-cmene samselpla
-                           ;    (nunjavni-naselci samselpla)))))))
+                             cmene: 'javni:)
+                           (nunjavni-?
+                             (nunjavni-naselci samselpla)
+                             cmene: 'samselpla:)))))
 
      (naselci        (nunjavni-morji
                        (nunjavni-samselpla
@@ -113,9 +112,12 @@
 
      (optional       (nunjavni-morji
                        (nunjavni-samselpla
-                         (lambda (#!key selci-javni)
-                           (samselpla-? selci-javni))
+                         (lambda (#!key cmene selci-javni)
+                           (samselpla-? cmene selci-javni))
                          (nunjavni-je
+                           (nunjavni-?
+                             (nunjavni-naselci cmene-sumti)
+                             cmene: 'cmene:)
                            (nunjavni-cmene
                              (nunjavni-naselci selci-javni)
                              cmene: 'selci-javni:)
@@ -123,9 +125,12 @@
                            (nunjavni-naselci canlu)))))
      (repetition0    (nunjavni-morji
                        (nunjavni-samselpla
-                         (lambda (#!key selci-javni)
-                           (samselpla-* selci-javni))
+                         (lambda (#!key cmene selci-javni)
+                           (samselpla-* cmene selci-javni))
                          (nunjavni-je
+                           (nunjavni-?
+                             (nunjavni-naselci cmene-sumti)
+                             cmene: 'cmene:)
                            (nunjavni-cmene
                              (nunjavni-naselci selci-javni)
                              cmene: 'selci-javni:)
@@ -133,9 +138,12 @@
                            (nunjavni-naselci canlu)))))
      (repetition1    (nunjavni-morji
                        (nunjavni-samselpla
-                         (lambda (#!key selci-javni)
-                           (samselpla-+ selci-javni))
+                         (lambda (#!key cmene selci-javni)
+                           (samselpla-+ cmene selci-javni))
                          (nunjavni-je
+                           (nunjavni-?
+                             (nunjavni-naselci cmene-sumti)
+                             cmene: 'cmene:)
                            (nunjavni-cmene
                              (nunjavni-naselci selci-javni)
                              cmene: 'selci-javni:)
@@ -171,6 +179,16 @@
                              (nunjavni-naselci selci-javni)
                              cmene: 'selci-javni:)))))
 
+     (cmene-sumti    (nunjavni-morji
+                       (nunjavni-samselpla
+                         samselpla-cmene-sumti
+                         (nunjavni-je
+                           (nunjavni-lerfu #\#)
+                           (nunjavni-re "[A-Za-z_-]" cmene: 'cfari:)
+                           (nunjavni-re "[A-Za-z0-9_-]*" cmene: 'fanmo:)
+                           (nunjavni-lerfu #\:)
+                           (nunjavni-naselci canlu)))))
+
      (selci-javni    (nunjavni-morji
                        (nunjavni-jonai
                          (nunjavni-naselci selci-naselci)
@@ -183,7 +201,7 @@
      (selci-naselci  (nunjavni-morji
                        (nunjavni-samselpla
                          (lambda (#!key naselci)
-                           (samselpla-selci-naselci naselci))
+                           (samselpla-selci-naselci #f naselci))
                          (nunjavni-je
                            (nunjavni-cmene
                              (nunjavni-naselci naselci)
@@ -310,6 +328,27 @@
                            (samselpla-denpabu))
                          (nunjavni-je
                            (nunjavni-lerfu #\.)
+                           (nunjavni-naselci canlu)))))
+
+     (samselpla      (nunjavni-morji
+                       (nunjavni-samselpla
+                         (lambda (#!key samselpla) samselpla)
+                         (nunjavni-je
+                           (nunjavni-lerfu #\{)
+                           (nunjavni-naselci canlu)
+                           (nunjavni-samselpla
+                             (lambda (#!key samselpla-lerfu)
+                               (apply string samselpla-lerfu))
+                             (nunjavni-*
+                               (nunjavni-samselpla
+                                 (lambda (#!key lerfu) lerfu)
+                                 (nunjavni-je
+                                   (nunjavni-!
+                                     (nunjavni-lerfu #\}))
+                                   (nunjavni-. cmene: 'lerfu:)))
+                               cmene: 'samselpla-lerfu:)
+                             cmene: 'samselpla:)
+                           (nunjavni-lerfu #\})
                            (nunjavni-naselci canlu)))))
 
      (girzu-javni    (nunjavni-morji
