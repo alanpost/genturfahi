@@ -366,7 +366,8 @@
 
      (girzu-javni    (nunjavni-morji
                        (nunjavni-samselpla
-                         (lambda (#!key javni) javni)
+                         (lambda (#!key javni)
+                           javni)
                          (nunjavni-je
                            (nunjavni-lerfu #\()
                            (nunjavni-naselci canlu)

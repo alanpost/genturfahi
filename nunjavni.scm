@@ -176,9 +176,7 @@
         ; this javni cannot fail.  |porsi| is not advanced
         ; on failure, so we can use it.
         ;
-        (mapti porsi
-               (lambda ()
-                 (make-javni-valsi cmene ""))))
+        (mapti porsi (lambda () (make-javni-valsi cmene ""))))
 
       (javni porsi mapti-? namapti-?))
     javni-?))
