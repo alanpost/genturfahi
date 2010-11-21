@@ -25,31 +25,40 @@
 ;;; b     <- #\b
 ;;; c     <- #\c
 ;;;
+(define (test-samselpla-samselpla #!key a b c)
+  (string-append a b c))
+
+(define (test-samselpla-lerfu #!key lerfu)
+  (make-string 1 lerfu))
+
 (define (samselpla)
-  (set! genturfahi-samselpla
+  (let ((genturfahi-samselpla
     (letrec ((gerna (nunjavni-morji
                ; concatenate the strings
-               (nunjavni-samselpla
-                 (lambda (#!key a b c) (string-append a b c))
+               (nunjavni-samselpla test-samselpla-samselpla
                  (nunjavni-je
                    (nunjavni-cmene (nunjavni-naselci a) cmene: 'a:)
                    (nunjavni-cmene (nunjavni-naselci b) cmene: 'b:)
                    (nunjavni-cmene (nunjavni-naselci c) cmene: 'c:)))))
              (a (nunjavni-morji
                ; convert each character to a string.
-               (nunjavni-samselpla
-                 (lambda (#!key lerfu) (make-string 1 lerfu))
+               (nunjavni-samselpla test-samselpla-lerfu
                  (nunjavni-lerfu #\a cmene: 'lerfu:))))
              (b (nunjavni-morji
-               (nunjavni-samselpla
-                 (lambda (#!key lerfu) (make-string 1 lerfu))
+               (nunjavni-samselpla test-samselpla-lerfu
                  (nunjavni-lerfu #\b cmene: 'lerfu:))))
              (c (nunjavni-morji
-               (nunjavni-samselpla
-                 (lambda (#!key lerfu) (make-string 1 lerfu))
+               (nunjavni-samselpla test-samselpla-lerfu
                  (nunjavni-lerfu #\c cmene: 'lerfu:)))))
-      (genturfahi* gerna)))
+      (genturfahi* gerna))))
+    (samselpla-test genturfahi-samselpla)))
 
+(define (samselpla-peg)
+  (let* ((samselpla (call-with-input-file "samselpla.peg" genturfahi-peg))
+         (genturfahi-samselpla (genturfahi* (eval samselpla))))
+    (samselpla-test genturfahi-samselpla)))
+
+(define (samselpla-test genturfahi-samselpla)
   ; The code runs only after a a syntax tree is successfully
   ; generated.
   ;
@@ -74,3 +83,6 @@
 
 (test-group "samselpla"
   (samselpla))
+
+;(test-group "samselpla (PEG)"
+;  (samselpla-peg))
