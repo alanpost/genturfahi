@@ -20,7 +20,7 @@
 ;;;
 ;;; PEG grammar paser
 ;;;
-(let ((bootstrap
+(define genturfahi-peg
   (letrec
     ((cfari          (nunjavni-morji
                        (nunjavni-samselpla
@@ -363,6 +363,4 @@
                          (nunjavni-naselci LF))))
      (FAhO           (nunjavni-morji
                        (nunjavni-fanmo))))
-    (genturfahi cfari))))
-  (genturfahi-bootstrap  bootstrap)
-  (genturfahi-bootstrap* bootstrap))
+    (genturfahi cfari)))

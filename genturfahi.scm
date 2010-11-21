@@ -58,9 +58,3 @@
       (call-with-values
         (lambda () (gerna lefpoi))
         (lambda rodasumti rodasumti)))))
-
-(define (genturfahi-peg port)
-  ((genturfahi-bootstrap) port))
-
-(define (genturfahi-peg* port)
-  ((genturfahi-bootstrap*) port))

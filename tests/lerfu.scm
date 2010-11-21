@@ -23,15 +23,13 @@
 ;;; lerfu <- #\a
 ;;;
 (define (lerfu)
-  (set! genturfahi-lerfu
-        (genturfahi* (nunjavni-lerfu #\a)))
-  (lerfu-test genturfahi-lerfu))
+  (let ((genturfahi-lerfu (genturfahi* (nunjavni-lerfu #\a))))
+    (lerfu-test genturfahi-lerfu)))
 
 (define (lerfu-peg)
-  (set! genturfahi-lerfu
-        (begin (eval (call-with-input-file "lerfu.peg" genturfahi-peg))
-               (genturfahi-bootstrap*)))
-  (lerfu-test genturfahi-lerfu))
+  (let* ((samselpla (call-with-input-file "lerfu.peg" genturfahi-peg))
+         (genturfahi-lerfu (genturfahi* (eval samselpla))))
+    (lerfu-test genturfahi-lerfu)))
 
 (define (lerfu-test genturfahi-lerfu)
   ; match the only character this parser matches.

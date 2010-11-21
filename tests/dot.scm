@@ -23,15 +23,13 @@
 ;;; dot <- .
 ;;;
 (define (dot)
-  (set! genturfahi-.
-        (genturfahi* (nunjavni-.)))
-  (dot-test genturfahi-.))
+  (let ((genturfahi-. (genturfahi* (nunjavni-.))))
+    (dot-test genturfahi-.)))
 
 (define (dot-peg)
-  (set! genturfahi-.
-        (begin (eval (call-with-input-file "dot.peg" genturfahi-peg))
-               (genturfahi-bootstrap*)))
-  (dot-test genturfahi-.))
+  (let* ((samselpla (call-with-input-file "dot.peg" genturfahi-peg))
+         (genturfahi-. (genturfahi* (eval samselpla))))
+    (dot-test genturfahi-.)))
 
 (define (dot-test genturfahi-.)
   (test '(#\a "") (genturfahi-. "a"))

@@ -23,14 +23,13 @@
 ;;; end-of-input <- [eof]
 ;;;
 (define (end-of-input)
-  (set! genturfahi-eof (genturfahi* (nunjavni-fanmo)))
-  (end-of-input-test genturfahi-eof))
+  (let ((genturfahi-eof (genturfahi* (nunjavni-fanmo))))
+    (end-of-input-test genturfahi-eof)))
 
 (define (end-of-input-peg)
-  (set! genturfahi-eof
-        (begin (eval (call-with-input-file "end-of-input.peg" genturfahi-peg))
-               (genturfahi-bootstrap*)))
-  (end-of-input-test genturfahi-eof))
+  (let* ((samselpla (call-with-input-file "end-of-input.peg" genturfahi-peg))
+         (genturfahi-eof (genturfahi* (eval samselpla))))
+    (end-of-input-test genturfahi-eof)))
 
 (define (end-of-input-test genturfahi-eof)
   ; The end of file only matches when we're at the end of

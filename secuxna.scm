@@ -19,5 +19,3 @@
 
 (define genturfahi-status (make-parameter 0))
 
-(define genturfahi-bootstrap  (make-parameter #f))
-(define genturfahi-bootstrap* (make-parameter #f))

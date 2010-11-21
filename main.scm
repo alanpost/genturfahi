@@ -37,7 +37,7 @@
   (error (format "unrecognized option \"~a\"" name)))
 
 (define (args name . seeds)
-  (let ((jalge (call-with-input-file name (genturfahi-bootstrap))))
+  (let ((jalge (call-with-input-file name genturfahi-peg)))
     (if (not jalge)
         (genturfahi-status 1))
     (pretty-print jalge)))

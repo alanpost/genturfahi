@@ -23,15 +23,14 @@
 ;;; not-predicate <- !#\a
 ;;;
 (define (not-predicate)
-  (set! genturfahi-not-predicate
-        (genturfahi* (nunjavni-! (nunjavni-lerfu #\a))))
-  (not-predicate-test genturfahi-not-predicate))
+  (let ((genturfahi-not-predicate
+    (genturfahi* (nunjavni-! (nunjavni-lerfu #\a)))))
+    (not-predicate-test genturfahi-not-predicate)))
 
 (define (not-predicate-peg)
-  (set! genturfahi-not-predicate
-        (begin (eval (call-with-input-file "not-predicate.peg" genturfahi-peg))
-               (genturfahi-bootstrap*)))
-  (not-predicate-test genturfahi-not-predicate))
+  (let* ((samselpla (call-with-input-file "not-predicate.peg" genturfahi-peg))
+         (genturfahi-not-predicate (genturfahi* (eval samselpla))))
+    (not-predicate-test genturfahi-not-predicate)))
 
 (define (not-predicate-test genturfahi-not-predicate)
   ; this not-predicate matches everything *but* \#a.

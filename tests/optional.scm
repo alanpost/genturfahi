@@ -23,15 +23,14 @@
 ;;; optional <- #\a?
 ;;;
 (define (optional?)
-  (set! genturfahi-optional
-        (genturfahi* (nunjavni-? (nunjavni-lerfu #\a))))
-  (optional?-test genturfahi-optional))
+  (let ((genturfahi-optional
+    (genturfahi* (nunjavni-? (nunjavni-lerfu #\a)))))
+  (optional?-test genturfahi-optional)))
 
 (define (optional?-peg)
-  (set! genturfahi-optional
-        (begin (eval (call-with-input-file "optional.peg" genturfahi-peg))
-               (genturfahi-bootstrap*)))
-  (optional?-test genturfahi-optional))
+  (let* ((samselpla (call-with-input-file "optional.peg" genturfahi-peg))
+         (genturfahi-optional (genturfahi* (eval samselpla))))
+    (optional?-test genturfahi-optional)))
 
 (define (optional?-test genturfahi-optional)
   ; match the only character this parser matches.

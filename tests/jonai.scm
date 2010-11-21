@@ -23,17 +23,16 @@
 ;;; jonai <- #\a / #\b / #\c
 ;;;
 (define (jonai)
-  (set! genturfahi-jonai
-        (genturfahi* (nunjavni-jonai (nunjavni-lerfu #\a)
-                                     (nunjavni-lerfu #\b)
-                                     (nunjavni-lerfu #\c))))
-  (jonai-test genturfahi-jonai))
+  (let ((genturfahi-jonai
+    (genturfahi* (nunjavni-jonai (nunjavni-lerfu #\a)
+                                 (nunjavni-lerfu #\b)
+                                 (nunjavni-lerfu #\c)))))
+    (jonai-test genturfahi-jonai)))
 
 (define (jonai-peg)
-  (set! genturfahi-jonai
-        (begin (eval (call-with-input-file "jonai.peg" genturfahi-peg))
-               (genturfahi-bootstrap*)))
-  (jonai-test genturfahi-jonai))
+  (let* ((samselpla (call-with-input-file "jonai.peg" genturfahi-peg))
+         (genturfahi-jonai (genturfahi* (eval samselpla))))
+    (jonai-test genturfahi-jonai)))
 
 (define (jonai-test genturfahi-jonai)
   ; matches (nunjavni-jonai (nunjavni-lerfu #\a) ...)

@@ -23,15 +23,14 @@
 ;;; zero-or-more <- #\a*
 ;;;
 (define (zero-or-more)
-  (set! genturfahi-zero-or-more
-        (genturfahi* (nunjavni-* (nunjavni-lerfu #\a))))
-  (zero-or-more-test genturfahi-zero-or-more))
+  (let ((genturfahi-zero-or-more
+    (genturfahi* (nunjavni-* (nunjavni-lerfu #\a)))))
+    (zero-or-more-test genturfahi-zero-or-more)))
 
 (define (zero-or-more-peg)
-  (set! genturfahi-zero-or-more
-        (begin (eval (call-with-input-file "zero-or-more.peg" genturfahi-peg))
-               (genturfahi-bootstrap*)))
-  (zero-or-more-test genturfahi-zero-or-more))
+  (let* ((samselpla (call-with-input-file "zero-or-more.peg" genturfahi-peg))
+         (genturfahi-zero-or-more (genturfahi* (eval samselpla))))
+    (zero-or-more-test genturfahi-zero-or-more)))
 
 (define (zero-or-more-test genturfahi-zero-or-more)
   ; match the only character this parser matches.

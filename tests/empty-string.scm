@@ -23,14 +23,13 @@
 ;;; empty-string <- ""
 ;;;
 (define (empty-string)
-  (set! genturfahi-empty-string (genturfahi* (nunjavni-e)))
-  (empty-string-test genturfahi-empty-string))
+  (let ((genturfahi-empty-string (genturfahi* (nunjavni-e))))
+    (empty-string-test genturfahi-empty-string)))
 
 (define (empty-string-peg)
-  (set! genturfahi-empty-string
-        (begin (eval (call-with-input-file "empty-string.peg" genturfahi-peg))
-               (genturfahi-bootstrap*)))
-  (empty-string-test genturfahi-empty-string))
+  (let* ((samselpla (call-with-input-file "empty-string.peg" genturfahi-peg))
+         (genturfahi-empty-string (genturfahi* (eval samselpla))))
+    (empty-string-test genturfahi-empty-string)))
 
 (define (empty-string-test genturfahi-empty-string)
   ; the empty string is zero characters long, so

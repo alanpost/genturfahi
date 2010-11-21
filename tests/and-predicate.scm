@@ -23,15 +23,14 @@
 ;;; and-predicate <- &#\a
 ;;;
 (define (and-predicate)
-  (set! genturfahi-and-predicate
-        (genturfahi* (nunjavni-& (nunjavni-lerfu #\a))))
-  (and-predicate-test genturfahi-and-predicate))
+  (let ((genturfahi-and-predicate
+        (genturfahi* (nunjavni-& (nunjavni-lerfu #\a)))))
+    (and-predicate-test genturfahi-and-predicate)))
 
 (define (and-predicate-peg)
-  (set! genturfahi-and-predicate
-        (begin (eval (call-with-input-file "and-predicate.peg" genturfahi-peg))
-               (genturfahi-bootstrap*)))
-  (and-predicate-test genturfahi-and-predicate))
+  (let* ((samselpla (call-with-input-file "and-predicate.peg" genturfahi-peg))
+         (genturfahi-and-predicate (genturfahi* (eval samselpla))))
+    (and-predicate-test genturfahi-and-predicate)))
 
 (define (and-predicate-test genturfahi-and-predicate)
   ; the and-predicate matches as normal, but does not advance

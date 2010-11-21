@@ -30,10 +30,8 @@
         (let ((selci cfari))
           (set! cfari #f)
           (if (not (null? smuni))
-              `(let ((gerna
-                 (letrec (,@smuni)
-                   (genturfahi* ,(string->symbol selci)))))
-                 (genturfahi-bootstrap* gerna))
+              `(letrec (,@smuni)
+                 ,(string->symbol selci))
               '())))
 
       ;; emit the non-terminal with it's rule.

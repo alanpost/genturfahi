@@ -23,15 +23,14 @@
 ;;; one-or-more <- #\a+
 ;;;
 (define (one-or-more)
-  (set! genturfahi-one-or-more
-        (genturfahi* (nunjavni-+ (nunjavni-lerfu #\a))))
-  (one-or-more-test genturfahi-one-or-more))
+  (let ((genturfahi-one-or-more
+    (genturfahi* (nunjavni-+ (nunjavni-lerfu #\a)))))
+    (one-or-more-test genturfahi-one-or-more)))
 
 (define (one-or-more-peg)
-  (set! genturfahi-one-or-more
-        (begin (eval (call-with-input-file "one-or-more.peg" genturfahi-peg))
-               (genturfahi-bootstrap*)))
-  (one-or-more-test genturfahi-one-or-more))
+  (let* ((samselpla (call-with-input-file "one-or-more.peg" genturfahi-peg))
+         (genturfahi-one-or-more (genturfahi* (eval samselpla))))
+    (one-or-more-test genturfahi-one-or-more)))
 
 (define (one-or-more-test genturfahi-one-or-more)
   ; match the only character this parser matches.

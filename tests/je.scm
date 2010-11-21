@@ -23,17 +23,16 @@
 ;;; je <- #\a #\b #\c
 ;;;
 (define (je)
-  (set! genturfahi-je
-        (genturfahi* (nunjavni-je (nunjavni-lerfu #\a)
-                                  (nunjavni-lerfu #\b)
-                                  (nunjavni-lerfu #\c))))
-  (je-test genturfahi-je))
+  (let ((genturfahi-je
+    (genturfahi* (nunjavni-je (nunjavni-lerfu #\a)
+                              (nunjavni-lerfu #\b)
+                              (nunjavni-lerfu #\c)))))
+    (je-test genturfahi-je)))
 
 (define (je-peg)
-  (set! genturfahi-je
-        (begin (eval (call-with-input-file "je.peg" genturfahi-peg))
-               (genturfahi-bootstrap*)))
-  (je-test genturfahi-je))
+  (let* ((samselpla (call-with-input-file "je.peg" genturfahi-peg))
+         (genturfahi-je (genturfahi* (eval samselpla))))
+    (je-test genturfahi-je)))
 
 (define (je-test genturfahi-je)
   ; matches each lerfu in sequence 

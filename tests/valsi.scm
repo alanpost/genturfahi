@@ -23,15 +23,13 @@
 ;;; valsi <- "abc"
 ;;;
 (define (valsi)
-  (set! genturfahi-valsi
-        (genturfahi* (nunjavni-valsi "abc")))
-  (valsi-test genturfahi-valsi))
+  (let ((genturfahi-valsi (genturfahi* (nunjavni-valsi "abc"))))
+    (valsi-test genturfahi-valsi)))
 
 (define (valsi-peg)
-  (set! genturfahi-valsi
-        (begin (eval (call-with-input-file "valsi.peg" genturfahi-peg))
-               (genturfahi-bootstrap*)))
-  (valsi-test genturfahi-valsi))
+  (let* ((samselpla (call-with-input-file "valsi.peg" genturfahi-peg))
+         (genturfahi-valsi (genturfahi* (eval samselpla))))
+    (valsi-test genturfahi-valsi)))
 
 (define (valsi-test genturfahi-valsi)
   ; match the only word this parser matches.

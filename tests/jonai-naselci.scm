@@ -28,21 +28,20 @@
 ;;; c     <- #\c
 ;;;
 (define (jonai-naselci)
-  (set! genturfahi-jonai-naselci
+  (let ((genturfahi-jonai-naselci
     (letrec ((gerna (nunjavni-morji (nunjavni-jonai (nunjavni-naselci a)
                                                     (nunjavni-naselci b)
                                                     (nunjavni-naselci c))))
              (a (nunjavni-morji (nunjavni-lerfu #\a)))
              (b (nunjavni-morji (nunjavni-lerfu #\b)))
              (c (nunjavni-morji (nunjavni-lerfu #\c))))
-      (genturfahi* gerna)))
-  (jonai-naselci-test genturfahi-jonai-naselci))
+      (genturfahi* gerna))))
+    (jonai-naselci-test genturfahi-jonai-naselci)))
 
 (define (jonai-naselci-peg)
-  (set! genturfahi-jonai-naselci
-        (begin (eval (call-with-input-file "jonai-naselci.peg" genturfahi-peg))
-               (genturfahi-bootstrap*)))
-  (jonai-naselci-test genturfahi-jonai-naselci))
+  (let* ((samselpla (call-with-input-file "jonai-naselci.peg" genturfahi-peg))
+         (genturfahi-jonai-naselci (genturfahi* (eval samselpla))))
+    (jonai-naselci-test genturfahi-jonai-naselci)))
 
 (define (jonai-naselci-test genturfahi-jonai-naselci)
   ; matches (nunjavni-jonai-naselci (nunjavni-lerfu #\a) ...)

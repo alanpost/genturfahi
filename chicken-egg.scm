@@ -21,7 +21,6 @@
   (genturfahi
    genturfahi*
    genturfahi-peg
-   genturfahi-peg*
    genturfahi-version
    genturfahi-version-major
    genturfahi-version-minor
@@ -118,8 +117,7 @@
    samselpla-jonai
 
    ; secuxna
-   genturfahi-bootstrap
-   genturfahi-bootstrap*)
+   genturfahi-status)
 
 (import chicken)
 (import scheme)
