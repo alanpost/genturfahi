@@ -47,10 +47,16 @@
       (lambda (rodanunvalsi)
         (apply vejmina-rodanunvalsi-nacmene rodanunvalsi))))
 
+
+;; with a cmene, the list of results is associated with a single
+;; javni-valsi.
+;;
 (define (vejmina-rodanunvalsi cmene . rodanunvalsi)
   (lambda ()
     (make-javni-valsi cmene (map javni-nunvalsi-val rodanunvalsi))))
 
+;; with no cmene, return a list of results
+;;
 (define (vejmina-rodanunvalsi-nacmene . rodanunvalsi)
   (lambda ()
     (map (lambda (nunvalsi) (nunvalsi)) rodanunvalsi)))
