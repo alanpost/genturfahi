@@ -166,7 +166,7 @@
 ;;
 (define (nunjavni-? javni #!key cmene)
   (let ((vejmina (venunjmina-nunvalsi cmene)))
-    (define (javni-? porsi mapti namapti)
+    (define (javni-? porsi mapti ignore-namapti)
 
       (define (mapti-? porsi nunvalsi)
         (mapti porsi (vejmina nunvalsi)))
