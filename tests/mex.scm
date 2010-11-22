@@ -73,22 +73,46 @@
                      test-samselpla-simple
                      (nunjavni-je
                        (nunjavni-lerfu #\()
-                       (nunjavni-cmene (nunjavni-naselci expr) cmene: 'expr:)
+                       (nunjavni-naselci expr cmene: 'expr:)
                        (nunjavni-lerfu #\)))))))
        (digits (nunjavni-morji
                  (nunjavni-samselpla
                    test-samselpla-digits
                    (nunjavni-re "[[:digit:]]+" cmene: 'x:)))))
       (genturfahi expr))))
+  (mex-test genturfahi-mex)))
 
+(define (mex-read)
+  (let* ((samselpla
+          (call-with-input-file "mex.peg" genturfahi-peg))
+         (port
+          (with-output-to-string (lambda () (write samselpla))))
+         (genturfahi-mex
+          (genturfahi (eval (call-with-input-string port read)))))
+    (mex-test genturfahi-mex)))
+
+(define (mex-peg)
+  (let* ((samselpla
+         (call-with-input-file "mex.peg" genturfahi-peg))
+         (genturfahi-mex
+          (genturfahi (eval samselpla))))
+    (mex-test genturfahi-mex)))
+
+(define (mex-test genturfahi-mex)
     (test 2  (genturfahi-mex "2"))
     (test 22 (genturfahi-mex "22"))
     (test 4  (genturfahi-mex "2*2"))
     (test 4  (genturfahi-mex "2+2"))
     (test 16 (genturfahi-mex "2+2*7"))
     (test 28 (genturfahi-mex "(2+2)*7"))
-    (test 42 (genturfahi-mex "3*4+5*6")))
+    (test 42 (genturfahi-mex "3*4+5*6"))
     0)
 
 (test-group "mex"
   (mex))
+
+(test-group "mex (read)"
+  (mex-read))
+
+;(test-group "mex (PEG)"
+;  (mex-peg))

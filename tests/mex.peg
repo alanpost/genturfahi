@@ -1,0 +1,7 @@
+expr   <- #a: mulexp #\+ #b: mulexp {test-samselpla-+}
+        / mulexp
+mulexp <- #a: simple #\* #b: simple {test-samselpla-*}
+        / simple
+simple <- digits
+        / #\( #expr: expr #\)       {test-samselpla-simple}
+digits <- #x: [:digit:]+            {test-samselpla-digits}
