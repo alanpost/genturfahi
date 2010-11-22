@@ -56,11 +56,11 @@ cfari           <- canlu gerna FAhO
 
 gerna           <- smuni*
 
-smuni           <- naselci "<-" canlu javni samselpla?
+smuni           <- naselci "<-" canlu javni
                    ;{(samselpla-smuni naselci javni samselpla)}
 
 ; this really doesn't need to be so strict.
-naselci         <- [:alpha:_-] [:alnum:_-]* canlu
+naselci         <- [[:alpha:]_-] [[:alnum:]_-]* canlu
                    ;{(apply samselpla-naselci cfari fanmo)}
 
 javni           <- jonai
@@ -68,7 +68,7 @@ javni           <- jonai
 
 jonai           <- je (#\/ canlu je)+
                    ;{(samselpla-jonai cfari fanmo)}
-je              <- unary_rule+
+je              <- unary_rule+ samselpla?
                    ;{(samselpla-je rodajavni)}
 
 unary_rule      <- optional
@@ -77,7 +77,7 @@ unary_rule      <- optional
                  / and-predicate
                  / end-of-input
                  / not-predicate
-                 / selci-javni
+                 / cmene-sumti? selci-javni
 
 optional        <- cmene-sumti? selci-javni #\? canlu
                    ;{(samselpa-? selci-javni)}
@@ -92,7 +92,7 @@ end-of-input    <- #\! canlu #\. canlu
 not-predicate   <- #\! canlu selci-javni
                    ;{(samselpa-! selci-javni)}
 
-cmene-sumti     <- #\# [:alpha:_-] [:alnum:_-]* #\: canlu
+cmene-sumti     <- #\# [[:alpha:]_-] [[:alnum:]_-]* #\: canlu
 
 selci-javni     <- selci-naselci
                  / lerfu-selci
@@ -134,6 +134,7 @@ klesi-lerfu      <- klesi-cmene
                   / (!#\[ .)
 klesi-cmene     <- ":alnum:"
                  / ":alpha:"
+                 / ":ascii:"
                  / ":blank:"
                  / ":cntrl:"
                  / ":digit:"
@@ -144,6 +145,7 @@ klesi-cmene     <- ":alnum:"
                  / ":punct:"
                  / ":space:"
                  / ":upper:"
+                 / ":word:"
                  / ":xdigit:"
 
 denpabu         <- #\. canlu
