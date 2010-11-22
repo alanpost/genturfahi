@@ -67,29 +67,29 @@
 (define (samselpla-jonai . rodajavni)
   `(nunjavni-jonai ,@rodajavni))
 
-(define (samselpla-? cmene javni)
+(define (samselpla-? #!key cmene selci-javni)
   (if (equal? "" cmene)
-      `(nunjavni-? ,javni)
-      `(nunjavni-? ,javni cmene: ',cmene)))
+      `(nunjavni-? ,selci-javni)
+      `(nunjavni-? ,selci-javni cmene: ',cmene)))
 
-(define (samselpla-* cmene javni)
+(define (samselpla-* #!key cmene selci-javni)
   (if (equal? "" cmene)
-      `(nunjavni-* ,javni)
-      `(nunjavni-* ,javni cmene: ',cmene)))
+      `(nunjavni-* ,selci-javni)
+      `(nunjavni-* ,selci-javni cmene: ',cmene)))
 
-(define (samselpla-+ cmene javni)
+(define (samselpla-+ #!key cmene selci-javni)
   (if (equal? "" cmene)
-      `(nunjavni-+ ,javni)
-      `(nunjavni-+ ,javni cmene: ',cmene)))
+      `(nunjavni-+ ,selci-javni)
+      `(nunjavni-+ ,selci-javni cmene: ',cmene)))
 
-(define (samselpla-& javni)
-  `(nunjavni-& ,javni))
+(define (samselpla-& #!key selci-javni)
+  `(nunjavni-& ,selci-javni))
 
 (define (samselpla-fanmo)
   `(nunjavni-fanmo))
 
-(define (samselpla-! javni)
-  `(nunjavni-! ,javni))
+(define (samselpla-! #!key selci-javni)
+  `(nunjavni-! ,selci-javni))
 
 (define (samselpla-cmene-sumti #!key cfari fanmo)
   `,(string->symbol (string-append cfari fanmo ":")))
@@ -99,11 +99,11 @@
 (define (samselpla-selci-naselci #!key naselci)
   `(nunjavni-naselci ,(string->symbol naselci)))
 
-(define (samselpla-lerfu-selci lerfu)
+(define (samselpla-lerfu-selci #!key lerfu)
   `(nunjavni-lerfu ,lerfu))
 
-(define (samselpla-valsi-selci valsi)
-  `(nunjavni-valsi ,valsi))
+(define (samselpla-valsi-selci #!key valsi-lerfu)
+  `(nunjavni-valsi ,(apply string-append valsi-lerfu)))
 
 (define (samselpla-klesi-selci klesi)
   `(nunjavni-re ,klesi))

@@ -117,8 +117,7 @@
 
      (optional       (nunjavni-morji
                        (nunjavni-samselpla
-                         (lambda (#!key cmene selci-javni)
-                           (samselpla-? cmene selci-javni))
+                         samselpla-?
                          (nunjavni-je
                            (nunjavni-?
                              (nunjavni-naselci cmene-sumti)
@@ -130,8 +129,7 @@
                            (nunjavni-naselci canlu)))))
      (repetition0    (nunjavni-morji
                        (nunjavni-samselpla
-                         (lambda (#!key cmene selci-javni)
-                           (samselpla-* cmene selci-javni))
+                         samselpla-*
                          (nunjavni-je
                            (nunjavni-?
                              (nunjavni-naselci cmene-sumti)
@@ -143,8 +141,7 @@
                            (nunjavni-naselci canlu)))))
      (repetition1    (nunjavni-morji
                        (nunjavni-samselpla
-                         (lambda (#!key cmene selci-javni)
-                           (samselpla-+ cmene selci-javni))
+                         samselpla-+
                          (nunjavni-je
                            (nunjavni-?
                              (nunjavni-naselci cmene-sumti)
@@ -156,8 +153,7 @@
                            (nunjavni-naselci canlu)))))
      (and-predicate  (nunjavni-morji
                        (nunjavni-samselpla
-                         (lambda (#!key selci-javni)
-                           (samselpla-& selci-javni))
+                         samselpla-&
                          (nunjavni-je
                            (nunjavni-lerfu #\&)
                            (nunjavni-naselci canlu)
@@ -175,8 +171,7 @@
                            (nunjavni-naselci canlu)))))
      (not-predicate  (nunjavni-morji
                        (nunjavni-samselpla
-                         (lambda (#!key selci-javni)
-                           (samselpla-! selci-javni))
+                         samselpla-!
                          (nunjavni-je
                            (nunjavni-lerfu #\!)
                            (nunjavni-naselci canlu)
@@ -214,8 +209,7 @@
 
      (lerfu-selci    (nunjavni-morji
                        (nunjavni-samselpla
-                         (lambda (#!key lerfu)
-                           (samselpla-lerfu-selci lerfu))
+                         samselpla-lerfu-selci
                          (nunjavni-jonai
                            (nunjavni-je
                              (nunjavni-valsi "#\\")
@@ -248,9 +242,7 @@
 
      (valsi-selci    (nunjavni-morji
                        (nunjavni-samselpla
-                         (lambda (#!key valsi-lerfu)
-                           (samselpla-valsi-selci
-                             (apply string-append valsi-lerfu)))
+                         samselpla-valsi-selci
                          (nunjavni-je
                            (nunjavni-lerfu #\")
                              (nunjavni-*
