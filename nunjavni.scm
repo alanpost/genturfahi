@@ -379,7 +379,7 @@
                                                (list rodavalsi)))))
                (rodaval   (append-map!
                             (lambda (javni)
-                              (list (javni-valsi-cme javni)
+                              (list (string->keyword (javni-valsi-cme javni))
                                     (javni-valsi-val javni)))
                             rodacme))
                (valsi     (apply samselpla rodaval)))

@@ -39,7 +39,7 @@
                       (nunjavni-jonai
                         (nunjavni-naselci digit)
                         (nunjavni-naselci alpha))
-                      cmene: 'gerna:)
+                      cmene: "gerna")
                     (nunjavni-fanmo)))))
        (digit (nunjavni-morji
                 (nunjavni-re "[0-9]+")))

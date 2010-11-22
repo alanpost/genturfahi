@@ -92,7 +92,7 @@
   `(nunjavni-! ,selci-javni))
 
 (define (samselpla-cmene-sumti #!key cfari fanmo)
-  `,(string->keyword (string-append cfari fanmo)))
+  `,(string-append cfari fanmo))
 
 ;; A naselci that appears on the right side of a definition.
 ;;

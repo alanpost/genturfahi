@@ -37,19 +37,19 @@
                ; concatenate the strings
                (nunjavni-samselpla test-samselpla-samselpla
                  (nunjavni-je
-                   (nunjavni-cmene (nunjavni-naselci a) cmene: 'a:)
-                   (nunjavni-cmene (nunjavni-naselci b) cmene: 'b:)
-                   (nunjavni-cmene (nunjavni-naselci c) cmene: 'c:)))))
+                   (nunjavni-cmene (nunjavni-naselci a) cmene: "a")
+                   (nunjavni-cmene (nunjavni-naselci b) cmene: "b")
+                   (nunjavni-cmene (nunjavni-naselci c) cmene: "c")))))
              (a (nunjavni-morji
                ; convert each character to a string.
                (nunjavni-samselpla test-samselpla-lerfu
-                 (nunjavni-lerfu #\a cmene: 'lerfu:))))
+                 (nunjavni-lerfu #\a cmene: "lerfu"))))
              (b (nunjavni-morji
                (nunjavni-samselpla test-samselpla-lerfu
-                 (nunjavni-lerfu #\b cmene: 'lerfu:))))
+                 (nunjavni-lerfu #\b cmene: "lerfu"))))
              (c (nunjavni-morji
                (nunjavni-samselpla test-samselpla-lerfu
-                 (nunjavni-lerfu #\c cmene: 'lerfu:)))))
+                 (nunjavni-lerfu #\c cmene: "lerfu")))))
       (genturfahi* gerna))))
     (samselpla-test genturfahi-samselpla)))
 
@@ -84,5 +84,5 @@
 (test-group "samselpla"
   (samselpla))
 
-;(test-group "samselpla (PEG)"
-;  (samselpla-peg))
+(test-group "samselpla (PEG)"
+  (samselpla-peg))

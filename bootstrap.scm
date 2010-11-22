@@ -29,7 +29,7 @@
                            (nunjavni-naselci canlu)
                            (nunjavni-cmene
                              (nunjavni-naselci gerna)
-                             cmene: 'gerna:)
+                             cmene: "gerna")
                            (nunjavni-naselci FAhO)))))
 
      (gerna          (nunjavni-morji
@@ -37,7 +37,7 @@
                          samselpla-gerna
                          (nunjavni-*
                            (nunjavni-naselci smuni)
-                           cmene: 'smuni:))))
+                           cmene: "smuni"))))
 
      (smuni          (nunjavni-morji
                        (nunjavni-samselpla
@@ -45,20 +45,20 @@
                          (nunjavni-je
                            (nunjavni-cmene
                              (nunjavni-naselci naselci)
-                             cmene: 'naselci:)
+                             cmene: "naselci")
                            (nunjavni-valsi "<-")
                            (nunjavni-naselci canlu)
                            (nunjavni-cmene
                              (nunjavni-naselci javni)
-                             cmene: 'javni:)))))
+                             cmene: "javni")))))
 
      (naselci        (nunjavni-morji
                        (nunjavni-samselpla
                          (lambda (#!key cfari fanmo)
                            (samselpla-naselci cfari fanmo))
                          (nunjavni-je
-                           (nunjavni-re "[a-zA-Z_\\-]" cmene: 'cfari:)
-                           (nunjavni-re "[a-zA-Z0-9_\\-]*" cmene: 'fanmo:)
+                           (nunjavni-re "[a-zA-Z_\\-]" cmene: "cfari")
+                           (nunjavni-re "[a-zA-Z0-9_\\-]*" cmene: "fanmo")
                            (nunjavni-naselci canlu)))))
 
      (javni          (nunjavni-morji
@@ -73,7 +73,7 @@
                          (nunjavni-je
                            (nunjavni-cmene
                              (nunjavni-naselci je)
-                             cmene: 'cfari:)
+                             cmene: "cfari")
                            (nunjavni-+
                              (nunjavni-samselpla
                                ; this could be an ignore rule, if
@@ -84,18 +84,18 @@
                                  (nunjavni-naselci canlu)
                                  (nunjavni-cmene
                                    (nunjavni-naselci je)
-                                   cmene: 'porsi-javni:)))
-                             cmene: 'fanmo:)))))
+                                   cmene: "porsi-javni")))
+                             cmene: "fanmo")))))
      (je             (nunjavni-morji
                        (nunjavni-samselpla
                          samselpla-je
                          (nunjavni-je
                            (nunjavni-+
                              (nunjavni-naselci unary_rule)
-                             cmene: 'rodajavni:)
+                             cmene: "rodajavni")
                            (nunjavni-?
                              (nunjavni-naselci samselpla)
-                             cmene: 'samselpla:)))))
+                             cmene: "samselpla")))))
 
      (unary_rule     (nunjavni-morji
                        (nunjavni-jonai
@@ -110,10 +110,10 @@
                            (nunjavni-je
                              (nunjavni-?
                                (nunjavni-naselci cmene-sumti)
-                               cmene: 'cmene:)
+                               cmene: "cmene")
                              (nunjavni-cmene
                                (nunjavni-naselci selci-javni)
-                               cmene: 'selci-javni:))))))
+                               cmene: "selci-javni"))))))
 
      (optional       (nunjavni-morji
                        (nunjavni-samselpla
@@ -121,10 +121,10 @@
                          (nunjavni-je
                            (nunjavni-?
                              (nunjavni-naselci cmene-sumti)
-                             cmene: 'cmene:)
+                             cmene: "cmene")
                            (nunjavni-cmene
                              (nunjavni-naselci selci-javni)
-                             cmene: 'selci-javni:)
+                             cmene: "selci-javni")
                            (nunjavni-lerfu #\?)
                            (nunjavni-naselci canlu)))))
      (repetition0    (nunjavni-morji
@@ -133,10 +133,10 @@
                          (nunjavni-je
                            (nunjavni-?
                              (nunjavni-naselci cmene-sumti)
-                             cmene: 'cmene:)
+                             cmene: "cmene")
                            (nunjavni-cmene
                              (nunjavni-naselci selci-javni)
-                             cmene: 'selci-javni:)
+                             cmene: "selci-javni")
                            (nunjavni-lerfu #\*)
                            (nunjavni-naselci canlu)))))
      (repetition1    (nunjavni-morji
@@ -145,10 +145,10 @@
                          (nunjavni-je
                            (nunjavni-?
                              (nunjavni-naselci cmene-sumti)
-                             cmene: 'cmene:)
+                             cmene: "cmene")
                            (nunjavni-cmene
                              (nunjavni-naselci selci-javni)
-                             cmene: 'selci-javni:)
+                             cmene: "selci-javni")
                            (nunjavni-lerfu #\+)
                            (nunjavni-naselci canlu)))))
      (and-predicate  (nunjavni-morji
@@ -159,7 +159,7 @@
                            (nunjavni-naselci canlu)
                            (nunjavni-cmene
                              (nunjavni-naselci selci-javni)
-                             cmene: 'selci-javni:)))))
+                             cmene: "selci-javni")))))
      (end-of-input   (nunjavni-morji
                        (nunjavni-samselpla
                          (lambda ()
@@ -177,16 +177,15 @@
                            (nunjavni-naselci canlu)
                            (nunjavni-cmene
                              (nunjavni-naselci selci-javni)
-                             cmene: 'selci-javni:)))))
+                             cmene: "selci-javni")))))
 
      (cmene-sumti    (nunjavni-morji
                        (nunjavni-samselpla
                          samselpla-cmene-sumti
                          (nunjavni-je
-                           (nunjavni-lerfu #\#)
-                           (nunjavni-re "[A-Za-z_-]" cmene: 'cfari:)
-                           (nunjavni-re "[A-Za-z0-9_-]*" cmene: 'fanmo:)
-                           (nunjavni-lerfu #\:)
+                           (nunjavni-valsi "#:")
+                           (nunjavni-re "[A-Za-z_-]" cmene: "cfari")
+                           (nunjavni-re "[A-Za-z0-9_-]*" cmene: "fanmo")
                            (nunjavni-naselci canlu)))))
 
      (selci-javni    (nunjavni-morji
@@ -204,7 +203,7 @@
                          (nunjavni-je
                            (nunjavni-cmene
                              (nunjavni-naselci naselci)
-                             cmene: 'naselci:)
+                             cmene: "naselci")
                            (nunjavni-! (nunjavni-valsi "<-"))))))
 
      (lerfu-selci    (nunjavni-morji
@@ -215,11 +214,11 @@
                              (nunjavni-valsi "#\\")
                              (nunjavni-cmene
                                (nunjavni-naselci lerfu-cmene)
-                               cmene: 'lerfu:)
+                               cmene: "lerfu")
                              (nunjavni-naselci canlu))
                            (nunjavni-je
                              (nunjavni-valsi "#\\")
-                             (nunjavni-. cmene: 'lerfu:)
+                             (nunjavni-. cmene: "lerfu")
                              (nunjavni-naselci canlu))))))
 
      (lerfu-cmene    (nunjavni-morji
@@ -253,8 +252,8 @@
                                    (nunjavni-! (nunjavni-lerfu #\"))
                                    (nunjavni-cmene
                                      (nunjavni-naselci valsi-lerfu)
-                                     cmene: 'valsi-lerfu:)))
-                               cmene: 'valsi-lerfu:)
+                                     cmene: "valsi-lerfu")))
+                               cmene: "valsi-lerfu")
                              (nunjavni-lerfu #\")
                              (nunjavni-naselci canlu)))))
 
@@ -273,7 +272,7 @@
                            (lambda (#!key lerfu) (make-string 1 lerfu))
                            (nunjavni-je
                              (nunjavni-! (nunjavni-lerfu #\\))
-                             (nunjavni-. cmene: 'lerfu:))))))
+                             (nunjavni-. cmene: "lerfu"))))))
 
      (klesi-selci    (nunjavni-morji
                        (nunjavni-samselpla
@@ -291,14 +290,14 @@
                            (nunjavni-lerfu #\[)
                            (nunjavni-+
                              (nunjavni-naselci klesi-lerfu)
-                             cmene: 'klesi-lerfu:)
+                             cmene: "klesi-lerfu")
 
                            (nunjavni-lerfu #\])
                            (nunjavni-?
                              (nunjavni-jonai
                                (nunjavni-valsi "*")
                                (nunjavni-valsi "+"))
-                             cmene: 'repeat:)
+                             cmene: "repeat")
                            (nunjavni-naselci canlu)))))
 
      (klesi-lerfu    (nunjavni-morji
@@ -309,7 +308,7 @@
                              (string klesi-lerfu))
                            (nunjavni-je
                              (nunjavni-! (nunjavni-lerfu #\]))
-                             (nunjavni-. cmene: 'klesi-lerfu:))))))
+                             (nunjavni-. cmene: "klesi-lerfu"))))))
 
      (klesi-cmene    (nunjavni-morji
                        (nunjavni-jonai
@@ -354,9 +353,9 @@
                                  (nunjavni-je
                                    (nunjavni-!
                                      (nunjavni-lerfu #\}))
-                                   (nunjavni-. cmene: 'lerfu:)))
-                               cmene: 'samselpla-lerfu:)
-                             cmene: 'samselpla:)
+                                   (nunjavni-. cmene: "lerfu")))
+                               cmene: "samselpla-lerfu")
+                             cmene: "samselpla")
                            (nunjavni-lerfu #\})
                            (nunjavni-naselci canlu)))))
 
@@ -369,7 +368,7 @@
                            (nunjavni-naselci canlu)
                            (nunjavni-cmene
                              (nunjavni-naselci javni)
-                             cmene: 'javni:)
+                             cmene: "javni")
                            (nunjavni-lerfu #\))
                            (nunjavni-naselci canlu)))))
 

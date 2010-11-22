@@ -92,7 +92,7 @@ end-of-input    <- #\! canlu #\. canlu
 not-predicate   <- #\! canlu selci-javni
                    ;{(samselpa-! selci-javni)}
 
-cmene-sumti     <- #\# [[:alpha:]_-] [[:alnum:]_-]* #\: canlu
+cmene-sumti     <- "#:" [[:alpha:]_-] [[:alnum:]_-]* canlu
 
 selci-javni     <- selci-naselci
                  / lerfu-selci

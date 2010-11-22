@@ -53,18 +53,18 @@
                    (nunjavni-samselpla
                      test-samselpla-+
                      (nunjavni-je
-                       (nunjavni-naselci mulexp cmene: 'a:)
+                       (nunjavni-naselci mulexp cmene: "a")
                        (nunjavni-lerfu #\+)
-                       (nunjavni-naselci mulexp cmene: 'b:)))
+                       (nunjavni-naselci mulexp cmene: "b")))
                    (nunjavni-naselci mulexp))))
        (mulexp (nunjavni-morji
                  (nunjavni-jonai
                    (nunjavni-samselpla
                      test-samselpla-*
                      (nunjavni-je
-                       (nunjavni-naselci simple cmene: 'a:)
+                       (nunjavni-naselci simple cmene: "a")
                        (nunjavni-lerfu #\*)
-                       (nunjavni-naselci simple cmene: 'b:)))
+                       (nunjavni-naselci simple cmene: "b")))
                    (nunjavni-naselci simple))))
        (simple (nunjavni-morji
                  (nunjavni-jonai
@@ -73,12 +73,12 @@
                      test-samselpla-simple
                      (nunjavni-je
                        (nunjavni-lerfu #\()
-                       (nunjavni-naselci expr cmene: 'expr:)
+                       (nunjavni-naselci expr cmene: "expr")
                        (nunjavni-lerfu #\)))))))
        (digits (nunjavni-morji
                  (nunjavni-samselpla
                    test-samselpla-digits
-                   (nunjavni-re "[[:digit:]]+" cmene: 'x:)))))
+                   (nunjavni-re "[[:digit:]]+" cmene: "x")))))
       (genturfahi expr))))
   (mex-test genturfahi-mex)))
 
