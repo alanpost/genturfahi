@@ -114,5 +114,5 @@
 (test-group "mex (read)"
   (mex-read))
 
-;(test-group "mex (PEG)"
-;  (mex-peg))
+(test-group "mex (PEG)"
+  (mex-peg))

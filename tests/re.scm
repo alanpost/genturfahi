@@ -109,5 +109,5 @@
 (test-group "re (read)"
   (re-read))
 
-;(test-group "re (PEG)"
-;  (re-peg))
+(test-group "re (PEG)"
+  (re-peg))
