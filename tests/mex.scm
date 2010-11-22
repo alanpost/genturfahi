@@ -25,13 +25,33 @@
 ;;;
 ;;; It is here ported to genturfa'i.
 ;;;
+;;; expr   <- mulexp + mulexp
+;;;         / mulexp
+;;; mulexp <- simple * simple
+;;;         / simple
+;;; simple <- digits
+;;;         / #\( expr #\)
+;;; digits <- [:digit:]+
+
+(define (test-samselpla-+ #!key a b)
+  (+ a b))
+
+(define (test-samselpla-* #!key a b)
+  (* a b))
+
+(define (test-samselpla-simple #!key expr)
+  expr)
+
+(define (test-samselpla-digits #!key x)
+  (string->number x))
+
 (define (mex)
-  (let ((mex
+  (let ((genturfahi-mex
     (letrec
       ((expr   (nunjavni-morji
                  (nunjavni-jonai
                    (nunjavni-samselpla
-                     (lambda (#!key a b) (+ a b))
+                     test-samselpla-+
                      (nunjavni-je
                        (nunjavni-cmene (nunjavni-naselci mulexp) cmene: 'a:)
                        (nunjavni-lerfu #\+)
@@ -40,7 +60,7 @@
        (mulexp (nunjavni-morji
                  (nunjavni-jonai
                    (nunjavni-samselpla
-                     (lambda (#!key a b) (* a b))
+                     test-samselpla-*
                      (nunjavni-je
                        (nunjavni-cmene (nunjavni-naselci simple) cmene: 'a:)
                        (nunjavni-lerfu #\*)
@@ -48,38 +68,26 @@
                    (nunjavni-naselci simple))))
        (simple (nunjavni-morji
                  (nunjavni-jonai
-                   (nunjavni-naselci num)
+                   (nunjavni-naselci digits)
                    (nunjavni-samselpla
-                     (lambda (#!key a) a)
+                     test-samselpla-simple
                      (nunjavni-je
                        (nunjavni-lerfu #\()
-                       (nunjavni-cmene (nunjavni-naselci expr) cmene: 'a:)
+                       (nunjavni-cmene (nunjavni-naselci expr) cmene: 'expr:)
                        (nunjavni-lerfu #\)))))))
-       (num    (nunjavni-morji
+       (digits (nunjavni-morji
                  (nunjavni-samselpla
-                   (lambda (#!key x) (string->number (list->string x)))
-                   (nunjavni-+ (nunjavni-naselci digit) cmene: 'x:))))
-       (digit  (nunjavni-morji
-                 (nunjavni-jonai
-                   (nunjavni-lerfu #\0)
-                   (nunjavni-lerfu #\1)
-                   (nunjavni-lerfu #\2)
-                   (nunjavni-lerfu #\3)
-                   (nunjavni-lerfu #\4)
-                   (nunjavni-lerfu #\5)
-                   (nunjavni-lerfu #\6)
-                   (nunjavni-lerfu #\7)
-                   (nunjavni-lerfu #\8)
-                   (nunjavni-lerfu #\9)))))
+                   test-samselpla-digits
+                   (nunjavni-re "[[:digit:]]+" cmene: 'x:)))))
       (genturfahi expr))))
 
-    (test 2  (mex "2"))
-    (test 22 (mex "22"))
-    (test 4  (mex "2*2"))
-    (test 4  (mex "2+2"))
-    (test 16 (mex "2+2*7"))
-    (test 28 (mex "(2+2)*7"))
-    (test 42 (mex "3*4+5*6")))
+    (test 2  (genturfahi-mex "2"))
+    (test 22 (genturfahi-mex "22"))
+    (test 4  (genturfahi-mex "2*2"))
+    (test 4  (genturfahi-mex "2+2"))
+    (test 16 (genturfahi-mex "2+2*7"))
+    (test 28 (genturfahi-mex "(2+2)*7"))
+    (test 42 (genturfahi-mex "3*4+5*6")))
     0)
 
 (test-group "mex"
