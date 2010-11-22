@@ -21,7 +21,12 @@
 ;;          evaluation of the parser.
 ;;
 (define-syntax nunjavni-naselci
-  (syntax-rules ()
+  (syntax-rules (cmene:)
+    ((nunjavni-nasalci javni cmene: cmene)
+       (nunjavni-cmene
+         (lambda (porsi mapti namapti)
+           (javni porsi mapti namapti))
+         cmene: cmene))
     ((nunjavni-nasalci javni)
        (lambda (porsi mapti namapti)
          (javni porsi mapti namapti)))))
