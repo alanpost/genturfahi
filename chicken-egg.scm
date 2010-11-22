@@ -131,7 +131,7 @@
 ;(require-extension srfi-28)        ; built-in
 ;(require-extension srfi-39)        ; built-in
 ;(require-extension srfi-61)        ; built-in
-(require-extension extras)         ; only needed when I'm debugging
+;(require-extension extras)         ; only needed when I'm debugging
 (require-extension ports)
 (require-extension data-structures)
 (require-library regex)
@@ -143,7 +143,7 @@
 ;(import srfi-28)         ; basic format strings
 ;(import srfi-39)         ; parameter objects
 ;(import srfi-69)         ; A more general cond clause
-(import extras)         ; pretty-print (only needed when I'm debugging)
+;(import extras)         ; pretty-print (only needed when I'm debugging)
 (import ports)           ; Chicken Scheme srfi-6 and port extensions
 (import data-structures) ; flatten
 (import regex)           ; Irregular expressions
