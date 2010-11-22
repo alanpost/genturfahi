@@ -53,18 +53,18 @@
                    (nunjavni-samselpla
                      test-samselpla-+
                      (nunjavni-je
-                       (nunjavni-cmene (nunjavni-naselci mulexp) cmene: 'a:)
+                       (nunjavni-naselci mulexp cmene: 'a:)
                        (nunjavni-lerfu #\+)
-                       (nunjavni-cmene (nunjavni-naselci mulexp) cmene: 'b:)))
+                       (nunjavni-naselci mulexp cmene: 'b:)))
                    (nunjavni-naselci mulexp))))
        (mulexp (nunjavni-morji
                  (nunjavni-jonai
                    (nunjavni-samselpla
                      test-samselpla-*
                      (nunjavni-je
-                       (nunjavni-cmene (nunjavni-naselci simple) cmene: 'a:)
+                       (nunjavni-naselci simple cmene: 'a:)
                        (nunjavni-lerfu #\*)
-                       (nunjavni-cmene (nunjavni-naselci simple) cmene: 'b:)))
+                       (nunjavni-naselci simple cmene: 'b:)))
                    (nunjavni-naselci simple))))
        (simple (nunjavni-morji
                  (nunjavni-jonai
