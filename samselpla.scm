@@ -26,7 +26,7 @@
     (values
       ;; emit the entire grammar
       ;;
-      (lambda (smuni)
+      (lambda (#!key smuni)
         (let ((selci cfari))
           (set! cfari #f)
           (if (not (null? smuni))
@@ -38,31 +38,31 @@
       ;;
       ;; we assume we're in a letrec.
       ;;
-      (lambda (naselci javni samselpla)
+      (lambda (#!key naselci javni)
         ; if this is the first non-terminal we've seen, it is the
         ; initial rule of the grammar.
         (if (not cfari)
             (set! cfari naselci))
 
-        (if (equal? "" samselpla)
-
-            `(,(string->symbol naselci)
-               (nunjavni-morji ,javni))
-
-            `(,(string->symbol naselci)
-               (nunjavni-morji
-                 (nunjavni-samselpla
-                   ,(string->symbol samselpla)
-                   ,javni))))))))
+        `(,(string->symbol naselci)
+           (nunjavni-morji ,javni))))))
 
 
 (define (samselpla-naselci cfari fanmo)
   (string-append cfari fanmo))
 
-(define (samselpla-je . rodajavni)
-  (if (null? (cdr rodajavni))
-      (car rodajavni)
-      `(nunjavni-je ,@rodajavni)))
+(define (samselpla-je #!key samselpla rodajavni)
+  (let* ((javni (if (null? (cdr rodajavni))
+                         (car rodajavni)
+                         `(nunjavni-je ,@rodajavni))))
+    (if (equal? "" samselpla)
+        javni
+        `(nunjavni-samselpla ,(string->symbol samselpla) ,javni))))
+
+(define (samselpla-selci-javni #!key cmene selci-javni)
+  (if (equal? "" cmene)
+      selci-javni
+      `(,@selci-javni cmene: ',cmene)))
 
 (define (samselpla-jonai . rodajavni)
   `(nunjavni-jonai ,@rodajavni))
@@ -96,14 +96,8 @@
 
 ;; A naselci that appears on the right side of a definition.
 ;;
-(define (samselpla-selci-naselci cmene naselci)
-  (if cmene
-      `(nunjavni-cmene
-         (nunjavni-naselci ,(string->symbol naselci))
-         cmene: ',cmene)
-      `(nunjavni-cmene
-         (nunjavni-naselci ,(string->symbol naselci))
-         cmene: ',(string->symbol (string-append naselci ":")))))
+(define (samselpla-selci-naselci #!key naselci)
+  `(nunjavni-naselci ,(string->symbol naselci)))
 
 (define (samselpla-lerfu-selci lerfu)
   `(nunjavni-lerfu ,lerfu))

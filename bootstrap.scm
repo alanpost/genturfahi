@@ -34,16 +34,14 @@
 
      (gerna          (nunjavni-morji
                        (nunjavni-samselpla
-                         ;; can we get rid of key?
-                         (lambda (#!key smuni) (samselpla-gerna smuni))
-                           (nunjavni-*
-                             (nunjavni-naselci smuni)
-                             cmene: 'smuni:))))
+                         samselpla-gerna
+                         (nunjavni-*
+                           (nunjavni-naselci smuni)
+                           cmene: 'smuni:))))
 
      (smuni          (nunjavni-morji
                        (nunjavni-samselpla
-                         (lambda (#!key naselci javni samselpla)
-                           (samselpla-smuni naselci javni samselpla))
+                         samselpla-smuni
                          (nunjavni-je
                            (nunjavni-cmene
                              (nunjavni-naselci naselci)
@@ -52,10 +50,7 @@
                            (nunjavni-naselci canlu)
                            (nunjavni-cmene
                              (nunjavni-naselci javni)
-                             cmene: 'javni:)
-                           (nunjavni-?
-                             (nunjavni-naselci samselpla)
-                             cmene: 'samselpla:)))))
+                             cmene: 'javni:)))))
 
      (naselci        (nunjavni-morji
                        (nunjavni-samselpla
@@ -92,13 +87,15 @@
                                    cmene: 'porsi-javni:)))
                              cmene: 'fanmo:)))))
      (je             (nunjavni-morji
-                       ; XXX: could have implied tag.
                        (nunjavni-samselpla
-                         (lambda (#!key rodajavni)
-                           (apply samselpla-je rodajavni))
-                         (nunjavni-+
-                           (nunjavni-naselci unary_rule)
-                           cmene: 'rodajavni:))))
+                         samselpla-je
+                         (nunjavni-je
+                           (nunjavni-+
+                             (nunjavni-naselci unary_rule)
+                             cmene: 'rodajavni:)
+                           (nunjavni-?
+                             (nunjavni-naselci samselpla)
+                             cmene: 'samselpla:)))))
 
      (unary_rule     (nunjavni-morji
                        (nunjavni-jonai
@@ -108,7 +105,15 @@
                          (nunjavni-naselci and-predicate)
                          (nunjavni-naselci end-of-input)
                          (nunjavni-naselci not-predicate)
-                         (nunjavni-naselci selci-javni))))
+                         (nunjavni-samselpla
+                           samselpla-selci-javni
+                           (nunjavni-je
+                             (nunjavni-?
+                               (nunjavni-naselci cmene-sumti)
+                               cmene: 'cmene:)
+                             (nunjavni-cmene
+                               (nunjavni-naselci selci-javni)
+                               cmene: 'selci-javni:))))))
 
      (optional       (nunjavni-morji
                        (nunjavni-samselpla
@@ -200,8 +205,7 @@
 
      (selci-naselci  (nunjavni-morji
                        (nunjavni-samselpla
-                         (lambda (#!key naselci)
-                           (samselpla-selci-naselci #f naselci))
+                         samselpla-selci-naselci
                          (nunjavni-je
                            (nunjavni-cmene
                              (nunjavni-naselci naselci)
