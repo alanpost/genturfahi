@@ -17,15 +17,14 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
-(include "declare.scm")
+;;;
+;;; optimization options.
+;;;
 
-(use srfi-28)    ; Basic Format Strings
-(use srfi-37)    ; args-fold
-(use extras)     ; pretty-print
-(use genturfahi)
-
-(include "license.scm")
-(include "main.scm")
-
-(main)
-(exit (genturfahi-status))
+;(declare (disable-interrupts))
+;(declare (fixnum-arithmetic))
+;(declare (lambda-lift))
+;(declare (no-bound-checks))
+;(declare (no-procedure-checks))
+;(declare (number-type fixnum))
+;(declare (unsafe))

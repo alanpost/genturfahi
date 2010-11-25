@@ -154,6 +154,8 @@
 (import chicken)
 (import scheme)
 
+(include "declare.scm")
+
 ;(require-extension utf8)
 
 (require-extension srfi-1)

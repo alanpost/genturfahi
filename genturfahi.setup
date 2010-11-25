@@ -4,6 +4,7 @@
        ; genturfahi executable
        ;
 (make (("genturfahi" ("chicken-exe.scm"
+                      "declare.scm"
                       "license.scm"
                       "main.scm"
                       "genturfahi.meta"
@@ -16,6 +17,8 @@
        ;
        ((dynld-name "genturfahi") ("bootstrap.scm"
                                    "chicken-egg.scm"
+                                   "declare.scm"
+                                   "eval.scm"
                                    "genturfahi.scm"
                                    "javni-valsi.scm"
                                    "lerfu-porsi.scm"
@@ -42,6 +45,8 @@
        ;
        ("genturfahi.o" ("bootstrap.scm"
                         "chicken-egg.scm"
+                        "declare.scm"
+                        "eval.scm"
                         "genturfahi.scm"
                         "javni-valsi.scm"
                         "lerfu-porsi.scm"
