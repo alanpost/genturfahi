@@ -328,7 +328,24 @@
                          (nunjavni-valsi ":space:")
                          (nunjavni-valsi ":upper:")
                          (nunjavni-valsi ":word:")
-                         (nunjavni-valsi ":xdigit:"))))
+                         (nunjavni-valsi ":xdigit:")
+                         (nunjavni-valsi ":^alnum:")
+                         (nunjavni-valsi ":^alpha:")
+                         (nunjavni-valsi ":^ascii:")
+                         (nunjavni-valsi ":^blank:")
+                         (nunjavni-valsi ":^cntrl:")
+                         (nunjavni-valsi ":^digit:")
+                         (nunjavni-valsi ":^graph:")
+                         (nunjavni-valsi ":^lower:")
+                         (nunjavni-samselpla
+                           (lambda () "^0-7")
+                           (nunjavni-valsi ":^odigit:"))
+                         (nunjavni-valsi ":^print:")
+                         (nunjavni-valsi ":^punct:")
+                         (nunjavni-valsi ":^space:")
+                         (nunjavni-valsi ":^upper:")
+                         (nunjavni-valsi ":^word:")
+                         (nunjavni-valsi ":^xdigit:"))))
 
      (denpabu        (nunjavni-morji
                        (nunjavni-samselpla
