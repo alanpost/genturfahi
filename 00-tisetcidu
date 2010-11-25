@@ -20,7 +20,7 @@ Source Code
   00-tisetcidu            - README
   bootstrap.scm           - PEG parser bootstrap.
   chicken-egg.scm         - Chicken Scheme 'egg' package support.
-  chicken-exe.scm         - Chicken Scheme bin/ program support.
+  chicken-cmd.scm         - Chicken Scheme bin/ program support.
   conf.scm                - build configuration.
   genturfahi.scm          - main program.
   genturfahi.peg          - main program.

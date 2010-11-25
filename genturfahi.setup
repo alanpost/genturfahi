@@ -3,7 +3,7 @@
 
        ; genturfahi executable
        ;
-(make (("genturfahi" ("chicken-exe.scm"
+(make (("genturfahi" ("chicken-cmd.scm"
                       "declare.scm"
                       "license.scm"
                       "main.scm"
@@ -11,7 +11,7 @@
                       "genturfahi.setup")
        (compile ,@genturfahi-cscflags
                 -o "genturfahi"
-                "chicken-exe.scm"))
+                "chicken-cmd.scm"))
 
        ; dynamic library
        ;
