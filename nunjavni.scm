@@ -306,16 +306,19 @@
 ;;
 (define-values (genturfahi-tolmohi nunjavni-morji)
   (let ((clear-mapti-caches '())
-        (clear-namapti-caches '()))
+        (clear-namapti-caches '())
+        (clear-recurse-caches '()))
     (values
       (lambda ()
         (for-each (lambda (x) (x)) clear-mapti-caches)
         (for-each (lambda (x) (x)) clear-namapti-caches)
+        (for-each (lambda (x) (x)) clear-recurse-caches)
         '())
 
       (lambda (javni)
         (let ((mapti-cache '())
-              (namapti-cache '()))
+              (namapti-cache '())
+              (recurse-cache '()))
 
           ; register this cache so we can clear if we want to use this
           ; parser on a new |lerfu-porsi|.
@@ -326,6 +329,9 @@
           (set! clear-namapti-caches
             (cons (lambda () (set! namapti-cache '()))
                   clear-namapti-caches))
+          (set! clear-recurse-caches
+            (cons (lambda () (set! recurse-cache '()))
+                  clear-recurse-caches))
 
           (define (javni-morji cache-porsi mapti namapti)
             (define (set-mapti-cache! cache-porsi porsi nunvalsi)
@@ -338,12 +344,21 @@
                 (cons (cons cache-porsi (list porsi))
                       namapti-cache)))
 
+            (define (set-recurse-cache!)
+              (set! recurse-cache
+                (cons (cons cache-porsi (list cache-porsi))
+                      namapti-cache)))
+
             ;; call the cached |mapti|
             (define (mapti-morji assv-valsi)
               (apply mapti (cdr assv-valsi)))
 
             ;; call the cached |nomapti|
             (define (namapti-morji assv-valsi)
+              (apply namapti (cdr assv-valsi)))
+
+            ;; left recursion support.
+            (define (recurse-morji assv-valsi)
               (apply namapti (cdr assv-valsi)))
 
             (define (javni-morji)
@@ -357,12 +372,18 @@
                 (set-namapti-cache! cache-porsi porsi)
                 (namapti porsi))
 
+              ; register this parse position to detect left
+              ; recursion.
+              (set-recurse-cache!)
+
               (javni cache-porsi mapti-morji namapti-morji))
 
                    ; search the match results
             (cond ((assv cache-porsi mapti-cache) => mapti-morji)
                    ; search the non-match results
                   ((assv cache-porsi namapti-cache) => namapti-morji)
+                   ; search for left recursion
+                  ((assv cache-porsi recurse-cache) => recurse-morji)
                    ; run the rule.
                   (else (javni-morji))))
           javni-morji)))))
