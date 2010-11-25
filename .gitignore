@@ -1,4 +1,5 @@
 genturfahi
+license.scm
 *.import.scm
 *.o
 *.so
