@@ -20,7 +20,10 @@
 (module genturfahi
   (genturfahi
    genturfahi*
+
    genturfahi-peg
+   genturfahi-peg-gerna
+
    genturfahi-version
    genturfahi-version-major
    genturfahi-version-minor
