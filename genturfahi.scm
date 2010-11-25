@@ -44,7 +44,7 @@
     ; a new |porsi|.
     (genturfahi-tolmohi)
 
-    (values #f (lerfu-porsi-string porsi)))
+    (values (nonmatch-token) (lerfu-porsi-string porsi)))
 
   (lambda (lefpoi)
     (let ((porsi (if (port? lefpoi)

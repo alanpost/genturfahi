@@ -19,3 +19,9 @@
 
 (define genturfahi-status (make-parameter 0))
 
+(define memoize        (make-parameter #t))
+
+(define sentinel       (make-parameter #\nul))
+
+(define empty-string   (make-parameter ""))
+(define nonmatch-token (make-parameter #f))
