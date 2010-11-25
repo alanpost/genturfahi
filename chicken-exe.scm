@@ -22,6 +22,7 @@
 (use extras)     ; pretty-print
 (use genturfahi)
 
+(include "license.scm")
 (include "main.scm")
 
 (main)

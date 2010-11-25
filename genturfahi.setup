@@ -4,6 +4,7 @@
        ; genturfahi executable
        ;
 (make (("genturfahi-peg" ("chicken-exe.scm"
+                          "license.scm"
                           "main.scm"
                           "genturfahi.meta"
                           "genturfahi.setup")
@@ -57,7 +58,14 @@
                 ,@genturfahi-cscflags
                 -unit genturfahi
                 -o "genturfahi.o"
-                "chicken-egg.scm")))
+                "chicken-egg.scm"))
+
+       ("license.scm" ("LICENSE")
+        (call-with-output-file "license.scm"
+          (lambda (port)
+            (write
+              `(define genturfahi-license ,(read-all "LICENSE"))
+              port)))))
 
       `("genturfahi-peg" ,(dynld-name "genturfahi") "genturfahi.o"))
 
