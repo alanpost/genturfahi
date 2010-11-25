@@ -17,11 +17,8 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
-(define (cmene option name arg . seeds)
-  (genturfahi-gerna (string->symbol arg)))
-
 (define (help option name arg . seeds)
-  (print "usage")
+  (print "usage: genturfahi [-help] [-version] [file]")
   (exit 0))
 
 (define (version option name arg . seeds)
@@ -29,8 +26,7 @@
   (exit 0))
 
 (define options
-  (list (option '(#\c "cmene" "name")    #t #f cmene)
-        (option '(#\h "sidju" "help")    #f #f help)
+  (list (option '(#\h "sidju" "help")    #f #f help)
         (option '(#\v         "version") #f #f version)))
 
 (define (usage option name args . seeds)
