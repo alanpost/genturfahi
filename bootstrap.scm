@@ -17,22 +17,33 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
-;;;
-;;; PEG grammar paser
-;;;
 (define genturfahi-peg-gerna
   (letrec ((cfari (nunjavni-morji
                     (nunjavni-samselpla
                       samselpla-cfari
                       (nunjavni-je
                         (nunjavni-naselci canlu)
-                        (nunjavni-*
-                          (nunjavni-naselci samselpla)
-                          cmene:
-                          "rodasamselpla")
+                        (nunjavni-* (nunjavni-naselci cfari-samselpla))
                         (nunjavni-naselci canlu)
                         (nunjavni-naselci gerna cmene: "gerna")
                         (nunjavni-naselci FAhO)))))
+           (cfari-samselpla
+             (nunjavni-morji
+               (nunjavni-samselpla
+                 samselpla-cfari-samselpla
+                 (nunjavni-je
+                   (nunjavni-lerfu #\{)
+                   (nunjavni-naselci canlu)
+                   (nunjavni-+
+                     (nunjavni-samselpla
+                       samselpla-samselpla-lerfu
+                       (nunjavni-je
+                         (nunjavni-! (nunjavni-lerfu #\}))
+                         (nunjavni-. cmene: "lerfu")))
+                     cmene:
+                     "rodalerfu")
+                   (nunjavni-lerfu #\})
+                   (nunjavni-naselci canlu)))))
            (gerna (nunjavni-morji
                     (nunjavni-samselpla
                       samselpla-gerna

@@ -37,10 +37,12 @@
   (error (format "unrecognized option \"~a\"" name)))
 
 (define (args name . seeds)
-  (let ((jalge (call-with-input-file name genturfahi-peg)))
+  (let ((jalge (call-with-input-file name genturfahi-peg))
+        (gerna (string->symbol (secuxna-definition-name))))
     (if (not jalge)
-        (genturfahi-status 1))
-    (pretty-print jalge)))
+        (secuxna-status 1))
+    (display genturfahi-license)
+    (pretty-print `(define ,gerna ,jalge))))
 
 (define (main)
   (args-fold (cdr (argv)) options usage args))

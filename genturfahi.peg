@@ -17,12 +17,20 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
+;;;
+;;; parser options.  The default values are commented out.
+;;;
+
+;; the exit status of the parser.
+;;
+;{(genturfahi-status 0)}
+
 ;; The name of the symbol the parser generator
 ;; rules will be bound to in the output file.
 ;;
-;{(definition-name "genturfahi-peg-gerna")}
+;{(definition-name "gerna")}
+{(definition-name "genturfahi-peg-gerna")}
 
-;;
 ;; Enable debugging of the paser.
 ;;
 ;; Describe the parse as it occurs, including
@@ -31,11 +39,6 @@
 ;; There may need to be a debug level.
 ;;
 ;{(debug #f)}
-
-;; fold rules that only appear in other other production into that
-;; production, removing the non-terminal name.
-;;
-;{(optimize #f)}
 
 ;; Enable profiling of the parser.
 ;;
@@ -46,19 +49,34 @@
 ;;
 ;{(profile #f)}
 
-{(memoize #t)}
+;; Enable memoization of non-terminals.
+;;
+;;
+;{(memoize #t)}
 
-;{(sentinal #\nul)}
+;{(sentinel #\nul)}
 
 ;{(empty-string "")}
 
 ;{(nonmatch-token #f)}
 
 cfari           <- canlu
-                   #:rodasamselpla samselpla*
+                   cfari-samselpla*
                    canlu
                    #:gerna gerna
                    FAhO                             {samselpla-cfari}
+
+; we want to execute header code before compiling the grammar.
+; this rule is here to associated a different code action with
+; header code than body code.
+;
+cfari-samselpla <- #\{
+                   canlu
+                   #:rodalerfu (!#\}
+                                #:lerfu .
+                                {samselpla-samselpla-lerfu})+
+                   #\}
+                   canlu                            {samselpla-cfari-samselpla}
 
 gerna           <- #:smuni smuni*                   {samselpla-gerna}
 

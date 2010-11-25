@@ -17,24 +17,56 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
-;; the production used to begin parsing.  If not
-;; specified, the first production in the input
-;; port will be used.
+
+;;;
+;;; This environment is used to evaluate header code in .peg files. 
+;;;
+(define genturfahi-env
+  (make-safe-environment parent: default-safe-environment))
+
+;; extend the regular safe environment with genturfa'i parameters.
 ;;
-(define secuxna-start-production (make-parameter #f))
+(safe-environment-set!
+  genturfahi-env
+  'start-production
+  secuxna-start-production)
 
-;; The name of the variable used to define the parser.
-;;
-(define secuxna-definition-name  (make-parameter "gerna"))
+(safe-environment-set!
+  genturfahi-env
+  'definition-name
+  secuxna-definition-name)
 
-;; the exit status of the program
-;;
-(define secuxna-status           (make-parameter 0))
+(safe-environment-set!
+  genturfahi-env
+  'status
+  secuxna-status)
 
-(define secuxna-debug            (make-parameter #f))
-(define secuxna-profile          (make-parameter #f))
-(define secuxna-memoize          (make-parameter #t))
+(safe-environment-set!
+  genturfahi-env
+  'debug
+  secuxna-debug)
 
-(define secuxna-sentinel         (make-parameter #\nul))
-(define secuxna-empty-string     (make-parameter ""))
-(define secuxna-nonmatch-token   (make-parameter #f))
+(safe-environment-set!
+  genturfahi-env
+  'profile
+  secuxna-profile)
+
+(safe-environment-set!
+  genturfahi-env
+  'memoize
+  secuxna-memoize)
+
+(safe-environment-set!
+  genturfahi-env
+  'sentinel
+  secuxna-sentinel)
+
+(safe-environment-set!
+  genturfahi-env
+  'empty-string
+  secuxna-empty-string)
+
+(safe-environment-set!
+  genturfahi-env
+  'nonmatch-token
+  secuxna-nonmatch-token)

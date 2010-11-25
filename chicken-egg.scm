@@ -21,6 +21,8 @@
   (genturfahi
    genturfahi*
 
+   genturfahi-env
+
    genturfahi-peg
    genturfahi-peg-gerna
 
@@ -139,7 +141,15 @@
    samselpla-canlu
 
    ; secuxna
-   genturfahi-status)
+   secuxna-start-production
+   secuxna-definition-name
+   secuxna-status
+   secuxna-debug
+   secuxna-profile
+   secuxna-memoize
+   secuxna-sentinel
+   secuxna-empty-string
+   secuxna-nonmatch-token)
 
 (import chicken)
 (import scheme)
@@ -157,6 +167,7 @@
 (require-extension ports)
 (require-extension data-structures)
 (require-library regex)
+(require-library sandbox)
 
 (import srfi-1)          ; filter
 ;(import srfi-6)          ; string ports
@@ -169,17 +180,19 @@
 (import ports)           ; Chicken Scheme srfi-6 and port extensions
 (import data-structures) ; flatten
 (import regex)           ; Irregular expressions
+(import sandbox)
 
 ;(declare (unsafe))
 ;(declare fixnum)
 
 (include "lerfu-porsi.scm")
 (include "javni-valsi.scm")
+(include "secuxna.scm")
 (include "nunjavni.scm")
 (include "nunjavni-syntax.scm")
 (include "nunvalsi.scm")
-(include "secuxna.scm")
 (include "genturfahi.scm")
+(include "eval.scm")
 (include "samselpla.scm")
 (include "bootstrap.scm")
 (include "peg.scm")

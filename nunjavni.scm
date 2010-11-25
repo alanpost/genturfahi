@@ -49,7 +49,7 @@
 ;;
 (define (nunjavni-e #!key cmene)
   (define (javni-e porsi mapti namapti)
-    (mapti porsi (lambda () (make-javni-valsi cmene (empty-string)))))
+    (mapti porsi (lambda () (make-javni-valsi cmene (secuxna-empty-string)))))
   javni-e)
 
 
@@ -61,7 +61,7 @@
 (define (nunjavni-fanmo #!key cmene)
   (define (javni-fanmo porsi mapti namapti)
     (if (lerfu-porsi-fanmo? porsi)
-        (mapti porsi (lambda () (make-javni-valsi cmene (sentinel))))
+        (mapti porsi (lambda () (make-javni-valsi cmene (secuxna-sentinel))))
         (namapti porsi)))
   javni-fanmo)
 
@@ -176,7 +176,8 @@
         ; this javni cannot fail.  |porsi| is not advanced
         ; on failure, so we can use it.
         ;
-        (mapti porsi (lambda () (make-javni-valsi cmene (empty-string)))))
+        (mapti porsi
+               (lambda () (make-javni-valsi cmene (secuxna-empty-string)))))
 
       (javni porsi mapti-? namapti-?))
     javni-?))
@@ -187,7 +188,7 @@
 (define (nunjavni-& javni)
   (define (javni-& porsi mapti namapti)
     (define (mapti-& ignore-porsi ignore-nunvalsi)
-      (mapti porsi (lambda () (make-javni-valsi #f (empty-string)))))
+      (mapti porsi (lambda () (make-javni-valsi #f (secuxna-empty-string)))))
 
     (define (namapti-& ignore-porsi)
       (namapti porsi))
@@ -205,7 +206,7 @@
       (namapti porsi))
 
     (define (namapti-! ignore-porsi)
-      (mapti porsi (lambda () (make-javni-valsi #f (empty-string)))))
+      (mapti porsi (lambda () (make-javni-valsi #f (secuxna-empty-string)))))
 
     (javni porsi mapti-! namapti-!))
   javni-!)

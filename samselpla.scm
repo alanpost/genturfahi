@@ -24,21 +24,24 @@
 ;; ignore the FAhO tag in the file, and
 ;; just return the header code and grammar.
 ;;
-(define (samselpla-cfari #!key rodasamselpla gerna)
-  (if (null? rodasamselpla)
-      gerna
-      gerna))
+(define (samselpla-cfari #!key gerna)
+  gerna)
 ;      `(nunjavni-samselpla
 ;         (lambda ()
 ;           ,@(map (lambda (samselpla) (call-with-input-string samselpla read))
 ;                  rodasamselpla))
 ;         ,gerna)))
 
+(define (samselpla-cfari-samselpla #!key rodalerfu)
+  (let* ((valsi     (apply string rodalerfu))
+         (samselpla (call-with-input-string valsi read)))
+    (safe-eval samselpla environment: genturfahi-env)))
+
 (define (samselpla-gerna #!key smuni)
-  (let ((selci (start-production)))
+  (let ((selci (secuxna-start-production)))
 
     ; reset the start production.
-    (start-production #f)
+    (secuxna-start-production #f)
 
     (if (not (null? smuni))
         `(letrec (,@smuni)
@@ -52,11 +55,13 @@
 (define (samselpla-smuni #!key naselci javni)
   ; if this is the first non-terminal we've seen, it is the
   ; initial rule of the grammar.
-  (if (not (start-production))
-      (start-production naselci))
+  (if (not (secuxna-start-production))
+      (secuxna-start-production naselci))
 
   `(,(string->symbol naselci)
-     (nunjavni-morji ,javni)))
+    ,(if (secuxna-memoize)
+         `(nunjavni-morji ,javni)
+         javni)))
 
 
 (define (samselpla-naselci #!key cfari fanmo)
