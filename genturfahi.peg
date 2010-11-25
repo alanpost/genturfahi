@@ -23,7 +23,7 @@
 
 ;; the exit status of the parser.
 ;;
-;{(genturfahi-status 0)}
+;{(exit-status 0)}
 
 ;; The name of the symbol the parser generator
 ;; rules will be bound to in the output file.

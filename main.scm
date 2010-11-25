@@ -36,7 +36,7 @@
   (let ((jalge (call-with-input-file name genturfahi-peg))
         (gerna (string->symbol (secuxna-definition-name))))
     (if (not jalge)
-        (secuxna-status 1))
+        (secuxna-exit-status 1))
     (display genturfahi-license)
     (pretty-print `(define ,gerna ,jalge))))
 

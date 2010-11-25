@@ -143,7 +143,7 @@
    ; secuxna
    secuxna-start-production
    secuxna-definition-name
-   secuxna-status
+   secuxna-exit-status
    secuxna-debug
    secuxna-profile
    secuxna-memoize
