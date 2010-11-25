@@ -27,7 +27,7 @@
 (define (samselpla-cfari #!key rodasamselpla gerna)
   (if (null? rodasamselpla)
       gerna
-      gerna
+      gerna))
 ;      `(nunjavni-samselpla
 ;         (lambda ()
 ;           ,@(map (lambda (samselpla) (call-with-input-string samselpla read))
