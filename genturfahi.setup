@@ -3,13 +3,13 @@
 
        ; genturfahi executable
        ;
-(make (("genturfahi-peg" ("chicken-exe.scm"
-                          "license.scm"
-                          "main.scm"
-                          "genturfahi.meta"
-                          "genturfahi.setup")
+(make (("genturfahi" ("chicken-exe.scm"
+                      "license.scm"
+                      "main.scm"
+                      "genturfahi.meta"
+                      "genturfahi.setup")
        (compile ,@genturfahi-cscflags
-                -o "genturfahi-peg"
+                -o "genturfahi"
                 "chicken-exe.scm"))
 
        ; dynamic library
@@ -67,7 +67,7 @@
               `(define genturfahi-license ,(read-all "LICENSE"))
               port)))))
 
-      `("genturfahi-peg" ,(dynld-name "genturfahi") "genturfahi.o"))
+      `("genturfahi" ,(dynld-name "genturfahi") "genturfahi.o"))
 
 (install-extension
   ; lo cmene vi pagbu
@@ -84,10 +84,10 @@
 
 (install-program
   ; lo cmene vi pagbu
-  'genturfahi-peg
+  'genturfahi-cmd
 
   ; lo datnyvei vi pagbu
-  `("genturfahi-peg")
+  `("genturfahi")
 
   ; lo se ckaji vi pagbu
   `((version ,genturfahi-version)))
