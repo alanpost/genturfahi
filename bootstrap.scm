@@ -29,7 +29,7 @@
                         (nunjavni-*
                           (nunjavni-naselci samselpla)
                           cmene:
-                          "samselpla")
+                          "rodasamselpla")
                         (nunjavni-naselci canlu)
                         (nunjavni-naselci gerna cmene: "gerna")
                         (nunjavni-naselci FAhO)))))

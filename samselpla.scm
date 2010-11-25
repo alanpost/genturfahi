@@ -24,9 +24,15 @@
 ;; ignore the FAhO tag in the file, and
 ;; just return the header code and grammar.
 ;;
-(define (samselpla-cfari #!key samselpla gerna)
-  gerna)
-  ;`(,@samselpla ,gerna))
+(define (samselpla-cfari #!key rodasamselpla gerna)
+  (if (null? rodasamselpla)
+      gerna
+      gerna
+;      `(nunjavni-samselpla
+;         (lambda ()
+;           ,@(map (lambda (samselpla) (call-with-input-string samselpla read))
+;                  rodasamselpla))
+;         ,gerna)))
 
 (define (samselpla-gerna #!key smuni)
   (let ((selci (start-production)))
