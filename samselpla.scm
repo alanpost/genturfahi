@@ -21,34 +21,39 @@
 ;;; code for PEG parser.
 ;;;
 
-(define-values (samselpla-gerna samselpla-smuni)
-  (let ((cfari #f))
-    (values
-      ;; emit the entire grammar
-      ;;
-      (lambda (#!key smuni)
-        (let ((selci cfari))
-          (set! cfari #f)
-          (if (not (null? smuni))
-              `(letrec (,@smuni)
-                 ,(string->symbol selci))
-              '())))
+;; ignore the FAhO tag in the file, and
+;; just return the header code and grammar.
+;;
+(define (samselpla-cfari #!key samselpla gerna)
+  gerna)
+  ;`(,@samselpla ,gerna))
 
-      ;; emit the non-terminal with it's rule.
-      ;;
-      ;; we assume we're in a letrec.
-      ;;
-      (lambda (#!key naselci javni)
-        ; if this is the first non-terminal we've seen, it is the
-        ; initial rule of the grammar.
-        (if (not cfari)
-            (set! cfari naselci))
+(define (samselpla-gerna #!key smuni)
+  (let ((selci (start-production)))
 
-        `(,(string->symbol naselci)
-           (nunjavni-morji ,javni))))))
+    ; reset the start production.
+    (start-production #f)
+
+    (if (not (null? smuni))
+        `(letrec (,@smuni)
+           ,(string->symbol selci))
+        '())))
+
+;; emit the non-terminal with it's rule.
+;;
+;; we assume we're in a letrec.
+;;
+(define (samselpla-smuni #!key naselci javni)
+  ; if this is the first non-terminal we've seen, it is the
+  ; initial rule of the grammar.
+  (if (not (start-production))
+      (start-production naselci))
+
+  `(,(string->symbol naselci)
+     (nunjavni-morji ,javni)))
 
 
-(define (samselpla-naselci cfari fanmo)
+(define (samselpla-naselci #!key cfari fanmo)
   (string-append cfari fanmo))
 
 (define (samselpla-je #!key samselpla rodajavni)
@@ -59,37 +64,40 @@
         javni
         `(nunjavni-samselpla ,(string->symbol samselpla) ,javni))))
 
-(define (samselpla-selci-javni #!key cmene selci-javni)
+(define (samselpla-pajavni-cmene #!key cmene javni)
   (if (equal? "" cmene)
-      selci-javni
-      `(,@selci-javni cmene: ',cmene)))
+      javni
+      `(,@javni cmene: ,cmene)))
 
-(define (samselpla-jonai . rodajavni)
-  `(nunjavni-jonai ,@rodajavni))
+(define (samselpla-jonai-je #!key je)
+  je)
 
-(define (samselpla-? #!key cmene selci-javni)
+(define (samselpla-jonai #!key cfari fanmo)
+  `(nunjavni-jonai ,cfari ,@fanmo))
+
+(define (samselpla-? #!key cmene javni)
   (if (equal? "" cmene)
-      `(nunjavni-? ,selci-javni)
-      `(nunjavni-? ,selci-javni cmene: ',cmene)))
+      `(nunjavni-? ,javni)
+      `(nunjavni-? ,javni cmene: ,cmene)))
 
-(define (samselpla-* #!key cmene selci-javni)
+(define (samselpla-* #!key cmene javni)
   (if (equal? "" cmene)
-      `(nunjavni-* ,selci-javni)
-      `(nunjavni-* ,selci-javni cmene: ',cmene)))
+      `(nunjavni-* ,javni)
+      `(nunjavni-* ,javni cmene: ,cmene)))
 
-(define (samselpla-+ #!key cmene selci-javni)
+(define (samselpla-+ #!key cmene javni)
   (if (equal? "" cmene)
-      `(nunjavni-+ ,selci-javni)
-      `(nunjavni-+ ,selci-javni cmene: ',cmene)))
+      `(nunjavni-+ ,javni)
+      `(nunjavni-+ ,javni cmene: ,cmene)))
 
-(define (samselpla-& #!key selci-javni)
-  `(nunjavni-& ,selci-javni))
+(define (samselpla-& #!key javni)
+  `(nunjavni-& ,javni))
 
 (define (samselpla-fanmo)
   `(nunjavni-fanmo))
 
-(define (samselpla-! #!key selci-javni)
-  `(nunjavni-! ,selci-javni))
+(define (samselpla-! #!key javni)
+  `(nunjavni-! ,javni))
 
 (define (samselpla-cmene-sumti #!key cfari fanmo)
   `,(string-append cfari fanmo))
@@ -102,20 +110,77 @@
 (define (samselpla-lerfu-selci #!key lerfu)
   `(nunjavni-lerfu ,lerfu))
 
+(define (samselpla-lerfu-space)
+  #\space)
+
+(define (samselpla-lerfu-linefeed)
+  #\return)
+
+(define (samselpla-lerfu-linefeed)
+  #\linefeed)
+
+(define (samselpla-lerfu-newline)
+  #\newline)
+
+(define (samselpla-lerfu-return)
+  #\return)
+
+(define (samselpla-lerfu-tab)
+  #\tab)
+
 (define (samselpla-valsi-selci #!key valsi-lerfu)
   `(nunjavni-valsi ,(apply string-append valsi-lerfu)))
 
-(define (samselpla-klesi-selci klesi)
-  `(nunjavni-re ,klesi))
+(define (samselpla-valsi-selci-lerfu #!key lerfu)
+  lerfu)
+
+(define (samselpla-valsi-newline)
+  "\\n")
+
+(define (samselpla-valsi-linefeed)
+  "\\r")
+
+(define (samselpla-valsi-tab)
+  "\\t")
+
+(define (samselpla-valsi-backslash)
+  "\\")
+
+(define (samselpla-valsi-single-quote)
+  "\'")
+
+(define (samselpla-valsi-double-quote)
+  "\"")
+
+(define (samselpla-valsi-lerfu #!key lerfu)
+  (make-string 1 lerfu))
+
+(define (samselpla-odigit)
+  "0-7")
+
+(define (samselpla-^odigit)
+  "^0-7")
+
+(define (samselpla-klesi-selci #!key klesi-lerfu repeat)
+  `(nunjavni-re ,(string-append "["
+                                (apply string-append klesi-lerfu)
+                                "]"
+                                repeat)))
+
+(define (samselpla-klesi-lerfu #!key klesi-lerfu)
+  (make-string 1 klesi-lerfu))
 
 (define (samselpla-denpabu)
   `(nunjavni-.))
 
-;; ignore the FAhO tag in the file, and
-;; just return the grammar.
-;;
-(define (samselpla-cfari gerna)
-  gerna)
+(define (samselpla-samselpla #!key rodalerfu)
+  (apply string rodalerfu))
+
+(define (samselpla-samselpla-lerfu #!key lerfu)
+  lerfu)
+
+(define (samselpla-girzu-javni #!key javni)
+  javni)
 
 ;; ignore comments and space
 ;;

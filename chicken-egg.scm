@@ -101,20 +101,39 @@
    samselpla-gerna
    samselpla-smuni
    samselpla-naselci
-   samselpla-selci-naselci
-   samselpla-lerfu-selci
-   samselpla-valsi-selci
-   samselpla-klesi-selci
-   samselpla-denpabu
-   samselpla-cfari
-   samselpla-canlu
+   samselpla-je
+   samselpla-pajavni-cmene
+   samselpla-jonai-je
+   samselpla-jonai
+   samselpla-?
    samselpla-*
    samselpla-+
-   samselpla-?
    samselpla-&
+   samselpla-fanmo
    samselpla-!
-   samselpla-je
-   samselpla-jonai
+   samselpla-cmene-sumti
+   samselpla-selci-naselci
+   samselpla-lerfu-selci
+   samselpla-lerfu-space
+   samselpla-lerfu-return
+   samselpla-lerfu-linefeed
+   samselpla-lerfu-newline
+   samselpla-lerfu-return
+   samselpla-lerfu-tab
+   samselpla-valsi-selci
+   samselpla-valsi-newline
+   samselpla-valsi-linefeed
+   samselpla-valsi-tab
+   samselpla-valsi-backslash
+   samselpla-valsi-single-quote
+   samselpla-valsi-double-quote
+   samselpla-valsi-lerfu
+   samselpla-klesi-selci
+   samselpla-denpabu
+   samselpla-samselpla
+   samselpla-samselpla-lerfu
+   samselpla-girzu-javni
+   samselpla-canlu
 
    ; secuxna
    genturfahi-status)

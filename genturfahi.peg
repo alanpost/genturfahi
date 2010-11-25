@@ -17,7 +17,12 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
-;;;
+;; The name of the symbol the parser generator
+;; rules will be bound to in the output file.
+;;
+;{(definition-name "genturfahi-peg-gerna")}
+
+;;
 ;; Enable debugging of the paser.
 ;;
 ;; Describe the parse as it occurs, including
@@ -25,7 +30,12 @@
 ;;
 ;; There may need to be a debug level.
 ;;
-;{(secuxna debug)}
+;{(debug #f)}
+
+;; fold rules that only appear in other other production into that
+;; production, removing the non-terminal name.
+;;
+;{(optimize #f)}
 
 ;; Enable profiling of the parser.
 ;;
@@ -34,65 +44,79 @@
 ;;  * success or failure of rule
 ;;  * memoization
 ;;
-;{(secuxna profile)}
+;{(profile #f)}
 
-;; fold rules that only appear in other other production into that
-;; production, removing the non-terminal name.
-;;
-;{(secuxna optimize)}
+{(memoize #t)}
 
-;{(secuxna memoize #t)}
+;{(sentinal #\nul)}
 
-;{(secuxna sentinal #\nul)}
+;{(empty-string "")}
 
-;{(secuxna empty-string "")}
+;{(nonmatch-token #f)}
 
-;{(secuxna nonmatch-token #f)}
+cfari           <- canlu
+                   #:samselpla samselpla*
+                   canlu
+                   #:gerna gerna
+                   FAhO                             {samselpla-cfari}
 
-;{(include "samselpa.scm")}
+gerna           <- #:smuni smuni*                   {samselpla-gerna}
 
-cfari           <- canlu gerna FAhO
-                   ;{(samselpla-gerna gerna)}
-
-gerna           <- smuni*
-
-smuni           <- naselci "<-" canlu javni
-                   ;{(samselpla-smuni naselci javni samselpla)}
+smuni           <- #:naselci naselci
+                   "<-"
+                   canlu
+                   #:javni javni                    {samselpla-smuni}
 
 ; this really doesn't need to be so strict.
-naselci         <- [[:alpha:]_-] [[:alnum:]_-]* canlu
-                   ;{(apply samselpla-naselci cfari fanmo)}
+naselci         <- #:cfari [[:alpha:]_\-]
+                   #:fanmo [[:alnum:]_\-]*
+                   canlu                            {samselpla-naselci}
 
 javni           <- jonai
                  / je
 
-jonai           <- je (#\/ canlu je)+
-                   ;{(samselpla-jonai cfari fanmo)}
-je              <- unary_rule+ samselpla?
-                   ;{(samselpla-je rodajavni)}
+jonai           <- #:cfari je
+                   #:fanmo (#\/
+                            canlu
+                            #:je je
+                            {samselpla-jonai-je})+  {samselpla-jonai}
+je              <- #:rodajavni pajavni+
+                   #:cmene     cmene-sumti?
+                   #:samselpla samselpla?           {samselpla-je}
 
-unary_rule      <- optional
+pajavni         <- optional
                  / repetition0
                  / repetition1
                  / and-predicate
                  / end-of-input
                  / not-predicate
-                 / cmene-sumti? selci-javni
+                 / #:cmene cmene-sumti?
+                   #:javni selci-javni              {samselpla-pajavni-cmene}
 
-optional        <- cmene-sumti? selci-javni #\? canlu
-                   ;{(samselpa-? selci-javni)}
-repetition0     <- cmene-sumti? selci-javni #\* canlu
-                   ;{(samselpa-* selci-javni)}
-repetition1     <- cmene-sumti? selci-javni #\+ canlu
-                   ;{(samselpa-+ selci-javni)}
-and-predicate   <- #\& canlu selci-javni
-                   ;{(samselpa-& selci-javni)}
-end-of-input    <- #\! canlu #\. canlu
-                   ;{(samselpa-fanmo)}
-not-predicate   <- #\! canlu selci-javni
-                   ;{(samselpa-! selci-javni)}
+optional        <- #:cmene cmene-sumti?
+                   #:javni selci-javni
+                   #\?
+                   canlu                            {samselpla-?}
+repetition0     <- #:cmene cmene-sumti?
+                   #:javni selci-javni
+                   #\*
+                   canlu                            {samselpla-*}
+repetition1     <- #:cmene cmene-sumti?
+                   #:javni selci-javni
+                   #\+
+                   canlu                            {samselpla-+}
+and-predicate   <- #\&
+                   canlu
+                   #:javni selci-javni              {samselpla-&}
+end-of-input    <- #\! canlu #\. canlu              {samselpla-fanmo}
+not-predicate   <- #\!
+                   canlu
+                   #:javni selci-javni              {samselpla-!}
 
-cmene-sumti     <- "#:" [[:alpha:]_-] [[:alnum:]_-]* canlu
+cmene-sumti     <- "#:"
+                   #:cfari [[:alpha:]_\-]
+                   #:fanmo [[:alnum:]_\-]*
+                   canlu                            {samselpla-cmene-sumti}
 
 selci-javni     <- selci-naselci
                  / lerfu-selci
@@ -101,78 +125,90 @@ selci-javni     <- selci-naselci
                  / denpabu
                  / girzu-javni
 
-selci-naselci   <- naselci !"<-"
-                   ;{(samselpla-selci-naselci naselci)}
+selci-naselci   <- #:naselci naselci !"<-"          {samselpla-selci-naselci}
 
-lerfu-selci     <- "#\\" lerfu-cmene canlu
-                 / "#\\" .           canlu
-                   ;{(samselpa-lerfu-selci lerfu)}
+lerfu-selci     <- "#\\" #:lerfu lerfu-cmene canlu  {samselpla-lerfu-selci}
+                 / "#\\" #:lerfu .           canlu  {samselpla-lerfu-selci}
 
-lerfu-cmene     <- "space"
-                   ;{#\space}
-                 / "linefeed"
-                   ;{#\linefeed}
-                 / "newline"
-                   ;{#\newline}
-                 / "return"
-                   ;{#\return}
-                 / "tab"
-                   ;{#\tab}
+lerfu-cmene     <- "space"                          {samselpla-lerfu-space}
+                 / "return"                         {samselpla-lerfu-return}
+                 / "linefeed"                       {samselpla-lerfu-linefeed}
+                 / "newline"                        {samselpla-lerfu-newline}
+                 / "return"                         {samselpla-lerfu-return}
+                 / "tab"                            {samselpla-lerfu-tab}
 
-valsi-selci     <- #\" (!#\" valsi-lerfu)* #\" canlu
-                   ;{(list->string valsi-lerfu)
-valsi-lerfu     <- "\n"
-                 / "\r"
-                 / "\t"
-                 / "\\"
-                 / "\'"
-                 / "\""
-                 / !#\\ .
+valsi-selci     <- #\"
+                   #:valsi-lerfu (!#\"
+                                  #:lerfu valsi-lerfu
+                                  {samselpla-valsi-selci-lerfu})*
+                   #\"
+                   canlu                  {samselpla-valsi-selci}
+valsi-lerfu     <- #\\ #\n                {samselpla-valsi-newline}
+                 / #\\ #\r                {samselpla-valsi-linefeed}
+                 / #\\ #\t                {samselpla-valsi-tab}
+                 / #\\ #\\                {samselpla-valsi-backslash}
+                 / #\\ #\'                {samselpla-valsi-single-quote}
+                 / #\\ #\"                {samselpla-valsi-double-quote}
+                 / !#\\ #:lerfu .         {samselpla-valsi-lerfu}
 
-klesi-selci      <- #\[ klesi-lerfu+ #\] (#\* / #\+)? canlu
+klesi-selci      <- #\[
+                    #:klesi-lerfu klesi-lerfu+
+                    #\]
+                    #:repeat ("*" / "+")?
+                    canlu                            {samselpla-klesi-selci}
 klesi-lerfu      <- klesi-cmene
-                  / (!#\[ .)
-klesi-cmene     <- ":alnum:"
-                 / ":alpha:"
-                 / ":ascii:"
-                 / ":blank:"
-                 / ":cntrl:"
-                 / ":digit:"
-                 / ":graph:"
-                 / ":lower:"
-                 / ":odigit:"
-                 / ":print:"
-                 / ":punct:"
-                 / ":space:"
-                 / ":upper:"
-                 / ":word:"
-                 / ":xdigit:"
-                 / ":^alnum:"
-                 / ":^alpha:"
-                 / ":^ascii:"
-                 / ":^blank:"
-                 / ":^cntrl:"
-                 / ":^digit:"
-                 / ":^graph:"
-                 / ":^lower:"
-                 / ":^odigit:"
-                 / ":^print:"
-                 / ":^punct:"
-                 / ":^space:"
-                 / ":^upper:"
-                 / ":^word:"
-                 / ":^xdigit:"
+                  / (!#\]
+                     #:klesi-lerfu .
+                     {samselpla-klesi-lerfu})
+klesi-cmene     <- "[:alnum:]"
+                 / "[:alpha:]"
+                 / "[:ascii:]"
+                 / "[:blank:]"
+                 / "[:cntrl:]"
+                 / "[:digit:]"
+                 / "[:graph:]"
+                 / "[:lower:]"
+                 / "[:odigit:]"                      {samselpla-odigit}
+                 / "[:print:]"
+                 / "[:punct:]"
+                 / "[:space:]"
+                 / "[:upper:]"
+                 / "[:word:]"
+                 / "[:xdigit:]"
+                 / "[:^alnum:]"
+                 / "[:^alpha:]"
+                 / "[:^ascii:]"
+                 / "[:^blank:]"
+                 / "[:^cntrl:]"
+                 / "[:^digit:]"
+                 / "[:^graph:]"
+                 / "[:^lower:]"
+                 / "[:^odigit:]"                     {samselpla-^odigit}
+                 / "[:^print:]"
+                 / "[:^punct:]"
+                 / "[:^space:]"
+                 / "[:^upper:]"
+                 / "[:^word:]"
+                 / "[:^xdigit:]"
 
-denpabu         <- #\. canlu
+denpabu         <- #\. canlu                         {samselpla-denpabu}
 
-samselpla       <- #\{ canlu (!#\} .)* #\} canlu
+samselpla       <- #\{
+                   canlu
+                   #:rodalerfu (!#\}
+                                #:lerfu .
+                                {samselpla-samselpla-lerfu})+
+                   #\}
+                   canlu                             {samselpla-samselpla}
 
-girzu-javni     <- #\( canlu javni #\) canlu
+girzu-javni     <- #\( canlu #:javni javni #\) canlu {samselpla-girzu-javni}
 
-canlu           <- (canlubu / totoi)*
-                   ;{(samselpla-canlu)}
+canlu           <- (canlubu / totoi)*                {samselpla-canlu}
 
-canlubu         <- (#\space #\tab CR LF)
+canlubu         <- #\space
+                 / #\tab
+                 / CR
+                 / LF
 totoi           <- #\; (!CRLF .)* (CRLF / &FAhO)
 
 CR              <- #\return

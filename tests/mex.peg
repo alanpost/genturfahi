@@ -4,4 +4,4 @@ mulexp <- #:a simple #\* #:b simple {test-samselpla-*}
         / simple
 simple <- digits
         / #\( #:expr expr #\)       {test-samselpla-simple}
-digits <- #:x [:digit:]+            {test-samselpla-digits}
+digits <- #:x [[:digit:]]+          {test-samselpla-digits}
