@@ -4,21 +4,32 @@ Backlog
 Sprint Backlog
 --------------
 
- * [open] Create grammar for PEG file parsing.
+ * [open] detect runtime options empty-string, sentinel, &c and
+          enabled them for runtime code.
 
 
 Product Backlog
 ---------------
 
- * [] Create a wrapper to export English translations of the API
-      code.
  * [] Optimize compiler settings based on performance test.
  * [] Performance testing on code.
- * [] Write tests for PEG file parser.
  * [] Write PEG parser application manpage. 
- * [] Create a PEG file parser application.
- * [open] Create bootstrap compiler for file parser.
- * [open] Create grammar for PEG file parser.
+ * [] Write tests for PEG file parser.
+ * [] extend the regular expression test to test all character
+      classes.
+ * [] utf8 testing and performance improvement.  Either remove utf8
+      or make string-ref O(1).
+ * [] use srfi-14/iset for character class comparison, removing
+      the dependency on irregex code.
+ * [] Compile the expression '()' as the empty string.
+ * [] Implement left recursion.
+ * [done] implement secuxna module, global options for the parse.
+ * [done] Create a PEG file parser application.
+ * [wont] Create a wrapper to export English translations of the API
+          code.
+ * [done] Create grammar for PEG file parsing.
+ * [done] Create bootstrap compiler for file parser.
+ * [done] Create grammar for PEG file parser.
  * [done] Add full API documentation.
  * [done] Add test cases for each syntax element in the parser. 
  * [done] Create a Chicken Scheme egg for this project.
