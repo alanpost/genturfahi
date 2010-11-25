@@ -29,7 +29,7 @@
 
 ;; the exit status of the program
 ;;
-(define secuxna-status           (make-parameter 0))
+(define secuxna-exit-status      (make-parameter 0))
 
 (define secuxna-debug            (make-parameter #f))
 (define secuxna-profile          (make-parameter #f))

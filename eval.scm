@@ -38,8 +38,8 @@
 
 (safe-environment-set!
   genturfahi-env
-  'status
-  secuxna-status)
+  'exit-status
+  secuxna-exit-status)
 
 (safe-environment-set!
   genturfahi-env

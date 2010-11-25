@@ -29,4 +29,4 @@
 (include "main.scm")
 
 (main)
-(exit (genturfahi-status))
+(exit (secuxna-exit-status))
