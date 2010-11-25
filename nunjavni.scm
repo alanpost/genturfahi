@@ -353,7 +353,7 @@
             (define (mapti-morji assv-valsi)
               (apply mapti (cdr assv-valsi)))
 
-            ;; call the cached |nomapti|
+            ;; call the cached |namapti|
             (define (namapti-morji assv-valsi)
               (apply namapti (cdr assv-valsi)))
 
@@ -388,9 +388,7 @@
                   (else (javni-morji))))
           javni-morji)))))
 
-(define (nunjavni-samselpla samselpla
-                            javni
-                            #!key cmene)
+(define (nunjavni-samselpla samselpla javni #!key cmene)
   (define (javni-samselpla porsi mapti namapti)
     (define (mapti-samselpla porsi nunvalsi)
       (define (nunvalsi-samselpla)
