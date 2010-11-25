@@ -144,7 +144,7 @@
 (import chicken)
 (import scheme)
 
-(require-extension utf8)
+;(require-extension utf8)
 
 (require-extension srfi-1)
 ;(require-extension srfi-6)         ; built-in
