@@ -319,20 +319,6 @@
         (let ((mapti-cache '())
               (namapti-cache '())
               (recurse-cache '()))
-
-          ; register this cache so we can clear if we want to use this
-          ; parser on a new |lerfu-porsi|.
-          ;
-          (set! clear-mapti-caches
-            (cons (lambda () (set! mapti-cache '()))
-                  clear-mapti-caches))
-          (set! clear-namapti-caches
-            (cons (lambda () (set! namapti-cache '()))
-                  clear-namapti-caches))
-          (set! clear-recurse-caches
-            (cons (lambda () (set! recurse-cache '()))
-                  clear-recurse-caches))
-
           (define (javni-morji cache-porsi mapti namapti)
             (define (set-mapti-cache! cache-porsi porsi nunvalsi)
               (set! mapti-cache
@@ -386,6 +372,20 @@
                   ((assv cache-porsi recurse-cache) => recurse-morji)
                    ; run the rule.
                   (else (javni-morji))))
+
+          ; register this cache so we can clear if we want to use this
+          ; parser on a new |lerfu-porsi|.
+          ;
+          (set! clear-mapti-caches
+            (cons (lambda () (set! mapti-cache '()))
+                  clear-mapti-caches))
+          (set! clear-namapti-caches
+            (cons (lambda () (set! namapti-cache '()))
+                  clear-namapti-caches))
+          (set! clear-recurse-caches
+            (cons (lambda () (set! recurse-cache '()))
+                  clear-recurse-caches))
+
           javni-morji)))))
 
 (define (nunjavni-samselpla samselpla javni #!key cmene)
