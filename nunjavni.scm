@@ -347,7 +347,7 @@
             (define (recurse-morji assv-valsi)
               (apply namapti (cdr assv-valsi)))
 
-            (define (javni-morji)
+            (define (javni-nomorji)
               (define (mapti-morji porsi nunvalsi)
                 (set-mapti-cache! cache-porsi
                                   porsi
@@ -371,7 +371,7 @@
                    ; search for left recursion
                   ((assv cache-porsi recurse-cache) => recurse-morji)
                    ; run the rule.
-                  (else (javni-morji))))
+                  (else (javni-nomorji))))
 
           ; register this cache so we can clear if we want to use this
           ; parser on a new |lerfu-porsi|.
