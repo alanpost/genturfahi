@@ -37,9 +37,18 @@
                ; concatenate the strings
                (nunjavni-samselpla test-samselpla-samselpla
                  (nunjavni-je
-                   (nunjavni-cmene (nunjavni-naselci a) cmene: "a")
-                   (nunjavni-cmene (nunjavni-naselci b) cmene: "b")
-                   (nunjavni-cmene (nunjavni-naselci c) cmene: "c")))))
+                   (nunjavni-cmene
+                     (lambda (porsi mapti namapti)
+                       (a porsi mapti namapti))
+                     cmene: "a")
+                   (nunjavni-cmene
+                     (lambda (porsi mapti namapti)
+                       (b porsi mapti namapti))
+                     cmene: "b")
+                   (nunjavni-cmene
+                     (lambda (porsi mapti namapti)
+                       (c porsi mapti namapti))
+                     cmene: "c")))))
              (a (nunjavni-morji
                ; convert each character to a string.
                (nunjavni-samselpla test-samselpla-lerfu

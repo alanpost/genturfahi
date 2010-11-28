@@ -78,7 +78,9 @@
 (define (samselpla-pajavni-cmene #!key cmene javni)
   (if (equal? "" cmene)
       javni
-      `(,@javni cmene: ,cmene)))
+      (if (eq? 'lambda (car javni))
+          `(nunjavni-cmene ,javni cmene: ,cmene)
+          `(,@javni cmene: ,cmene))))
 
 (define (samselpla-jonai-je #!key je)
   je)
@@ -116,7 +118,8 @@
 ;; A naselci that appears on the right side of a definition.
 ;;
 (define (samselpla-selci-naselci #!key naselci)
-  `(nunjavni-naselci ,(string->symbol naselci)))
+  `(lambda (porsi mapti namapti)
+     (,(string->symbol naselci) porsi mapti namapti)))
 
 (define (samselpla-lerfu-selci #!key lerfu)
   `(nunjavni-lerfu ,lerfu))

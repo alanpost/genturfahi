@@ -29,9 +29,14 @@
 ;;;
 (define (jonai-naselci)
   (let ((genturfahi-jonai-naselci
-    (letrec ((gerna (nunjavni-morji (nunjavni-jonai (nunjavni-naselci a)
-                                                    (nunjavni-naselci b)
-                                                    (nunjavni-naselci c))))
+    (letrec ((gerna
+               (nunjavni-morji
+                 (nunjavni-jonai (lambda (porsi mapti namapti)
+                                   (a porsi mapti namapti))
+                                 (lambda (porsi mapti namapti)
+                                   (b porsi mapti namapti))
+                                 (lambda (porsi mapti namapti)
+                                   (c porsi mapti namapti)))))
              (a (nunjavni-morji (nunjavni-lerfu #\a)))
              (b (nunjavni-morji (nunjavni-lerfu #\b)))
              (c (nunjavni-morji (nunjavni-lerfu #\c))))

@@ -27,7 +27,6 @@ Source Code
   javni-valsi-syntax.scm  - syntax for abstract syntax tree.
   javni-valsi.scm         - abstract syntax tree.
   lerfu-porsi.scm         - parse input.
-  nunjavni-syntax.scm     - syntax for rule generators.
   nunjavni.scm            - rule generators.
   samselpla.scm           - code shared between bootstrap compiler
                             and genturfahi.peg.

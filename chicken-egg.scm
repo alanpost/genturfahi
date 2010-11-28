@@ -87,10 +87,6 @@
    nunjavni-samselpla
    nunjavni-cmene
 
-   ; nunjavni syntax
-   nunjavni-naselci
-
-
    ; nunvalsi
    ;
    venunjmina-nunvalsi
@@ -191,7 +187,6 @@
 (include "javni-valsi.scm")
 (include "secuxna.scm")
 (include "nunjavni.scm")
-(include "nunjavni-syntax.scm")
 (include "nunvalsi.scm")
 (include "genturfahi.scm")
 (include "eval.scm")

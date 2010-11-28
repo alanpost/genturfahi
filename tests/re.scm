@@ -37,8 +37,10 @@
                   (nunjavni-je
                     (nunjavni-*
                       (nunjavni-jonai
-                        (nunjavni-naselci digit)
-                        (nunjavni-naselci alpha))
+                        (lambda (porsi mapti namapti)
+                          (digit porsi mapti namapti))
+                        (lambda (porsi mapti namapti)
+                          (alpha porsi mapti namapti)))
                       cmene: "gerna")
                     (nunjavni-fanmo)))))
        (digit (nunjavni-morji

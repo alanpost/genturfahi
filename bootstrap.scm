@@ -22,18 +22,27 @@
                     (nunjavni-samselpla
                       samselpla-cfari
                       (nunjavni-je
-                        (nunjavni-naselci canlu)
-                        (nunjavni-* (nunjavni-naselci cfari-samselpla))
-                        (nunjavni-naselci canlu)
-                        (nunjavni-naselci gerna cmene: "gerna")
-                        (nunjavni-naselci FAhO)))))
+                        (lambda (porsi mapti namapti)
+                          (canlu porsi mapti namapti))
+                        (nunjavni-*
+                          (lambda (porsi mapti namapti)
+                            (cfari-samselpla porsi mapti namapti)))
+                        (lambda (porsi mapti namapti)
+                          (canlu porsi mapti namapti))
+                        (nunjavni-cmene
+                          (lambda (porsi mapti namapti)
+                            (gerna porsi mapti namapti))
+                          cmene:
+                          "gerna")
+                        (lambda (porsi mapti namapti)
+                          (FAhO porsi mapti namapti))))))
            (cfari-samselpla
              (nunjavni-morji
                (nunjavni-samselpla
                  samselpla-cfari-samselpla
                  (nunjavni-je
                    (nunjavni-lerfu #\{)
-                   (nunjavni-naselci canlu)
+                   (lambda (porsi mapti namapti) (canlu porsi mapti namapti))
                    (nunjavni-+
                      (nunjavni-samselpla
                        samselpla-samselpla-lerfu
@@ -43,19 +52,33 @@
                      cmene:
                      "rodalerfu")
                    (nunjavni-lerfu #\})
-                   (nunjavni-naselci canlu)))))
+                   (lambda (porsi mapti namapti)
+                     (canlu porsi mapti namapti))))))
            (gerna (nunjavni-morji
                     (nunjavni-samselpla
                       samselpla-gerna
-                      (nunjavni-* (nunjavni-naselci smuni) cmene: "smuni"))))
+                      (nunjavni-*
+                        (lambda (porsi mapti namapti)
+                          (smuni porsi mapti namapti))
+                        cmene:
+                        "smuni"))))
            (smuni (nunjavni-morji
                     (nunjavni-samselpla
                       samselpla-smuni
                       (nunjavni-je
-                        (nunjavni-naselci naselci cmene: "naselci")
+                        (nunjavni-cmene
+                          (lambda (porsi mapti namapti)
+                            (naselci porsi mapti namapti))
+                          cmene:
+                          "naselci")
                         (nunjavni-valsi "<-")
-                        (nunjavni-naselci canlu)
-                        (nunjavni-naselci javni cmene: "javni")))))
+                        (lambda (porsi mapti namapti)
+                          (canlu porsi mapti namapti))
+                        (nunjavni-cmene
+                          (lambda (porsi mapti namapti)
+                            (javni porsi mapti namapti))
+                          cmene:
+                          "javni")))))
            (naselci
              (nunjavni-morji
                (nunjavni-samselpla
@@ -63,101 +86,171 @@
                  (nunjavni-je
                    (nunjavni-re "[[:alpha:]_\\-]" cmene: "cfari")
                    (nunjavni-re "[[:alnum:]_\\-]*" cmene: "fanmo")
-                   (nunjavni-naselci canlu)))))
+                   (lambda (porsi mapti namapti)
+                     (canlu porsi mapti namapti))))))
            (javni (nunjavni-morji
                     (nunjavni-jonai
-                      (nunjavni-naselci jonai)
-                      (nunjavni-naselci je))))
+                      (lambda (porsi mapti namapti)
+                        (jonai porsi mapti namapti))
+                      (lambda (porsi mapti namapti)
+                        (je porsi mapti namapti)))))
            (jonai (nunjavni-morji
                     (nunjavni-samselpla
                       samselpla-jonai
                       (nunjavni-je
-                        (nunjavni-naselci je cmene: "cfari")
+                        (nunjavni-cmene
+                          (lambda (porsi mapti namapti)
+                            (je porsi mapti namapti))
+                          cmene:
+                          "cfari")
                         (nunjavni-+
                           (nunjavni-samselpla
                             samselpla-jonai-je
                             (nunjavni-je
                               (nunjavni-lerfu #\/)
-                              (nunjavni-naselci canlu)
-                              (nunjavni-naselci je cmene: "je")))
+                              (lambda (porsi mapti namapti)
+                                (canlu porsi mapti namapti))
+                              (nunjavni-cmene
+                                (lambda (porsi mapti namapti)
+                                  (je porsi mapti namapti))
+                                cmene:
+                                "je")))
                           cmene:
                           "fanmo")))))
            (je (nunjavni-morji
                  (nunjavni-samselpla
                    samselpla-je
                    (nunjavni-je
-                     (nunjavni-+ (nunjavni-naselci pajavni) cmene: "rodajavni")
-                     (nunjavni-? (nunjavni-naselci cmene-sumti) cmene: "cmene")
+                     (nunjavni-+
+                       (lambda (porsi mapti namapti)
+                         (pajavni porsi mapti namapti))
+                       cmene:
+                       "rodajavni")
                      (nunjavni-?
-                       (nunjavni-naselci samselpla)
+                       (lambda (porsi mapti namapti)
+                         (cmene-sumti porsi mapti namapti))
+                       cmene:
+                       "cmene")
+                     (nunjavni-?
+                       (lambda (porsi mapti namapti)
+                         (samselpla porsi mapti namapti))
                        cmene:
                        "samselpla")))))
            (pajavni
              (nunjavni-morji
                (nunjavni-jonai
-                 (nunjavni-naselci optional)
-                 (nunjavni-naselci repetition0)
-                 (nunjavni-naselci repetition1)
-                 (nunjavni-naselci and-predicate)
-                 (nunjavni-naselci end-of-input)
-                 (nunjavni-naselci not-predicate)
+                 (lambda (porsi mapti namapti) (optional porsi mapti namapti))
+                 (lambda (porsi mapti namapti)
+                   (repetition0 porsi mapti namapti))
+                 (lambda (porsi mapti namapti)
+                   (repetition1 porsi mapti namapti))
+                 (lambda (porsi mapti namapti)
+                   (and-predicate porsi mapti namapti))
+                 (lambda (porsi mapti namapti)
+                   (end-of-input porsi mapti namapti))
+                 (lambda (porsi mapti namapti)
+                   (not-predicate porsi mapti namapti))
                  (nunjavni-samselpla
                    samselpla-pajavni-cmene
                    (nunjavni-je
-                     (nunjavni-? (nunjavni-naselci cmene-sumti) cmene: "cmene")
-                     (nunjavni-naselci selci-javni cmene: "javni"))))))
+                     (nunjavni-?
+                       (lambda (porsi mapti namapti)
+                         (cmene-sumti porsi mapti namapti))
+                       cmene:
+                       "cmene")
+                     (nunjavni-cmene
+                       (lambda (porsi mapti namapti)
+                         (selci-javni porsi mapti namapti))
+                       cmene:
+                       "javni"))))))
            (optional
              (nunjavni-morji
                (nunjavni-samselpla
                  samselpla-?
                  (nunjavni-je
-                   (nunjavni-? (nunjavni-naselci cmene-sumti) cmene: "cmene")
-                   (nunjavni-naselci selci-javni cmene: "javni")
+                   (nunjavni-?
+                     (lambda (porsi mapti namapti)
+                       (cmene-sumti porsi mapti namapti))
+                     cmene:
+                     "cmene")
+                   (nunjavni-cmene
+                     (lambda (porsi mapti namapti)
+                       (selci-javni porsi mapti namapti))
+                     cmene:
+                     "javni")
                    (nunjavni-lerfu #\?)
-                   (nunjavni-naselci canlu)))))
+                   (lambda (porsi mapti namapti)
+                     (canlu porsi mapti namapti))))))
            (repetition0
              (nunjavni-morji
                (nunjavni-samselpla
                  samselpla-*
                  (nunjavni-je
-                   (nunjavni-? (nunjavni-naselci cmene-sumti) cmene: "cmene")
-                   (nunjavni-naselci selci-javni cmene: "javni")
+                   (nunjavni-?
+                     (lambda (porsi mapti namapti)
+                       (cmene-sumti porsi mapti namapti))
+                     cmene:
+                     "cmene")
+                   (nunjavni-cmene
+                     (lambda (porsi mapti namapti)
+                       (selci-javni porsi mapti namapti))
+                     cmene:
+                     "javni")
                    (nunjavni-lerfu #\*)
-                   (nunjavni-naselci canlu)))))
+                   (lambda (porsi mapti namapti)
+                     (canlu porsi mapti namapti))))))
            (repetition1
              (nunjavni-morji
                (nunjavni-samselpla
                  samselpla-+
                  (nunjavni-je
-                   (nunjavni-? (nunjavni-naselci cmene-sumti) cmene: "cmene")
-                   (nunjavni-naselci selci-javni cmene: "javni")
+                   (nunjavni-?
+                     (lambda (porsi mapti namapti)
+                       (cmene-sumti porsi mapti namapti))
+                     cmene:
+                     "cmene")
+                   (nunjavni-cmene
+                     (lambda (porsi mapti namapti)
+                       (selci-javni porsi mapti namapti))
+                     cmene:
+                     "javni")
                    (nunjavni-lerfu #\+)
-                   (nunjavni-naselci canlu)))))
+                   (lambda (porsi mapti namapti)
+                     (canlu porsi mapti namapti))))))
            (and-predicate
              (nunjavni-morji
                (nunjavni-samselpla
                  samselpla-&
                  (nunjavni-je
                    (nunjavni-lerfu #\&)
-                   (nunjavni-naselci canlu)
-                   (nunjavni-naselci selci-javni cmene: "javni")))))
+                   (lambda (porsi mapti namapti) (canlu porsi mapti namapti))
+                   (nunjavni-cmene
+                     (lambda (porsi mapti namapti)
+                       (selci-javni porsi mapti namapti))
+                     cmene:
+                     "javni")))))
            (end-of-input
              (nunjavni-morji
                (nunjavni-samselpla
                  samselpla-fanmo
                  (nunjavni-je
                    (nunjavni-lerfu #\!)
-                   (nunjavni-naselci canlu)
+                   (lambda (porsi mapti namapti) (canlu porsi mapti namapti))
                    (nunjavni-lerfu #\.)
-                   (nunjavni-naselci canlu)))))
+                   (lambda (porsi mapti namapti)
+                     (canlu porsi mapti namapti))))))
            (not-predicate
              (nunjavni-morji
                (nunjavni-samselpla
                  samselpla-!
                  (nunjavni-je
                    (nunjavni-lerfu #\!)
-                   (nunjavni-naselci canlu)
-                   (nunjavni-naselci selci-javni cmene: "javni")))))
+                   (lambda (porsi mapti namapti) (canlu porsi mapti namapti))
+                   (nunjavni-cmene
+                     (lambda (porsi mapti namapti)
+                       (selci-javni porsi mapti namapti))
+                     cmene:
+                     "javni")))))
            (cmene-sumti
              (nunjavni-morji
                (nunjavni-samselpla
@@ -166,22 +259,32 @@
                    (nunjavni-valsi "#:")
                    (nunjavni-re "[[:alpha:]_\\-]" cmene: "cfari")
                    (nunjavni-re "[[:alnum:]_\\-]*" cmene: "fanmo")
-                   (nunjavni-naselci canlu)))))
+                   (lambda (porsi mapti namapti)
+                     (canlu porsi mapti namapti))))))
            (selci-javni
              (nunjavni-morji
                (nunjavni-jonai
-                 (nunjavni-naselci selci-naselci)
-                 (nunjavni-naselci lerfu-selci)
-                 (nunjavni-naselci valsi-selci)
-                 (nunjavni-naselci klesi-selci)
-                 (nunjavni-naselci denpabu)
-                 (nunjavni-naselci girzu-javni))))
+                 (lambda (porsi mapti namapti)
+                   (selci-naselci porsi mapti namapti))
+                 (lambda (porsi mapti namapti)
+                   (lerfu-selci porsi mapti namapti))
+                 (lambda (porsi mapti namapti)
+                   (valsi-selci porsi mapti namapti))
+                 (lambda (porsi mapti namapti)
+                   (klesi-selci porsi mapti namapti))
+                 (lambda (porsi mapti namapti) (denpabu porsi mapti namapti))
+                 (lambda (porsi mapti namapti)
+                   (girzu-javni porsi mapti namapti)))))
            (selci-naselci
              (nunjavni-morji
                (nunjavni-samselpla
                  samselpla-selci-naselci
                  (nunjavni-je
-                   (nunjavni-naselci naselci cmene: "naselci")
+                   (nunjavni-cmene
+                     (lambda (porsi mapti namapti)
+                       (naselci porsi mapti namapti))
+                     cmene:
+                     "naselci")
                    (nunjavni-! (nunjavni-valsi "<-"))))))
            (lerfu-selci
              (nunjavni-morji
@@ -190,14 +293,20 @@
                    samselpla-lerfu-selci
                    (nunjavni-je
                      (nunjavni-valsi "#\\")
-                     (nunjavni-naselci lerfu-cmene cmene: "lerfu")
-                     (nunjavni-naselci canlu)))
+                     (nunjavni-cmene
+                       (lambda (porsi mapti namapti)
+                         (lerfu-cmene porsi mapti namapti))
+                       cmene:
+                       "lerfu")
+                     (lambda (porsi mapti namapti)
+                       (canlu porsi mapti namapti))))
                  (nunjavni-samselpla
                    samselpla-lerfu-selci
                    (nunjavni-je
                      (nunjavni-valsi "#\\")
                      (nunjavni-. cmene: "lerfu")
-                     (nunjavni-naselci canlu))))))
+                     (lambda (porsi mapti namapti)
+                       (canlu porsi mapti namapti)))))))
            (lerfu-cmene
              (nunjavni-morji
                (nunjavni-jonai
@@ -230,11 +339,16 @@
                        samselpla-valsi-selci-lerfu
                        (nunjavni-je
                          (nunjavni-! (nunjavni-lerfu #\"))
-                         (nunjavni-naselci valsi-lerfu cmene: "lerfu")))
+                         (nunjavni-cmene
+                           (lambda (porsi mapti namapti)
+                             (valsi-lerfu porsi mapti namapti))
+                           cmene:
+                           "lerfu")))
                      cmene:
                      "valsi-lerfu")
                    (nunjavni-lerfu #\")
-                   (nunjavni-naselci canlu)))))
+                   (lambda (porsi mapti namapti)
+                     (canlu porsi mapti namapti))))))
            (valsi-lerfu
              (nunjavni-morji
                (nunjavni-jonai
@@ -268,7 +382,8 @@
                  (nunjavni-je
                    (nunjavni-lerfu #\[)
                    (nunjavni-+
-                     (nunjavni-naselci klesi-lerfu)
+                     (lambda (porsi mapti namapti)
+                       (klesi-lerfu porsi mapti namapti))
                      cmene:
                      "klesi-lerfu")
                    (nunjavni-lerfu #\])
@@ -276,11 +391,13 @@
                      (nunjavni-jonai (nunjavni-valsi "*") (nunjavni-valsi "+"))
                      cmene:
                      "repeat")
-                   (nunjavni-naselci canlu)))))
+                   (lambda (porsi mapti namapti)
+                     (canlu porsi mapti namapti))))))
            (klesi-lerfu
              (nunjavni-morji
                (nunjavni-jonai
-                 (nunjavni-naselci klesi-cmene)
+                 (lambda (porsi mapti namapti)
+                   (klesi-cmene porsi mapti namapti))
                  (nunjavni-samselpla
                    samselpla-klesi-lerfu
                    (nunjavni-je
@@ -327,14 +444,17 @@
              (nunjavni-morji
                (nunjavni-samselpla
                  samselpla-denpabu
-                 (nunjavni-je (nunjavni-lerfu #\.) (nunjavni-naselci canlu)))))
+                 (nunjavni-je
+                   (nunjavni-lerfu #\.)
+                   (lambda (porsi mapti namapti)
+                     (canlu porsi mapti namapti))))))
            (samselpla
              (nunjavni-morji
                (nunjavni-samselpla
                  samselpla-samselpla
                  (nunjavni-je
                    (nunjavni-lerfu #\{)
-                   (nunjavni-naselci canlu)
+                   (lambda (porsi mapti namapti) (canlu porsi mapti namapti))
                    (nunjavni-+
                      (nunjavni-samselpla
                        samselpla-samselpla-lerfu
@@ -344,47 +464,61 @@
                      cmene:
                      "rodalerfu")
                    (nunjavni-lerfu #\})
-                   (nunjavni-naselci canlu)))))
+                   (lambda (porsi mapti namapti)
+                     (canlu porsi mapti namapti))))))
            (girzu-javni
              (nunjavni-morji
                (nunjavni-samselpla
                  samselpla-girzu-javni
                  (nunjavni-je
                    (nunjavni-lerfu #\()
-                   (nunjavni-naselci canlu)
-                   (nunjavni-naselci javni cmene: "javni")
+                   (lambda (porsi mapti namapti) (canlu porsi mapti namapti))
+                   (nunjavni-cmene
+                     (lambda (porsi mapti namapti) (javni porsi mapti namapti))
+                     cmene:
+                     "javni")
                    (nunjavni-lerfu #\))
-                   (nunjavni-naselci canlu)))))
+                   (lambda (porsi mapti namapti)
+                     (canlu porsi mapti namapti))))))
            (canlu (nunjavni-morji
                     (nunjavni-samselpla
                       samselpla-canlu
                       (nunjavni-*
                         (nunjavni-jonai
-                          (nunjavni-naselci canlubu)
-                          (nunjavni-naselci totoi))))))
+                          (lambda (porsi mapti namapti)
+                            (canlubu porsi mapti namapti))
+                          (lambda (porsi mapti namapti)
+                            (totoi porsi mapti namapti)))))))
            (canlubu
              (nunjavni-morji
                (nunjavni-jonai
                  (nunjavni-lerfu #\space)
                  (nunjavni-lerfu #\tab)
-                 (nunjavni-naselci CR)
-                 (nunjavni-naselci LF))))
+                 (lambda (porsi mapti namapti) (CR porsi mapti namapti))
+                 (lambda (porsi mapti namapti) (LF porsi mapti namapti)))))
            (totoi (nunjavni-morji
                     (nunjavni-je
                       (nunjavni-lerfu #\;)
                       (nunjavni-*
                         (nunjavni-je
-                          (nunjavni-! (nunjavni-naselci CRLF))
+                          (nunjavni-!
+                            (lambda (porsi mapti namapti)
+                              (CRLF porsi mapti namapti)))
                           (nunjavni-.)))
                       (nunjavni-jonai
-                        (nunjavni-naselci CRLF)
-                        (nunjavni-& (nunjavni-naselci FAhO))))))
+                        (lambda (porsi mapti namapti)
+                          (CRLF porsi mapti namapti))
+                        (nunjavni-&
+                          (lambda (porsi mapti namapti)
+                            (FAhO porsi mapti namapti)))))))
            (CR (nunjavni-morji (nunjavni-lerfu #\return)))
            (LF (nunjavni-morji (nunjavni-lerfu #\newline)))
            (CRLF (nunjavni-morji
                    (nunjavni-jonai
-                     (nunjavni-je (nunjavni-naselci CR) (nunjavni-naselci LF))
-                     (nunjavni-naselci CR)
-                     (nunjavni-naselci LF))))
+                     (nunjavni-je
+                       (lambda (porsi mapti namapti) (CR porsi mapti namapti))
+                       (lambda (porsi mapti namapti) (LF porsi mapti namapti)))
+                     (lambda (porsi mapti namapti) (CR porsi mapti namapti))
+                     (lambda (porsi mapti namapti) (LF porsi mapti namapti)))))
            (FAhO (nunjavni-morji (nunjavni-fanmo))))
     cfari))
