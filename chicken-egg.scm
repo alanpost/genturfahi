@@ -150,7 +150,7 @@
 (import chicken)
 (import scheme)
 
-(include "declare.scm")
+(include "chicken-declare.scm")
 
 ;(require-extension utf8)
 

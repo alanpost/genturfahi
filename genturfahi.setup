@@ -1,11 +1,11 @@
 (include "version.scm")
-(include "conf.scm")
+(include "chicken-conf.scm")
 
        ; genturfahi executable
        ;
 (make (("genturfahi" ("chicken-cmd.scm"
-                      "conf.scm"
-                      "declare.scm"
+                      "chicken-conf.scm"
+                      "chicken-declare.scm"
                       "license.scm"
                       "main.scm"
                       "genturfahi.meta"
@@ -19,8 +19,8 @@
        ;
        ((dynld-name "genturfahi") ("bootstrap.scm"
                                    "chicken-egg.scm"
-                                   "conf.scm"
-                                   "declare.scm"
+                                   "chicken-conf.scm"
+                                   "chicken-declare.scm"
                                    "eval.scm"
                                    "genturfahi.scm"
                                    "javni-valsi.scm"
@@ -47,8 +47,8 @@
        ;
        ("genturfahi.o" ("bootstrap.scm"
                         "chicken-egg.scm"
-                        "conf.scm"
-                        "declare.scm"
+                        "chicken-conf.scm"
+                        "chicken-declare.scm"
                         "eval.scm"
                         "genturfahi.scm"
                         "javni-valsi.scm"
