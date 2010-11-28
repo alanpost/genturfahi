@@ -53,27 +53,45 @@
                    (nunjavni-samselpla
                      test-samselpla-+
                      (nunjavni-je
-                       (nunjavni-naselci mulexp cmene: "a")
+                       (nunjavni-cmene
+                         (lambda (porsi mapti namapti)
+                           (mulexp porsi mapti namapti))
+                         cmene: "a")
                        (nunjavni-lerfu #\+)
-                       (nunjavni-naselci mulexp cmene: "b")))
-                   (nunjavni-naselci mulexp))))
+                       (nunjavni-cmene
+                         (lambda (porsi mapti namapti)
+                           (mulexp porsi mapti namapti))
+                         cmene: "b")))
+                   (lambda (porsi mapti namapti)
+                     (mulexp porsi mapti namapti)))))
        (mulexp (nunjavni-morji
                  (nunjavni-jonai
                    (nunjavni-samselpla
                      test-samselpla-*
                      (nunjavni-je
-                       (nunjavni-naselci simple cmene: "a")
+                       (nunjavni-cmene
+                         (lambda (porsi mapti namapti)
+                           (simple porsi mapti namapti))
+                         cmene: "a")
                        (nunjavni-lerfu #\*)
-                       (nunjavni-naselci simple cmene: "b")))
-                   (nunjavni-naselci simple))))
+                       (nunjavni-cmene
+                         (lambda (porsi mapti namapti)
+                           (simple porsi mapti namapti))
+                         cmene: "b")))
+                   (lambda (porsi mapti namapti)
+                     (simple porsi mapti namapti)))))
        (simple (nunjavni-morji
                  (nunjavni-jonai
-                   (nunjavni-naselci digits)
+                   (lambda (porsi mapti namapti)
+                     (digits porsi mapti namapti))
                    (nunjavni-samselpla
                      test-samselpla-simple
                      (nunjavni-je
                        (nunjavni-lerfu #\()
-                       (nunjavni-naselci expr cmene: "expr")
+                       (nunjavni-cmene
+                         (lambda (porsi mapti namapti)
+                           (expr porsi mapti namapti))
+                         cmene: "expr")
                        (nunjavni-lerfu #\)))))))
        (digits (nunjavni-morji
                  (nunjavni-samselpla
