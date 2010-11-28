@@ -180,9 +180,6 @@
 (import regex)           ; Irregular expressions
 (import sandbox)
 
-;(declare (unsafe))
-;(declare fixnum)
-
 (include "lerfu-porsi.scm")
 (include "javni-valsi.scm")
 (include "secuxna.scm")
