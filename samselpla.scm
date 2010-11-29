@@ -128,9 +128,6 @@
   #\space)
 
 (define (samselpla-lerfu-linefeed)
-  #\return)
-
-(define (samselpla-lerfu-linefeed)
   #\linefeed)
 
 (define (samselpla-lerfu-newline)
