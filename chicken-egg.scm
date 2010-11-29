@@ -182,6 +182,8 @@
 (import data-structures) ; flatten
 (import sandbox)
 
+(include "chicken-platform.scm")
+
 (include "lerfu-porsi.scm")
 (include "javni-valsi.scm")
 (include "secuxna.scm")

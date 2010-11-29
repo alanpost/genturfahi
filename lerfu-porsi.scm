@@ -39,13 +39,13 @@
 
 ;; open a port as a lerfu-porsi
 ;;
-;; This procedure uses |copy-port|, which is a
-;; (Chicken Scheme) extension.
+;; This procedure uses |copy-octet-port-to-octet-port|,
+;; which must be defined in a *-platform.scm file.
 ;;
 (define (make-lerfu-porsi-port iport)
   (define (port->string oport)
     ; copy the input port to a string
-    (copy-port iport oport)
+    (copy-octet-port-to-octet-port iport oport)
 
     ; copy a #\nul to the end of the string as a sentinel.
     (write-char #\nul oport)
