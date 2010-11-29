@@ -39,27 +39,21 @@
 
 ;; open a port as a lerfu-porsi
 ;;
-;; This procedure uses |call-with-input-string|,
-;; |call-with-output-string| and |copy-port|, all
-;; of which are (Chicken Scheme) extensions to
-;; R5RS ports and srfi-6.
+;; This procedure uses |copy-port|, which is a
+;; (Chicken Scheme) extension.
 ;;
 (define (make-lerfu-porsi-port iport)
   (define (port->string oport)
-    (define (eof->string nport)
-      ; copy a #\nul to the end of the string as a sentinel.
-      (copy-port nport oport))
-
     ; copy the input port to a string
     (copy-port iport oport)
 
-    ; append the sentinel
-    (call-with-input-string (make-string 1 #\nul) eof->string)
+    ; copy a #\nul to the end of the string as a sentinel.
+    (write-char #\nul oport)
 
     ; copy the string from the port
     (get-output-string oport))
 
-  (make-lerfu-porsi 0 (call-with-output-string port->string)))
+  (make-lerfu-porsi 0 (port->string (open-output-string))))
 
 
 ;; return the remaining characters in the parse input.
