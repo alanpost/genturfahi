@@ -171,43 +171,49 @@ valsi-lerfu     <- #\\ #\n                {samselpla-valsi-newline}
 
 klesi-selci      <- #\[
                     #:klesi-lerfu klesi-lerfu+
+                    "]*"
+                    canlu                            {samselpla-klesi-selci-*}
+                  / #\[
+                    #:klesi-lerfu klesi-lerfu+
+                    "]+"
+                    canlu                            {samselpla-klesi-selci-+}
+                  / #\[
+                    #:klesi-lerfu klesi-lerfu+
                     #\]
-                    #:repeat ("*" / "+")?
                     canlu                            {samselpla-klesi-selci}
+
 klesi-lerfu      <- klesi-cmene
                   / (!#\]
                      #:klesi-lerfu .
                      {samselpla-klesi-lerfu})
-klesi-cmene     <- "[:alnum:]"
-                 / "[:alpha:]"
-                 / "[:ascii:]"
-                 / "[:blank:]"
-                 / "[:cntrl:]"
-                 / "[:digit:]"
-                 / "[:graph:]"
-                 / "[:lower:]"
+klesi-cmene     <- "[:alnum:]"                       {samselpla-alnum}
+                 / "[:alpha:]"                       {samselpla-alpha}
+                 / "[:ascii:]"                       {samselpla-ascii}
+                 / "[:blank:]"                       {samselpla-blank}
+                 / "[:cntrl:]"                       {samselpla-cntrl}
+                 / "[:digit:]"                       {samselpla-digit}
+                 / "[:graph:]"                       {samselpla-graph}
+                 / "[:lower:]"                       {samselpla-lower}
                  / "[:odigit:]"                      {samselpla-odigit}
-                 / "[:print:]"
-                 / "[:punct:]"
-                 / "[:space:]"
-                 / "[:upper:]"
-                 / "[:word:]"
-                 / "[:xdigit:]"
-                 / "[:^alnum:]"
-                 / "[:^alpha:]"
-                 / "[:^ascii:]"
-                 / "[:^blank:]"
-                 / "[:^cntrl:]"
-                 / "[:^digit:]"
-                 / "[:^graph:]"
-                 / "[:^lower:]"
+                 / "[:print:]"                       {samselpla-print}
+                 / "[:punct:]"                       {samselpla-punct}
+                 / "[:space:]"                       {samselpla-space}
+                 / "[:upper:]"                       {samselpla-upper}
+                 / "[:xdigit:]"                      {samselpla-xdigit}
+                 / "[:^alnum:]"                      {samselpla-^alnum}
+                 / "[:^alpha:]"                      {samselpla-^alpha}
+                 / "[:^ascii:]"                      {samselpla-^ascii}
+                 / "[:^blank:]"                      {samselpla-^blank}
+                 / "[:^cntrl:]"                      {samselpla-^cntrl}
+                 / "[:^digit:]"                      {samselpla-^digit}
+                 / "[:^graph:]"                      {samselpla-^graph}
+                 / "[:^lower:]"                      {samselpla-^lower}
                  / "[:^odigit:]"                     {samselpla-^odigit}
-                 / "[:^print:]"
-                 / "[:^punct:]"
-                 / "[:^space:]"
-                 / "[:^upper:]"
-                 / "[:^word:]"
-                 / "[:^xdigit:]"
+                 / "[:^print:]"                      {samselpla-^print}
+                 / "[:^punct:]"                      {samselpla-^punct}
+                 / "[:^space:]"                      {samselpla-^space}
+                 / "[:^upper:]"                      {samselpla-^upper}
+                 / "[:^xdigit:]"                     {samselpla-^xdigit}
 
 denpabu         <- #\. canlu                         {samselpla-denpabu}
 

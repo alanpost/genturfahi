@@ -96,7 +96,7 @@
        (digits (nunjavni-morji
                  (nunjavni-samselpla
                    test-samselpla-digits
-                   (nunjavni-re "[[:digit:]]+" cmene: "x")))))
+                   (nunjavni-char-set-+ char-set:digit cmene: "x")))))
       (genturfahi expr))))
   (mex-test genturfahi-mex)))
 

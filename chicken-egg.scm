@@ -73,7 +73,9 @@
    nunjavni-e
    nunjavni-fanmo
    nunjavni-valsi
-   nunjavni-re
+   nunjavni-char-set-*
+   nunjavni-char-set-+
+   nunjavni-char-set
    nunjavni-*
    nunjavni-+
    nunjavni-?
@@ -158,26 +160,26 @@
 ;(require-extension srfi-6)         ; built-in
 ;(require-extension srfi-9)         ; built-in
 (require-extension srfi-13)
+(require-extension srfi-14)
 ;(require-extension srfi-28)        ; built-in
 ;(require-extension srfi-39)        ; built-in
 ;(require-extension srfi-61)        ; built-in
 ;(require-extension extras)         ; only needed when I'm debugging
 (require-extension ports)
 (require-extension data-structures)
-(require-library regex)
 (require-library sandbox)
 
 (import srfi-1)          ; filter
 ;(import srfi-6)          ; string ports
 ;(import srfi-9)          ; define-record-type
 (import srfi-13)         ; string-copy
+(import srfi-14)         ; character set library
 ;(import srfi-28)         ; basic format strings
 ;(import srfi-39)         ; parameter objects
 ;(import srfi-69)         ; A more general cond clause
 ;(import extras)         ; pretty-print (only needed when I'm debugging)
 (import ports)           ; Chicken Scheme srfi-6 and port extensions
 (import data-structures) ; flatten
-(import regex)           ; Irregular expressions
 (import sandbox)
 
 (include "lerfu-porsi.scm")

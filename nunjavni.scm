@@ -85,28 +85,52 @@
     javni-valsi))
 
 
-;; regular expression: match the provided in regular expression
-;;
-(define (nunjavni-re pattern #!key cmene)
-  (let ((re (regexp (string-append "^" pattern))))
-    (define (javni-re porsi mapti namapti)
-      (define (javni-re lefpoi)
-        (mapti (make-lerfu-porsi-pabalvi-valsi porsi
-                                               (string-length (car lefpoi)))
-               (lambda () (make-javni-valsi cmene (car lefpoi)))))
+(define (nunjavni-char-set-* char-set #!key cmene)
+  (define (javni-char-set-* porsi
+                            mapti
+                            ignore-namapti
+                            #!optional (poi (lerfu-porsi-poi porsi))
+                                       (zva (lerfu-porsi-zva porsi)))
+    (define (mapti-char-set-* zva)
+      (let ((puzva (lerfu-porsi-zva porsi)))
+        (mapti (make-lerfu-porsi-pabalvi-valsi porsi (- zva puzva))
+               (lambda ()
+                 (make-javni-valsi cmene (string-copy poi puzva zva))))))
 
-      (let ((zva (lerfu-porsi-zva porsi))
-            (poi (lerfu-porsi-poi porsi)))
-                ; search the parse input, being careful to avoid
-                ; the sentinel and already matched parse input.
-        (cond ((string-search
-                 re
-                 poi
-                 zva
-                 (- (string-length poi) zva 1)) => javni-re)
-              (else (namapti porsi)))))
-    javni-re))
+    (define (char-set-* poi zva)
+      (if (char-set-contains? char-set (string-ref poi zva))
+          (char-set-* poi (+ 1 zva))
+          zva))
 
+    (mapti-char-set-* (char-set-* poi zva)))
+  javni-char-set-*)
+
+
+(define (nunjavni-char-set-+ char-set #!key cmene)
+  (let ((javni-char-set-* (nunjavni-char-set-* char-set cmene: cmene)))
+    (define (javni-char-set-+ porsi mapti namapti)
+      (let ((poi        (lerfu-porsi-poi porsi))
+            (zva        (lerfu-porsi-zva porsi)))
+        (if (char-set-contains? char-set (string-ref poi zva))
+            (javni-char-set-* porsi
+                             mapti
+                             namapti
+                             poi
+                             (+ 1 zva))
+            (namapti porsi))))
+    javni-char-set-+))
+
+(define (nunjavni-char-set char-set #!key cmene)
+  (define (javni-char-set porsi mapti namapti)
+
+    (let* ((poi        (lerfu-porsi-poi porsi))
+           (zva        (lerfu-porsi-zva porsi)))
+      (if (char-set-contains? char-set (string-ref poi zva))
+          (mapti (make-lerfu-porsi-pabalvi-lerfu porsi)
+                 (lambda ()
+                   (make-javni-valsi cmene (lerfu-porsi-lerfu porsi))))
+          (namapti porsi))))
+  javni-char-set)
 
 ;; zero-or-more: parse zero or more javni out of the |lerfu-porsi|.
 ;;

@@ -65,7 +65,7 @@
 
 
 (define (samselpla-naselci #!key cfari fanmo)
-  (string-append cfari fanmo))
+  (string-append (make-string 1 cfari) fanmo))
 
 (define (samselpla-je #!key samselpla rodajavni)
   (let* ((javni (if (null? (cdr rodajavni))
@@ -113,7 +113,7 @@
   `(nunjavni-! ,javni))
 
 (define (samselpla-cmene-sumti #!key cfari fanmo)
-  `,(string-append cfari fanmo))
+  `,(string-append (make-string 1 cfari) fanmo))
 
 ;; A naselci that appears on the right side of a definition.
 ;;
@@ -169,20 +169,125 @@
 (define (samselpla-valsi-lerfu #!key lerfu)
   (make-string 1 lerfu))
 
+(define (samselpla-alnum)
+  'char-set:letter+digit)
+
+(define (samselpla-alpha)
+  'char-set:letter)
+
+(define (samselpla-ascii)
+  'char-set:ascii)
+
+(define (samselpla-blank)
+  'char-set:blank)
+
+(define (samselpla-cntrl)
+  'char-set:iso-control)
+
+(define (samselpla-digit)
+  'char-set:digit)
+
+(define (samselpla-graph)
+  'char-set:graphic)
+
+(define (samselpla-lower)
+  'char-set:lower-case)
+
 (define (samselpla-odigit)
-  "0-7")
+  (char-set #\0 #\1 #\2 #\3 #\4 #\5 #\6 #\7))
+
+(define (samselpla-print)
+  'char-set:printing)
+
+(define (samselpla-punct)
+  'char-set:punctuation)
+
+(define (samselpla-space)
+  'char-set:whitespace)
+
+(define (samselpla-upper)
+  'char-set:upper-case)
+
+(define (samselpla-xdigit)
+  'char-set:hex-digit)
+
+(define (samselpla-^alnum)
+  `(char-set-xor (char-set-complement char-set:letter+digit)
+                 (char-set (secuxna-sentinel))))
+
+(define (samselpla-^alpha)
+  `(char-set-xor (char-set-complement char-set:letter)
+                 (char-set (secuxna-sentinel))))
+
+(define (samselpla-^ascii)
+  `(char-set-xor (char-set-complement char-set:ascii)
+                 (char-set (secuxna-sentinel))))
+
+(define (samselpla-^blank)
+  `(char-set-xor (char-set-complement char-set:blank)
+                 (char-set (secuxna-sentinel))))
+
+(define (samselpla-^cntrl)
+  `(char-set-xor (char-set-complement char-set:iso-control)
+                 (char-set (secuxna-sentinel))))
+
+(define (samselpla-^digit)
+  `(char-set-xor (char-set-complement char-set:digit)
+                 (char-set (secuxna-sentinel))))
+
+(define (samselpla-^graph)
+  `(char-set-xor (char-set-complement char-set:graphic)
+                 (char-set (secuxna-sentinel))))
+
+(define (samselpla-^lower)
+  `(char-set-xor (char-set-complement char-set:lower-case)
+                 (char-set (secuxna-sentinel))))
 
 (define (samselpla-^odigit)
-  "^0-7")
+  `(char-set-xor (char-set-complement
+                   (char-set #\0 #\1 #\2 #\3 #\4 #\5 #\6 #\7))
+                 (char-set (secuxna-sentinel))))
 
-(define (samselpla-klesi-selci #!key klesi-lerfu repeat)
-  `(nunjavni-re ,(string-append "["
-                                (apply string-append klesi-lerfu)
-                                "]"
-                                repeat)))
+(define (samselpla-^print)
+  `(char-set-xor (char-set-complement char-set:printing)
+                 (char-set (secuxna-sentinel))))
+
+(define (samselpla-^punct)
+  `(char-set-xor (char-set-complement char-set:punctuation)
+                 (char-set (secuxna-sentinel))))
+
+(define (samselpla-^space)
+  `(char-set-xor (char-set-complement char-set:whitespace)
+                 (char-set (secuxna-sentinel))))
+
+(define (samselpla-^upper)
+  `(char-set-xor (char-set-complement char-set:upper-case)
+                 (char-set (secuxna-sentinel))))
+
+(define (samselpla-^xdigit)
+  `(char-set-xor (char-set-complement char-set:hex-digit)
+                 (char-set (secuxna-sentinel))))
+
 
 (define (samselpla-klesi-lerfu #!key klesi-lerfu)
-  (make-string 1 klesi-lerfu))
+  `(char-set ,klesi-lerfu))
+
+
+(define (samselpla-klesi-selci-* #!key klesi-lerfu)
+  (if (null? (cdr klesi-lerfu))
+      `(nunjavni-char-set-* ,(car klesi-lerfu))
+      `(nunjavni-char-set-* (char-set-union ,@klesi-lerfu))))
+
+(define (samselpla-klesi-selci-+ #!key klesi-lerfu)
+  (if (null? (cdr klesi-lerfu))
+      `(nunjavni-char-set-+ ,(car klesi-lerfu))
+      `(nunjavni-char-set-+ (char-set-union ,@klesi-lerfu))))
+
+(define (samselpla-klesi-selci #!key klesi-lerfu)
+  (if (null? (cdr klesi-lerfu))
+      `(nunjavni-char-set ,(car klesi-lerfu))
+      `(nunjavni-char-set (char-set-union ,@klesi-lerfu))))
+
 
 (define (samselpla-denpabu)
   `(nunjavni-.))

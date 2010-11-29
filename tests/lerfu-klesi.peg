@@ -17,7 +17,7 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
-gerna <- #:gerna (digit / alpha)* FAhO {test-samselpla-re}
+gerna <- #:gerna (digit / alpha)* FAhO {test-samselpla-lerfu-klesi}
 digit <- [[:digit:]]+
 alpha <- [[:alpha:]]+
 FAhO  <- !.

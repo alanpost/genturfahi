@@ -33,7 +33,7 @@
 (include "not-predicate.scm")
 (include "jonai-naselci.scm")
 (include "samselpla.scm")
-(include "re.scm")
+(include "lerfu-klesi.scm")
 (include "mex.scm")
 (include "rrecursion.scm")
 (include "lrecursion.scm")

@@ -84,8 +84,22 @@
                (nunjavni-samselpla
                  samselpla-naselci
                  (nunjavni-je
-                   (nunjavni-re "[[:alpha:]_\\-]" cmene: "cfari")
-                   (nunjavni-re "[[:alnum:]_\\-]*" cmene: "fanmo")
+                   (nunjavni-char-set
+                     (char-set-union
+                       char-set:letter
+                       (char-set #\_)
+                       (char-set #\\)
+                       (char-set #\-))
+                     cmene:
+                     "cfari")
+                   (nunjavni-char-set-*
+                     (char-set-union
+                       char-set:letter+digit
+                       (char-set #\_)
+                       (char-set #\\)
+                       (char-set #\-))
+                     cmene:
+                     "fanmo")
                    (lambda (porsi mapti namapti)
                      (canlu porsi mapti namapti))))))
            (javni (nunjavni-morji
@@ -257,8 +271,22 @@
                  samselpla-cmene-sumti
                  (nunjavni-je
                    (nunjavni-valsi "#:")
-                   (nunjavni-re "[[:alpha:]_\\-]" cmene: "cfari")
-                   (nunjavni-re "[[:alnum:]_\\-]*" cmene: "fanmo")
+                   (nunjavni-char-set
+                     (char-set-union
+                       char-set:letter
+                       (char-set #\_)
+                       (char-set #\\)
+                       (char-set #\-))
+                     cmene:
+                     "cfari")
+                   (nunjavni-char-set-*
+                     (char-set-union
+                       char-set:letter+digit
+                       (char-set #\_)
+                       (char-set #\\)
+                       (char-set #\-))
+                     cmene:
+                     "fanmo")
                    (lambda (porsi mapti namapti)
                      (canlu porsi mapti namapti))))))
            (selci-javni
@@ -377,22 +405,43 @@
                      (nunjavni-. cmene: "lerfu"))))))
            (klesi-selci
              (nunjavni-morji
-               (nunjavni-samselpla
-                 samselpla-klesi-selci
-                 (nunjavni-je
-                   (nunjavni-lerfu #\[)
-                   (nunjavni-+
+               (nunjavni-jonai
+                 (nunjavni-samselpla
+                   samselpla-klesi-selci-*
+                   (nunjavni-je
+                     (nunjavni-lerfu #\[)
+                     (nunjavni-+
+                       (lambda (porsi mapti namapti)
+                         (klesi-lerfu porsi mapti namapti))
+                       cmene:
+                       "klesi-lerfu")
+                     (nunjavni-valsi "]*")
                      (lambda (porsi mapti namapti)
-                       (klesi-lerfu porsi mapti namapti))
-                     cmene:
-                     "klesi-lerfu")
-                   (nunjavni-lerfu #\])
-                   (nunjavni-?
-                     (nunjavni-jonai (nunjavni-valsi "*") (nunjavni-valsi "+"))
-                     cmene:
-                     "repeat")
-                   (lambda (porsi mapti namapti)
-                     (canlu porsi mapti namapti))))))
+                       (canlu porsi mapti namapti))))
+                 (nunjavni-samselpla
+                   samselpla-klesi-selci-+
+                   (nunjavni-je
+                     (nunjavni-lerfu #\[)
+                     (nunjavni-+
+                       (lambda (porsi mapti namapti)
+                         (klesi-lerfu porsi mapti namapti))
+                       cmene:
+                       "klesi-lerfu")
+                     (nunjavni-valsi "]+")
+                     (lambda (porsi mapti namapti)
+                       (canlu porsi mapti namapti))))
+                 (nunjavni-samselpla
+                   samselpla-klesi-selci
+                   (nunjavni-je
+                     (nunjavni-lerfu #\[)
+                     (nunjavni-+
+                       (lambda (porsi mapti namapti)
+                         (klesi-lerfu porsi mapti namapti))
+                       cmene:
+                       "klesi-lerfu")
+                     (nunjavni-lerfu #\])
+                     (lambda (porsi mapti namapti)
+                       (canlu porsi mapti namapti)))))))
            (klesi-lerfu
              (nunjavni-morji
                (nunjavni-jonai
@@ -406,40 +455,90 @@
            (klesi-cmene
              (nunjavni-morji
                (nunjavni-jonai
-                 (nunjavni-valsi "[:alnum:]")
-                 (nunjavni-valsi "[:alpha:]")
-                 (nunjavni-valsi "[:ascii:]")
-                 (nunjavni-valsi "[:blank:]")
-                 (nunjavni-valsi "[:cntrl:]")
-                 (nunjavni-valsi "[:digit:]")
-                 (nunjavni-valsi "[:graph:]")
-                 (nunjavni-valsi "[:lower:]")
+                 (nunjavni-samselpla
+                   samselpla-alnum
+                   (nunjavni-valsi "[:alnum:]"))
+                 (nunjavni-samselpla
+                   samselpla-alpha
+                   (nunjavni-valsi "[:alpha:]"))
+                 (nunjavni-samselpla
+                   samselpla-ascii
+                   (nunjavni-valsi "[:ascii:]"))
+                 (nunjavni-samselpla
+                   samselpla-blank
+                   (nunjavni-valsi "[:blank:]"))
+                 (nunjavni-samselpla
+                   samselpla-cntrl
+                   (nunjavni-valsi "[:cntrl:]"))
+                 (nunjavni-samselpla
+                   samselpla-digit
+                   (nunjavni-valsi "[:digit:]"))
+                 (nunjavni-samselpla
+                   samselpla-graph
+                   (nunjavni-valsi "[:graph:]"))
+                 (nunjavni-samselpla
+                   samselpla-lower
+                   (nunjavni-valsi "[:lower:]"))
                  (nunjavni-samselpla
                    samselpla-odigit
                    (nunjavni-valsi "[:odigit:]"))
-                 (nunjavni-valsi "[:print:]")
-                 (nunjavni-valsi "[:punct:]")
-                 (nunjavni-valsi "[:space:]")
-                 (nunjavni-valsi "[:upper:]")
-                 (nunjavni-valsi "[:word:]")
-                 (nunjavni-valsi "[:xdigit:]")
-                 (nunjavni-valsi "[:^alnum:]")
-                 (nunjavni-valsi "[:^alpha:]")
-                 (nunjavni-valsi "[:^ascii:]")
-                 (nunjavni-valsi "[:^blank:]")
-                 (nunjavni-valsi "[:^cntrl:]")
-                 (nunjavni-valsi "[:^digit:]")
-                 (nunjavni-valsi "[:^graph:]")
-                 (nunjavni-valsi "[:^lower:]")
+                 (nunjavni-samselpla
+                   samselpla-print
+                   (nunjavni-valsi "[:print:]"))
+                 (nunjavni-samselpla
+                   samselpla-punct
+                   (nunjavni-valsi "[:punct:]"))
+                 (nunjavni-samselpla
+                   samselpla-space
+                   (nunjavni-valsi "[:space:]"))
+                 (nunjavni-samselpla
+                   samselpla-upper
+                   (nunjavni-valsi "[:upper:]"))
+                 (nunjavni-samselpla
+                   samselpla-xdigit
+                   (nunjavni-valsi "[:xdigit:]"))
+                 (nunjavni-samselpla
+                   samselpla-^alnum
+                   (nunjavni-valsi "[:^alnum:]"))
+                 (nunjavni-samselpla
+                   samselpla-^alpha
+                   (nunjavni-valsi "[:^alpha:]"))
+                 (nunjavni-samselpla
+                   samselpla-^ascii
+                   (nunjavni-valsi "[:^ascii:]"))
+                 (nunjavni-samselpla
+                   samselpla-^blank
+                   (nunjavni-valsi "[:^blank:]"))
+                 (nunjavni-samselpla
+                   samselpla-^cntrl
+                   (nunjavni-valsi "[:^cntrl:]"))
+                 (nunjavni-samselpla
+                   samselpla-^digit
+                   (nunjavni-valsi "[:^digit:]"))
+                 (nunjavni-samselpla
+                   samselpla-^graph
+                   (nunjavni-valsi "[:^graph:]"))
+                 (nunjavni-samselpla
+                   samselpla-^lower
+                   (nunjavni-valsi "[:^lower:]"))
                  (nunjavni-samselpla
                    samselpla-^odigit
                    (nunjavni-valsi "[:^odigit:]"))
-                 (nunjavni-valsi "[:^print:]")
-                 (nunjavni-valsi "[:^punct:]")
-                 (nunjavni-valsi "[:^space:]")
-                 (nunjavni-valsi "[:^upper:]")
-                 (nunjavni-valsi "[:^word:]")
-                 (nunjavni-valsi "[:^xdigit:]"))))
+                 (nunjavni-samselpla
+                   samselpla-^print
+                   (nunjavni-valsi "[:^print:]"))
+                 (nunjavni-samselpla
+                   samselpla-^punct
+                   (nunjavni-valsi "[:^punct:]"))
+                 (nunjavni-samselpla
+                   samselpla-^space
+                   (nunjavni-valsi "[:^space:]"))
+                 (nunjavni-samselpla
+                   samselpla-^upper
+                   (nunjavni-valsi "[:^upper:]"))
+                 (nunjavni-samselpla
+                   samselpla-^xdigit
+                   (nunjavni-valsi "[:^xdigit:]")))))
            (denpabu
              (nunjavni-morji
                (nunjavni-samselpla
