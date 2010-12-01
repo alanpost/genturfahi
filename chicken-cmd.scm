@@ -26,7 +26,7 @@
 (use genturfahi)
 
 (include "license.scm")
-(include "main.scm")
+(include "main-srfi-37.scm")
 
 (main)
 (exit (secuxna-exit-status))

@@ -7,7 +7,7 @@
                       "chicken-conf.scm"
                       "chicken-declare.scm"
                       "license.scm"
-                      "main.scm"
+                      "main-srfi-37.scm"
                       "genturfahi.meta"
                       "genturfahi.setup"
                       (dynld-name "genturfahi"))
