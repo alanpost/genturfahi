@@ -45,13 +45,13 @@
 
     (call-with-values
       (lambda () (unzip4 smuni))
-      (lambda (smuni-selci smuni-nunselci smuni set-cdr)
+      (lambda (smuni-selci smuni-nunselci smuni set)
         (if (not (null? smuni))
             `(let (,@smuni-selci)
                (let (,@smuni-nunselci)
                  (let (,@smuni)
                    (tolmohi-nunjavni)
-                   ,@set-cdr
+                   ,@set
                    ,(string->symbol (string-append selci "*")))))
             '())))))
 
