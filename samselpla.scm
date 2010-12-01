@@ -43,10 +43,17 @@
     ; reset the start production.
     (secuxna-start-production #f)
 
-    (if (not (null? smuni))
-        `(letrec (,@smuni)
-           ,(string->symbol selci))
-        '())))
+    (call-with-values
+      (lambda () (unzip4 smuni))
+      (lambda (smuni-selci smuni-nunselci smuni set-cdr)
+        (if (not (null? smuni))
+            `(let (,@smuni-selci)
+               (let (,@smuni-nunselci)
+                 (let (,@smuni)
+                   (tolmohi-nunjavni)
+                   ,@set-cdr
+                   ,(string->symbol (string-append selci "*")))))
+            '())))))
 
 ;; emit the non-terminal with it's rule.
 ;;
@@ -58,10 +65,38 @@
   (if (not (secuxna-start-production))
       (secuxna-start-production naselci))
 
-  `(,(string->symbol naselci)
-    ,(if (secuxna-memoize)
-         `(nunjavni-morji ,javni)
-         javni)))
+  ; we create three symbols, two of which, because of the grammar
+  ; rules, can't be created by the user.  (so there is no symbol
+  ; collision)
+  ;
+  ; the non-decorated symbol is used when this rule is referenced
+  ; in other rules.  The decorated symbol is the actual grammar
+  ; rule.
+  ;
+  (let ((symbol-nunselci (string->symbol naselci))
+        (symbol-selci    (string->symbol (string-append naselci "+")))
+        (symbol          (string->symbol (string-append naselci "*"))))
+
+          ; final binding
+    (list `(,symbol-selci '())
+
+          ; outer letrec (which stores references)
+          ;
+          `(,symbol-nunselci
+             (lambda (porsi mapti namapti)
+               (,symbol-selci porsi mapti namapti)))
+
+          ; inner let (which stores grammar rules)
+          ;
+          `(,symbol
+            ,(if (secuxna-memoize)
+                 `(nunjavni-morji ,javni)
+                 javni))
+
+          ; letrec body (which binds grammar rules to reference
+          ; variables)
+          ;
+          `(set! ,symbol-selci ,symbol))))
 
 
 (define (samselpla-naselci #!key cfari fanmo)
@@ -69,48 +104,48 @@
 
 (define (samselpla-je #!key samselpla rodajavni)
   (let* ((javni (if (null? (cdr rodajavni))
-                         (car rodajavni)
-                         `(nunjavni-je ,@rodajavni))))
+                           (car rodajavni)
+                           `(morji-nunjavni-je ,@rodajavni))))
     (if (equal? "" samselpla)
         javni
-        `(nunjavni-samselpla ,(string->symbol samselpla) ,javni))))
+        `(morji-nunjavni-samselpla ,(string->symbol samselpla) ,javni))))
 
 (define (samselpla-pajavni-cmene #!key cmene javni)
   (if (equal? "" cmene)
       javni
-      (if (eq? 'lambda (car javni))
-          `(nunjavni-cmene ,javni cmene: ,cmene)
+      (if (symbol? javni)
+          `(morji-nunjavni-cmene ,javni cmene: ,cmene)
           `(,@javni cmene: ,cmene))))
 
 (define (samselpla-jonai-je #!key je)
   je)
 
 (define (samselpla-jonai #!key cfari fanmo)
-  `(nunjavni-jonai ,cfari ,@fanmo))
+  `(morji-nunjavni-jonai ,cfari ,@fanmo))
 
 (define (samselpla-? #!key cmene javni)
   (if (equal? "" cmene)
-      `(nunjavni-? ,javni)
-      `(nunjavni-? ,javni cmene: ,cmene)))
+      `(morji-nunjavni-? ,javni)
+      `(morji-nunjavni-? ,javni cmene: ,cmene)))
 
 (define (samselpla-* #!key cmene javni)
   (if (equal? "" cmene)
-      `(nunjavni-* ,javni)
-      `(nunjavni-* ,javni cmene: ,cmene)))
+      `(morji-nunjavni-* ,javni)
+      `(morji-nunjavni-* ,javni cmene: ,cmene)))
 
 (define (samselpla-+ #!key cmene javni)
   (if (equal? "" cmene)
-      `(nunjavni-+ ,javni)
-      `(nunjavni-+ ,javni cmene: ,cmene)))
+      `(morji-nunjavni-+ ,javni)
+      `(morji-nunjavni-+ ,javni cmene: ,cmene)))
 
 (define (samselpla-& #!key javni)
-  `(nunjavni-& ,javni))
+  `(morji-nunjavni-& ,javni))
 
 (define (samselpla-fanmo)
-  `(nunjavni-fanmo))
+  `(morji-nunjavni-fanmo))
 
 (define (samselpla-! #!key javni)
-  `(nunjavni-! ,javni))
+  `(morji-nunjavni-! ,javni))
 
 (define (samselpla-cmene-sumti #!key cfari fanmo)
   `,(string-append (make-string 1 cfari) fanmo))
@@ -118,11 +153,10 @@
 ;; A naselci that appears on the right side of a definition.
 ;;
 (define (samselpla-selci-naselci #!key naselci)
-  `(lambda (porsi mapti namapti)
-     (,(string->symbol naselci) porsi mapti namapti)))
+  (string->symbol naselci))
 
 (define (samselpla-lerfu-selci #!key lerfu)
-  `(nunjavni-lerfu ,lerfu))
+  `(morji-nunjavni-lerfu ,lerfu))
 
 (define (samselpla-lerfu-space)
   #\space)
@@ -140,7 +174,7 @@
   #\tab)
 
 (define (samselpla-valsi-selci #!key valsi-lerfu)
-  `(nunjavni-valsi ,(apply string-append valsi-lerfu)))
+  `(morji-nunjavni-valsi ,(apply string-append valsi-lerfu)))
 
 (define (samselpla-valsi-selci-lerfu #!key lerfu)
   lerfu)
@@ -272,22 +306,22 @@
 
 (define (samselpla-klesi-selci-* #!key klesi-lerfu)
   (if (null? (cdr klesi-lerfu))
-      `(nunjavni-char-set-* ,(car klesi-lerfu))
-      `(nunjavni-char-set-* (char-set-union ,@klesi-lerfu))))
+      `(morji-nunjavni-char-set-* ,(car klesi-lerfu))
+      `(morji-nunjavni-char-set-* (char-set-union ,@klesi-lerfu))))
 
 (define (samselpla-klesi-selci-+ #!key klesi-lerfu)
   (if (null? (cdr klesi-lerfu))
-      `(nunjavni-char-set-+ ,(car klesi-lerfu))
-      `(nunjavni-char-set-+ (char-set-union ,@klesi-lerfu))))
+      `(morji-nunjavni-char-set-+ ,(car klesi-lerfu))
+      `(morji-nunjavni-char-set-+ (char-set-union ,@klesi-lerfu))))
 
 (define (samselpla-klesi-selci #!key klesi-lerfu)
   (if (null? (cdr klesi-lerfu))
-      `(nunjavni-char-set ,(car klesi-lerfu))
-      `(nunjavni-char-set (char-set-union ,@klesi-lerfu))))
+      `(morji-nunjavni-char-set ,(car klesi-lerfu))
+      `(morji-nunjavni-char-set (char-set-union ,@klesi-lerfu))))
 
 
 (define (samselpla-denpabu)
-  `(nunjavni-.))
+  `(morji-nunjavni-.))
 
 (define (samselpla-samselpla #!key rodalerfu)
   (apply string rodalerfu))

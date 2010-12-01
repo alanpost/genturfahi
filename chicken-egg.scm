@@ -89,6 +89,31 @@
    nunjavni-samselpla
    nunjavni-cmene
 
+   ; morji
+   ;
+   tolmohi-nunjavni
+   nunmorji-nunjavni
+
+   morji-nunjavni-lerfu
+   morji-nunjavni-.
+   morji-nunjavni-e
+   morji-nunjavni-fanmo
+   morji-nunjavni-valsi
+   morji-nunjavni-char-set-*
+   morji-nunjavni-char-set-+
+   morji-nunjavni-char-set
+   morji-nunjavni-*
+   morji-nunjavni-+
+   morji-nunjavni-?
+   morji-nunjavni-&
+   morji-nunjavni-!
+   morji-nunjavni-je
+   morji-nunjavni-jonai
+
+   morji-nunjavni-samselpla
+   morji-nunjavni-cmene
+
+
    ; nunvalsi
    ;
    venunjmina-nunvalsi
@@ -188,6 +213,7 @@
 (include "javni-valsi.scm")
 (include "secuxna.scm")
 (include "nunjavni.scm")
+(include "morji.scm")
 (include "nunvalsi.scm")
 (include "genturfahi.scm")
 (include "eval.scm")
