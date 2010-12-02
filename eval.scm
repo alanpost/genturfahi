@@ -26,47 +26,46 @@
 
 ;; extend the regular safe environment with genturfa'i parameters.
 ;;
+;; for the parameters that affect the parser generator, set the
+;; values immediately.  For parameters that apply to the parser
+;; return an expression that will be included in the output.
+;;
 (safe-environment-set!
   genturfahi-env
   'start-production
-  secuxna-start-production)
+  (lambda rodasumti (apply secuxna-start-production rodasumti) '()))
 
 (safe-environment-set!
   genturfahi-env
   'definition-name
-  secuxna-definition-name)
-
-(safe-environment-set!
-  genturfahi-env
-  'exit-status
-  secuxna-exit-status)
+  (lambda rodasumti (apply secuxna-definition-name rodasumti) '()))
 
 (safe-environment-set!
   genturfahi-env
   'debug
-  secuxna-debug)
+  (lambda rodasumti (apply secuxna-debug rodasumti) '()))
 
 (safe-environment-set!
   genturfahi-env
   'profile
-  secuxna-profile)
+  (lambda rodasumti (apply secuxna-profile rodasumti) '()))
 
 (safe-environment-set!
   genturfahi-env
   'memoize
-  secuxna-memoize)
+  (lambda rodasumti (apply secuxna-memoize rodasumti) '()))
 
 (safe-environment-set!
   genturfahi-env
   'sentinel
-  secuxna-sentinel)
+  (lambda rodasumti `(secuxna-sentinel ,@rodasumti)))
 
 (safe-environment-set!
   genturfahi-env
   'empty-string
-  secuxna-empty-string)
+  (lambda rodasumti `(secuxna-empty-string ,@rodasumti)))
 
 (safe-environment-set!
   genturfahi-env
   'nonmatch-token
-  secuxna-nonmatch-token)
+  (lambda rodasumti `(secuxna-nonmatch-token ,@rodasumti)))

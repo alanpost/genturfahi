@@ -126,7 +126,6 @@
 
 
    ; samselpla
-   samselpla-gerna
    samselpla-smuni
    samselpla-naselci
    samselpla-je

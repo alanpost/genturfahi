@@ -121,7 +121,7 @@
                   samselpla-cfari
                   (morji-nunjavni-je
                     canlu
-                    (morji-nunjavni-* cfari-samselpla)
+                    (morji-nunjavni-* cfari-samselpla cmene: "samselpla")
                     canlu
                     (morji-nunjavni-cmene gerna cmene: "gerna")
                     FAhO))))
@@ -142,11 +142,7 @@
                       "rodalerfu")
                     (morji-nunjavni-lerfu #\})
                     canlu))))
-            (gerna*
-              (nunjavni-morji
-                (morji-nunjavni-samselpla
-                  samselpla-gerna
-                  (morji-nunjavni-* smuni cmene: "smuni"))))
+            (gerna* (nunjavni-morji (morji-nunjavni-* smuni)))
             (smuni*
               (nunjavni-morji
                 (morji-nunjavni-samselpla

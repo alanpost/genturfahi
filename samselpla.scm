@@ -24,27 +24,15 @@
 ;; ignore the FAhO tag in the file, and
 ;; just return the header code and grammar.
 ;;
-(define (samselpla-cfari #!key gerna)
-  gerna)
-;      `(nunjavni-samselpla
-;         (lambda ()
-;           ,@(map (lambda (samselpla) (call-with-input-string samselpla read))
-;                  rodasamselpla))
-;         ,gerna)))
-
-(define (samselpla-cfari-samselpla #!key rodalerfu)
-  (let* ((valsi     (apply string rodalerfu))
-         (samselpla (call-with-input-string valsi read)))
-    (safe-eval samselpla environment: genturfahi-env)))
-
-(define (samselpla-gerna #!key smuni)
-  (let ((selci (secuxna-start-production)))
+(define (samselpla-cfari #!key gerna (samselpla '()))
+  (let ((selci (secuxna-start-production))
+        (samselpla (remove null? samselpla)))
 
     ; reset the start production.
     (secuxna-start-production #f)
 
     (call-with-values
-      (lambda () (unzip4 smuni))
+      (lambda () (unzip4 gerna))
       (lambda (smuni-selci smuni-nunselci smuni set)
         (if (not (null? smuni))
             `(let (,@smuni-selci)
@@ -52,8 +40,24 @@
                  (let (,@smuni)
                    (tolmohi-nunjavni)
                    ,@set
-                   ,(string->symbol (string-append selci "*")))))
+                   ,(if (null? samselpla)
+                        (string->symbol (string-append selci "*"))
+                        `(lambda (porsi mapti namapti)
+                           ,@samselpla
+                           (,(string->symbol (string-append selci "*"))
+                             porsi
+                             mapti
+                             namapti))))))
             '())))))
+
+(define (samselpla-cfari-samselpla #!key rodalerfu)
+  (let* ((valsi     (apply string rodalerfu))
+         (samselpla (call-with-input-string valsi read)))
+    ; we evaluate every for before the rest of the code executes.
+    ; those forms that apply to the result parser are returned for
+    ; inclusion in the output, and those that apply to parser
+    ; generator are executed immediately.
+    (safe-eval samselpla environment: genturfahi-env)))
 
 ;; emit the non-terminal with it's rule.
 ;;
