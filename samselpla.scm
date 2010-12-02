@@ -32,22 +32,21 @@
     (secuxna-start-production #f)
 
     (call-with-values
-      (lambda () (unzip4 gerna))
-      (lambda (smuni-selci smuni-nunselci smuni set)
+      (lambda () (unzip2 gerna))
+      (lambda (smuni-nunselci smuni)
         (if (not (null? smuni))
-            `(let (,@smuni-selci)
-               (let (,@smuni-nunselci)
-                 (let (,@smuni)
-                   (tolmohi-nunjavni)
-                   ,@set
-                   ,(if (null? samselpla)
-                        (string->symbol (string-append selci "*"))
-                        `(lambda (porsi mapti namapti)
-                           ,@samselpla
-                           (,(string->symbol (string-append selci "*"))
-                             porsi
-                             mapti
-                             namapti))))))
+            `(let ()
+               ,@smuni-nunselci
+               ,@smuni
+               (tolmohi-nunjavni)
+               ,(if (null? samselpla)
+                    (string->symbol (string-append selci "*"))
+                    `(lambda (porsi mapti namapti)
+                       ,@samselpla
+                       (,(string->symbol (string-append selci "*"))
+                         porsi
+                         mapti
+                         namapti))))
             '())))))
 
 (define (samselpla-cfari-samselpla #!key rodalerfu)
@@ -78,29 +77,19 @@
   ; rule.
   ;
   (let ((symbol-nunselci (string->symbol naselci))
-        (symbol-selci    (string->symbol (string-append naselci "+")))
         (symbol          (string->symbol (string-append naselci "*"))))
-
-          ; final binding
-    (list `(,symbol-selci '())
 
           ; outer letrec (which stores references)
           ;
-          `(,symbol-nunselci
-             (lambda (porsi mapti namapti)
-               (,symbol-selci porsi mapti namapti)))
+    (list `(define (,symbol-nunselci porsi mapti namapti)
+             (,symbol porsi mapti namapti))
 
           ; inner let (which stores grammar rules)
           ;
-          `(,symbol
+          `(define ,symbol
             ,(if (secuxna-memoize)
                  `(nunjavni-morji ,javni)
-                 javni))
-
-          ; letrec body (which binds grammar rules to reference
-          ; variables)
-          ;
-          `(set! ,symbol-selci ,symbol))))
+                 javni)))))
 
 
 (define (samselpla-naselci #!key cfari fanmo)
