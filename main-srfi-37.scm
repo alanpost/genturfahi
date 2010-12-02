@@ -33,12 +33,15 @@
   (error (format "unrecognized option \"~a\"" name)))
 
 (define (args name . seeds)
-  (let ((jalge (call-with-input-file name genturfahi-peg))
-        (tamgau (string->symbol (secuxna-define-name))))
+  (let ((jalge    (call-with-input-file name genturfahi-peg))
+        (tamgau   (string->symbol (secuxna-define-name)))
+        (toplevel (secuxna-define-toplevel)))
     (if (not jalge)
         (secuxna-exit-status 1))
     (display genturfahi-license)
-    (pretty-print `(define ,tamgau ,jalge))))
+    (if toplevel
+        (for-each pretty-print jalge)
+        (pretty-print `(define ,tamgau ,jalge)))))
 
 (define (main)
   (args-fold (cdr (argv)) options usage args))

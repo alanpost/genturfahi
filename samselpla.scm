@@ -25,7 +25,9 @@
 ;; just return the header code and grammar.
 ;;
 (define (samselpla-cfari #!key gerna)
-  (let ((selci     (secuxna-start-production)))
+  (let ((selci-cmene (secuxna-start-production))
+        (tamgau      (string->symbol (secuxna-define-name)))
+        (toplevel    (secuxna-define-toplevel)))
 
     ; reset the start production.
     (secuxna-start-production #f)
@@ -33,13 +35,17 @@
     (call-with-values
       (lambda () (unzip2 gerna))
       (lambda (smuni-nunselci smuni)
+        (let ((nunselci-cmene
+              (string->symbol (string-append selci-cmene "*"))))
         (if (not (null? smuni))
-            `(let ()
+            `(,@(if toplevel '() '(let ()))
               ,@smuni-nunselci
               ,@smuni
               (tolmohi-nunjavni)
-              ,(string->symbol (string-append selci "*")))
-            '())))))
+              ,(if toplevel
+                   `(define ,tamgau ,nunselci-cmene)
+                   nunselci-cmene))
+            '()))))))
 
 (define (samselpla-cfari-samselpla #!key rodalerfu)
   (let* ((valsi     (apply string rodalerfu))

@@ -27,6 +27,13 @@
 ;;
 (define secuxna-define-name  (make-parameter "gerna"))
 
+;; Define all non-terminal tokens as top-level variables.
+;;
+;; By default, all non-terminal tokens will be kept inside
+;; a let.
+;;
+(define secuxna-define-toplevel (make-parameter #f))
+
 ;; the exit status of the program
 ;;
 (define secuxna-exit-status      (make-parameter 0))

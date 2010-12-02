@@ -42,6 +42,11 @@
 
 (safe-environment-set!
   genturfahi-env
+  'define-toplevel
+  secuxna-define-toplevel)
+
+(safe-environment-set!
+  genturfahi-env
   'debug
   secuxna-debug)
 
