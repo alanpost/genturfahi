@@ -28,8 +28,8 @@
 ;; The name of the symbol the parser generator
 ;; rules will be bound to in the output file.
 ;;
-;{(definition-name "gerna")}
-{(definition-name "genturfahi-peg-gerna")}
+;{(define-name "gerna")}
+{(define-name "genturfahi-peg-gerna")}
 
 ;; Enable debugging of the paser.
 ;;

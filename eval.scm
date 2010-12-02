@@ -37,8 +37,8 @@
 
 (safe-environment-set!
   genturfahi-env
-  'definition-name
-  (lambda rodasumti (apply secuxna-definition-name rodasumti) '()))
+  'define-name
+  (lambda rodasumti (apply secuxna-define-name rodasumti) '()))
 
 (safe-environment-set!
   genturfahi-env

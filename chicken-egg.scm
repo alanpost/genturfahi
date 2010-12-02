@@ -164,7 +164,7 @@
 
    ; secuxna
    secuxna-start-production
-   secuxna-definition-name
+   secuxna-define-name
    secuxna-exit-status
    secuxna-debug
    secuxna-profile

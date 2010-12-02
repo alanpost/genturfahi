@@ -34,7 +34,7 @@
 
 (define (args name . seeds)
   (let ((jalge (call-with-input-file name genturfahi-peg))
-        (tamgau (string->symbol (secuxna-definition-name))))
+        (tamgau (string->symbol (secuxna-define-name))))
     (if (not jalge)
         (secuxna-exit-status 1))
     (display genturfahi-license)

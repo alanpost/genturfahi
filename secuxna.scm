@@ -25,7 +25,7 @@
 
 ;; The name of the variable used to define the parser.
 ;;
-(define secuxna-definition-name  (make-parameter "gerna"))
+(define secuxna-define-name  (make-parameter "gerna"))
 
 ;; the exit status of the program
 ;;
