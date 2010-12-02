@@ -47,9 +47,9 @@
 ;; empty-string: parse the empty string, which always succeeds without
 ;;               advancing input.
 ;;
-(define (nunjavni-e #!key cmene)
+(define (nunjavni-e #!key cmene (empty-string ""))
   (define (javni-e porsi mapti namapti)
-    (mapti porsi (lambda () (make-javni-valsi cmene (secuxna-empty-string)))))
+    (mapti porsi (lambda () (make-javni-valsi cmene empty-string))))
   javni-e)
 
 
@@ -58,10 +58,10 @@
 ;; Should this rule return the sentinel character, or should there
 ;; be a separate option for the value to return at the end of the file?
 ;;
-(define (nunjavni-fanmo #!key cmene)
+(define (nunjavni-fanmo #!key cmene (sentinel #\nul))
   (define (javni-fanmo porsi mapti namapti)
     (if (lerfu-porsi-fanmo? porsi)
-        (mapti porsi (lambda () (make-javni-valsi cmene (secuxna-sentinel))))
+        (mapti porsi (lambda () (make-javni-valsi cmene sentinel)))
         (namapti porsi)))
   javni-fanmo)
 
@@ -188,7 +188,7 @@
 
 ;; optional: parse an optional javni out of the |lerfu-porsi|.
 ;;
-(define (nunjavni-? javni #!key cmene)
+(define (nunjavni-? javni #!key cmene (empty-string ""))
   (let ((vejmina (venunjmina-nunvalsi cmene)))
     (define (javni-? porsi mapti ignore-namapti)
 
@@ -201,7 +201,7 @@
         ; on failure, so we can use it.
         ;
         (mapti porsi
-               (lambda () (make-javni-valsi cmene (secuxna-empty-string)))))
+               (lambda () (make-javni-valsi cmene empty-string))))
 
       (javni porsi mapti-? namapti-?))
     javni-?))
@@ -209,10 +209,10 @@
 
 ;; and-predicate: succeed or fail without consuming input.
 ;;
-(define (nunjavni-& javni)
+(define (nunjavni-& javni #!key (empty-string ""))
   (define (javni-& porsi mapti namapti)
     (define (mapti-& ignore-porsi ignore-nunvalsi)
-      (mapti porsi (lambda () (make-javni-valsi #f (secuxna-empty-string)))))
+      (mapti porsi (lambda () (make-javni-valsi #f empty-string))))
 
     (define (namapti-& ignore-porsi)
       (namapti porsi))
@@ -224,13 +224,13 @@
 ;; not-predicate: require that javni is not able to be parsed from
 ;;                the |lerfu-porsi|.
 ;;
-(define (nunjavni-! javni)
+(define (nunjavni-! javni #!key (empty-string ""))
   (define (javni-! porsi mapti namapti)
     (define (mapti-! ignore-porsi nunvalsi)
       (namapti porsi))
 
     (define (namapti-! ignore-porsi)
-      (mapti porsi (lambda () (make-javni-valsi #f (secuxna-empty-string)))))
+      (mapti porsi (lambda () (make-javni-valsi #f empty-string))))
 
     (javni porsi mapti-! namapti-!))
   javni-!)

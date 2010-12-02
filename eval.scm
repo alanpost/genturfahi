@@ -33,39 +33,39 @@
 (safe-environment-set!
   genturfahi-env
   'start-production
-  (lambda rodasumti (apply secuxna-start-production rodasumti) '()))
+  secuxna-start-production)
 
 (safe-environment-set!
   genturfahi-env
   'define-name
-  (lambda rodasumti (apply secuxna-define-name rodasumti) '()))
+  secuxna-define-name)
 
 (safe-environment-set!
   genturfahi-env
   'debug
-  (lambda rodasumti (apply secuxna-debug rodasumti) '()))
+  secuxna-debug)
 
 (safe-environment-set!
   genturfahi-env
   'profile
-  (lambda rodasumti (apply secuxna-profile rodasumti) '()))
+  secuxna-profile)
 
 (safe-environment-set!
   genturfahi-env
   'memoize
-  (lambda rodasumti (apply secuxna-memoize rodasumti) '()))
+  secuxna-memoize)
 
 (safe-environment-set!
   genturfahi-env
   'sentinel
-  (lambda rodasumti `(secuxna-sentinel ,@rodasumti)))
+  secuxna-sentinel)
 
 (safe-environment-set!
   genturfahi-env
   'empty-string
-  (lambda rodasumti `(secuxna-empty-string ,@rodasumti)))
+  secuxna-empty-string)
 
 (safe-environment-set!
   genturfahi-env
   'nonmatch-token
-  (lambda rodasumti `(secuxna-nonmatch-token ,@rodasumti)))
+  secuxna-nonmatch-token)

@@ -24,9 +24,8 @@
 ;; ignore the FAhO tag in the file, and
 ;; just return the header code and grammar.
 ;;
-(define (samselpla-cfari #!key gerna (samselpla '()))
-  (let ((selci (secuxna-start-production))
-        (samselpla (remove null? samselpla)))
+(define (samselpla-cfari #!key gerna)
+  (let ((selci     (secuxna-start-production)))
 
     ; reset the start production.
     (secuxna-start-production #f)
@@ -36,26 +35,16 @@
       (lambda (smuni-nunselci smuni)
         (if (not (null? smuni))
             `(let ()
-               ,@smuni-nunselci
-               ,@smuni
-               (tolmohi-nunjavni)
-               ,(if (null? samselpla)
-                    (string->symbol (string-append selci "*"))
-                    `(lambda (porsi mapti namapti)
-                       ,@samselpla
-                       (,(string->symbol (string-append selci "*"))
-                         porsi
-                         mapti
-                         namapti))))
+              ,@smuni-nunselci
+              ,@smuni
+              (tolmohi-nunjavni)
+              ,(string->symbol (string-append selci "*")))
             '())))))
 
 (define (samselpla-cfari-samselpla #!key rodalerfu)
   (let* ((valsi     (apply string rodalerfu))
          (samselpla (call-with-input-string valsi read)))
-    ; we evaluate every for before the rest of the code executes.
-    ; those forms that apply to the result parser are returned for
-    ; inclusion in the output, and those that apply to parser
-    ; generator are executed immediately.
+    ; evaluate parameters before compiling the code.
     (safe-eval samselpla environment: genturfahi-env)))
 
 ;; emit the non-terminal with it's rule.
@@ -117,28 +106,40 @@
   `(morji-nunjavni-jonai ,cfari ,@fanmo))
 
 (define (samselpla-? #!key cmene javni)
-  (if (equal? "" cmene)
-      `(morji-nunjavni-? ,javni)
-      `(morji-nunjavni-? ,javni cmene: ,cmene)))
+  (let ((empty-string (secuxna-empty-string)))
+    `(morji-nunjavni-? ,javni
+                       ,@(if (equal? "" cmene)
+                             '()
+                             `(cmene: ,cmene))
+                       ,@(if (equal? "" empty-string)
+                             '()
+                             `(empty-string: ,empty-string)))))
 
 (define (samselpla-* #!key cmene javni)
-  (if (equal? "" cmene)
-      `(morji-nunjavni-* ,javni)
-      `(morji-nunjavni-* ,javni cmene: ,cmene)))
+  `(morji-nunjavni-* ,javni ,@(if (equal? "" cmene) '() `(cmene: ,cmene))))
 
 (define (samselpla-+ #!key cmene javni)
-  (if (equal? "" cmene)
-      `(morji-nunjavni-+ ,javni)
-      `(morji-nunjavni-+ ,javni cmene: ,cmene)))
+  `(morji-nunjavni-+ ,javni ,@(if (equal? "" cmene) '() `(cmene: ,cmene))))
 
 (define (samselpla-& #!key javni)
-  `(morji-nunjavni-& ,javni))
+  (let ((empty-string (secuxna-empty-string)))
+    `(morji-nunjavni-& ,javni
+                       ,@(if (equal? "" empty-string)
+                             '()
+                             `(empty-string: ,empty-string)))))
 
 (define (samselpla-fanmo)
-  `(morji-nunjavni-fanmo))
+  (let ((sentinel (secuxna-sentinel)))
+    `(morji-nunjavni-fanmo ,@(if (eq? #\nul sentinel)
+                                 '()
+                                 `(sentinel: ,sentinel)))))
 
 (define (samselpla-! #!key javni)
-  `(morji-nunjavni-! ,javni))
+  (let ((empty-string (secuxna-empty-string)))
+    `(morji-nunjavni-! ,javni
+                       ,@(if (equal? "" empty-string)
+                             '()
+                             `(empty-string: ,empty-string)))))
 
 (define (samselpla-cmene-sumti #!key cfari fanmo)
   `,(string-append (make-string 1 cfari) fanmo))
@@ -237,60 +238,60 @@
 
 (define (samselpla-^alnum)
   `(char-set-xor (char-set-complement char-set:letter+digit)
-                 (char-set (secuxna-sentinel))))
+                 (char-set ,(secuxna-sentinel))))
 
 (define (samselpla-^alpha)
   `(char-set-xor (char-set-complement char-set:letter)
-                 (char-set (secuxna-sentinel))))
+                 (char-set ,(secuxna-sentinel))))
 
 (define (samselpla-^ascii)
   `(char-set-xor (char-set-complement char-set:ascii)
-                 (char-set (secuxna-sentinel))))
+                 (char-set ,(secuxna-sentinel))))
 
 (define (samselpla-^blank)
   `(char-set-xor (char-set-complement char-set:blank)
-                 (char-set (secuxna-sentinel))))
+                 (char-set ,(secuxna-sentinel))))
 
 (define (samselpla-^cntrl)
   `(char-set-xor (char-set-complement char-set:iso-control)
-                 (char-set (secuxna-sentinel))))
+                 (char-set ,(secuxna-sentinel))))
 
 (define (samselpla-^digit)
   `(char-set-xor (char-set-complement char-set:digit)
-                 (char-set (secuxna-sentinel))))
+                 (char-set ,(secuxna-sentinel))))
 
 (define (samselpla-^graph)
   `(char-set-xor (char-set-complement char-set:graphic)
-                 (char-set (secuxna-sentinel))))
+                 (char-set ,(secuxna-sentinel))))
 
 (define (samselpla-^lower)
   `(char-set-xor (char-set-complement char-set:lower-case)
-                 (char-set (secuxna-sentinel))))
+                 (char-set ,(secuxna-sentinel))))
 
 (define (samselpla-^odigit)
   `(char-set-xor (char-set-complement
-                   (char-set #\0 #\1 #\2 #\3 #\4 #\5 #\6 #\7))
-                 (char-set (secuxna-sentinel))))
+                 (char-set #\0 #\1 #\2 #\3 #\4 #\5 #\6 #\7))
+                 (char-set ,(secuxna-sentinel))))
 
 (define (samselpla-^print)
   `(char-set-xor (char-set-complement char-set:printing)
-                 (char-set (secuxna-sentinel))))
+                 (char-set ,(secuxna-sentinel))))
 
 (define (samselpla-^punct)
   `(char-set-xor (char-set-complement char-set:punctuation)
-                 (char-set (secuxna-sentinel))))
+                 (char-set ,(secuxna-sentinel))))
 
 (define (samselpla-^space)
   `(char-set-xor (char-set-complement char-set:whitespace)
-                 (char-set (secuxna-sentinel))))
+                 (char-set ,(secuxna-sentinel))))
 
 (define (samselpla-^upper)
   `(char-set-xor (char-set-complement char-set:upper-case)
-                 (char-set (secuxna-sentinel))))
+                 (char-set ,(secuxna-sentinel))))
 
 (define (samselpla-^xdigit)
   `(char-set-xor (char-set-complement char-set:hex-digit)
-                 (char-set (secuxna-sentinel))))
+                 (char-set ,(secuxna-sentinel))))
 
 
 (define (samselpla-klesi-lerfu #!key klesi-lerfu)

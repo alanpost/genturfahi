@@ -77,7 +77,7 @@
           samselpla-cfari
           (morji-nunjavni-je
             canlu
-            (morji-nunjavni-* cfari-samselpla cmene: "samselpla")
+            (morji-nunjavni-* cfari-samselpla)
             canlu
             (morji-nunjavni-cmene gerna cmene: "gerna")
             FAhO))))

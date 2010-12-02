@@ -61,7 +61,7 @@
 ;{(nonmatch-token #f)}
 
 cfari           <- canlu
-                   #:samselpla cfari-samselpla*
+                   cfari-samselpla*
                    canlu
                    #:gerna gerna
                    FAhO                             {samselpla-cfari}
