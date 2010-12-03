@@ -4,25 +4,43 @@ Backlog
 Sprint Backlog
 --------------
 
- * [open] detect runtime options empty-string, sentinel, &c and
-          enabled them for runtime code.
+ * [open] gensym non-terminal names to avoid collision when
+          define-toplevel is set.
+ * [open] Update wiki documentation to match current code.
 
 
 Product Backlog
 ---------------
 
- * [] Optimize compiler settings based on performance test.
- * [] Performance testing on code.
- * [] Write PEG parser application manpage. 
+Release 1.1:
+
+ * [] Port to a second Scheme implementation. 
+ * [] Ignore & and ! rather than returning the empty string.  This
+      requires support in je and jonai as well.
  * [] Write tests for PEG file parser.
- * [] extend the regular expression test to test all character
+ * [] extend the character class test to test all character
       classes.
+ * [] Implement left recursion.
+
+Release 1.0:
+
  * [] utf8 testing and performance improvement.  Either remove utf8
       or make string-ref O(1).
- * [] use srfi-14/iset for character class comparison, removing
-      the dependency on irregex code.
- * [] Compile the expression '()' as the empty string.
- * [] Implement left recursion.
+ * [] Performance testing and optimization:
+       + which (declare ...) options lead to performance improvements?
+       + should the input buffer be a string or a list of characters?
+       + should I use a hash or assoc list for memoization and
+         symbol generation?
+       + Is a record-type or cons faster?
+       + Inline input buffer access routines.
+ * [] Write PEG parser application manpage. 
+ * [done] Permit multiple non-terminals to have an external
+          definition
+ * [done] Compile the expression '()' as the empty string.
+ * [done] detect runtime options empty-string, sentinel, &c and
+          enabled them for runtime code.
+ * [done] use srfi-14/iset for character class comparison, removing
+          the dependency on irregex code.
  * [done] implement secuxna module, global options for the parse.
  * [done] Create a PEG file parser application.
  * [wont] Create a wrapper to export English translations of the API
