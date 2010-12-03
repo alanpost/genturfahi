@@ -226,6 +226,7 @@ samselpla       <- #\{
                    canlu                             {samselpla-samselpla}
 
 girzu-javni     <- #\( canlu #:javni javni #\) canlu {samselpla-girzu-javni}
+                 / "()" canlu                        {samselpla-empty-string}
 
 canlu           <- (canlubu / totoi)*                {samselpla-canlu}
 

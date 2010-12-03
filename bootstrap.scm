@@ -493,14 +493,18 @@
             canlu))))
     (define girzu-javni*
       (nunjavni-morji
-        (morji-nunjavni-samselpla
-          samselpla-girzu-javni
-          (morji-nunjavni-je
-            (morji-nunjavni-lerfu #\()
-            canlu
-            (morji-nunjavni-cmene javni cmene: "javni")
-            (morji-nunjavni-lerfu #\))
-            canlu))))
+        (morji-nunjavni-jonai
+          (morji-nunjavni-samselpla
+            samselpla-girzu-javni
+            (morji-nunjavni-je
+              (morji-nunjavni-lerfu #\()
+              canlu
+              (morji-nunjavni-cmene javni cmene: "javni")
+              (morji-nunjavni-lerfu #\))
+              canlu))
+          (morji-nunjavni-samselpla
+            samselpla-empty-string
+            (morji-nunjavni-je (morji-nunjavni-valsi "()") canlu)))))
     (define canlu*
       (nunjavni-morji
         (morji-nunjavni-samselpla

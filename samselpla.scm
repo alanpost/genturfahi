@@ -332,6 +332,12 @@
 (define (samselpla-girzu-javni #!key javni)
   javni)
 
+(define (samselpla-empty-string)
+  (let ((empty-string (secuxna-empty-string)))
+    `(morji-nunjavni-e ,@(if (equal? "" empty-string)
+                             '()
+                             `(empty-string: ,empty-string)))))
+
 ;; ignore comments and space
 ;;
 (define (samselpla-canlu)
