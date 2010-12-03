@@ -21,6 +21,34 @@
 ;;; code for PEG parser.
 ;;;
 
+;; We gensym all non-terminal names in order to avoid name
+;; collisions.  This is particularly important if
+;; |define-toplevel| is #t.
+;;
+(define samselpla-hash-table  (make-hash-table string=?))
+(define samselpla-hash-table* (make-hash-table string=?))
+
+(define (samselpla-cmene->symbol cmene)
+  (hash-table-ref samselpla-hash-table
+                  cmene
+                  (lambda ()
+                    (let ((symbol (gensym (string->symbol cmene))))
+                      (hash-table-set! samselpla-hash-table
+                                       cmene
+                                       symbol)
+                      symbol))))
+
+(define (samselpla-cmene->symbol* cmene)
+  (hash-table-ref samselpla-hash-table*
+                  cmene
+                  (lambda ()
+                    (let ((symbol (gensym (string->symbol cmene))))
+                      (hash-table-set! samselpla-hash-table*
+                                       cmene
+                                       symbol)
+                      symbol))))
+
+
 ;; ignore the FAhO tag in the file, and
 ;; just return the header code and grammar.
 ;;
@@ -55,19 +83,19 @@
               ,@smuni
               (tolmohi-nunjavni)
               ,@(if (list? rodatamgau)
+
                     (let ((rodatamgau
-                            (map string->symbol rodatamgau))
+                            (map samselpla-cmene->symbol  rodatamgau))
                           (nunselci-cmene
-                            (map (lambda (cmene)
-                                   (string->symbol (string-append cmene "*")))
-                                 selci-cmene)))
+                            (map samselpla-cmene->symbol* selci-cmene)))
                       (if toplevel
                           (suhorecmene-e-toplevel rodatamgau nunselci-cmene)
                           (suhorecmene-enai-toplevel nunselci-cmene)))
+
                     (let ((rodatamgau
-                            (string->symbol rodatamgau))
+                            (samselpla-cmene->symbol  rodatamgau))
                           (nunselci-cmene
-                            (string->symbol (string-append selci-cmene "*"))))
+                            (samselpla-cmene->symbol* selci-cmene)))
                       (if toplevel
                           (pacmene-e-toplevel rodatamgau nunselci-cmene)
                           (pacmene-enai-toplevel nunselci-cmene)))))
@@ -97,8 +125,8 @@
   ; in other rules.  The decorated symbol is the actual grammar
   ; rule.
   ;
-  (let ((symbol-nunselci (string->symbol naselci))
-        (symbol          (string->symbol (string-append naselci "*"))))
+  (let ((symbol-nunselci (samselpla-cmene->symbol  naselci))
+        (symbol          (samselpla-cmene->symbol* naselci)))
 
           ; outer letrec (which stores references)
           ;
@@ -179,7 +207,7 @@
 ;; A naselci that appears on the right side of a definition.
 ;;
 (define (samselpla-selci-naselci #!key naselci)
-  (string->symbol naselci))
+  (samselpla-cmene->symbol naselci))
 
 (define (samselpla-lerfu-selci #!key lerfu)
   `(morji-nunjavni-lerfu ,lerfu))

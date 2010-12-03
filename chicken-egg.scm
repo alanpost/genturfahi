@@ -126,6 +126,12 @@
 
 
    ; samselpla
+   samselpla-hash-table
+   samselpla-hash-table*
+
+   samselpla-cmene->symbol
+   samselpla-cmene->symbol*
+
    samselpla-smuni
    samselpla-naselci
    samselpla-je
@@ -189,6 +195,7 @@
 ;(require-extension srfi-28)        ; built-in
 ;(require-extension srfi-39)        ; built-in
 ;(require-extension srfi-61)        ; built-in
+(require-extension srfi-69)
 (require-extension extras)
 (require-extension ports)
 (require-extension data-structures)
@@ -201,7 +208,8 @@
 (import srfi-14)         ; character set library
 ;(import srfi-28)         ; basic format strings
 ;(import srfi-39)         ; parameter objects
-;(import srfi-69)         ; A more general cond clause
+;(import srfi-61)         ; A more general cond clause
+(import srfi-69)         ; basic hash tables
 (import extras)          ; format, pretty-print
 (import ports)           ; Chicken Scheme srfi-6 and port extensions
 (import data-structures) ; flatten
