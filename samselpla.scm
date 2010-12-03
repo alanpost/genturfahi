@@ -25,27 +25,53 @@
 ;; just return the header code and grammar.
 ;;
 (define (samselpla-cfari #!key gerna)
-  (let ((selci-cmene (secuxna-start-production))
-        (tamgau      (string->symbol (secuxna-define-name)))
-        (toplevel    (secuxna-define-toplevel)))
+  (call-with-values
+    (lambda () (unzip2 gerna))
+    (lambda (smuni-nunselci smuni)
+      (let ((selci-cmene (secuxna-start-production))
+            (rodatamgau  (secuxna-define-name))
+            (toplevel    (secuxna-define-toplevel)))
 
-    ; reset the start production.
-    (secuxna-start-production #f)
+        (define (suhorecmene-e-toplevel tamgau nunselci-cmene)
+          (map (lambda (tamgau cmene)
+                  `(define ,tamgau ,cmene))
+               tamgau nunselci-cmene))
 
-    (call-with-values
-      (lambda () (unzip2 gerna))
-      (lambda (smuni-nunselci smuni)
-        (let ((nunselci-cmene
-              (string->symbol (string-append selci-cmene "*"))))
+        (define (suhorecmene-enai-toplevel nunselci-cmene)
+          `((values ,@nunselci-cmene)))
+
+        (define (pacmene-e-toplevel tamgau nunselci-cmene)
+          `((define ,tamgau ,nunselci-cmene)))
+
+        (define (pacmene-enai-toplevel nunselci-cmene)
+          `(,nunselci-cmene))
+
+        ; reset the start production.
+        (secuxna-start-production #f)
+
         (if (not (null? smuni))
             `(,@(if toplevel '() '(let ()))
               ,@smuni-nunselci
               ,@smuni
               (tolmohi-nunjavni)
-              ,(if toplevel
-                   `(define ,tamgau ,nunselci-cmene)
-                   nunselci-cmene))
-            '()))))))
+              ,@(if (list? rodatamgau)
+                    (let ((rodatamgau
+                            (map string->symbol rodatamgau))
+                          (nunselci-cmene
+                            (map (lambda (cmene)
+                                   (string->symbol (string-append cmene "*")))
+                                 selci-cmene)))
+                      (if toplevel
+                          (suhorecmene-e-toplevel rodatamgau nunselci-cmene)
+                          (suhorecmene-enai-toplevel nunselci-cmene)))
+                    (let ((rodatamgau
+                            (string->symbol rodatamgau))
+                          (nunselci-cmene
+                            (string->symbol (string-append selci-cmene "*"))))
+                      (if toplevel
+                          (pacmene-e-toplevel rodatamgau nunselci-cmene)
+                          (pacmene-enai-toplevel nunselci-cmene)))))
+            '())))))
 
 (define (samselpla-cfari-samselpla #!key rodalerfu)
   (let* ((valsi     (apply string rodalerfu))
