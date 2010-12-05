@@ -28,7 +28,7 @@
 (define-values (tolmohi-nunjavni nunmorji-nunjavni)
   (let ((rodamorji '()))
     (values
-      ;; delete the memoization cache.  This is called after
+      ;; clear the memoization cache.  This is called after
       ;; constructing the parser to free up memory.
       ;;
       (lambda ()
@@ -41,36 +41,21 @@
       ;; memoization routine.
       ;;
       (lambda (nunjavni)
-        (let ((morji '()))
+        (let ((morji (make-hash-table equal?)))
           (define (morji-nunjavni . sumti)
-            ;; update the cache with a new javni
-            ;;
-            (define (set-morji! sumti jalge)
-              (set! morji (cons (cons sumti jalge) morji)))
-
-            ;; we found a memoized rule
-            ;;
-            (define (semorji jalge)
-              (cdr jalge))
-
-            ;; we did not find a memoized rule.  Generate
-            ;; the rule, store it in the cache, and return
-            ;; it.
-            ;;
-            (define (nasemorji)
-              (let ((jalge (apply nunjavni sumti)))
-                (set-morji! sumti jalge)
-                jalge))
-
-            (cond ((assoc sumti morji) => semorji)
-                  (else (nasemorji))))
+            (hash-table-ref morji
+                            sumti
+                            (lambda ()
+                              (let ((javni (apply nunjavni sumti)))
+                                (hash-table-set! morji sumti javni)
+                                javni))))
 
           ;; register our cache with the global cache so
           ;; we can delete our memoization rules when we
           ;; no longer need them.
           ;;
           (set! rodamorji
-            (cons (lambda () (set! morji '()))
+            (cons (lambda () (hash-table-clear! morji))
                   rodamorji))
 
           morji-nunjavni)))))
