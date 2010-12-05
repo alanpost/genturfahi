@@ -1,8 +1,8 @@
-chicken-egg.scm is the wrapper file containing Chicken Scheme
-specific code.
+chicken-ext.scm and chicken-ext-peg.scm are the wrapper files containing
+Chicken Scheme specific code.
 
-main.scm is the wrapper file containing support for running scheme
-code as an executable program.
+main-srfi-37.scm is the wrapper file containing support for running
+scheme code as an executable program.
 
 Everything else here is intended to run on other suitably featured
 Scheme implementations.

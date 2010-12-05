@@ -24,6 +24,7 @@
 (use srfi-37)    ; args-fold
 (use extras)     ; pretty-print
 (use genturfahi)
+(use genturfahi-peg)
 
 (include "license.scm")
 (include "main-srfi-37.scm")

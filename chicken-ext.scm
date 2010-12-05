@@ -21,11 +21,6 @@
   (genturfahi
    genturfahi*
 
-   genturfahi-env
-
-   genturfahi-peg
-   genturfahi-peg-gerna
-
    genturfahi-version
    genturfahi-version-major
    genturfahi-version-minor
@@ -125,49 +120,6 @@
    vejmina-rodanunvalsi-nacmene
 
 
-   ; samselpla
-   samselpla-hash-table
-   samselpla-hash-table*
-
-   samselpla-cmene->symbol
-   samselpla-cmene->symbol*
-
-   samselpla-smuni
-   samselpla-naselci
-   samselpla-je
-   samselpla-pajavni-cmene
-   samselpla-jonai-je
-   samselpla-jonai
-   samselpla-?
-   samselpla-*
-   samselpla-+
-   samselpla-&
-   samselpla-fanmo
-   samselpla-!
-   samselpla-cmene-sumti
-   samselpla-selci-naselci
-   samselpla-lerfu-selci
-   samselpla-lerfu-space
-   samselpla-lerfu-return
-   samselpla-lerfu-linefeed
-   samselpla-lerfu-newline
-   samselpla-lerfu-return
-   samselpla-lerfu-tab
-   samselpla-valsi-selci
-   samselpla-valsi-newline
-   samselpla-valsi-linefeed
-   samselpla-valsi-tab
-   samselpla-valsi-backslash
-   samselpla-valsi-single-quote
-   samselpla-valsi-double-quote
-   samselpla-valsi-lerfu
-   samselpla-klesi-selci
-   samselpla-denpabu
-   samselpla-samselpla
-   samselpla-samselpla-lerfu
-   samselpla-girzu-javni
-   samselpla-canlu
-
    ; secuxna
    secuxna-start-production
    secuxna-define-name
@@ -199,7 +151,6 @@
 (require-extension extras)
 (require-extension ports)
 (require-extension data-structures)
-(require-library sandbox)
 
 (import srfi-1)          ; filter
 ;(import srfi-6)          ; string ports
@@ -213,7 +164,6 @@
 (import extras)          ; format, pretty-print
 (import ports)           ; Chicken Scheme srfi-6 and port extensions
 (import data-structures) ; flatten
-(import sandbox)
 
 (include "chicken-platform.scm")
 
@@ -224,8 +174,4 @@
 (include "morji.scm")
 (include "nunvalsi.scm")
 (include "genturfahi.scm")
-(include "eval.scm")
-(include "samselpla.scm")
-(include "bootstrap.scm")
-(include "peg.scm")
 (include "version.scm"))

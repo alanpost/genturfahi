@@ -10,27 +10,24 @@
                       "main-srfi-37.scm"
                       "genturfahi.meta"
                       "genturfahi.setup"
-                      (dynld-name "genturfahi"))
+                      (dynld-name "genturfahi")
+                      (dynld-name "genturfahi-peg"))
        (compile ,@genturfahi-cscflags
                 -o "genturfahi"
                 "chicken-cmd.scm"))
 
-       ; dynamic library
+       ; dynamic library (genturfahi)
        ;
-       ((dynld-name "genturfahi") ("bootstrap.scm"
-                                   "chicken-egg.scm"
+       ((dynld-name "genturfahi") ("chicken-ext.scm"
                                    "chicken-conf.scm"
                                    "chicken-declare.scm"
                                    "chicken-platform.scm"
-                                   "eval.scm"
                                    "genturfahi.scm"
                                    "javni-valsi.scm"
                                    "lerfu-porsi.scm"
                                    "nunjavni.scm"
                                    "morji.scm"
                                    "nunvalsi.scm"
-                                   "peg.scm"
-                                   "samselpla.scm"
                                    "secuxna.scm"
                                    "version.scm"
                                    "genturfahi.meta"
@@ -39,28 +36,47 @@
                        ,@genturfahi-cscflags
                        -j genturfahi
                        -o ,(dynld-name "genturfahi")
-                       chicken-egg.scm)
+                       chicken-ext.scm)
               (compile -s
                        ,@genturfahi-cscflags
                        -o ,(dynld-name "genturfahi.import")
                        genturfahi.import.scm)))
 
-       ; static library
+       ; dynamic library (PEG parser)
        ;
-       ("genturfahi.o" ("bootstrap.scm"
-                        "chicken-egg.scm"
+       ((dynld-name "genturfahi-peg") ("bootstrap.scm"
+                                       "chicken-ext-peg.scm"
+                                       "chicken-conf.scm"
+                                       "chicken-declare.scm"
+                                       "chicken-platform.scm"
+                                       "eval.scm"
+                                       "peg.scm"
+                                       "samselpla.scm"
+                                       "genturfahi.meta"
+                                       "genturfahi.setup"
+                                       (dynld-name "genturfahi"))
+       (begin (compile -s
+                       ,@genturfahi-cscflags
+                       -j genturfahi-peg
+                       -o ,(dynld-name "genturfahi-peg")
+                       chicken-ext-peg.scm)
+              (compile -s
+                       ,@genturfahi-cscflags
+                       -o ,(dynld-name "genturfahi-peg.import")
+                       genturfahi-peg.import.scm)))
+
+       ; static library (genturfahi)
+       ;
+       ("genturfahi.o" ("chicken-ext.scm"
                         "chicken-conf.scm"
                         "chicken-declare.scm"
                         "chicken-platform.scm"
-                        "eval.scm"
                         "genturfahi.scm"
                         "javni-valsi.scm"
                         "lerfu-porsi.scm"
                         "nunjavni.scm"
                         "morji.scm"
                         "nunvalsi.scm"
-                        "peg.scm"
-                        "samselpla.scm"
                         "secuxna.scm"
                         "version.scm"
                         "genturfahi.meta"
@@ -69,7 +85,25 @@
                 ,@genturfahi-cscflags
                 -unit genturfahi
                 -o "genturfahi.o"
-                "chicken-egg.scm"))
+                "chicken-ext.scm"))
+
+       ; static library (PEG parser)
+       ;
+       ("genturfahi-peg.o" ("bootstrap.scm"
+                            "chicken-ext-peg.scm"
+                            "chicken-conf.scm"
+                            "chicken-declare.scm"
+                            "chicken-platform.scm"
+                            "eval.scm"
+                            "peg.scm"
+                            "samselpla.scm"
+                            "genturfahi.meta"
+                            "genturfahi.setup")
+       (compile -c
+                ,@genturfahi-cscflags
+                -unit genturfahi-peg
+                -o "genturfahi-peg.o"
+                "chicken-ext-peg.scm"))
 
        ("license.scm" ("LICENSE")
         (call-with-output-file "license.scm"
@@ -78,7 +112,11 @@
               `(define genturfahi-license ,(read-all "LICENSE"))
               port)))))
 
-      `("genturfahi" ,(dynld-name "genturfahi") "genturfahi.o"))
+      `("genturfahi"
+        ,(dynld-name "genturfahi")
+        ,(dynld-name "genturfahi-peg")
+        "genturfahi.o"
+        "genturfahi-peg.o"))
 
 (install-extension
   ; lo cmene vi pagbu
@@ -91,6 +129,19 @@
 
   ; lo se ckaji vi pagbu
   `((static "genturfahi.o")
+    (version ,genturfahi-version)))
+
+(install-extension
+  ; lo cmene vi pagbu
+  'genturfahi-peg
+
+  ; lo datnyvei vi pagbu
+  `("genturfahi-peg.o"
+    ,(dynld-name "genturfahi-peg")
+    ,(dynld-name "genturfahi-peg.import"))
+
+  ; lo se ckaji vi pagbu
+  `((static "genturfahi-peg.o")
     (version ,genturfahi-version)))
 
 (install-program

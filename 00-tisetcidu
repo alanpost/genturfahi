@@ -19,7 +19,8 @@ Source Code
   00-selgu'a              - TODO
   00-tisetcidu            - README
   bootstrap.scm           - PEG parser bootstrap.
-  chicken-egg.scm         - Chicken Scheme 'egg' package support.
+  chicken-ext.scm         - Chicken Scheme 'egg' package support for parser runtime.
+  chicken-ext-peg.scm     - Chicken Scheme 'egg' package support for PEG parser.
   chicken-cmd.scm         - Chicken Scheme bin/ program support.
   conf.scm                - build configuration.
   genturfahi.scm          - main program.
@@ -28,6 +29,7 @@ Source Code
   javni-valsi.scm         - abstract syntax tree.
   lerfu-porsi.scm         - parse input.
   nunjavni.scm            - rule generators.
+  peg.scm                 - PEG parser.
   samselpla.scm           - code shared between bootstrap compiler
                             and genturfahi.peg.
   secuxna.scm             - parser configuration.
