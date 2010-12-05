@@ -22,6 +22,8 @@ Source Code
   chicken-ext.scm         - Chicken Scheme 'egg' package support for parser runtime.
   chicken-ext-peg.scm     - Chicken Scheme 'egg' package support for PEG parser.
   chicken-cmd.scm         - Chicken Scheme bin/ program support.
+  chicken-csi.scm         - Run genturfa'i from the interpreter.  Used
+                            for debugging, but not part of the build.
   conf.scm                - build configuration.
   genturfahi.scm          - main program.
   genturfahi.peg          - main program.
