@@ -45,3 +45,8 @@
 (define secuxna-sentinel         (make-parameter #\nul))
 (define secuxna-empty-string     (make-parameter ""))
 (define secuxna-nonmatch-token   (make-parameter #f))
+
+;; The predicate symbol is not a parameter, as changing
+;; it will affect the runtime parser.
+;;
+(define secuxna-sesumti          (gensym "sesumti-"))

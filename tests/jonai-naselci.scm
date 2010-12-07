@@ -23,9 +23,9 @@
 ;;; grammar differs.
 ;;;
 ;;; jonai <- a / b / c
-;;; a     <- #\a
-;;; b     <- #\b
-;;; c     <- #\c
+;;; a     <- !#\e !#\i !#\o !#\u #\a
+;;; b     <- &#\b #\b
+;;; c     <- &#\c #\c
 ;;;
 (define (jonai-naselci)
   (let ((genturfahi-jonai-naselci
@@ -37,9 +37,21 @@
                                    (b porsi mapti namapti))
                                  (lambda (porsi mapti namapti)
                                    (c porsi mapti namapti)))))
-             (a (nunjavni-morji (nunjavni-lerfu #\a)))
-             (b (nunjavni-morji (nunjavni-lerfu #\b)))
-             (c (nunjavni-morji (nunjavni-lerfu #\c))))
+             (a (nunjavni-morji
+                  (nunjavni-je
+                    (nunjavni-! (nunjavni-lerfu #\e))
+                    (nunjavni-! (nunjavni-lerfu #\i))
+                    (nunjavni-! (nunjavni-lerfu #\o))
+                    (nunjavni-! (nunjavni-lerfu #\u))
+                    (nunjavni-lerfu #\a))))
+             (b (nunjavni-morji
+                  (nunjavni-je
+                    (nunjavni-& (nunjavni-lerfu #\b))
+                    (nunjavni-lerfu #\b))))
+             (c (nunjavni-morji
+                  (nunjavni-je
+                    (nunjavni-& (nunjavni-lerfu #\c))
+                    (nunjavni-lerfu #\c)))))
       (genturfahi* gerna))))
     (jonai-naselci-test genturfahi-jonai-naselci)))
 

@@ -130,7 +130,8 @@
    secuxna-memoize
    secuxna-sentinel
    secuxna-empty-string
-   secuxna-nonmatch-token)
+   secuxna-nonmatch-token
+   secuxna-sesumti)
 
 (import chicken)
 (import scheme)

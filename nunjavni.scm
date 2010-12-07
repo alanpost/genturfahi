@@ -209,10 +209,10 @@
 
 ;; and-predicate: succeed or fail without consuming input.
 ;;
-(define (nunjavni-& javni #!key (empty-string ""))
+(define (nunjavni-& javni)
   (define (javni-& porsi mapti namapti)
     (define (mapti-& ignore-porsi ignore-nunvalsi)
-      (mapti porsi (lambda () (make-javni-valsi #f empty-string))))
+      (mapti porsi (lambda () (make-javni-valsi #f secuxna-sesumti))))
 
     (define (namapti-& ignore-porsi)
       (namapti porsi))
@@ -221,16 +221,16 @@
   javni-&)
 
 
-;; not-predicate: require that javni is not able to be parsed from
+;; not-predicate: require that |javni| is not able to be parsed from
 ;;                the |lerfu-porsi|.
 ;;
-(define (nunjavni-! javni #!key (empty-string ""))
+(define (nunjavni-! javni)
   (define (javni-! porsi mapti namapti)
     (define (mapti-! ignore-porsi nunvalsi)
       (namapti porsi))
 
     (define (namapti-! ignore-porsi)
-      (mapti porsi (lambda () (make-javni-valsi #f empty-string))))
+      (mapti porsi (lambda () (make-javni-valsi #f secuxna-sesumti))))
 
     (javni porsi mapti-! namapti-!))
   javni-!)

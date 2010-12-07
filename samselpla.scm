@@ -194,11 +194,7 @@
   `(morji-nunjavni-+ ,javni ,@(if (equal? "" cmene) '() `(cmene: ,cmene))))
 
 (define (samselpla-& #!key javni)
-  (let ((empty-string (secuxna-empty-string)))
-    `(morji-nunjavni-& ,javni
-                       ,@(if (equal? "" empty-string)
-                             '()
-                             `(empty-string: ,empty-string)))))
+  `(morji-nunjavni-& ,javni))
 
 (define (samselpla-fanmo)
   (let ((sentinel (secuxna-sentinel)))
@@ -207,11 +203,7 @@
                                  `(sentinel: ,sentinel)))))
 
 (define (samselpla-! #!key javni)
-  (let ((empty-string (secuxna-empty-string)))
-    `(morji-nunjavni-! ,javni
-                       ,@(if (equal? "" empty-string)
-                             '()
-                             `(empty-string: ,empty-string)))))
+  `(morji-nunjavni-! ,javni))
 
 (define (samselpla-cmene-sumti #!key cfari fanmo)
   `,(string-append (make-string 1 cfari) fanmo))

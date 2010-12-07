@@ -27,15 +27,49 @@
   (val javni-valsi-val))
 
 (define (javni-nunvalsi-val nunvalsi)
+  (define (sesumti? sumti)
+    (eq? secuxna-sesumti sumti))
+
   (let ((valsi (nunvalsi)))
     (if (javni-valsi? valsi)
         (javni-valsi-val valsi)
-        (map javni-rodavalsi-val valsi))))
+        (call-with-values
+
+          ; remove predicate javni-valsi from the list.
+          ;
+          (lambda () (partition sesumti? (map javni-rodavalsi-val valsi)))
+
+          ;; if there is only a single non-predicate element
+          ;; in a list that contained predicate elements, 
+          ;; return the single element rather than a list with
+          ;; that element.
+          ;;
+          (lambda (sesumti jalge)
+            (if (and (pair? sesumti) (pair? jalge) (null? (cdr jalge)))
+                (car jalge)
+                jalge))))))
 
 (define (javni-rodavalsi-val valsi)
+  (define (sesumti? sumti)
+    (eq? secuxna-sesumti sumti))
+
   (if (javni-valsi? valsi)
       (javni-valsi-val valsi)
-      (map javni-rodavalsi-val valsi)))
+      (call-with-values
+
+        ; remove predicate javni-valsi from the list.
+        ;
+        (lambda () (partition sesumti? (map javni-rodavalsi-val valsi)))
+        (lambda (sesumti jalge)
+
+          ; if there is only a single non-predicate element
+          ; in a list that contained predicate elements, 
+          ; return the single element rather than a list with
+          ; that element.
+          ;
+          (if (and (pair? sesumti) (pair? jalge) (null? (cdr jalge)))
+              (car jalge)
+              jalge)))))
 
 (define (javni-valsi->string valsi)
   (format "{cmene:~a valsi:~s}"
