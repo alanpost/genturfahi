@@ -4,8 +4,6 @@ Backlog
 Sprint Backlog
 --------------
 
- * [open] gensym non-terminal names to avoid collision when
-          define-toplevel is set.
  * [open] Update wiki documentation to match current code.
 
 
@@ -14,6 +12,8 @@ Product Backlog
 
 Release 1.1:
 
+ * [] gensym'd symbols passed through write are not guaranteed to be
+      unique when read.
  * [] Port to a second Scheme implementation. 
  * [] Ignore & and ! rather than returning the empty string.  This
       requires support in je and jonai as well.
@@ -36,6 +36,10 @@ Release 1.0:
        + Is a record-type or cons faster?
        + Inline input buffer access routines.
  * [] Write PEG parser application manpage. 
+ * [done] Don't modify the parse tree when matching predicate (& and !)
+          operators.
+ * [done] gensym non-terminal names to avoid collision when
+          define-toplevel is set.
  * [done] Permit multiple non-terminals to have an external
           definition
  * [done] Compile the expression '()' as the empty string.
