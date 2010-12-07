@@ -21,6 +21,8 @@ Release 1.1:
  * [] extend the character class test to test all character
       classes.
  * [] Implement left recursion.
+ * [] Add runtime debug output of parse.
+ * [] Add runtime profiling of parse.
 
 Release 1.0:
 
