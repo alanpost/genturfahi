@@ -32,7 +32,10 @@
   (hash-table-ref samselpla-hash-table
                   cmene
                   (lambda ()
-                    (let ((symbol (gensym (string->symbol (string-append cmene "-")))))
+                    (let ((symbol
+                            (gensym
+                              (string->symbol
+                                (string-append cmene "-")))))
                       (hash-table-set! samselpla-hash-table
                                        cmene
                                        symbol)
@@ -42,7 +45,10 @@
   (hash-table-ref samselpla-hash-table*
                   cmene
                   (lambda ()
-                    (let ((symbol (gensym (string->symbol (string-append cmene "-")))))
+                    (let ((symbol
+                             (gensym
+                               (string->symbol
+                                 (string-append cmene "-")))))
                       (hash-table-set! samselpla-hash-table*
                                        cmene
                                        symbol)
