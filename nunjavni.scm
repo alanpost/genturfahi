@@ -236,7 +236,7 @@
   javni-!)
 
 
-;; sequence: parse ro da javni out of the |lerfu-porsi|.
+;; sequence: parse |ro da javni| out of the |lerfu-porsi|.
 ;;           if any of the do not match, none of them match.
 ;;
 (define (nunjavni-je #!rest rodajavni #!key cmene)
