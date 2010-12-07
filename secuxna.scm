@@ -18,8 +18,8 @@
 ;;;;
 
 ;; the production used to begin parsing.  If not
-;; specified, the first production in the input
-;; port will be used.
+;; specified, the first production parsed out of
+;; the input buffer will be used.
 ;;
 (define secuxna-start-production (make-parameter #f))
 
