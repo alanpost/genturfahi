@@ -83,29 +83,35 @@
         ; reset the start production.
         (secuxna-start-production #f)
 
-        (if (not (null? smuni))
-            `(,@(if toplevel '() '(let ()))
-              ,@smuni-nunselci
-              ,@smuni
-              (tolmohi-nunjavni)
-              ,@(if (list? rodatamgau)
+        (let ((jalge
+          (if (not (null? smuni))
+              `(,@(if toplevel '() '(let ()))
+                ,@smuni-nunselci
+                ,@smuni
+                (tolmohi-nunjavni)
+                ,@(if (list? rodatamgau)
 
-                    (let ((rodatamgau
-                            (map string->symbol  rodatamgau))
-                          (nunselci-cmene
-                            (map samselpla-cmene->symbol* selci-cmene)))
-                      (if toplevel
-                          (suhorecmene-e-toplevel rodatamgau nunselci-cmene)
-                          (suhorecmene-enai-toplevel nunselci-cmene)))
+                      (let ((rodatamgau
+                              (map string->symbol  rodatamgau))
+                            (nunselci-cmene
+                              (map samselpla-cmene->symbol* selci-cmene)))
+                        (if toplevel
+                            (suhorecmene-e-toplevel rodatamgau nunselci-cmene)
+                            (suhorecmene-enai-toplevel nunselci-cmene)))
 
-                    (let ((rodatamgau
-                            (string->symbol  rodatamgau))
-                          (nunselci-cmene
-                            (samselpla-cmene->symbol* selci-cmene)))
-                      (if toplevel
-                          (pacmene-e-toplevel rodatamgau nunselci-cmene)
-                          (pacmene-enai-toplevel nunselci-cmene)))))
-            '())))))
+                      (let ((rodatamgau
+                              (string->symbol  rodatamgau))
+                            (nunselci-cmene
+                              (samselpla-cmene->symbol* selci-cmene)))
+                        (if toplevel
+                            (pacmene-e-toplevel rodatamgau nunselci-cmene)
+                            (pacmene-enai-toplevel nunselci-cmene)))))
+            '())))
+
+          (hash-table-clear! samselpla-hash-table)
+          (hash-table-clear! samselpla-hash-table*)
+
+          jalge)))))
 
 (define (samselpla-cfari-samselpla #!key rodalerfu)
   (let* ((valsi     (apply string rodalerfu))
