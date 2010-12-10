@@ -194,8 +194,7 @@
       (if (symbol? javni)
           ; if we have a non-terminal, we must use |morji-nunjavni-cmene|.
           ;
-          `(morji-nunjavni-cmene ,javni
-                                 cmene: ,cmene)
+          `(morji-nunjavni-cmene ,javni cmene: ,cmene)
           `(,@javni cmene: ,cmene))))
 
 (define (samselpla-jonai #!key cfari fanmo)
