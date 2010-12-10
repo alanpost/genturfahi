@@ -17,4 +17,4 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
-jonai <- #\a / #\b / #\c
+jonai <- ,#\a / ,#\b / ,#\c

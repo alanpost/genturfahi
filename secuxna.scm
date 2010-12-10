@@ -49,4 +49,4 @@
 ;; The predicate symbol is not a parameter, as changing
 ;; it will affect the runtime parser.
 ;;
-(define secuxna-sesumti          (gensym "sesumti-"))
+(define secuxna-nastura          (gensym "nastura-"))

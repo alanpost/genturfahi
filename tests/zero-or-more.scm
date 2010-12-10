@@ -20,11 +20,11 @@
 ;;;
 ;;; zero-or-more: e*
 ;;;
-;;; zero-or-more <- #\a*
+;;; zero-or-more <- ,#\a*
 ;;;
 (define (zero-or-more)
   (let ((genturfahi-zero-or-more
-    (genturfahi* (nunjavni-* (nunjavni-lerfu #\a)))))
+    (genturfahi* (nunjavni-* (nunjavni-lerfu #\a nastura: #f)))))
     (zero-or-more-test genturfahi-zero-or-more)))
 
 (define (zero-or-more-peg)

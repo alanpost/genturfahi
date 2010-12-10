@@ -33,8 +33,8 @@
    samselpla-smuni
    samselpla-naselci
    samselpla-je
+   samselpla-nastura-javni
    samselpla-pajavni-cmene
-   samselpla-jonai-je
    samselpla-jonai
    samselpla-?
    samselpla-*
@@ -44,6 +44,7 @@
    samselpla-!
    samselpla-cmene-sumti
    samselpla-selci-naselci
+   samselpla-stura-lerfu-selci
    samselpla-lerfu-selci
    samselpla-lerfu-space
    samselpla-lerfu-return
@@ -51,6 +52,7 @@
    samselpla-lerfu-newline
    samselpla-lerfu-return
    samselpla-lerfu-tab
+   samselpla-stura-valsi-selci
    samselpla-valsi-selci
    samselpla-valsi-newline
    samselpla-valsi-linefeed
@@ -61,12 +63,8 @@
    samselpla-valsi-lerfu
    samselpla-klesi-selci
    samselpla-denpabu
-   samselpla-samselpla
    samselpla-samselpla-xadni
-   samselpla-samselpla-cmene
-   samselpla-samselpla-lerfu
-   samselpla-girzu-javni
-   samselpla-canlu)
+   samselpla-samselpla-cmene)
 
 (import chicken)
 (import scheme)

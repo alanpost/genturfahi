@@ -17,7 +17,14 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
-gerna <- #:a a #:b b #:c c -> test-samselpla-samselpla
-a     <- #:lerfu #\a       -> test-samselpla-lerfu
-b     <- #:lerfu #\b       -> test-samselpla-lerfu
-c     <- #:lerfu #\c       -> test-samselpla-lerfu
+; test #!key args with positional args
+;
+gerna <- #:a a
+         b
+         #:c c -> test-samselpla-samselpla
+
+; test positional args
+;
+a     <- ,#\a  -> test-samselpla-lerfu
+b     <- ,"b"  -> test-samselpla-valsi
+c     <- [c]   -> test-samselpla-lerfu

@@ -36,7 +36,7 @@
   ; the and-predicate matches as normal, but does not advance
   ; the input or return the parse result.
   ;
-  (test `(,secuxna-sesumti "a") (genturfahi-and-predicate "a"))
+  (test '(() "a") (genturfahi-and-predicate "a"))
 
   ; It behaves like all other rules when there is no match,
   ; indicating no match.
@@ -56,9 +56,9 @@
   ; this rule won't even match two #\a,
   ; only one.
   ;
-  (test `(,secuxna-sesumti "aa") (genturfahi-and-predicate "aa"))
-  (test `(,secuxna-sesumti "ab") (genturfahi-and-predicate "ab"))
-  (test `(,secuxna-sesumti "ac") (genturfahi-and-predicate "ac"))
+  (test '(() "aa") (genturfahi-and-predicate "aa"))
+  (test '(() "ab") (genturfahi-and-predicate "ab"))
+  (test '(() "ac") (genturfahi-and-predicate "ac"))
 
   ; later characters that would match
   ; don't if there is no rule to match

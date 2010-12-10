@@ -51,15 +51,27 @@
    javni-valsi-cme
    javni-valsi-val
 
+   javni-nastura?
+
    javni-nunvalsi-val
    javni-rodavalsi-val
+
+   ; a version that removes the predicate *-val, for use
+   ; when returning to code outside of genturfa'i.
+   ;
+   javni-nunvalsi-val-filter
+   javni-rodavalsi-val-filter
 
    javni-valsi->string
 
 
    ; nunvalsi
    ;
+   make-nunvalsi
+   venunjmina-nunvalsi
    vejmina-nunvalsi
+   vejmina-rodanunvalsi
+   vejmina-rodanunvalsi-nacmene
 
    ; nunjavni
    ;
@@ -83,6 +95,7 @@
    nunjavni-morji
    nunjavni-samselpla
    nunjavni-cmene
+   nunjavni-nastura
 
    ; morji
    ;
@@ -107,6 +120,7 @@
 
    morji-nunjavni-samselpla
    morji-nunjavni-cmene
+   morji-nunjavni-nastura
 
 
    ; nunvalsi
@@ -131,7 +145,7 @@
    secuxna-sentinel
    secuxna-empty-string
    secuxna-nonmatch-token
-   secuxna-sesumti)
+   secuxna-nastura)
 
 (import chicken)
 (import scheme)

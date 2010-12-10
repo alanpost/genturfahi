@@ -21,14 +21,28 @@
 ;;; nunvalsi - valsi generators
 ;;;
 
+;; Each rule has a flag describing whether to make a javni-valsi
+;; on a successful match of that rule.  This routine return an
+;; appropriate constructor, depending on that flag.
+;;
+(define (make-nunvalsi cmene nastura)
+  (if nastura
+      (lambda (ignore-valsi)
+        (lambda () (make-javni-valsi cmene secuxna-nastura)))
+      (lambda (valsi)
+        (lambda () (make-javni-valsi cmene valsi)))))
+
 ;; merge a single nunvalsi with or without a cmene
 ;;
-(define (venunjmina-nunvalsi cmene)
-  (if cmene
-      (lambda (nunvalsi)
-        (vejmina-nunvalsi cmene nunvalsi))
-      (lambda (nunvalsi)
-        (vejmina-nunvalsi-nacmene nunvalsi))))
+(define (venunjmina-nunvalsi cmene nastura)
+  (if nastura
+      (lambda (ignore-nunvalsi)
+        (lambda () (make-javni-valsi cmene secuxna-nastura)))
+      (if cmene
+          (lambda (nunvalsi)
+            (vejmina-nunvalsi cmene nunvalsi))
+          (lambda (nunvalsi)
+            (vejmina-nunvalsi-nacmene nunvalsi)))))
 
 (define (vejmina-nunvalsi cmene nunvalsi)
   (lambda ()
@@ -40,12 +54,15 @@
 
 ;; merge multiple nunvalsi with or without a cmene
 ;;
-(define (venunjmina-rodanunvalsi cmene)
-  (if cmene
-      (lambda (rodanunvalsi)
-        (apply vejmina-rodanunvalsi cmene rodanunvalsi))
-      (lambda (rodanunvalsi)
-        (apply vejmina-rodanunvalsi-nacmene rodanunvalsi))))
+(define (venunjmina-rodanunvalsi cmene nastura)
+  (if nastura
+      (lambda (ignore-rodanunvalsi)
+        (lambda () (make-javni-valsi cmene secuxna-nastura)))
+      (if cmene
+          (lambda (rodanunvalsi)
+            (apply vejmina-rodanunvalsi cmene rodanunvalsi))
+          (lambda (rodanunvalsi)
+            (apply vejmina-rodanunvalsi-nacmene rodanunvalsi)))))
 
 
 ;; with a cmene, the list of results is associated with a single

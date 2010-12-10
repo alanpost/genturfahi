@@ -36,7 +36,7 @@
     ; a new |porsi|.
     (genturfahi-tolmohi)
 
-    (values (javni-nunvalsi-val nunvalsi)
+    (values (javni-nunvalsi-val-filter nunvalsi)
             (lerfu-porsi-string porsi)))
 
   (define (namapti porsi)

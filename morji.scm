@@ -81,3 +81,4 @@
 
 (define morji-nunjavni-samselpla  (nunmorji-nunjavni nunjavni-samselpla))
 (define morji-nunjavni-cmene      (nunmorji-nunjavni nunjavni-cmene))
+(define morji-nunjavni-nastura    (nunmorji-nunjavni nunjavni-nastura))

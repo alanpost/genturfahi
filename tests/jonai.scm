@@ -20,13 +20,13 @@
 ;;;
 ;;; ordered-choice: e_1 / e_2
 ;;;
-;;; jonai <- #\a / #\b / #\c
+;;; jonai <- ,#\a / ,#\b / ,#\c
 ;;;
 (define (jonai)
   (let ((genturfahi-jonai
-    (genturfahi* (nunjavni-jonai (nunjavni-lerfu #\a)
-                                 (nunjavni-lerfu #\b)
-                                 (nunjavni-lerfu #\c)))))
+    (genturfahi* (nunjavni-jonai (nunjavni-lerfu #\a nastura: #f)
+                                 (nunjavni-lerfu #\b nastura: #f)
+                                 (nunjavni-lerfu #\c nastura: #f)))))
     (jonai-test genturfahi-jonai)))
 
 (define (jonai-peg)

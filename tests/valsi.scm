@@ -20,10 +20,10 @@
 ;;;
 ;;; terminal:
 ;;;
-;;; valsi <- "abc"
+;;; valsi <- ,"abc"
 ;;;
 (define (valsi)
-  (let ((genturfahi-valsi (genturfahi* (nunjavni-valsi "abc"))))
+  (let ((genturfahi-valsi (genturfahi* (nunjavni-valsi "abc" nastura: #f))))
     (valsi-test genturfahi-valsi)))
 
 (define (valsi-peg)

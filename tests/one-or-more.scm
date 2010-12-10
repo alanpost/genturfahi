@@ -20,11 +20,11 @@
 ;;;
 ;;; one-or-more: e+
 ;;;
-;;; one-or-more <- #\a+
+;;; one-or-more <- ,#\a+
 ;;;
 (define (one-or-more)
   (let ((genturfahi-one-or-more
-    (genturfahi* (nunjavni-+ (nunjavni-lerfu #\a)))))
+    (genturfahi* (nunjavni-+ (nunjavni-lerfu #\a nastura: #f)))))
     (one-or-more-test genturfahi-one-or-more)))
 
 (define (one-or-more-peg)

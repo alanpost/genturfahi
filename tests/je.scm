@@ -20,13 +20,13 @@
 ;;;
 ;;; ordered sequence: e_1 e_2
 ;;;
-;;; je <- #\a #\b #\c
+;;; je <- ,#\a ,#\b ,#\c
 ;;;
 (define (je)
   (let ((genturfahi-je
-    (genturfahi* (nunjavni-je (nunjavni-lerfu #\a)
-                              (nunjavni-lerfu #\b)
-                              (nunjavni-lerfu #\c)))))
+    (genturfahi* (nunjavni-je (nunjavni-lerfu #\a nastura: #f)
+                              (nunjavni-lerfu #\b nastura: #f)
+                              (nunjavni-lerfu #\c nastura: #f)))))
     (je-test genturfahi-je)))
 
 (define (je-peg)

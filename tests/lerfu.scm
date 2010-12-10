@@ -20,10 +20,10 @@
 ;;;
 ;;; terminal:
 ;;;
-;;; lerfu <- #\a
+;;; lerfu <- ,#\a
 ;;;
 (define (lerfu)
-  (let ((genturfahi-lerfu (genturfahi* (nunjavni-lerfu #\a))))
+  (let ((genturfahi-lerfu (genturfahi* (nunjavni-lerfu #\a nastura: #f))))
     (lerfu-test genturfahi-lerfu)))
 
 (define (lerfu-peg)

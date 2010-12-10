@@ -20,7 +20,7 @@
 ;;;
 ;;; character classes:
 ;;;
-;;; gerna <- (digit / alpha)* FAhO
+;;; gerna <- (digit / alpha)* 'FAhO
 ;;; digit <- [:digit:]+
 ;;; alpha <- [:alpha:]+
 ;;; FAhO  <- !.
@@ -42,7 +42,9 @@
                         (lambda (porsi mapti namapti)
                           (alpha porsi mapti namapti)))
                       cmene: "gerna")
-                    (nunjavni-fanmo)))))
+                    (nunjavni-nastura
+                      (lambda (porsi mapti namapti)
+                        (FAhO porsi mapti namapti)))))))
        (digit (nunjavni-morji
                 (nunjavni-char-set-+ char-set:digit)))
        (alpha (nunjavni-morji

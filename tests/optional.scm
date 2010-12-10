@@ -20,11 +20,11 @@
 ;;;
 ;;; optional: e?
 ;;;
-;;; optional <- #\a?
+;;; optional <- ,#\a?
 ;;;
 (define (optional?)
   (let ((genturfahi-optional
-    (genturfahi* (nunjavni-? (nunjavni-lerfu #\a)))))
+    (genturfahi* (nunjavni-? (nunjavni-lerfu #\a nastura: #f)))))
   (optional?-test genturfahi-optional)))
 
 (define (optional?-peg)

@@ -26,50 +26,52 @@
   (cme javni-valsi-cme)
   (val javni-valsi-val))
 
+(define (javni-nastura? javni)
+  (eq? secuxna-nastura javni))
+
 (define (javni-nunvalsi-val nunvalsi)
-  (define (sesumti? sumti)
-    (eq? secuxna-sesumti sumti))
+  (javni-rodavalsi-val (nunvalsi)))
 
-  (let ((valsi (nunvalsi)))
-    (if (javni-valsi? valsi)
-        (javni-valsi-val valsi)
-        (call-with-values
-
-          ; remove predicate javni-valsi from the list.
-          ;
-          (lambda () (partition sesumti? (map javni-rodavalsi-val valsi)))
-
-          ;; if there is only a single non-predicate element
-          ;; in a list that contained predicate elements, 
-          ;; return the single element rather than a list with
-          ;; that element.
-          ;;
-          (lambda (sesumti jalge)
-            (if (and (pair? sesumti) (pair? jalge) (null? (cdr jalge)))
-                (car jalge)
-                jalge))))))
+(define (javni-nunvalsi-val-filter nunvalsi)
+  (javni-rodavalsi-val-filter (nunvalsi)))
 
 (define (javni-rodavalsi-val valsi)
-  (define (sesumti? sumti)
-    (eq? secuxna-sesumti sumti))
-
   (if (javni-valsi? valsi)
       (javni-valsi-val valsi)
       (call-with-values
 
         ; remove predicate javni-valsi from the list.
         ;
-        (lambda () (partition sesumti? (map javni-rodavalsi-val valsi)))
-        (lambda (sesumti jalge)
+        (lambda () (partition javni-nastura? (map javni-rodavalsi-val valsi)))
 
+        (lambda (nastura jalge)
           ; if there is only a single non-predicate element
           ; in a list that contained predicate elements, 
           ; return the single element rather than a list with
           ; that element.
           ;
-          (if (and (pair? sesumti) (pair? jalge) (null? (cdr jalge)))
-              (car jalge)
+          ; If all of the elements were predicate elements,
+          ; return a predicate element.  (which will be removed
+          ; later.)
+          ;
+          (if (pair? nastura)
+              (if (pair? jalge)
+                  (if (null? (cdr jalge))
+                      (car jalge)
+                      jalge)
+                  secuxna-nastura)
               jalge)))))
+
+(define (javni-rodavalsi-val-filter valsi)
+  ; if the only result was a predicate marker, don't return it.
+  ;
+  (if (javni-valsi? valsi)
+      (let ((val (javni-valsi-val valsi)))
+        (if (javni-nastura? val)
+            '()
+            val))
+      (remove javni-nastura? (map javni-rodavalsi-val valsi))))
+
 
 (define (javni-valsi->string valsi)
   (format "{cmene:~a valsi:~s}"

@@ -21,14 +21,17 @@
 ;;; execute code on syntax tree.
 ;;;
 ;;; gerna <- a b c
-;;; a     <- #\a
-;;; b     <- #\b
-;;; c     <- #\c
+;;; a     <- ,#\a
+;;; b     <- ,"b"
+;;; c     <- [c]
 ;;;
-(define (test-samselpla-samselpla #!key a b c)
+(define (test-samselpla-samselpla b #!key a c)
   (string-append a b c))
 
-(define (test-samselpla-lerfu #!key lerfu)
+(define (test-samselpla-valsi valsi)
+  valsi)
+
+(define (test-samselpla-lerfu lerfu)
   (make-string 1 lerfu))
 
 (define (samselpla)
@@ -43,8 +46,7 @@
                      cmene: "a")
                    (nunjavni-cmene
                      (lambda (porsi mapti namapti)
-                       (b porsi mapti namapti))
-                     cmene: "b")
+                       (b porsi mapti namapti)))
                    (nunjavni-cmene
                      (lambda (porsi mapti namapti)
                        (c porsi mapti namapti))
@@ -52,13 +54,13 @@
              (a (nunjavni-morji
                ; convert each character to a string.
                (nunjavni-samselpla test-samselpla-lerfu
-                 (nunjavni-lerfu #\a cmene: "lerfu"))))
+                 (nunjavni-lerfu #\a nastura: #f))))
              (b (nunjavni-morji
-               (nunjavni-samselpla test-samselpla-lerfu
-                 (nunjavni-lerfu #\b cmene: "lerfu"))))
+               (nunjavni-samselpla test-samselpla-valsi
+                 (nunjavni-valsi "b" nastura: #f))))
              (c (nunjavni-morji
                (nunjavni-samselpla test-samselpla-lerfu
-                 (nunjavni-lerfu #\c cmene: "lerfu")))))
+                 (nunjavni-char-set (char-set #\c))))))
       (genturfahi* gerna))))
     (samselpla-test genturfahi-samselpla)))
 

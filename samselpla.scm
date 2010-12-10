@@ -58,7 +58,7 @@
 ;; ignore the FAhO tag in the file, and
 ;; just return the header code and grammar.
 ;;
-(define (samselpla-cfari #!key gerna)
+(define (samselpla-cfari samselpla #!key gerna)
   (call-with-values
     (lambda () (unzip2 gerna))
     (lambda (smuni-nunselci smuni)
@@ -160,19 +160,26 @@
   (let* ((javni (if (null? (cdr rodajavni))
                            (car rodajavni)
                            `(morji-nunjavni-je ,@rodajavni))))
-    (if (equal? "" samselpla)
+    (if (string=? "" samselpla)
         javni
         `(morji-nunjavni-samselpla ,(string->symbol samselpla) ,javni))))
 
+(define (samselpla-nastura-javni #!key javni)
+  (if (symbol? javni)
+      ; if we have a non-terminal, we must use |morji-nunjavni-quote|.
+      ;
+      `(morji-nunjavni-nastura ,javni)
+      `(,@javni nastura: #t)))
+
 (define (samselpla-pajavni-cmene #!key cmene javni)
-  (if (equal? "" cmene)
+  (if (string=? "" cmene)
       javni
       (if (symbol? javni)
-          `(morji-nunjavni-cmene ,javni cmene: ,cmene)
+          ; if we have a non-terminal, we must use |morji-nunjavni-cmene|.
+          ;
+          `(morji-nunjavni-cmene ,javni
+                                 cmene: ,cmene)
           `(,@javni cmene: ,cmene))))
-
-(define (samselpla-jonai-je #!key je)
-  je)
 
 (define (samselpla-jonai #!key cfari fanmo)
   `(morji-nunjavni-jonai ,cfari ,@fanmo))
@@ -180,18 +187,18 @@
 (define (samselpla-? #!key cmene javni)
   (let ((empty-string (secuxna-empty-string)))
     `(morji-nunjavni-? ,javni
-                       ,@(if (equal? "" cmene)
+                       ,@(if (string=? "" cmene)
                              '()
                              `(cmene: ,cmene))
-                       ,@(if (equal? "" empty-string)
+                       ,@(if (string=? "" empty-string)
                              '()
                              `(empty-string: ,empty-string)))))
 
 (define (samselpla-* #!key cmene javni)
-  `(morji-nunjavni-* ,javni ,@(if (equal? "" cmene) '() `(cmene: ,cmene))))
+  `(morji-nunjavni-* ,javni ,@(if (string=? "" cmene) '() `(cmene: ,cmene))))
 
 (define (samselpla-+ #!key cmene javni)
-  `(morji-nunjavni-+ ,javni ,@(if (equal? "" cmene) '() `(cmene: ,cmene))))
+  `(morji-nunjavni-+ ,javni ,@(if (string=? "" cmene) '() `(cmene: ,cmene))))
 
 (define (samselpla-& #!key javni)
   `(morji-nunjavni-& ,javni))
@@ -213,6 +220,9 @@
 (define (samselpla-selci-naselci #!key naselci)
   (samselpla-cmene->symbol naselci))
 
+(define (samselpla-stura-lerfu-selci #!key lerfu)
+  `(morji-nunjavni-lerfu ,lerfu nastura: #f))
+
 (define (samselpla-lerfu-selci #!key lerfu)
   `(morji-nunjavni-lerfu ,lerfu))
 
@@ -231,11 +241,11 @@
 (define (samselpla-lerfu-tab)
   #\tab)
 
+(define (samselpla-stura-valsi-selci #!key valsi-lerfu)
+  `(morji-nunjavni-valsi ,(apply string-append valsi-lerfu) nastura: #f))
+
 (define (samselpla-valsi-selci #!key valsi-lerfu)
   `(morji-nunjavni-valsi ,(apply string-append valsi-lerfu)))
-
-(define (samselpla-valsi-selci-lerfu #!key lerfu)
-  lerfu)
 
 (define (samselpla-valsi-newline)
   "\\n")
@@ -381,28 +391,14 @@
 (define (samselpla-denpabu)
   `(morji-nunjavni-.))
 
-(define (samselpla-samselpla #!key samselpla)
-  samselpla)
-
 (define (samselpla-samselpla-xadni #!key rodalerfu)
   (apply string rodalerfu))
 
 (define (samselpla-samselpla-cmene #!key cfari fanmo)
   (string-append (make-string 1 cfari) fanmo))
 
-(define (samselpla-samselpla-lerfu #!key lerfu)
-  lerfu)
-
-(define (samselpla-girzu-javni #!key javni)
-  javni)
-
 (define (samselpla-empty-string)
   (let ((empty-string (secuxna-empty-string)))
-    `(morji-nunjavni-e ,@(if (equal? "" empty-string)
+    `(morji-nunjavni-e ,@(if (string=? "" empty-string)
                              '()
                              `(empty-string: ,empty-string)))))
-
-;; ignore comments and space
-;;
-(define (samselpla-canlu)
-  '())

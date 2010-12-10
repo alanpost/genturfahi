@@ -38,27 +38,27 @@
   ;
   ; on match, we return the empty list.
   ;
-  (test '(#f "a")               (genturfahi-not-predicate "a"))
-  (test `(,secuxna-sesumti "b") (genturfahi-not-predicate "b"))
-  (test `(,secuxna-sesumti "c") (genturfahi-not-predicate "c"))
+  (test '(#f "a") (genturfahi-not-predicate "a"))
+  (test '(() "b") (genturfahi-not-predicate "b"))
+  (test '(() "c") (genturfahi-not-predicate "c"))
 
   ; we match the empty string (because the empty string
   ; isn't #\a.)
   ;
-  (test `(,secuxna-sesumti "") (genturfahi-not-predicate ""))
+  (test '(() "") (genturfahi-not-predicate ""))
 
   ; there is no rule for the end-of-file
   ; These don't parse the whole buffer!
   ;
-  (test '(#f "aa")               (genturfahi-not-predicate "aa"))
-  (test '(#f "ab")               (genturfahi-not-predicate "ab"))
-  (test '(#f "ac")               (genturfahi-not-predicate "ac"))
-  (test `(,secuxna-sesumti "ba") (genturfahi-not-predicate "ba"))
-  (test `(,secuxna-sesumti "bb") (genturfahi-not-predicate "bb"))
-  (test `(,secuxna-sesumti "bc") (genturfahi-not-predicate "bc"))
-  (test `(,secuxna-sesumti "ca") (genturfahi-not-predicate "ca"))
-  (test `(,secuxna-sesumti "cb") (genturfahi-not-predicate "cb"))
-  (test `(,secuxna-sesumti "cc") (genturfahi-not-predicate "cc"))
+  (test '(#f "aa") (genturfahi-not-predicate "aa"))
+  (test '(#f "ab") (genturfahi-not-predicate "ab"))
+  (test '(#f "ac") (genturfahi-not-predicate "ac"))
+  (test '(() "ba") (genturfahi-not-predicate "ba"))
+  (test '(() "bb") (genturfahi-not-predicate "bb"))
+  (test '(() "bc") (genturfahi-not-predicate "bc"))
+  (test '(() "ca") (genturfahi-not-predicate "ca"))
+  (test '(() "cb") (genturfahi-not-predicate "cb"))
+  (test '(() "cc") (genturfahi-not-predicate "cc"))
   0)
 
 (test-group "not-predicate"

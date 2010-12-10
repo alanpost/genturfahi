@@ -23,34 +23,36 @@
 
 ;; selci: parse a single specified character.
 ;;
-(define (nunjavni-lerfu lerfu #!key cmene)
-  (define (javni-lerfu porsi mapti namapti)
-    (if (char=? lerfu (lerfu-porsi-lerfu porsi))
-        (mapti (make-lerfu-porsi-pabalvi-lerfu porsi)
-               (lambda () (make-javni-valsi cmene lerfu)))
-        (namapti porsi)))
-  javni-lerfu)
+(define (nunjavni-lerfu lerfu #!key cmene (nastura #t))
+  (let ((nunvalsi-lerfu (make-nunvalsi cmene nastura)))
+    (define (javni-lerfu porsi mapti namapti)
+      (if (char=? lerfu (lerfu-porsi-lerfu porsi))
+          (mapti (make-lerfu-porsi-pabalvi-lerfu porsi)
+                 (nunvalsi-lerfu lerfu))
+          (namapti porsi)))
+    javni-lerfu))
 
 
 ;; selci: parse any single character. 
 ;;
-(define (nunjavni-. #!key cmene)
-  (define (javni-. porsi mapti namapti)
-    (if (lerfu-porsi-fanmo? porsi)
-        (namapti porsi)
-        (mapti (make-lerfu-porsi-pabalvi-lerfu porsi)
-               (lambda ()
-                 (make-javni-valsi cmene (lerfu-porsi-lerfu porsi))))))
-  javni-.)
+(define (nunjavni-. #!key cmene nastura)
+  (let ((nunvalsi-. (make-nunvalsi cmene nastura)))
+    (define (javni-. porsi mapti namapti)
+      (if (lerfu-porsi-fanmo? porsi)
+          (namapti porsi)
+          (mapti (make-lerfu-porsi-pabalvi-lerfu porsi)
+                 (nunvalsi-. (lerfu-porsi-lerfu porsi)))))
+    javni-.))
 
 
 ;; empty-string: parse the empty string, which always succeeds without
 ;;               advancing input.
 ;;
-(define (nunjavni-e #!key cmene (empty-string ""))
-  (define (javni-e porsi mapti namapti)
-    (mapti porsi (lambda () (make-javni-valsi cmene empty-string))))
-  javni-e)
+(define (nunjavni-e #!key cmene nastura (empty-string ""))
+  (let ((nunvalsi-e (make-nunvalsi cmene nastura)))
+    (define (javni-e porsi mapti ignore-namapti)
+      (mapti porsi (nunvalsi-e empty-string)))
+    javni-e))
 
 
 ;; selci: parse the end of input.
@@ -58,18 +60,20 @@
 ;; Should this rule return the sentinel character, or should there
 ;; be a separate option for the value to return at the end of the file?
 ;;
-(define (nunjavni-fanmo #!key cmene (sentinel #\nul))
-  (define (javni-fanmo porsi mapti namapti)
-    (if (lerfu-porsi-fanmo? porsi)
-        (mapti porsi (lambda () (make-javni-valsi cmene sentinel)))
-        (namapti porsi)))
-  javni-fanmo)
+(define (nunjavni-fanmo #!key cmene nastura (sentinel #\nul))
+  (let ((nunvalsi-fanmo (make-nunvalsi cmene nastura)))
+    (define (javni-fanmo porsi mapti namapti)
+      (if (lerfu-porsi-fanmo? porsi)
+          (mapti porsi (nunvalsi-fanmo sentinel))
+          (namapti porsi)))
+  javni-fanmo))
 
 
 ;; selci: parse the specified string
 ;;
-(define (nunjavni-valsi valsi #!key cmene)
-  (let ((nilcla (string-length valsi)))
+(define (nunjavni-valsi valsi #!key cmene (nastura #t))
+  (let ((nilcla (string-length valsi))
+        (nunvalsi-valsi (make-nunvalsi cmene nastura)))
     (define (javni-valsi porsi mapti namapti)
       (let ((poi (lerfu-porsi-poi porsi))
             (zva (lerfu-porsi-zva porsi)))
@@ -80,34 +84,36 @@
                             zva
                             (- (string-length poi) 1))
             (mapti (make-lerfu-porsi-pabalvi-valsi porsi nilcla)
-                   (lambda () (make-javni-valsi cmene valsi)))
+                   (nunvalsi-valsi valsi))
             (namapti porsi))))
     javni-valsi))
 
 
-(define (nunjavni-char-set-* char-set #!key cmene)
-  (define (javni-char-set-* porsi
-                            mapti
-                            ignore-namapti
-                            #!optional (poi (lerfu-porsi-poi porsi))
-                                       (zva (lerfu-porsi-zva porsi)))
-    (define (mapti-char-set-* zva)
-      (let ((puzva (lerfu-porsi-zva porsi)))
-        (mapti (make-lerfu-porsi-pabalvi-valsi porsi (- zva puzva))
-               (lambda ()
-                 (make-javni-valsi cmene (string-copy poi puzva zva))))))
+(define (nunjavni-char-set-* char-set #!key cmene nastura)
+  (let ((nunvalsi-char-set-* (make-nunvalsi cmene nastura)))
+    (define (javni-char-set-* porsi
+                              mapti
+                              ignore-namapti
+                              #!optional (poi (lerfu-porsi-poi porsi))
+                                         (zva (lerfu-porsi-zva porsi)))
+      (define (mapti-char-set-* zva)
+        (let ((puzva (lerfu-porsi-zva porsi)))
+          (mapti (make-lerfu-porsi-pabalvi-valsi porsi (- zva puzva))
+                 (nunvalsi-char-set-* (string-copy poi puzva zva)))))
 
-    (define (char-set-* poi zva)
-      (if (char-set-contains? char-set (string-ref poi zva))
-          (char-set-* poi (+ 1 zva))
-          zva))
+      (define (char-set-* poi zva)
+        (if (char-set-contains? char-set (string-ref poi zva))
+            (char-set-* poi (+ 1 zva))
+            zva))
 
-    (mapti-char-set-* (char-set-* poi zva)))
-  javni-char-set-*)
+      (mapti-char-set-* (char-set-* poi zva)))
+    javni-char-set-*))
 
 
-(define (nunjavni-char-set-+ char-set #!key cmene)
-  (let ((javni-char-set-* (nunjavni-char-set-* char-set cmene: cmene)))
+(define (nunjavni-char-set-+ char-set #!key cmene nastura)
+  (let ((javni-char-set-* (nunjavni-char-set-* char-set
+                                               cmene: cmene
+                                               nastura: nastura)))
     (define (javni-char-set-+ porsi mapti namapti)
       (let ((poi        (lerfu-porsi-poi porsi))
             (zva        (lerfu-porsi-zva porsi)))
@@ -120,24 +126,25 @@
             (namapti porsi))))
     javni-char-set-+))
 
-(define (nunjavni-char-set char-set #!key cmene)
-  (define (javni-char-set porsi mapti namapti)
+;; XXX: inline optimize
+(define (nunjavni-char-set char-set #!key cmene nastura)
+  (let ((nunvalsi-char-set (make-nunvalsi cmene nastura)))
+    (define (javni-char-set porsi mapti namapti)
 
-    (let* ((poi        (lerfu-porsi-poi porsi))
-           (zva        (lerfu-porsi-zva porsi)))
-      (if (char-set-contains? char-set (string-ref poi zva))
-          (mapti (make-lerfu-porsi-pabalvi-lerfu porsi)
-                 (lambda ()
-                   (make-javni-valsi cmene (lerfu-porsi-lerfu porsi))))
-          (namapti porsi))))
-  javni-char-set)
+      (let* ((poi        (lerfu-porsi-poi porsi))
+             (zva        (lerfu-porsi-zva porsi)))
+        (if (char-set-contains? char-set (string-ref poi zva))
+            (mapti (make-lerfu-porsi-pabalvi-lerfu porsi)
+                   (nunvalsi-char-set (lerfu-porsi-lerfu porsi)))
+            (namapti porsi))))
+    javni-char-set))
 
 ;; zero-or-more: parse zero or more javni out of the |lerfu-porsi|.
 ;;
-(define (nunjavni-* javni #!key cmene)
+(define (nunjavni-* javni #!key cmene nastura)
         ; we merge the results differently when we have a cmene.
         ; generate the merge routine based on this.
-  (let ((vejmina (venunjmina-rodanunvalsi cmene)))
+  (let ((vejmina (venunjmina-rodanunvalsi cmene nastura)))
     (define (javni-* porsi
                      mapti
                      namapti
@@ -172,8 +179,8 @@
 
 ;; one-or-more: parse one or more javni out of the |lerfu-porsi|.
 ;;
-(define (nunjavni-+ javni #!key cmene)
-  (let ((javni-* (nunjavni-* javni cmene: cmene)))
+(define (nunjavni-+ javni #!key cmene nastura)
+  (let ((javni-* (nunjavni-* javni cmene: cmene nastura: nastura)))
     (define (javni-+ porsi mapti namapti)
       (define (mapti-+ porsi nunvalsi)
         (let ((fanmo (list nunvalsi)))
@@ -188,8 +195,8 @@
 
 ;; optional: parse an optional javni out of the |lerfu-porsi|.
 ;;
-(define (nunjavni-? javni #!key cmene (empty-string ""))
-  (let ((vejmina (venunjmina-nunvalsi cmene)))
+(define (nunjavni-? javni #!key cmene nastura (empty-string ""))
+  (let ((vejmina (venunjmina-nunvalsi cmene nastura)))
     (define (javni-? porsi mapti ignore-namapti)
 
       (define (mapti-? porsi nunvalsi)
@@ -212,7 +219,7 @@
 (define (nunjavni-& javni)
   (define (javni-& porsi mapti namapti)
     (define (mapti-& ignore-porsi ignore-nunvalsi)
-      (mapti porsi (lambda () (make-javni-valsi #f secuxna-sesumti))))
+      (mapti porsi (lambda () (make-javni-valsi #f secuxna-nastura))))
 
     (define (namapti-& ignore-porsi)
       (namapti porsi))
@@ -230,7 +237,7 @@
       (namapti porsi))
 
     (define (namapti-! ignore-porsi)
-      (mapti porsi (lambda () (make-javni-valsi #f secuxna-sesumti))))
+      (mapti porsi (lambda () (make-javni-valsi #f secuxna-nastura))))
 
     (javni porsi mapti-! namapti-!))
   javni-!)
@@ -239,10 +246,10 @@
 ;; sequence: parse |ro da javni| out of the |lerfu-porsi|.
 ;;           if any of the do not match, none of them match.
 ;;
-(define (nunjavni-je #!rest rodajavni #!key cmene)
+(define (nunjavni-je #!rest rodajavni #!key cmene nastura)
         ; we merge the results differently when we have a cmene.
         ; generate the merge routine based on this.
-  (let ((vejmina   (venunjmina-rodanunvalsi cmene))
+  (let ((vejmina   (venunjmina-rodanunvalsi cmene nastura))
         ; remove #!key name/value pairs from argument list.
         (rodajavni (filter procedure? rodajavni)))
     (define (javni-je porsi
@@ -298,10 +305,10 @@
 ;; ordered-choice: parse the first matching javni out of the
 ;;                 |lerfu-porsi|.
 ;;
-(define (nunjavni-jonai #!rest rodajavni #!key cmene)
+(define (nunjavni-jonai #!rest rodajavni #!key cmene nastura)
         ; we merge the results differently when we have a cmene.
         ; generate the merge routine based on this.
-  (let ((vejmina   (venunjmina-nunvalsi cmene))
+  (let ((vejmina   (venunjmina-nunvalsi cmene nastura))
         ; remove #!key name/value pairs from argument list.
         (rodajavni (filter procedure? rodajavni)))
     (define (javni-jonai porsi
@@ -415,28 +422,50 @@
 (define (nunjavni-samselpla samselpla javni #!key cmene)
   (define (javni-samselpla porsi mapti namapti)
     (define (mapti-samselpla porsi nunvalsi)
+
+      (define (samselpla-sumti rodavalsi)
+        (call-with-values
+          (lambda ()
+            (partition (lambda (javni) (and (javni-valsi? javni)
+                                            (javni-valsi-cme javni)))
+                       (if (list? rodavalsi)
+                           rodavalsi
+                           `(,rodavalsi))))
+          
+          (lambda (cmesumti sumti)
+            (let ((key (append-map!
+                         (lambda (javni)
+                           `(,(string->keyword (javni-valsi-cme javni))
+                             ,(javni-valsi-val javni)))
+                         cmesumti))
+                  (rest (javni-rodavalsi-val-filter sumti)))
+              (append! rest key)))))
+
       (define (nunvalsi-samselpla)
         (let* ((rodavalsi (nunvalsi))
-               (rodacme   (filter javni-valsi-cme
-                                  (flatten (if (list? rodavalsi)
-                                               rodavalsi
-                                               (list rodavalsi)))))
-               (rodaval   (append-map!
-                            (lambda (javni)
-                              (list (string->keyword (javni-valsi-cme javni))
-                                    (javni-valsi-val javni)))
-                            rodacme))
+               (rodaval   (samselpla-sumti rodavalsi))
                (valsi     (apply samselpla rodaval)))
           (make-javni-valsi cmene valsi)))
+
       (mapti porsi nunvalsi-samselpla))
+
     (javni porsi mapti-samselpla namapti))
+
   javni-samselpla)
 
-(define (nunjavni-cmene javni #!key cmene)
-  (define (javni-cmene porsi mapti namapti)
-    (define (mapti-cmene porsi nunvalsi)
-      (define (nunvalsi-cmene)
-        (make-javni-valsi cmene (javni-nunvalsi-val nunvalsi)))
-      (mapti porsi nunvalsi-cmene))
-    (javni porsi mapti-cmene namapti))
-  javni-cmene)
+(define (nunjavni-cmene javni #!key cmene nastura)
+  (let ((nunvalsi-cmene (make-nunvalsi cmene nastura)))
+    (define (javni-cmene porsi mapti namapti)
+      (define (mapti-cmene porsi nunvalsi)
+        (mapti porsi (nunvalsi-cmene (javni-nunvalsi-val nunvalsi))))
+      (javni porsi mapti-cmene namapti))
+    javni-cmene))
+
+(define (nunjavni-nastura javni)
+  (define (javni-nastura porsi mapti namapti)
+    (define (mapti-nastura porsi ignore-nunvalsi)
+      (define (nunvalsi-nastura)
+        (make-javni-valsi #f secuxna-nastura))
+      (mapti porsi nunvalsi-nastura))
+    (javni porsi mapti-nastura namapti))
+  javni-nastura)
