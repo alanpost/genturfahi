@@ -62,6 +62,8 @@
    samselpla-klesi-selci
    samselpla-denpabu
    samselpla-samselpla
+   samselpla-samselpla-xadni
+   samselpla-samselpla-cmene
    samselpla-samselpla-lerfu
    samselpla-girzu-javni
    samselpla-canlu)

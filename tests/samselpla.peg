@@ -17,7 +17,7 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
-gerna <- #:a a #:b b #:c c {test-samselpla-samselpla}
-a     <- #:lerfu #\a       {test-samselpla-lerfu}
-b     <- #:lerfu #\b       {test-samselpla-lerfu}
-c     <- #:lerfu #\c       {test-samselpla-lerfu}
+gerna <- #:a a #:b b #:c c -> test-samselpla-samselpla
+a     <- #:lerfu #\a       -> test-samselpla-lerfu
+b     <- #:lerfu #\b       -> test-samselpla-lerfu
+c     <- #:lerfu #\c       -> test-samselpla-lerfu

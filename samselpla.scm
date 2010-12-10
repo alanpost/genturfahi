@@ -381,8 +381,14 @@
 (define (samselpla-denpabu)
   `(morji-nunjavni-.))
 
-(define (samselpla-samselpla #!key rodalerfu)
+(define (samselpla-samselpla #!key samselpla)
+  samselpla)
+
+(define (samselpla-samselpla-xadni #!key rodalerfu)
   (apply string rodalerfu))
+
+(define (samselpla-samselpla-cmene #!key cfari fanmo)
+  (string-append (make-string 1 cfari) fanmo))
 
 (define (samselpla-samselpla-lerfu #!key lerfu)
   lerfu)

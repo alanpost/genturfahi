@@ -17,6 +17,6 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
-expr  <- #:x term #\+ #:y expr  {test-rrecursion-+}
+expr  <- #:x term #\+ #:y expr  -> {test-rrecursion-+}
        / term
-term  <- #:x [[:digit:]]+       {test-rrecursion-term}
+term  <- #:x [[:digit:]]+       -> test-rrecursion-term
