@@ -20,7 +20,7 @@
 ;;;
 ;;; character classes:
 ;;;
-;;; gerna <- (digit / alpha)* 'FAhO
+;;; gerna <- (digit / alpha)* `FAhO
 ;;; digit <- [:digit:]+
 ;;; alpha <- [:alpha:]+
 ;;; FAhO  <- !.

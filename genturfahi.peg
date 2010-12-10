@@ -94,7 +94,7 @@ je              <- #:rodajavni nastura-pajavni+
                    #:samselpla samselpla?
                 -> samselpla-je
 
-nastura-pajavni <- #\' canlu #:javni pajavni
+nastura-pajavni <- #\` canlu #:javni pajavni
                 -> samselpla-nastura-javni
                  / pajavni
 
@@ -242,7 +242,7 @@ girzu-javni     <- #\( canlu javni #\) canlu
                  / "()" canlu
                 -> samselpla-empty-string
 
-canlu           <- '(canlubu / totoi)*
+canlu           <- `(canlubu / totoi)*
 
 canlubu         <- #\space
                  / #\tab
@@ -256,4 +256,4 @@ CRLF            <- CR LF
                 /  CR
                 /  LF
 
-FAhO            <- '!.
+FAhO            <- `!.

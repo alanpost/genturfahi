@@ -179,7 +179,7 @@
           (morji-nunjavni-samselpla
             samselpla-nastura-javni
             (morji-nunjavni-je
-              (morji-nunjavni-lerfu #\')
+              (morji-nunjavni-lerfu #\`)
               canlu-1
               (morji-nunjavni-cmene pajavni-13 cmene: "javni")))
           pajavni-13)))
