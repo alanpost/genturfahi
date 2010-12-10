@@ -20,10 +20,10 @@
 ;;;
 ;;; empty-string:
 ;;;
-;;; empty-string <- ""
+;;; empty-string <- ,""
 ;;;
 (define (empty-string)
-  (let ((genturfahi-empty-string (genturfahi* (nunjavni-e))))
+  (let ((genturfahi-empty-string (genturfahi* (nunjavni-e nastura: #f))))
     (empty-string-test genturfahi-empty-string)))
 
 (define (empty-string-peg)

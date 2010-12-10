@@ -20,6 +20,7 @@
 (use genturfahi genturfahi-peg test)
 
 (include "empty-string.scm")
+(include "empty-list.scm")
 (include "end-of-input.scm")
 (include "lerfu.scm")
 (include "dot.scm")

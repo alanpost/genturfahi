@@ -78,6 +78,7 @@
    nunjavni-lerfu
    nunjavni-.
    nunjavni-e
+   nunjavni-nil
    nunjavni-fanmo
    nunjavni-valsi
    nunjavni-char-set-*
@@ -105,6 +106,7 @@
    morji-nunjavni-lerfu
    morji-nunjavni-.
    morji-nunjavni-e
+   morji-nunjavni-nil
    morji-nunjavni-fanmo
    morji-nunjavni-valsi
    morji-nunjavni-char-set-*
@@ -144,6 +146,7 @@
    secuxna-memoize
    secuxna-sentinel
    secuxna-empty-string
+   secuxna-empty-list
    secuxna-nonmatch-token
    secuxna-nastura)
 

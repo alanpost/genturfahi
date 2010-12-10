@@ -17,4 +17,33 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
-empty-string <- ,""
+;;;
+;;; empty-list:
+;;;
+;;; empty-list <- ()
+;;;
+(define (empty-list)
+  (let ((genturfahi-empty-list (genturfahi* (nunjavni-nil))))
+    (empty-list-test genturfahi-empty-list)))
+
+(define (empty-list-peg)
+  (let* ((samselpla (call-with-input-file "empty-list.peg" genturfahi-peg))
+         (genturfahi-empty-list (genturfahi* (eval samselpla))))
+    (empty-list-test genturfahi-empty-list)))
+
+(define (empty-list-test genturfahi-empty-list)
+  ; the empty string is zero characters long, so
+  ; it always matches.
+  ;
+  (test '(() "") (genturfahi-empty-list ""))
+  (test '(() "a") (genturfahi-empty-list "a"))
+  (test '(() "b") (genturfahi-empty-list "b"))
+  (test '(() "c") (genturfahi-empty-list "c"))
+  (test '(() "abc") (genturfahi-empty-list "abc"))
+  0)
+
+(test-group "empty-list"
+  (empty-list))
+
+(test-group "empty-list (PEG)"
+  (empty-list-peg))

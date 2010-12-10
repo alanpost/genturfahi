@@ -52,6 +52,8 @@
 
 ;{(sentinel #\nul)}
 
+;{(empty-list '())}
+
 ;{(empty-string "")}
 
 ;{(nonmatch-token #f)}
@@ -166,13 +168,19 @@ lerfu-cmene     <- "space"    -> samselpla-lerfu-space
                  / "return"   -> samselpla-lerfu-return
                  / "tab"      -> samselpla-lerfu-tab
 
-valsi-selci     <- ",\""
-                   #:valsi-lerfu (!#\" valsi-lerfu)*
+valsi-selci     <- ",\"\""
+                   canlu
+                -> samselpla-stura-empty-string
+                 / "\"\""
+                   canlu
+                -> samselpla-empty-string
+                 / ",\""
+                   #:valsi-lerfu (!#\" valsi-lerfu)+
                    #\"
                    canlu
                 -> samselpla-stura-valsi-selci
                  / #\"
-                   #:valsi-lerfu (!#\" valsi-lerfu)*
+                   #:valsi-lerfu (!#\" valsi-lerfu)+
                    #\"
                    canlu
                 -> samselpla-valsi-selci
@@ -238,9 +246,9 @@ samselpla-cmene <- #:cfari [[:alnum:]$%:=>^~_@]
                    canlu
                 -> samselpla-samselpla-cmene
 
-girzu-javni     <- #\( canlu javni #\) canlu
-                 / "()" canlu
-                -> samselpla-empty-string
+girzu-javni     <- "()" canlu
+                -> samselpla-empty-list
+                 / #\( canlu javni #\) canlu
 
 canlu           <- `(canlubu / totoi)*
 

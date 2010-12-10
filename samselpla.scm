@@ -413,8 +413,21 @@
 (define (samselpla-samselpla-cmene #!key cfari fanmo)
   (string-append (make-string 1 cfari) fanmo))
 
+(define (samselpla-stura-empty-string)
+  (let ((empty-string (secuxna-empty-string)))
+    `(morji-nunjavni-e nastura: #f
+                       ,@(if (string=? "" empty-string)
+                             '()
+                             `(empty-string: ,empty-string)))))
+
 (define (samselpla-empty-string)
   (let ((empty-string (secuxna-empty-string)))
     `(morji-nunjavni-e ,@(if (string=? "" empty-string)
                              '()
                              `(empty-string: ,empty-string)))))
+
+(define (samselpla-empty-list)
+  (let ((empty-list (secuxna-empty-list)))
+    `(morji-nunjavni-nil ,@(if (eq? '() empty-list)
+                               '()
+                               `(empty-list: ,empty-list)))))

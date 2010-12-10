@@ -358,10 +358,16 @@
       (nunjavni-morji
         (morji-nunjavni-jonai
           (morji-nunjavni-samselpla
+            samselpla-stura-empty-string
+            (morji-nunjavni-je (morji-nunjavni-valsi ",\"\"") canlu-1))
+          (morji-nunjavni-samselpla
+            samselpla-empty-string
+            (morji-nunjavni-je (morji-nunjavni-valsi "\"\"") canlu-1))
+          (morji-nunjavni-samselpla
             samselpla-stura-valsi-selci
             (morji-nunjavni-je
               (morji-nunjavni-valsi ",\"")
-              (morji-nunjavni-*
+              (morji-nunjavni-+
                 (morji-nunjavni-je
                   (morji-nunjavni-! (morji-nunjavni-lerfu #\"))
                   valsi-lerfu-28)
@@ -373,7 +379,7 @@
             samselpla-valsi-selci
             (morji-nunjavni-je
               (morji-nunjavni-lerfu #\")
-              (morji-nunjavni-*
+              (morji-nunjavni-+
                 (morji-nunjavni-je
                   (morji-nunjavni-! (morji-nunjavni-lerfu #\"))
                   valsi-lerfu-28)
@@ -608,15 +614,15 @@
     (define girzu-javni-69
       (nunjavni-morji
         (morji-nunjavni-jonai
+          (morji-nunjavni-samselpla
+            samselpla-empty-list
+            (morji-nunjavni-je (morji-nunjavni-valsi "()") canlu-1))
           (morji-nunjavni-je
             (morji-nunjavni-lerfu #\()
             canlu-1
             javni-7
             (morji-nunjavni-lerfu #\))
-            canlu-1)
-          (morji-nunjavni-samselpla
-            samselpla-empty-string
-            (morji-nunjavni-je (morji-nunjavni-valsi "()") canlu-1)))))
+            canlu-1))))
     (define canlu-70
       (nunjavni-morji
         (morji-nunjavni-*

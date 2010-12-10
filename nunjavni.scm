@@ -48,11 +48,21 @@
 ;; empty-string: parse the empty string, which always succeeds without
 ;;               advancing input.
 ;;
-(define (nunjavni-e #!key cmene nastura (empty-string ""))
+(define (nunjavni-e #!key cmene (nastura #t) (empty-string ""))
   (let ((nunvalsi-e (make-nunvalsi cmene nastura)))
     (define (javni-e porsi mapti ignore-namapti)
       (mapti porsi (nunvalsi-e empty-string)))
     javni-e))
+
+
+;; empty-list: parse the empty list, which always succeeds without
+;;             advancing input.
+;;
+(define (nunjavni-nil #!key cmene nastura (empty-list '()))
+  (let ((nunvalsi-nil (make-nunvalsi cmene nastura)))
+    (define (javni-nil porsi mapti ignore-namapti)
+      (mapti porsi (nunvalsi-nil empty-list)))
+    javni-nil))
 
 
 ;; selci: parse the end of input.

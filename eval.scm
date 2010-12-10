@@ -67,6 +67,11 @@
 
 (safe-environment-set!
   genturfahi-env
+  'empty-list
+  secuxna-empty-list)
+
+(safe-environment-set!
+  genturfahi-env
   'empty-string
   secuxna-empty-string)
 

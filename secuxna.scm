@@ -43,6 +43,7 @@
 (define secuxna-memoize          (make-parameter #t))
 
 (define secuxna-sentinel         (make-parameter #\nul))
+(define secuxna-empty-list       (make-parameter '()))
 (define secuxna-empty-string     (make-parameter ""))
 (define secuxna-nonmatch-token   (make-parameter #f))
 

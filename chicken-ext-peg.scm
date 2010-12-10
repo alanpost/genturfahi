@@ -64,7 +64,10 @@
    samselpla-klesi-selci
    samselpla-denpabu
    samselpla-samselpla-xadni
-   samselpla-samselpla-cmene)
+   samselpla-samselpla-cmene
+   samselpla-stura-empty-string
+   samselpla-empty-string
+   samselpla-empty-list)
 
 (import chicken)
 (import scheme)
