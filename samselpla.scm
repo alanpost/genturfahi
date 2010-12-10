@@ -156,13 +156,30 @@
 (define (samselpla-naselci #!key cfari fanmo)
   (string-append (make-string 1 cfari) fanmo))
 
-(define (samselpla-je #!key samselpla rodajavni)
-  (let* ((javni (if (null? (cdr rodajavni))
-                           (car rodajavni)
-                           `(morji-nunjavni-je ,@rodajavni))))
+(define (samselpla-je #!key cmene samselpla javni)
+  ; if there is more than one javni, wrap in a sequence operator.
+  ;
+  (define (nunje javni)
+    (if (null? (cdr javni))
+        (car javni)
+        `(morji-nunjavni-je ,@javni)))
+
+  ; if code was specified, wrap in a code operator.
+  ;
+  (define (nunsamselpla samselpla javni)
     (if (string=? "" samselpla)
         javni
-        `(morji-nunjavni-samselpla ,(string->symbol samselpla) ,javni))))
+        `(morji-nunjavni-samselpla ,(string->symbol samselpla) ,javni)))
+
+  ; if this production is named, attach the name to the rule,
+  ; sequence operator, or code.
+  ;
+  (define (nuncmene cmene javni)
+    (if (string=? "" cmene)
+        javni
+        `(,@javni cmene: ,cmene)))
+
+  (nuncmene cmene (nunsamselpla samselpla (nunje javni))))
 
 (define (samselpla-nastura-javni #!key javni)
   (if (symbol? javni)

@@ -89,7 +89,7 @@ javni           <- jonai
 jonai           <- #:cfari je
                    #:fanmo (#\/ canlu je)+
                 -> samselpla-jonai
-je              <- #:rodajavni nastura-pajavni+
+je              <- #:javni     nastura-pajavni+
                    #:cmene     cmene-sumti?
                    #:samselpla samselpla?
                 -> samselpla-je

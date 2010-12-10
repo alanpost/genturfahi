@@ -170,7 +170,7 @@
         (morji-nunjavni-samselpla
           samselpla-je
           (morji-nunjavni-je
-            (morji-nunjavni-+ nastura-pajavni-10 cmene: "rodajavni")
+            (morji-nunjavni-+ nastura-pajavni-10 cmene: "javni")
             (morji-nunjavni-? cmene-sumti-11 cmene: "cmene")
             (morji-nunjavni-? samselpla-12 cmene: "samselpla")))))
     (define nastura-pajavni-47
