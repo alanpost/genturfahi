@@ -120,13 +120,35 @@
           samselpla-naselci
           (morji-nunjavni-je
             (morji-nunjavni-char-set
-              (char-set-union char-set:letter (char-set #\_))
+              (char-set-union
+                char-set:letter+digit
+                (char-set #\$)
+                (char-set #\%)
+                (char-set #\:)
+                (char-set #\=)
+                (char-set #\>)
+                (char-set #\^)
+                (char-set #\~)
+                (char-set #\_)
+                (char-set #\@))
               cmene:
               "cfari")
             (morji-nunjavni-char-set-*
               (char-set-union
                 char-set:letter+digit
+                (char-set #\$)
+                (char-set #\%)
+                (char-set #\:)
+                (char-set #\=)
+                (char-set #\>)
+                (char-set #\^)
+                (char-set #\~)
                 (char-set #\_)
+                (char-set #\@)
+                (char-set #\.)
+                (char-set #\!)
+                (char-set #\&)
+                (char-set #\/)
                 (char-set #\\)
                 (char-set #\-))
               cmene:
@@ -234,13 +256,35 @@
           (morji-nunjavni-je
             (morji-nunjavni-valsi "#:")
             (morji-nunjavni-char-set
-              (char-set-union char-set:letter (char-set #\_))
+              (char-set-union
+                char-set:letter+digit
+                (char-set #\$)
+                (char-set #\%)
+                (char-set #\:)
+                (char-set #\=)
+                (char-set #\>)
+                (char-set #\^)
+                (char-set #\~)
+                (char-set #\_)
+                (char-set #\@))
               cmene:
               "cfari")
             (morji-nunjavni-char-set-*
               (char-set-union
                 char-set:letter+digit
+                (char-set #\$)
+                (char-set #\%)
+                (char-set #\:)
+                (char-set #\=)
+                (char-set #\>)
+                (char-set #\^)
+                (char-set #\~)
                 (char-set #\_)
+                (char-set #\@)
+                (char-set #\.)
+                (char-set #\!)
+                (char-set #\&)
+                (char-set #\/)
                 (char-set #\\)
                 (char-set #\-))
               cmene:
@@ -527,13 +571,35 @@
           samselpla-samselpla-cmene
           (morji-nunjavni-je
             (morji-nunjavni-char-set
-              (char-set-union char-set:letter (char-set #\_))
+              (char-set-union
+                char-set:letter+digit
+                (char-set #\$)
+                (char-set #\%)
+                (char-set #\:)
+                (char-set #\=)
+                (char-set #\>)
+                (char-set #\^)
+                (char-set #\~)
+                (char-set #\_)
+                (char-set #\@))
               cmene:
               "cfari")
             (morji-nunjavni-char-set-*
               (char-set-union
                 char-set:letter+digit
+                (char-set #\$)
+                (char-set #\%)
+                (char-set #\:)
+                (char-set #\=)
+                (char-set #\>)
+                (char-set #\^)
+                (char-set #\~)
                 (char-set #\_)
+                (char-set #\@)
+                (char-set #\.)
+                (char-set #\!)
+                (char-set #\&)
+                (char-set #\/)
                 (char-set #\\)
                 (char-set #\-))
               cmene:

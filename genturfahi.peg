@@ -78,9 +78,8 @@ smuni           <- #:naselci naselci
                    #:javni javni
                 -> samselpla-smuni
 
-; this really doesn't need to be so strict.
-naselci         <- #:cfari [[:alpha:]_]
-                   #:fanmo [[:alnum:]_\-]*
+naselci         <- #:cfari [[:alnum:]$%:=>^~_@]
+                   #:fanmo [[:alnum:]$%:=>^~_@.!&/\-]*
                    canlu
                 -> samselpla-naselci
 
@@ -136,8 +135,8 @@ not-predicate   <- #\!
                 -> {samselpla-!}
 
 cmene-sumti     <- "#:"
-                   #:cfari [[:alpha:]_]
-                   #:fanmo [[:alnum:]_\-]*
+                   #:cfari [[:alnum:]$%:=>^~_@]
+                   #:fanmo [[:alnum:]$%:=>^~_@.!&/\-]*
                    canlu
                 -> samselpla-cmene-sumti
 
@@ -208,20 +207,20 @@ klesi-cmene     <- "[:alnum:]"   -> samselpla-alnum
                  / "[:space:]"   -> samselpla-space
                  / "[:upper:]"   -> samselpla-upper
                  / "[:xdigit:]"  -> samselpla-xdigit
-                 / "[:^alnum:]"  -> {samselpla-^alnum}
-                 / "[:^alpha:]"  -> {samselpla-^alpha}
-                 / "[:^ascii:]"  -> {samselpla-^ascii}
-                 / "[:^blank:]"  -> {samselpla-^blank}
-                 / "[:^cntrl:]"  -> {samselpla-^cntrl}
-                 / "[:^digit:]"  -> {samselpla-^digit}
-                 / "[:^graph:]"  -> {samselpla-^graph}
-                 / "[:^lower:]"  -> {samselpla-^lower}
-                 / "[:^odigit:]" -> {samselpla-^odigit}
-                 / "[:^print:]"  -> {samselpla-^print}
-                 / "[:^punct:]"  -> {samselpla-^punct}
-                 / "[:^space:]"  -> {samselpla-^space}
-                 / "[:^upper:]"  -> {samselpla-^upper}
-                 / "[:^xdigit:]" -> {samselpla-^xdigit}
+                 / "[:^alnum:]"  -> samselpla-^alnum
+                 / "[:^alpha:]"  -> samselpla-^alpha
+                 / "[:^ascii:]"  -> samselpla-^ascii
+                 / "[:^blank:]"  -> samselpla-^blank
+                 / "[:^cntrl:]"  -> samselpla-^cntrl
+                 / "[:^digit:]"  -> samselpla-^digit
+                 / "[:^graph:]"  -> samselpla-^graph
+                 / "[:^lower:]"  -> samselpla-^lower
+                 / "[:^odigit:]" -> samselpla-^odigit
+                 / "[:^print:]"  -> samselpla-^print
+                 / "[:^punct:]"  -> samselpla-^punct
+                 / "[:^space:]"  -> samselpla-^space
+                 / "[:^upper:]"  -> samselpla-^upper
+                 / "[:^xdigit:]" -> samselpla-^xdigit
 
 denpabu         <- #\. canlu
                 -> samselpla-denpabu
@@ -234,8 +233,8 @@ samselpla       <- "->"
 samselpla-xadni <- #\{ canlu #:rodalerfu (!#\} .)+ #\} canlu
                 -> samselpla-samselpla-xadni
 
-samselpla-cmene <- #:cfari [[:alpha:]_]
-                   #:fanmo [[:alnum:]_\-]*
+samselpla-cmene <- #:cfari [[:alnum:]$%:=>^~_@]
+                   #:fanmo [[:alnum:]$%:=>^~_@.!&/\-]*
                    canlu
                 -> samselpla-samselpla-cmene
 
