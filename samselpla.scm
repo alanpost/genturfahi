@@ -92,7 +92,7 @@
                 ,@(if (list? rodatamgau)
 
                       (let ((rodatamgau
-                              (map string->symbol  rodatamgau))
+                              (map string->symbol rodatamgau))
                             (nunselci-cmene
                               (map samselpla-cmene->symbol* selci-cmene)))
                         (if toplevel
