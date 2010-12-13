@@ -206,7 +206,10 @@
 ;; optional: parse an optional javni out of the |lerfu-porsi|.
 ;;
 (define (nunjavni-? javni #!key cmene nastura (empty-string ""))
-  (let ((vejmina (venunjmina-nunvalsi cmene nastura)))
+  (let ((vejmina (venunjmina-nunvalsi cmene nastura))
+        (novejmina (if nastura
+                       (lambda () (make-javni-valsi cmene secuxna-nastura))
+                       (lambda () (make-javni-valsi cmene empty-string)))))
     (define (javni-? porsi mapti ignore-namapti)
 
       (define (mapti-? porsi nunvalsi)
@@ -217,8 +220,7 @@
         ; this javni cannot fail.  |porsi| is not advanced
         ; on failure, so we can use it.
         ;
-        (mapti porsi
-               (lambda () (make-javni-valsi cmene empty-string))))
+        (mapti porsi novejmina))
 
       (javni porsi mapti-? namapti-?))
     javni-?))
