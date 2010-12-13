@@ -169,7 +169,7 @@
   (define (nunsamselpla samselpla javni)
     (if (string=? "" samselpla)
         javni
-        `(morji-nunjavni-samselpla ,(string->symbol samselpla) ,javni)))
+        `(morji-nunjavni-samselpla ,samselpla ,javni)))
 
   ; if this production is named, attach the name to the rule,
   ; sequence operator, or code.
@@ -408,10 +408,10 @@
   `(morji-nunjavni-.))
 
 (define (samselpla-samselpla-xadni #!key rodalerfu)
-  (apply string rodalerfu))
+  (read (open-input-string (apply string rodalerfu))))
 
 (define (samselpla-samselpla-cmene #!key cfari fanmo)
-  (string-append (make-string 1 cfari) fanmo))
+  (string->symbol (string-append (make-string 1 cfari) fanmo)))
 
 (define (samselpla-stura-empty-string)
   (let ((empty-string (secuxna-empty-string)))
