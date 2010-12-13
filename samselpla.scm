@@ -305,6 +305,11 @@
 (define (samselpla-graph)
   'char-set:graphic)
 
+(define (samselpla-jbolehu)
+  `(char-set-union
+     (char-set-xor char-set:letter+digit (char-set #\q #\w))
+     (char-set #\')))
+
 (define (samselpla-lower)
   'char-set:lower-case)
 

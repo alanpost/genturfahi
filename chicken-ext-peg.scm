@@ -67,6 +67,7 @@
    samselpla-cntrl
    samselpla-digit
    samselpla-graph
+   samselpla-jbolehu
    samselpla-lower
    samselpla-odigit
    samselpla-print

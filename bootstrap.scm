@@ -483,6 +483,9 @@
             samselpla-graph
             (morji-nunjavni-valsi "[:graph:]"))
           (morji-nunjavni-samselpla
+            samselpla-jbolehu
+            (morji-nunjavni-valsi "[:jbole'u:]"))
+          (morji-nunjavni-samselpla
             samselpla-lower
             (morji-nunjavni-valsi "[:lower:]"))
           (morji-nunjavni-samselpla

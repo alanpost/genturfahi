@@ -208,6 +208,7 @@ klesi-cmene     <- "[:alnum:]"   -> samselpla-alnum
                  / "[:cntrl:]"   -> samselpla-cntrl
                  / "[:digit:]"   -> samselpla-digit
                  / "[:graph:]"   -> samselpla-graph
+                 / "[:jbole'u:]" -> samselpla-jbolehu
                  / "[:lower:]"   -> samselpla-lower
                  / "[:odigit:]"  -> samselpla-odigit
                  / "[:print:]"   -> samselpla-print
