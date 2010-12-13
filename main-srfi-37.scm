@@ -17,17 +17,46 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
+(define (debug option name arg . seeds)
+  (secuxna-debug #t))
+
 (define (help option name arg . seeds)
-  (print "usage: genturfahi [-help] [-version] [file]")
+  (print #<<EOS
+usage: genturfahi [-dhmpv] [-help] [-version]
+                  [-debug] [-no-memoize] [-profile]
+                  [file]
+EOS
+  )
   (exit 0))
+
+(define (define-name option name arg . seeds)
+  (secuxna-define-name arg))
+
+(define (define-toplevel option name arg . seeds)
+  (secuxna-define-toplevel #t))
+
+(define (no-memoize option name arg . seeds)
+  (secuxna-memoize #f))
+
+(define (profile option name arg . seeds)
+  (secuxna-profile #t))
+
+(define (start-production option name arg . seeds)
+  (secuxna-start-production arg))
 
 (define (version option name arg . seeds)
   (print (format "genturfa'i version ~a" genturfahi-version))
   (exit 0))
 
 (define options
-  (list (option '(#\h "sidju" "help")    #f #f help)
-        (option '(#\v         "version") #f #f version)))
+  (list (option '(#\d "debug")            #f         #f debug)
+        (option '(#\h "sidju" "help")     #f         #f help)
+        (option '(#\m "no-memoize")       #f         #f no-memoize)
+        (option '(#\n "define-name")      #:required #f define-name)
+        (option '(#\p "profile")          #f         #f profile)
+        (option '(#\s "start-production") #:required #f start-production)
+        (option '(#\t "define-toplevel")  #f         #f define-toplevel)
+        (option '(#\v "version")          #f         #f version)))
 
 (define (usage option name args . seeds)
   (error (format "unrecognized option \"~a\"" name)))
