@@ -1,5 +1,3 @@
-(include "chicken-declare.scm")
-
 (use srfi-1)
 (use srfi-9)
 (use srfi-13)    ; String Libraries
