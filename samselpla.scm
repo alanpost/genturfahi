@@ -58,7 +58,7 @@
 ;; ignore the FAhO tag in the file, and
 ;; just return the header code and grammar.
 ;;
-(define (samselpla-cfari samselpla #!key gerna)
+(define (samselpla-cfari #!key samselpla gerna)
   (call-with-values
     (lambda () (unzip2 gerna))
     (lambda (smuni-nunselci smuni)
