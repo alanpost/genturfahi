@@ -60,6 +60,34 @@
    samselpla-valsi-single-quote
    samselpla-valsi-double-quote
    samselpla-valsi-lerfu
+   samselpla-alnum
+   samselpla-alpha
+   samselpla-ascii
+   samselpla-blank
+   samselpla-cntrl
+   samselpla-digit
+   samselpla-graph
+   samselpla-lower
+   samselpla-odigit
+   samselpla-print
+   samselpla-punct
+   samselpla-space
+   samselpla-upper
+   samselpla-xdigit
+   samselpla-^alnum
+   samselpla-^alpha
+   samselpla-^ascii
+   samselpla-^blank
+   samselpla-^cntrl
+   samselpla-^digit
+   samselpla-^graph
+   samselpla-^lower
+   samselpla-^odigit
+   samselpla-^print
+   samselpla-^punct
+   samselpla-^space
+   samselpla-^upper
+   samselpla-^xdigit
    samselpla-klesi-selci
    samselpla-denpabu
    samselpla-samselpla-xadni
