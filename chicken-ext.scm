@@ -170,7 +170,6 @@
 (require-extension srfi-69)
 (require-extension extras)
 (require-extension ports)
-(require-extension data-structures)
 
 (import srfi-1)          ; filter
 ;(import srfi-6)          ; string ports
@@ -183,7 +182,6 @@
 (import srfi-69)         ; basic hash tables
 (import extras)          ; format, pretty-print
 (import ports)           ; Chicken Scheme srfi-6 and port extensions
-(import data-structures) ; flatten
 
 (include "chicken-platform.scm")
 
