@@ -59,7 +59,7 @@
 ;{(nonmatch-token #f)}
 
 cfari           <- canlu
-                   #:samselpla cfari-samselpla*
+                   `cfari-samselpla*
                    canlu
                    #:gerna gerna
                    FAhO
@@ -70,7 +70,7 @@ cfari           <- canlu
 ; header code than body code.
 ;
 cfari-samselpla <- #\{ canlu #:rodalerfu (!#\} .)+ #\} canlu
-                -> samselpla-cfari-samselpla
+                -| samselpla-cfari-samselpla
 
 gerna           <- smuni*
 
@@ -237,6 +237,12 @@ samselpla       <- "->"
                    canlu
                    ( samselpla-xadni
                    / samselpla-cmene )
+                -> samselpla-samselpla-balvi
+                 / "-|"
+                   canlu
+                   ( samselpla-xadni
+                   / samselpla-cmene )
+                -> samselpla-samselpla-cabna
 
 samselpla-xadni <- #\{ canlu #:rodalerfu (!#\} .)+ #\} canlu
                 -> samselpla-samselpla-xadni

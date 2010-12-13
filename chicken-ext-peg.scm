@@ -65,6 +65,8 @@
    samselpla-denpabu
    samselpla-samselpla-xadni
    samselpla-samselpla-cmene
+   samselpla-samselpla-balvi
+   samselpla-samselpla-cabna
    samselpla-stura-empty-string
    samselpla-empty-string
    samselpla-empty-list)

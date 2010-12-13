@@ -85,13 +85,13 @@
           samselpla-cfari
           (morji-nunjavni-je
             canlu-1
-            (morji-nunjavni-* cfari-samselpla-2 cmene: "samselpla")
+            (morji-nunjavni-* cfari-samselpla-2 nastura: #t)
             canlu-1
             (morji-nunjavni-cmene gerna-3 cmene: "gerna")
             FAhO-4))))
     (define cfari-samselpla-40
       (nunjavni-morji
-        (morji-nunjavni-samselpla
+        (morji-nunjavni-samselpla-cabna
           samselpla-cfari-samselpla
           (morji-nunjavni-je
             (morji-nunjavni-lerfu #\{)
@@ -552,10 +552,19 @@
           (morji-nunjavni-je (morji-nunjavni-lerfu #\.) canlu-1))))
     (define samselpla-66
       (nunjavni-morji
-        (morji-nunjavni-je
-          (morji-nunjavni-valsi "->")
-          canlu-1
-          (morji-nunjavni-jonai samselpla-xadni-31 samselpla-cmene-32))))
+        (morji-nunjavni-jonai
+          (morji-nunjavni-samselpla
+            samselpla-samselpla-balvi
+            (morji-nunjavni-je
+              (morji-nunjavni-valsi "->")
+              canlu-1
+              (morji-nunjavni-jonai samselpla-xadni-31 samselpla-cmene-32)))
+          (morji-nunjavni-samselpla
+            samselpla-samselpla-cabna
+            (morji-nunjavni-je
+              (morji-nunjavni-valsi "-|")
+              canlu-1
+              (morji-nunjavni-jonai samselpla-xadni-31 samselpla-cmene-32))))))
     (define samselpla-xadni-67
       (nunjavni-morji
         (morji-nunjavni-samselpla

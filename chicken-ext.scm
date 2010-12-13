@@ -95,6 +95,7 @@
    genturfahi-tolmohi
    nunjavni-morji
    nunjavni-samselpla
+   nunjavni-samselpla-cabna
    nunjavni-cmene
    nunjavni-nastura
 
@@ -121,6 +122,7 @@
    morji-nunjavni-jonai
 
    morji-nunjavni-samselpla
+   morji-nunjavni-samselpla-cabna
    morji-nunjavni-cmene
    morji-nunjavni-nastura
 

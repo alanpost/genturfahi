@@ -58,7 +58,7 @@
 ;; ignore the FAhO tag in the file, and
 ;; just return the header code and grammar.
 ;;
-(define (samselpla-cfari #!key samselpla gerna)
+(define (samselpla-cfari #!key gerna)
   (call-with-values
     (lambda () (unzip2 gerna))
     (lambda (smuni-nunselci smuni)
@@ -167,9 +167,9 @@
   ; if code was specified, wrap in a code operator.
   ;
   (define (nunsamselpla samselpla javni)
-    (if (string=? "" samselpla)
+    (if (and (string? samselpla) (string=? "" samselpla))
         javni
-        `(morji-nunjavni-samselpla ,samselpla ,javni)))
+        `(,@samselpla ,javni)))
 
   ; if this production is named, attach the name to the rule,
   ; sequence operator, or code.
@@ -412,6 +412,12 @@
 
 (define (samselpla-samselpla-cmene #!key cfari fanmo)
   (string->symbol (string-append (make-string 1 cfari) fanmo)))
+
+(define (samselpla-samselpla-balvi samselpla)
+  `(morji-nunjavni-samselpla ,samselpla))
+
+(define (samselpla-samselpla-cabna samselpla)
+  `(morji-nunjavni-samselpla-cabna ,samselpla))
 
 (define (samselpla-stura-empty-string)
   (let ((empty-string (secuxna-empty-string)))
