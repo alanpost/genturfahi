@@ -47,7 +47,6 @@
    samselpla-stura-lerfu-selci
    samselpla-lerfu-selci
    samselpla-lerfu-space
-   samselpla-lerfu-return
    samselpla-lerfu-linefeed
    samselpla-lerfu-newline
    samselpla-lerfu-return
