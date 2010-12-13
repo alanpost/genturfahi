@@ -268,7 +268,7 @@ totoi           <- #\; (!CRLF .)* (CRLF / &FAhO)
 CR              <- #\return
 LF              <- #\linefeed
 CRLF            <- CR LF
-                /  CR
-                /  LF
+                 / CR
+                 / LF
 
 FAhO            <- `!.
