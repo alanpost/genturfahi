@@ -62,7 +62,7 @@ cfari           <- canlu
                    `cfari-samselpla*
                    canlu
                    #:gerna gerna
-                   FAhO
+                   `FAhO
                 -> samselpla-cfari
 
 ; we want to execute header code before compiling the grammar.
@@ -259,16 +259,12 @@ girzu-javni     <- "()" canlu
 
 canlu           <- `(canlubu / totoi)*
 
-canlubu         <- #\space
-                 / #\tab
-                 / CR
-                 / LF
+canlubu         <- [[:space:]]
+                 / CRLF
 totoi           <- #\; (!CRLF .)* (CRLF / &FAhO)
 
 CR              <- #\return
 LF              <- #\linefeed
-CRLF            <- CR LF
-                 / CR
-                 / LF
+CRLF            <- CR LF / CR / LF
 
-FAhO            <- `!.
+FAhO            <- !.

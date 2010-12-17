@@ -75,9 +75,9 @@
     (define (canlu-1 porsi mapti namapti) (canlu-70 porsi mapti namapti))
     (define (canlubu-33 porsi mapti namapti) (canlubu-71 porsi mapti namapti))
     (define (totoi-34 porsi mapti namapti) (totoi-72 porsi mapti namapti))
-    (define (CR-35 porsi mapti namapti) (CR-73 porsi mapti namapti))
-    (define (LF-36 porsi mapti namapti) (LF-74 porsi mapti namapti))
-    (define (CRLF-37 porsi mapti namapti) (CRLF-75 porsi mapti namapti))
+    (define (CR-36 porsi mapti namapti) (CR-73 porsi mapti namapti))
+    (define (LF-37 porsi mapti namapti) (LF-74 porsi mapti namapti))
+    (define (CRLF-35 porsi mapti namapti) (CRLF-75 porsi mapti namapti))
     (define (FAhO-4 porsi mapti namapti) (FAhO-76 porsi mapti namapti))
     (define cfari-39
       (nunjavni-morji
@@ -88,7 +88,7 @@
             (morji-nunjavni-* cfari-samselpla-2 nastura: #t)
             canlu-1
             (morji-nunjavni-cmene gerna-3 cmene: "gerna")
-            FAhO-4))))
+            (morji-nunjavni-nastura FAhO-4)))))
     (define cfari-samselpla-40
       (nunjavni-morji
         (morji-nunjavni-samselpla-cabna
@@ -644,22 +644,20 @@
     (define canlubu-71
       (nunjavni-morji
         (morji-nunjavni-jonai
-          (morji-nunjavni-lerfu #\space)
-          (morji-nunjavni-lerfu #\tab)
-          CR-35
-          LF-36)))
+          (morji-nunjavni-char-set char-set:whitespace)
+          CRLF-35)))
     (define totoi-72
       (nunjavni-morji
         (morji-nunjavni-je
           (morji-nunjavni-lerfu #\;)
           (morji-nunjavni-*
-            (morji-nunjavni-je (morji-nunjavni-! CRLF-37) (morji-nunjavni-.)))
-          (morji-nunjavni-jonai CRLF-37 (morji-nunjavni-& FAhO-4)))))
+            (morji-nunjavni-je (morji-nunjavni-! CRLF-35) (morji-nunjavni-.)))
+          (morji-nunjavni-jonai CRLF-35 (morji-nunjavni-& FAhO-4)))))
     (define CR-73 (nunjavni-morji (morji-nunjavni-lerfu #\return)))
     (define LF-74 (nunjavni-morji (morji-nunjavni-lerfu #\newline)))
     (define CRLF-75
       (nunjavni-morji
-        (morji-nunjavni-jonai (morji-nunjavni-je CR-35 LF-36) CR-35 LF-36)))
-    (define FAhO-76 (nunjavni-morji (morji-nunjavni-fanmo nastura: #t)))
+        (morji-nunjavni-jonai (morji-nunjavni-je CR-36 LF-37) CR-36 LF-37)))
+    (define FAhO-76 (nunjavni-morji (morji-nunjavni-fanmo)))
     (tolmohi-nunjavni)
     cfari-39))
