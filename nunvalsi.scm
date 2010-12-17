@@ -22,7 +22,7 @@
 ;;;
 
 ;; Each rule has a flag describing whether to make a javni-valsi
-;; on a successful match of that rule.  This routine return an
+;; on a successful match of that rule.  This routine returns an
 ;; appropriate constructor, depending on that flag.
 ;;
 (define (make-nunvalsi cmene nastura)
