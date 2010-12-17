@@ -413,7 +413,7 @@
   `(morji-nunjavni-.))
 
 (define (samselpla-samselpla-xadni #!key rodalerfu)
-  (read (open-input-string (apply string rodalerfu))))
+  (list (read (open-input-string (apply string rodalerfu)))))
 
 (define (samselpla-samselpla-cmene #!key cfari fanmo)
   (string->symbol (string-append (make-string 1 cfari) fanmo)))
