@@ -63,15 +63,13 @@
                       jalge)))))))
 
 (define (javni-rodavalsi-val-filter valsi)
-  ; if the only result was a predicate marker, don't return it.
+  ; if the only result was a predicate marker, return the empty
+  ; list instead.
   ;
-  (if (javni-valsi? valsi)
-      (let ((val (javni-valsi-val valsi)))
-        (if (javni-nastura? val)
-            '()
-            val))
-      (remove javni-nastura? (map javni-rodavalsi-val valsi))))
-
+  (let ((val (javni-rodavalsi-val valsi)))
+    (if (javni-nastura? val)
+        '()
+        val)))
 
 (define (javni-valsi->string valsi)
   (format "{cmene:~a valsi:~s}"

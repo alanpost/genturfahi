@@ -451,7 +451,7 @@
                              ,(javni-valsi-val javni)))
                          cmesumti))
                   (rest (javni-rodavalsi-val-filter sumti)))
-              (append! rest key)))))
+              (append! (if (list? rest) rest `(,rest)) key)))))
 
       (define (nunvalsi-samselpla)
         (let* ((rodavalsi (nunvalsi))
