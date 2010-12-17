@@ -48,6 +48,10 @@ EOS
   (print (format "genturfa'i version ~a" genturfahi-version))
   (exit 0))
 
+; handled by the Chicken runtime.
+(define (runtime option name arg . seeds)
+  '())
+
 (define options
   (list (option '(#\d "debug")            #f         #f debug)
         (option '(#\h "sidju" "help")     #f         #f help)
@@ -56,7 +60,8 @@ EOS
         (option '(#\p "profile")          #f         #f profile)
         (option '(#\s "start-production") #:required #f start-production)
         (option '(#\t "define-toplevel")  #f         #f define-toplevel)
-        (option '(#\v "version")          #f         #f version)))
+        (option '(#\v "version")          #f         #f version)
+        (option '(#\:)                    #:required #f runtime)))
 
 (define (usage option name args . seeds)
   (error (format "unrecognized option \"~a\"" name)))
