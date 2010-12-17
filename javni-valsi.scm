@@ -54,13 +54,13 @@
           ; return a predicate element.  (which will be removed
           ; later.)
           ;
-          (if (pair? nastura)
-              (if (pair? jalge)
+          (if (null? nastura)
+              jalge
+              (if (null? jalge)
+                  secuxna-nastura
                   (if (null? (cdr jalge))
                       (car jalge)
-                      jalge)
-                  secuxna-nastura)
-              jalge)))))
+                      jalge)))))))
 
 (define (javni-rodavalsi-val-filter valsi)
   ; if the only result was a predicate marker, don't return it.
