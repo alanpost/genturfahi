@@ -40,7 +40,7 @@
 
 (define secuxna-debug            (make-parameter #f))
 (define secuxna-profile          (make-parameter #f))
-(define secuxna-memoize          (make-parameter #t))
+(define secuxna-no-memoize       (make-parameter #f))
 
 (define secuxna-sentinel         (make-parameter #\nul))
 (define secuxna-empty-list       (make-parameter '()))

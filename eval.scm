@@ -57,8 +57,8 @@
 
 (safe-environment-set!
   genturfahi-env
-  'memoize
-  secuxna-memoize)
+  'no-memoize
+  secuxna-no-memoize)
 
 (safe-environment-set!
   genturfahi-env

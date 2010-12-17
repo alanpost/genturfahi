@@ -146,7 +146,7 @@
    secuxna-exit-status
    secuxna-debug
    secuxna-profile
-   secuxna-memoize
+   secuxna-no-memoize
    secuxna-sentinel
    secuxna-empty-string
    secuxna-empty-list
