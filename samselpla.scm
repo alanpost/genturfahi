@@ -129,13 +129,8 @@
   (if (not (secuxna-start-production))
       (secuxna-start-production naselci))
 
-  ; we create three symbols, two of which, because of the grammar
-  ; rules, can't be created by the user.  (so there is no symbol
-  ; collision)
-  ;
-  ; the non-decorated symbol is used when this rule is referenced
-  ; in other rules.  The decorated symbol is the actual grammar
-  ; rule.
+  ; we create two symbols for each terminal rule.  One is the
+  ; definition and the other is the reference.
   ;
   (let ((symbol-nunselci (samselpla-cmene->symbol  naselci))
         (symbol          (samselpla-cmene->symbol* naselci)))
@@ -156,6 +151,12 @@
 (define (samselpla-naselci #!key cfari fanmo)
   (string-append (make-string 1 cfari) fanmo))
 
+;; sequence: wrap the current rule in a sequence operator, unless
+;;           it is only a single rule, in which case we pass it
+;;           untouched.
+;;
+;;           this is where we attach code to a production as well,
+;;
 (define (samselpla-je #!key cmene samselpla javni)
   ; if there is more than one javni, wrap in a sequence operator.
   ;
@@ -181,6 +182,8 @@
 
   (nuncmene cmene (nunsamselpla samselpla (nunje javni))))
 
+;; backquote: the following operator should not modify the parse tree.
+;;
 (define (samselpla-nastura-javni #!key javni)
   (if (symbol? javni)
       ; if we have a non-terminal, we must use |morji-nunjavni-quote|.
@@ -188,6 +191,10 @@
       `(morji-nunjavni-nastura ,javni)
       `(,@javni nastura: #t)))
 
+;; tag: attach a name to the rule.  If the rule is a non-terminal,
+;; we must wrap the rule in a tagging call, but other rules directly
+;; accept a name argument.
+;;
 (define (samselpla-pajavni-cmene #!key cmene javni)
   (if (string=? "" cmene)
       javni
@@ -197,6 +204,8 @@
           `(morji-nunjavni-cmene ,javni cmene: ,cmene)
           `(,@javni cmene: ,cmene))))
 
+;; ordered choice: the passed in rules are an ordered choice.
+;;
 (define (samselpla-jonai #!key cfari fanmo)
   `(morji-nunjavni-jonai ,cfari ,@fanmo))
 
@@ -210,23 +219,31 @@
                              '()
                              `(empty-string: ,empty-string)))))
 
+;; zero-or-more
+;;
 (define (samselpla-* #!key cmene javni)
   `(morji-nunjavni-* ,javni ,@(if (string=? "" cmene) '() `(cmene: ,cmene))))
 
+;; one-or-more
+;;
 (define (samselpla-+ #!key cmene javni)
   `(morji-nunjavni-+ ,javni ,@(if (string=? "" cmene) '() `(cmene: ,cmene))))
 
+;; and-predicate
+;;
 (define (samselpla-& #!key javni)
   `(morji-nunjavni-& ,javni))
+
+;; not-predicate
+;;
+(define (samselpla-! #!key javni)
+  `(morji-nunjavni-! ,javni))
 
 (define (samselpla-fanmo)
   (let ((sentinel (secuxna-sentinel)))
     `(morji-nunjavni-fanmo ,@(if (eq? #\nul sentinel)
                                  '()
                                  `(sentinel: ,sentinel)))))
-
-(define (samselpla-! #!key javni)
-  `(morji-nunjavni-! ,javni))
 
 (define (samselpla-cmene-sumti #!key cfari fanmo)
   `,(string-append (make-string 1 cfari) fanmo))
