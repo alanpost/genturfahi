@@ -92,6 +92,7 @@
    nunjavni-je
    nunjavni-jonai
 
+   genturfahi-semorji
    genturfahi-tolmohi
    nunjavni-morji
    nunjavni-samselpla

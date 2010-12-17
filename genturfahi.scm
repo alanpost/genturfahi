@@ -50,6 +50,7 @@
     (let ((porsi (if (port? lefpoi)
                      (make-lerfu-porsi-port lefpoi)
                      (make-lerfu-porsi-string lefpoi))))
+      (genturfahi-semorji (string-length (lerfu-porsi-poi porsi)))
       (javni porsi mapti namapti))))
 
 (define (genturfahi* javni)

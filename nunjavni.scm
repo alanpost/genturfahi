@@ -347,87 +347,81 @@
 ;;        Any javni can be memoized, but in practice we memoize
 ;;        na selci javni.
 ;;
-(define-values (genturfahi-tolmohi nunjavni-morji)
-  (let ((clear-mapti-caches '())
-        (clear-namapti-caches '())
-        (clear-recurse-caches '()))
+(define-values (genturfahi-semorji genturfahi-tolmohi nunjavni-morji)
+  (let ((rodasemorji '())
+        (rodatolmohi '()))
     (values
+      (lambda (nilcla)
+        (map (lambda (semorji) (semorji nilcla)) rodasemorji))
+
       (lambda ()
-        (for-each (lambda (x) (x)) clear-mapti-caches)
-        (for-each (lambda (x) (x)) clear-namapti-caches)
-        (for-each (lambda (x) (x)) clear-recurse-caches)
-        '())
+        (map (lambda (tolmohi) (tolmohi)) rodatolmohi))
 
       (lambda (javni)
-        (let ((mapti-cache '())
-              (namapti-cache '())
-              (recurse-cache '()))
-          (define (javni-morji cache-porsi mapti namapti)
-            (define (set-mapti-cache! cache-porsi porsi nunvalsi)
-              (set! mapti-cache
-                (cons (cons cache-porsi (list porsi nunvalsi))
-                      mapti-cache)))
+        (let ((morji '()))
+          (define (semorji nilcla)
+            (let ((klani (quotient nilcla 2)))
+              (set! morji (make-hash-table = size: (if (= 0 klani) 1 klani)))))
 
-            (define (set-namapti-cache! cache-porsi porsi)
-              (set! namapti-cache
-                (cons (cons cache-porsi (list porsi))
-                      namapti-cache)))
+          (define (tolmohi)
+            (set! morji '()))
 
-            (define (set-recurse-cache!)
-              (set! recurse-cache
-                (cons (cons cache-porsi (list cache-porsi))
-                      namapti-cache)))
+          (define (javni-morji morji-porsi mapti namapti)
+            ;; mapti
+            (define (set-mapti-morji! porsi nunvalsi)
+              (define (mapti-morji mapti ignore-namapti)
+                (mapti porsi nunvalsi))
 
-            ;; call the cached |mapti|
-            (define (mapti-morji assv-valsi)
-              (apply mapti (cdr assv-valsi)))
+              (hash-table-set! morji
+                               (lerfu-porsi-zva morji-porsi)
+                               mapti-morji))
 
-            ;; call the cached |namapti|
-            (define (namapti-morji assv-valsi)
-              (apply namapti (cdr assv-valsi)))
+            ;; namapti
+            (define (set-namapti-morji! porsi)
+              (define (namapti-morji ignore-mapti namapti)
+                (namapti porsi))
 
-            ;; left recursion support.
-            (define (recurse-morji assv-valsi)
-              (apply namapti (cdr assv-valsi)))
+              (hash-table-set! morji
+                               (lerfu-porsi-zva morji-porsi)
+                               namapti-morji))
+
+            ;; recurse
+            (define (set-recurse-morji!)
+              (define (recurse-morji ignore-mapti namapti)
+                (namapti morji-porsi))
+
+              (hash-table-set! morji
+                               (lerfu-porsi-zva morji-porsi)
+                               recurse-morji))
 
             (define (javni-nomorji)
               (define (mapti-morji porsi nunvalsi)
-                (set-mapti-cache! cache-porsi
-                                  porsi
-                                  nunvalsi)
+                (set-mapti-morji! porsi nunvalsi)
                 (mapti porsi nunvalsi))
 
               (define (namapti-morji porsi)
-                (set-namapti-cache! cache-porsi porsi)
+                (set-namapti-morji! porsi)
                 (namapti porsi))
 
               ; register this parse position to detect left
               ; recursion.
-              (set-recurse-cache!)
+              (set-recurse-morji!)
 
-              (javni cache-porsi mapti-morji namapti-morji))
+              (javni morji-porsi mapti-morji namapti-morji))
 
-                   ; search the match results
-            (cond ((assv cache-porsi mapti-cache) => mapti-morji)
-                   ; search the non-match results
-                  ((assv cache-porsi namapti-cache) => namapti-morji)
-                   ; search for left recursion
-                  ((assv cache-porsi recurse-cache) => recurse-morji)
-                   ; run the rule.
-                  (else (javni-nomorji))))
+            (let ((nunjalge
+                    (hash-table-ref/default morji
+                                            (lerfu-porsi-zva morji-porsi)
+                                            #f)))
+              (if nunjalge (nunjalge mapti namapti) (javni-nomorji))))
 
-          ; register this cache so we can clear if we want to use this
-          ; parser on a new |lerfu-porsi|.
+          ; register this cache so we can initialize and clear.
+          ; This routine customizes itself based on the input size,
+          ; and we can free up a substantial amount of memory if
+          ; we clear the caches after we're done parsing.
           ;
-          (set! clear-mapti-caches
-            (cons (lambda () (set! mapti-cache '()))
-                  clear-mapti-caches))
-          (set! clear-namapti-caches
-            (cons (lambda () (set! namapti-cache '()))
-                  clear-namapti-caches))
-          (set! clear-recurse-caches
-            (cons (lambda () (set! recurse-cache '()))
-                  clear-recurse-caches))
+          (set! rodasemorji (cons semorji rodasemorji))
+          (set! rodatolmohi (cons tolmohi rodatolmohi))
 
           javni-morji)))))
 
