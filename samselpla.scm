@@ -143,9 +143,9 @@
           ; inner let (which stores grammar rules)
           ;
           `(define ,symbol
-            ,(if (secuxna-memoize)
-                 `(nunjavni-morji ,javni)
-                 javni)))))
+            ,(if (secuxna-no-memoize)
+                 javni
+                 `(nunjavni-morji ,javni))))))
 
 
 (define (samselpla-naselci #!key cfari fanmo)
