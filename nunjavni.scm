@@ -471,15 +471,14 @@
   javni-samselpla)
 
 (define (nunjavni-samselpla-cabna samselpla javni #!key cmene)
-  (define javni-samselpla (nunjavni-samselpla samselpla javni))
+  (let ((javni-samselpla (nunjavni-samselpla samselpla javni)))
+    (define (javni-samselpla-cabna porsi mapti namapti)
+      (define (mapti-samselpla-cabna porsi nunvalsi)
+        (nunvalsi)
+        (mapti porsi (make-javni-valsi cmene secuxna-nastura)))
 
-  (define (javni-samselpla-cabna porsi mapti namapti)
-    (define (mapti-samselpla-cabna porsi nunvalsi)
-      (nunvalsi)
-      (mapti porsi (make-javni-valsi cmene secuxna-nastura)))
-
-    (javni-samselpla porsi mapti-samselpla-cabna namapti))
-  javni-samselpla-cabna)
+      (javni-samselpla porsi mapti-samselpla-cabna namapti))
+    javni-samselpla-cabna))
 
 (define (nunjavni-cmene javni #!key cmene nastura)
   (let ((nunvalsi-cmene (make-nunvalsi cmene nastura)))
