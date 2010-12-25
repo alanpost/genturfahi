@@ -45,7 +45,7 @@
           (namapti porsi)
           (mapti (make-lerfu-porsi-pabalvi-lerfu porsi)
                  (nunvalsi-. (lerfu-porsi-lerfu porsi)))))
-    (nunjavni-secuxna (lambda () "#\.") javni-.)))
+    (nunjavni-secuxna (lambda () "#\\.") javni-.)))
 
 
 ;; empty-string: parse the empty string, which always succeeds without
