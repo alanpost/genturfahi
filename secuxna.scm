@@ -25,14 +25,14 @@
 
 ;; The name of the variable used to define the parser.
 ;;
-(define secuxna-define-name  (make-parameter "gerna"))
+(define secuxna-define-name      (make-parameter "gerna"))
 
 ;; Define all non-terminal tokens as top-level variables.
 ;;
 ;; By default, all non-terminal tokens will be kept inside
 ;; a let.
 ;;
-(define secuxna-define-toplevel (make-parameter #f))
+(define secuxna-define-toplevel  (make-parameter #f))
 
 ;; the exit status of the program
 ;;
