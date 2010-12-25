@@ -468,19 +468,22 @@
 
 
 (define (samselpla-klesi-selci-* #!key klesi-lerfu)
-  (if (null? (cdr klesi-lerfu))
-      `(morji-nunjavni-char-set-* ,(car klesi-lerfu))
-      `(morji-nunjavni-char-set-* (char-set-union ,@klesi-lerfu))))
+  (let ((char-set-* (if (null? (cdr klesi-lerfu))
+                        (car klesi-lerfu)
+                        `(char-set-union ,@klesi-lerfu))))
+    `(morji-nunjavni-char-set-* ,char-set-*)))
 
 (define (samselpla-klesi-selci-+ #!key klesi-lerfu)
-  (if (null? (cdr klesi-lerfu))
-      `(morji-nunjavni-char-set-+ ,(car klesi-lerfu))
-      `(morji-nunjavni-char-set-+ (char-set-union ,@klesi-lerfu))))
+  (let ((char-set-+ (if (null? (cdr klesi-lerfu))
+                        (car klesi-lerfu)
+                        `(char-set-union ,@klesi-lerfu))))
+    `(morji-nunjavni-char-set-+ ,char-set-+)))
 
 (define (samselpla-klesi-selci #!key klesi-lerfu)
-  (if (null? (cdr klesi-lerfu))
-      `(morji-nunjavni-char-set ,(car klesi-lerfu))
-      `(morji-nunjavni-char-set (char-set-union ,@klesi-lerfu))))
+  (let ((char-set (if (null? (cdr klesi-lerfu))
+                      (car klesi-lerfu)
+                      `(char-set-union ,@klesi-lerfu))))
+    `(morji-nunjavni-char-set ,char-set)))
 
 
 (define (samselpla-denpabu)
