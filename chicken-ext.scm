@@ -181,7 +181,6 @@
 (require-extension srfi-18)
 ;(require-extension srfi-28)        ; built-in
 ;(require-extension srfi-39)        ; built-in
-;(require-extension srfi-61)        ; built-in
 (require-extension srfi-69)
 ;(require-extension srfi-95)
 (require-extension data-structures)
@@ -197,7 +196,6 @@
 (import srfi-18)         ; multi-threading support
 ;(import srfi-28)         ; basic format strings
 ;(import srfi-39)         ; parameter objects
-;(import srfi-61)         ; A more general cond clause
 (import srfi-69)         ; basic hash tables
 ;(import srfi-95)         ; sorting and merging
 (import data-structures) ; should be srfi-95
