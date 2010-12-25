@@ -18,13 +18,23 @@
 ;;;;
 
 (define (debug option name arg . seeds)
+  (if arg (sexuna-debug-file arg))
   (secuxna-debug #t))
 
 (define (help option name arg . seeds)
   (print #<<EOS
-usage: genturfahi [-dhmpv] [-help] [-version]
-                  [-debug] [-no-memoize] [-profile]
-                  [file]
+usage: genturfahi [-:?]
+                  [-d | --debug]
+                  [-h | --help]
+                  [-i | --input-file NAME]
+                  [-m | --no-memoize]
+                  [-n | --define-name NAME]
+                  [-o | --output-file NAME]
+                  [-p | --profile]
+                  [-s | --start-production NAME]
+                  [-t | --define-toplevel]
+                  [-v | --version]
+                  [file]*
 EOS
   )
   (exit 0))
@@ -35,10 +45,17 @@ EOS
 (define (define-toplevel option name arg . seeds)
   (secuxna-define-toplevel #t))
 
+(define (input-file option name arg . seeds)
+  (call-with-input-file arg current-input-port))
+
 (define (no-memoize option name arg . seeds)
   (secuxna-memoize #f))
 
+(define (output-file option name arg . seeds)
+  (call-with-output-file arg current-output-port))
+
 (define (profile option name arg . seeds)
+  (if arg (sexuna-profile-file arg))
   (secuxna-profile #t))
 
 (define (start-production option name arg . seeds)
@@ -53,31 +70,42 @@ EOS
   '())
 
 (define options
-  (list (option '(#\d "debug")            #f         #f debug)
-        (option '(#\h "sidju" "help")     #f         #f help)
-        (option '(#\m "no-memoize")       #f         #f no-memoize)
-        (option '(#\n "define-name")      #:required #f define-name)
-        (option '(#\p "profile")          #f         #f profile)
-        (option '(#\s "start-production") #:required #f start-production)
-        (option '(#\t "define-toplevel")  #f         #f define-toplevel)
-        (option '(#\v "version")          #f         #f version)
-        (option '(#\:)                    #:required #f runtime)))
+  (list (option '(#\d "debug")            #f #t debug)
+        (option '(#\h "sidju" "help")     #f #f help)
+        (option '(#\i "input-file")       #t #f input-file)
+        (option '(#\m "no-memoize")       #f #f no-memoize)
+        (option '(#\n "define-name")      #t #f define-name)
+        (option '(#\o "output-file")      #t #f output-file)
+        (option '(#\p "profile")          #f #t profile)
+        (option '(#\s "start-production") #t #f start-production)
+        (option '(#\t "define-toplevel")  #f #f define-toplevel)
+        (option '(#\v "version")          #f #f version)
+        (option '(#\:)                    #t #f runtime)))
 
 (define (usage option name args . seeds)
   (error (format "unrecognized option \"~a\"" name)))
 
-(define (args name . seeds)
-  (let ((jalge    (call-with-input-file name genturfahi-peg))
+(define (peg name . seeds)
+  (call-with-input-file name for-port))
+
+(define (for-port port)
+  (let ((jalge    (genturfahi-peg port))
         (tamgau   (secuxna-define-name))
-        (toplevel (secuxna-define-toplevel)))
+        (toplevel (secuxna-define-toplevel))
+        (port     (current-output-port)))
     (if (not jalge)
         (secuxna-exit-status 1))
-    (display genturfahi-license)
+    (display genturfahi-license port)
     (if toplevel
-        (for-each pretty-print jalge)
-        (if (pair? tamgau)
-            (pretty-print `(define-values ,(map string->symbol tamgau) ,jalge))
-            (pretty-print `(define ,(string->symbol tamgau) ,jalge))))))
+        (for-each (lambda (jalge) (pretty-print jalge port)) jalge)
+        (pretty-print
+          (if (pair? tamgau)
+              `(define-values ,(map string->symbol tamgau) ,jalge)
+              `(define ,(string->symbol tamgau) ,jalge))
+          port))))
 
 (define (main)
-  (args-fold (cdr (argv)) options usage args))
+  (let ((args (cdr (argv))))
+    (if (null? args)
+        (for-port (current-input-port))
+        (args-fold args options usage peg))))

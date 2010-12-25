@@ -49,8 +49,7 @@
   genturfahi-env
   'output-file
   (lambda (file)
-    (let ((port (open-output-file file)))
-      (lambda () port))))
+    (call-with-output-file file current-output-port)))
 
 (safe-environment-set!
   genturfahi-env
