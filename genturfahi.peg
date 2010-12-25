@@ -47,15 +47,27 @@
 ;; Enable memoization of non-terminals.
 ;;
 ;;
-;{(memoize #t)}
+;{(no-memoize #f)}
 
+;; The sentinel character cannot be a valid character in the
+;; grammar.
+;;
 ;{(sentinel #\nul)}
 
+;; The value returned when we match the empty list.
+;;
 ;{(empty-list '())}
 
+;; The value returned when we match the empty string.
+;;
 ;{(empty-string "")}
 
+;; The value returned when the input does not match the grammar.
+;;
 ;{(nonmatch-token #f)}
+
+;; PEG grammar
+;;
 
 cfari           <- canlu
                    `cfari-samselpla*
