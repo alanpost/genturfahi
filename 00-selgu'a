@@ -15,14 +15,11 @@ Release 1.1:
  * [] gensym'd symbols passed through write are not guaranteed to be
       unique when read.
  * [] Port to a second Scheme implementation. 
- * [] Ignore & and ! rather than returning the empty string.  This
-      requires support in je and jonai as well.
  * [] Write tests for PEG file parser.
  * [] extend the character class test to test all character
       classes.
  * [] Implement left recursion.
- * [] Add runtime debug output of parse.
- * [] Add runtime profiling of parse.
+ * [] Implement error reporting.
 
 Release 1.0:
 
@@ -32,10 +29,14 @@ Release 1.0:
        + which (declare ...) options lead to performance improvements?
        + should the input buffer be a string or a list of characters?
        + should I use a hash or assoc list for memoization and
-         symbol generation?
+         symbol generation? [hash]
        + Is a record-type or cons faster?
        + Inline input buffer access routines.
  * [] Write PEG parser application manpage. 
+ * [done] Add runtime debug output of parse.
+ * [done] Add runtime profiling of parse.
+ * [done] Ignore & and ! rather than returning the empty string.  This
+          requires support in je and jonai as well.
  * [done] Don't modify the parse tree when matching predicate (& and !)
           operators.
  * [done] gensym non-terminal names to avoid collision when
