@@ -26,10 +26,6 @@
 
 ;; extend the regular safe environment with genturfa'i parameters.
 ;;
-;; for the parameters that affect the parser generator, set the
-;; values immediately.  For parameters that apply to the parser
-;; return an expression that will be included in the output.
-;;
 (safe-environment-set!
   genturfahi-env
   'start-production
