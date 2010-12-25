@@ -30,6 +30,9 @@
    samselpla-cmene->symbol
    samselpla-cmene->symbol*
 
+   samselpla-namorji
+   samselpla-namorji?
+
    samselpla-smuni
    samselpla-naselci
    samselpla-je

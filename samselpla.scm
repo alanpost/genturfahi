@@ -54,6 +54,13 @@
                                        symbol)
                       symbol))))
 
+; a hash table containing rules that we won't be memoizing
+;
+(define samselpla-namorji (make-hash-table string=?))
+
+(define (samselpla-namorji? naselci-cmene)
+  (hash-table-exists? samselpla-namorji naselci-cmene))
+
 
 ;; ignore the FAhO tag in the file, and
 ;; just return the header code and grammar.
@@ -124,7 +131,20 @@
   (let* ((valsi     (apply string rodalerfu))
          (samselpla (call-with-input-string valsi read)))
     ; evaluate parameters before compiling the code.
-    (safe-eval samselpla environment: genturfahi-env)))
+    (safe-eval samselpla environment: genturfahi-env)
+
+    ; update the list of non-terminals that we don't memoize
+    ;
+    (let ((no-memoize (secuxna-no-memoize)))
+      (if (list? no-memoize)
+          (begin
+            (for-each (lambda (naselci)
+                        (hash-table-set! samselpla-namorji naselci #t))
+                      no-memoize)
+            ; since we've registered all of the rules not to
+            ; memoize, make sure we do memoize the rest of them.
+            ;
+            (secuxna-no-memoize #f))))))
 
 ;; emit the non-terminal with it's rule.
 ;;
@@ -142,6 +162,25 @@
   (let ((symbol-nunselci (samselpla-cmene->symbol  naselci))
         (symbol          (samselpla-cmene->symbol* naselci)))
 
+    (if (pair? javni)
+        ; there are a set of productions that we should never
+        ; memoize.  memoization in this case is more expensive
+        ; than running the rule.
+        ;
+        (case (car javni)
+          ((morji-nunjavni-lerfu
+            morji-nunjavni-.
+            morji-nunjavni-e
+            morji-nunjavni-nil
+            morji-nunjavni-fanmo
+            morji-nunjavni-valsi)
+           (hash-table-set! samselpla-namorji naselci #t)))
+
+        ; don't memoize a non-terminal production which consists
+        ; only of another non-terminal production.
+        ;
+        (hash-table-set! samselpla-namorji naselci #t))
+
           ; outer letrec (which stores references)
           ;
     (list `(define ,symbol-nunselci
@@ -153,7 +192,7 @@
           ; inner let (which stores grammar rules)
           ;
           `(define ,symbol
-            ,(if (secuxna-no-memoize)
+            ,(if (or (samselpla-namorji? naselci) (secuxna-no-memoize))
                  javni
                  `(nunjavni-morji ,javni))))))
 
