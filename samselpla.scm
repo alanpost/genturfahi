@@ -73,6 +73,8 @@
             (rodatamgau  (secuxna-define-name))
             (toplevel    (secuxna-define-toplevel)))
 
+        ; toplevel definition with mulitple start productions
+        ;
         (define (suhorecmene-e-toplevel tamgau nunselci-cmene)
           (map (lambda (tamgau cmene)
                   `(define
@@ -80,17 +82,23 @@
                      (nunjavni-secuxna (lambda () ,selci-cmene) ,cmene)))
                tamgau nunselci-cmene))
 
+        ; (let ...) definition with multiple start productions
+        ;
         (define (suhorecmene-enai-toplevel nunselci-cmene)
           `((values ,@(map (lambda (tamgau cmene)
                              `(nunjavni-secuxna
                                 (lambda () ,selci-cmene)
                                 ,cmene))))))
 
+        ; toplevel definition with a single start production.
+        ;
         (define (pacmene-e-toplevel tamgau nunselci-cmene)
           `((define
               ,tamgau
               (nunjavni-secuxna (lambda () selci-cmene) ,nunselci-cmene))))
 
+        ; (let ...) definition with a single start production.
+        ;
         (define (pacmene-enai-toplevel nunselci-cmene)
           `((nunjavni-secuxna (lambda () ,selci-cmene) ,nunselci-cmene)))
 
@@ -235,7 +243,7 @@
 ;;
 (define (samselpla-nastura-javni #!key javni)
   (if (symbol? javni)
-      ; if we have a non-terminal, we must use |morji-nunjavni-quote|.
+      ; if we have a non-terminal, we must use |morji-nunjavni-nastura|.
       ;
       `(morji-nunjavni-nastura ,javni)
       `(,@javni nastura: #t)))

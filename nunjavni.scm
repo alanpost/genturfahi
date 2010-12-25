@@ -356,8 +356,9 @@
 
 
 ;; morji: memoization is done to ensure we run in linear time.
-;;        Any javni can be memoized, but in practice we memoize
-;;        na selci javni.
+;;        Any javni can be memoized, though the compiler only
+;;        memoizes non-terminals above a certain level of
+;;        complexity.
 ;;
 (define-values (genturfahi-semorji genturfahi-tolmohi nunjavni-morji)
   (let ((rodasemorji '())
@@ -440,7 +441,6 @@
 (define (nunjavni-samselpla samselpla javni #!key cmene)
   (define (javni-samselpla porsi mapti namapti)
     (define (mapti-samselpla porsi nunvalsi)
-
       (define (samselpla-sumti rodavalsi)
         (call-with-values
           (lambda ()
@@ -468,7 +468,6 @@
       (mapti porsi nunvalsi-samselpla))
 
     (javni porsi mapti-samselpla namapti))
-
   javni-samselpla)
 
 (define (nunjavni-samselpla-cabna samselpla javni #!key cmene)
@@ -490,6 +489,8 @@
       (javni porsi mapti-cmene namapti))
     javni-cmene))
 
+;; backtick operator
+;;
 (define (nunjavni-nastura javni)
   (define (javni-nastura porsi mapti namapti)
     (define (mapti-nastura porsi ignore-nunvalsi)
