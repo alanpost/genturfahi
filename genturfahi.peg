@@ -29,21 +29,20 @@
 
 ;; Enable debugging of the paser.
 ;;
-;; Describe the parse as it occurs, including
-;; rule matches and failures, backtracking, memoization, &c.
+;; Describe the parse as it occurs, describing which rules matched
+;; and which rules didn't.
 ;;
-;; There may need to be a debug level.
-;;
+;{(debug-file "grammar-debug.scm")}
 ;{(debug #f)}
 
 ;; Enable profiling of the parser.
 ;;
-;; for each step in the parser, track:
+;; Record the time expended by each rule determining whether it
+;; matches.
 ;;
-;;  * success or failure of rule
-;;  * memoization
-;;
+;{(profile-file "grammar-profile.scm")}
 ;{(profile #f)}
+
 
 ;; Enable memoization of non-terminals.
 ;;

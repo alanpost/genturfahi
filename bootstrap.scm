@@ -19,66 +19,162 @@
 
 (define genturfahi-peg-gerna
   (let ()
-    (define (cfari-38 porsi mapti namapti) (cfari-39 porsi mapti namapti))
-    (define (cfari-samselpla-2 porsi mapti namapti)
-      (cfari-samselpla-40 porsi mapti namapti))
-    (define (gerna-3 porsi mapti namapti) (gerna-41 porsi mapti namapti))
-    (define (smuni-5 porsi mapti namapti) (smuni-42 porsi mapti namapti))
-    (define (naselci-6 porsi mapti namapti) (naselci-43 porsi mapti namapti))
-    (define (javni-7 porsi mapti namapti) (javni-44 porsi mapti namapti))
-    (define (jonai-8 porsi mapti namapti) (jonai-45 porsi mapti namapti))
-    (define (je-9 porsi mapti namapti) (je-46 porsi mapti namapti))
-    (define (nastura-pajavni-10 porsi mapti namapti)
-      (nastura-pajavni-47 porsi mapti namapti))
-    (define (pajavni-13 porsi mapti namapti) (pajavni-48 porsi mapti namapti))
-    (define (optional-14 porsi mapti namapti)
-      (optional-49 porsi mapti namapti))
-    (define (zero-or-more-15 porsi mapti namapti)
-      (zero-or-more-50 porsi mapti namapti))
-    (define (one-or-more-16 porsi mapti namapti)
-      (one-or-more-51 porsi mapti namapti))
-    (define (and-predicate-17 porsi mapti namapti)
-      (and-predicate-52 porsi mapti namapti))
-    (define (end-of-input-18 porsi mapti namapti)
-      (end-of-input-53 porsi mapti namapti))
-    (define (not-predicate-19 porsi mapti namapti)
-      (not-predicate-54 porsi mapti namapti))
-    (define (cmene-sumti-11 porsi mapti namapti)
-      (cmene-sumti-55 porsi mapti namapti))
-    (define (selci-javni-20 porsi mapti namapti)
-      (selci-javni-56 porsi mapti namapti))
-    (define (selci-naselci-21 porsi mapti namapti)
-      (selci-naselci-57 porsi mapti namapti))
-    (define (lerfu-selci-22 porsi mapti namapti)
-      (lerfu-selci-58 porsi mapti namapti))
-    (define (lerfu-cmene-27 porsi mapti namapti)
-      (lerfu-cmene-59 porsi mapti namapti))
-    (define (valsi-selci-23 porsi mapti namapti)
-      (valsi-selci-60 porsi mapti namapti))
-    (define (valsi-lerfu-28 porsi mapti namapti)
-      (valsi-lerfu-61 porsi mapti namapti))
-    (define (klesi-selci-24 porsi mapti namapti)
-      (klesi-selci-62 porsi mapti namapti))
-    (define (klesi-lerfu-29 porsi mapti namapti)
-      (klesi-lerfu-63 porsi mapti namapti))
-    (define (klesi-cmene-30 porsi mapti namapti)
-      (klesi-cmene-64 porsi mapti namapti))
-    (define (denpabu-25 porsi mapti namapti) (denpabu-65 porsi mapti namapti))
-    (define (samselpla-12 porsi mapti namapti)
-      (samselpla-66 porsi mapti namapti))
-    (define (samselpla-xadni-31 porsi mapti namapti)
-      (samselpla-xadni-67 porsi mapti namapti))
-    (define (samselpla-cmene-32 porsi mapti namapti)
-      (samselpla-cmene-68 porsi mapti namapti))
-    (define (girzu-javni-26 porsi mapti namapti)
-      (girzu-javni-69 porsi mapti namapti))
-    (define (canlu-1 porsi mapti namapti) (canlu-70 porsi mapti namapti))
-    (define (canlubu-33 porsi mapti namapti) (canlubu-71 porsi mapti namapti))
-    (define (totoi-34 porsi mapti namapti) (totoi-72 porsi mapti namapti))
-    (define (CR-36 porsi mapti namapti) (CR-73 porsi mapti namapti))
-    (define (LF-37 porsi mapti namapti) (LF-74 porsi mapti namapti))
-    (define (CRLF-35 porsi mapti namapti) (CRLF-75 porsi mapti namapti))
-    (define (FAhO-4 porsi mapti namapti) (FAhO-76 porsi mapti namapti))
+    (define cfari-38
+      (nunjavni-secuxna
+        (lambda () "cfari")
+        (lambda (porsi mapti namapti) (cfari-39 porsi mapti namapti))))
+    (define cfari-samselpla-2
+      (nunjavni-secuxna
+        (lambda () "cfari-samselpla")
+        (lambda (porsi mapti namapti)
+          (cfari-samselpla-40 porsi mapti namapti))))
+    (define gerna-3
+      (nunjavni-secuxna
+        (lambda () "gerna")
+        (lambda (porsi mapti namapti) (gerna-41 porsi mapti namapti))))
+    (define smuni-5
+      (nunjavni-secuxna
+        (lambda () "smuni")
+        (lambda (porsi mapti namapti) (smuni-42 porsi mapti namapti))))
+    (define naselci-6
+      (nunjavni-secuxna
+        (lambda () "naselci")
+        (lambda (porsi mapti namapti) (naselci-43 porsi mapti namapti))))
+    (define javni-7
+      (nunjavni-secuxna
+        (lambda () "javni")
+        (lambda (porsi mapti namapti) (javni-44 porsi mapti namapti))))
+    (define jonai-8
+      (nunjavni-secuxna
+        (lambda () "jonai")
+        (lambda (porsi mapti namapti) (jonai-45 porsi mapti namapti))))
+    (define je-9
+      (nunjavni-secuxna
+        (lambda () "je")
+        (lambda (porsi mapti namapti) (je-46 porsi mapti namapti))))
+    (define nastura-pajavni-10
+      (nunjavni-secuxna
+        (lambda () "nastura-pajavni")
+        (lambda (porsi mapti namapti)
+          (nastura-pajavni-47 porsi mapti namapti))))
+    (define pajavni-13
+      (nunjavni-secuxna
+        (lambda () "pajavni")
+        (lambda (porsi mapti namapti) (pajavni-48 porsi mapti namapti))))
+    (define optional-14
+      (nunjavni-secuxna
+        (lambda () "optional")
+        (lambda (porsi mapti namapti) (optional-49 porsi mapti namapti))))
+    (define zero-or-more-15
+      (nunjavni-secuxna
+        (lambda () "zero-or-more")
+        (lambda (porsi mapti namapti) (zero-or-more-50 porsi mapti namapti))))
+    (define one-or-more-16
+      (nunjavni-secuxna
+        (lambda () "one-or-more")
+        (lambda (porsi mapti namapti) (one-or-more-51 porsi mapti namapti))))
+    (define and-predicate-17
+      (nunjavni-secuxna
+        (lambda () "and-predicate")
+        (lambda (porsi mapti namapti) (and-predicate-52 porsi mapti namapti))))
+    (define end-of-input-18
+      (nunjavni-secuxna
+        (lambda () "end-of-input")
+        (lambda (porsi mapti namapti) (end-of-input-53 porsi mapti namapti))))
+    (define not-predicate-19
+      (nunjavni-secuxna
+        (lambda () "not-predicate")
+        (lambda (porsi mapti namapti) (not-predicate-54 porsi mapti namapti))))
+    (define cmene-sumti-11
+      (nunjavni-secuxna
+        (lambda () "cmene-sumti")
+        (lambda (porsi mapti namapti) (cmene-sumti-55 porsi mapti namapti))))
+    (define selci-javni-20
+      (nunjavni-secuxna
+        (lambda () "selci-javni")
+        (lambda (porsi mapti namapti) (selci-javni-56 porsi mapti namapti))))
+    (define selci-naselci-21
+      (nunjavni-secuxna
+        (lambda () "selci-naselci")
+        (lambda (porsi mapti namapti) (selci-naselci-57 porsi mapti namapti))))
+    (define lerfu-selci-22
+      (nunjavni-secuxna
+        (lambda () "lerfu-selci")
+        (lambda (porsi mapti namapti) (lerfu-selci-58 porsi mapti namapti))))
+    (define lerfu-cmene-27
+      (nunjavni-secuxna
+        (lambda () "lerfu-cmene")
+        (lambda (porsi mapti namapti) (lerfu-cmene-59 porsi mapti namapti))))
+    (define valsi-selci-23
+      (nunjavni-secuxna
+        (lambda () "valsi-selci")
+        (lambda (porsi mapti namapti) (valsi-selci-60 porsi mapti namapti))))
+    (define valsi-lerfu-28
+      (nunjavni-secuxna
+        (lambda () "valsi-lerfu")
+        (lambda (porsi mapti namapti) (valsi-lerfu-61 porsi mapti namapti))))
+    (define klesi-selci-24
+      (nunjavni-secuxna
+        (lambda () "klesi-selci")
+        (lambda (porsi mapti namapti) (klesi-selci-62 porsi mapti namapti))))
+    (define klesi-lerfu-29
+      (nunjavni-secuxna
+        (lambda () "klesi-lerfu")
+        (lambda (porsi mapti namapti) (klesi-lerfu-63 porsi mapti namapti))))
+    (define klesi-cmene-30
+      (nunjavni-secuxna
+        (lambda () "klesi-cmene")
+        (lambda (porsi mapti namapti) (klesi-cmene-64 porsi mapti namapti))))
+    (define denpabu-25
+      (nunjavni-secuxna
+        (lambda () "denpabu")
+        (lambda (porsi mapti namapti) (denpabu-65 porsi mapti namapti))))
+    (define samselpla-12
+      (nunjavni-secuxna
+        (lambda () "samselpla")
+        (lambda (porsi mapti namapti) (samselpla-66 porsi mapti namapti))))
+    (define samselpla-xadni-31
+      (nunjavni-secuxna
+        (lambda () "samselpla-xadni")
+        (lambda (porsi mapti namapti)
+          (samselpla-xadni-67 porsi mapti namapti))))
+    (define samselpla-cmene-32
+      (nunjavni-secuxna
+        (lambda () "samselpla-cmene")
+        (lambda (porsi mapti namapti)
+          (samselpla-cmene-68 porsi mapti namapti))))
+    (define girzu-javni-26
+      (nunjavni-secuxna
+        (lambda () "girzu-javni")
+        (lambda (porsi mapti namapti) (girzu-javni-69 porsi mapti namapti))))
+    (define canlu-1
+      (nunjavni-secuxna
+        (lambda () "canlu")
+        (lambda (porsi mapti namapti) (canlu-70 porsi mapti namapti))))
+    (define canlubu-33
+      (nunjavni-secuxna
+        (lambda () "canlubu")
+        (lambda (porsi mapti namapti) (canlubu-71 porsi mapti namapti))))
+    (define totoi-34
+      (nunjavni-secuxna
+        (lambda () "totoi")
+        (lambda (porsi mapti namapti) (totoi-72 porsi mapti namapti))))
+    (define CR-36
+      (nunjavni-secuxna
+        (lambda () "CR")
+        (lambda (porsi mapti namapti) (CR-73 porsi mapti namapti))))
+    (define LF-37
+      (nunjavni-secuxna
+        (lambda () "LF")
+        (lambda (porsi mapti namapti) (LF-74 porsi mapti namapti))))
+    (define CRLF-35
+      (nunjavni-secuxna
+        (lambda () "CRLF")
+        (lambda (porsi mapti namapti) (CRLF-75 porsi mapti namapti))))
+    (define FAhO-4
+      (nunjavni-secuxna
+        (lambda () "FAhO")
+        (lambda (porsi mapti namapti) (FAhO-76 porsi mapti namapti))))
     (define cfari-39
       (nunjavni-morji
         (morji-nunjavni-samselpla
@@ -660,4 +756,4 @@
         (morji-nunjavni-jonai (morji-nunjavni-je CR-36 LF-37) CR-36 LF-37)))
     (define FAhO-76 (nunjavni-morji (morji-nunjavni-fanmo)))
     (tolmohi-nunjavni)
-    cfari-39))
+    (nunjavni-secuxna (lambda () "cfari") cfari-39)))

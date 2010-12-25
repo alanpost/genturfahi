@@ -18,12 +18,14 @@
 
        ; dynamic library (genturfahi)
        ;
-       ((dynld-name "genturfahi") ("chicken-ext.scm"
+       ((dynld-name "genturfahi") ("cfisisku.scm"
+                                   "chicken-ext.scm"
                                    "chicken-conf.scm"
                                    "chicken-declare.scm"
                                    "chicken-platform.scm"
                                    "genturfahi.scm"
                                    "javni-valsi.scm"
+                                   "junla.scm"
                                    "lerfu-porsi.scm"
                                    "nunjavni.scm"
                                    "morji.scm"
@@ -67,12 +69,14 @@
 
        ; static library (genturfahi)
        ;
-       ("genturfahi.o" ("chicken-ext.scm"
+       ("genturfahi.o" ("cfisisku.scm"
+                        "chicken-ext.scm"
                         "chicken-conf.scm"
                         "chicken-declare.scm"
                         "chicken-platform.scm"
                         "genturfahi.scm"
                         "javni-valsi.scm"
+                        "junla.scm"
                         "lerfu-porsi.scm"
                         "nunjavni.scm"
                         "morji.scm"

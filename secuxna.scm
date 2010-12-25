@@ -38,6 +38,9 @@
 ;;
 (define secuxna-exit-status      (make-parameter 0))
 
+(define secuxna-debug-file       (make-parameter "grammar-debug.scm"))
+(define secuxna-profile-file     (make-parameter "grammar-profile.scm"))
+
 (define secuxna-debug            (make-parameter #f))
 (define secuxna-profile          (make-parameter #f))
 (define secuxna-no-memoize       (make-parameter #f))

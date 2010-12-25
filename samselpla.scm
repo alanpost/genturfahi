@@ -68,17 +68,24 @@
 
         (define (suhorecmene-e-toplevel tamgau nunselci-cmene)
           (map (lambda (tamgau cmene)
-                  `(define ,tamgau ,cmene))
+                  `(define
+                     ,tamgau
+                     (nunjavni-secuxna (lambda () ,selci-cmene) ,cmene)))
                tamgau nunselci-cmene))
 
         (define (suhorecmene-enai-toplevel nunselci-cmene)
-          `((values ,@nunselci-cmene)))
+          `((values ,@(map (lambda (tamgau cmene)
+                             `(nunjavni-secuxna
+                                (lambda () ,selci-cmene)
+                                ,cmene))))))
 
         (define (pacmene-e-toplevel tamgau nunselci-cmene)
-          `((define ,tamgau ,nunselci-cmene)))
+          `((define
+              ,tamgau
+              (nunjavni-secuxna (lambda () selci-cmene) ,nunselci-cmene))))
 
         (define (pacmene-enai-toplevel nunselci-cmene)
-          `(,nunselci-cmene))
+          `((nunjavni-secuxna (lambda () ,selci-cmene) ,nunselci-cmene)))
 
         ; reset the start production.
         (secuxna-start-production #f)
@@ -137,8 +144,11 @@
 
           ; outer letrec (which stores references)
           ;
-    (list `(define (,symbol-nunselci porsi mapti namapti)
-             (,symbol porsi mapti namapti))
+    (list `(define ,symbol-nunselci
+             (nunjavni-secuxna
+               (lambda () ,naselci)
+               (lambda (porsi mapti namapti)
+                 (,symbol porsi mapti namapti))))
 
           ; inner let (which stores grammar rules)
           ;

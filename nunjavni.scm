@@ -30,7 +30,10 @@
           (mapti (make-lerfu-porsi-pabalvi-lerfu porsi)
                  (nunvalsi-lerfu lerfu))
           (namapti porsi)))
-    javni-lerfu))
+    (nunjavni-secuxna
+      (lambda ()
+        (string-append "#\\" (make-string 1 lerfu)))
+        javni-lerfu)))
 
 
 ;; selci: parse any single character. 
@@ -42,7 +45,7 @@
           (namapti porsi)
           (mapti (make-lerfu-porsi-pabalvi-lerfu porsi)
                  (nunvalsi-. (lerfu-porsi-lerfu porsi)))))
-    javni-.))
+    (nunjavni-secuxna (lambda () "#\.") javni-.)))
 
 
 ;; empty-string: parse the empty string, which always succeeds without
@@ -52,7 +55,7 @@
   (let ((nunvalsi-e (make-nunvalsi cmene nastura)))
     (define (javni-e porsi mapti ignore-namapti)
       (mapti porsi (nunvalsi-e empty-string)))
-    javni-e))
+    (nunjavni-secuxna (lambda () (make-string 2 #\")) javni-e)))
 
 
 ;; empty-list: parse the empty list, which always succeeds without
@@ -62,7 +65,7 @@
   (let ((nunvalsi-nil (make-nunvalsi cmene nastura)))
     (define (javni-nil porsi mapti ignore-namapti)
       (mapti porsi (nunvalsi-nil empty-list)))
-    javni-nil))
+    (nunjavni-secuxna (lambda () "()") javni-nil)))
 
 
 ;; selci: parse the end of input.
@@ -76,7 +79,7 @@
       (if (lerfu-porsi-fanmo? porsi)
           (mapti porsi (nunvalsi-fanmo sentinel))
           (namapti porsi)))
-  javni-fanmo))
+  (nunjavni-secuxna (lambda () "!.") javni-fanmo)))
 
 
 ;; selci: parse the specified string
@@ -96,7 +99,10 @@
             (mapti (make-lerfu-porsi-pabalvi-valsi porsi nilcla)
                    (nunvalsi-valsi valsi))
             (namapti porsi))))
-    javni-valsi))
+    (nunjavni-secuxna
+      (lambda ()
+        (string-append (make-string 1 #\") valsi (make-string 1 #\")))
+        javni-valsi)))
 
 
 (define (nunjavni-char-set-* char-set #!key cmene nastura)
@@ -117,7 +123,9 @@
             zva))
 
       (mapti-char-set-* (char-set-* poi zva)))
-    javni-char-set-*))
+    (nunjavni-secuxna
+      (lambda () (string-append "[" (char-set->string char-set) "]*"))
+      javni-char-set-*)))
 
 
 (define (nunjavni-char-set-+ char-set #!key cmene nastura)
@@ -129,12 +137,14 @@
             (zva        (lerfu-porsi-zva porsi)))
         (if (char-set-contains? char-set (string-ref poi zva))
             (javni-char-set-* porsi
-                             mapti
-                             namapti
-                             poi
-                             (+ 1 zva))
+                              mapti
+                              namapti
+                              poi
+                              (+ 1 zva))
             (namapti porsi))))
-    javni-char-set-+))
+    (nunjavni-secuxna
+      (lambda () (string-append "[" (char-set->string char-set) "]+"))
+      javni-char-set-+)))
 
 ;; XXX: inline optimize
 (define (nunjavni-char-set char-set #!key cmene nastura)
@@ -147,7 +157,9 @@
             (mapti (make-lerfu-porsi-pabalvi-lerfu porsi)
                    (nunvalsi-char-set (lerfu-porsi-lerfu porsi)))
             (namapti porsi))))
-    javni-char-set))
+    (nunjavni-secuxna
+      (lambda () (string-append "[" (char-set->string char-set) "]"))
+      javni-char-set)))
 
 ;; zero-or-more: parse zero or more javni out of the |lerfu-porsi|.
 ;;
@@ -184,7 +196,7 @@
         (mapti porsi (vejmina (cdr cfari))))
 
       (javni porsi mapti-* namapti-*))
-    javni-*))
+    (nunjavni-secuxna (lambda () "*") javni-*)))
 
 
 ;; one-or-more: parse one or more javni out of the |lerfu-porsi|.
@@ -200,7 +212,7 @@
                    cfari: (cons (list '()) fanmo)
                    fanmo: fanmo)))
       (javni porsi mapti-+ namapti))
-    javni-+))
+    (nunjavni-secuxna (lambda () "+") javni-+)))
 
 
 ;; optional: parse an optional javni out of the |lerfu-porsi|.
@@ -223,7 +235,7 @@
         (mapti porsi novejmina))
 
       (javni porsi mapti-? namapti-?))
-    javni-?))
+    (nunjavni-secuxna (lambda () "?") javni-?)))
 
 
 ;; and-predicate: succeed or fail without consuming input.
@@ -237,7 +249,7 @@
       (namapti porsi))
 
     (javni porsi mapti-& namapti-&))
-  javni-&)
+  (nunjavni-secuxna (lambda () "&") javni-&))
 
 
 ;; not-predicate: require that |javni| is not able to be parsed from
@@ -252,7 +264,7 @@
       (mapti porsi (lambda () (make-javni-valsi #f secuxna-nastura))))
 
     (javni porsi mapti-! namapti-!))
-  javni-!)
+  (nunjavni-secuxna (lambda () "!") javni-!))
 
 
 ;; sequence: parse |ro da javni| out of the |lerfu-porsi|.
@@ -311,7 +323,7 @@
                                          cfari: cfari
                                          fanmo: (cdr fanmo)))))
               (javni porsi mapti-je namapti-je)))))
-  javni-je))
+  (nunjavni-secuxna (lambda () "je") javni-je)))
 
 
 ;; ordered-choice: parse the first matching javni out of the
@@ -340,7 +352,7 @@
             (let ((namapti-jonai (lambda (porsi)
                                   (javni-jonai porsi mapti namapti rest))))
               (javni porsi mapti-jonai namapti-jonai)))))
-    javni-jonai))
+    (nunjavni-secuxna (lambda () "jonai") javni-jonai)))
 
 
 ;; morji: memoization is done to ensure we run in linear time.
@@ -486,3 +498,21 @@
       (mapti porsi nunvalsi-nastura))
     (javni porsi mapti-nastura namapti))
   javni-nastura)
+
+;; decorate each rule according to the options specified.
+;;
+(define (nunjavni-secuxna nuncmene javni #!rest cmene-sumti)
+  (define (cfisisku cmene javni)
+    (if (secuxna-debug)
+        (apply nunjavni-cfisisku cmene javni cmene-sumti)
+        javni))
+
+  (define (junla cmene javni)
+    (if (secuxna-profile)
+        (apply nunjavni-junla cmene javni cmene-sumti)
+        javni))
+
+  (if (or (secuxna-debug) (secuxna-profile))
+      (let ((cmene (nuncmene)))
+            (cfisisku cmene (junla cmene javni)))
+      javni))

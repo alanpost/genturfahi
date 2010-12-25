@@ -100,6 +100,8 @@
    nunjavni-cmene
    nunjavni-nastura
 
+   nunjavni-secuxna
+
    ; morji
    ;
    tolmohi-nunjavni
@@ -139,11 +141,22 @@
    vejmina-rodanunvalsi-nacmene
 
 
+   ; cfiselsisku
+   cfisisku-datni
+   nunjavni-cfisisku
+
+   ; junla
+   junla-datni
+   nunjavni-junla
+
+
    ; secuxna
    secuxna-start-production
    secuxna-define-name
    secuxna-define-toplevel
    secuxna-exit-status
+   secuxna-debug-file
+   secuxna-profile-file
    secuxna-debug
    secuxna-profile
    secuxna-no-memoize
@@ -165,11 +178,15 @@
 ;(require-extension srfi-9)         ; built-in
 (require-extension srfi-13)
 (require-extension srfi-14)
+(require-extension srfi-18)
 ;(require-extension srfi-28)        ; built-in
 ;(require-extension srfi-39)        ; built-in
 ;(require-extension srfi-61)        ; built-in
 (require-extension srfi-69)
+;(require-extension srfi-95)
+(require-extension data-structures)
 (require-extension extras)
+(require-extension latch)
 (require-extension ports)
 
 (import srfi-1)          ; filter
@@ -177,11 +194,15 @@
 ;(import srfi-9)          ; define-record-type
 (import srfi-13)         ; string-copy
 (import srfi-14)         ; character set library
+(import srfi-18)         ; multi-threading support
 ;(import srfi-28)         ; basic format strings
 ;(import srfi-39)         ; parameter objects
 ;(import srfi-61)         ; A more general cond clause
 (import srfi-69)         ; basic hash tables
+;(import srfi-95)         ; sorting and merging
+(import data-structures) ; should be srfi-95
 (import extras)          ; format, pretty-print
+(import latch)           ; let-once
 (import ports)           ; Chicken Scheme srfi-6 and port extensions
 
 (include "chicken-platform.scm")
@@ -192,5 +213,7 @@
 (include "nunjavni.scm")
 (include "morji.scm")
 (include "nunvalsi.scm")
+(include "cfisisku.scm")
+(include "junla.scm")
 (include "genturfahi.scm")
 (include "version.scm"))

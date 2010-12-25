@@ -47,6 +47,23 @@
 
 (safe-environment-set!
   genturfahi-env
+  'output-file
+  (lambda (file)
+    (let ((port (open-output-file file)))
+      (lambda () port))))
+
+(safe-environment-set!
+  genturfahi-env
+  'debug-file
+  secuxna-debug-file)
+
+(safe-environment-set!
+  genturfahi-env
+  'profile-file
+  secuxna-profile-file)
+
+(safe-environment-set!
+  genturfahi-env
   'debug
   secuxna-debug)
 

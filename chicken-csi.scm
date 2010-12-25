@@ -19,6 +19,8 @@
 (include "nunjavni.scm")
 (include "morji.scm")
 (include "nunvalsi.scm")
+(include "cfisisku.scm")
+(include "junla.scm")
 (include "genturfahi.scm")
 (include "version.scm")
 

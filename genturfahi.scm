@@ -27,6 +27,20 @@
 ;; in |javni-valsi| to the caller.
 ;;
 (define (genturfahi javni)
+  (define (cfisisku)
+    (if (secuxna-debug)
+        (call-with-output-file
+          (secuxna-debug-file)
+          (lambda (port)
+            (pretty-print (cfisisku-datni) port)))))
+
+  (define (junla)
+    (if (secuxna-profile)
+        (call-with-output-file
+          (secuxna-profile-file)
+          (lambda (port)
+            (pretty-print (junla-datni) port)))))
+
   ; generate the genturfa'i valsi.  Calling |nunvalsi| here
   ; is where all of the samselpla specified in
   ; |nunjavni-samselpla| executes.
@@ -36,6 +50,9 @@
     ; a new |porsi|.
     (genturfahi-tolmohi)
 
+    (cfisisku) ; if debugging is enabled, output the debugging report.
+    (junla)    ; if profiling is enabled, output the profiling report.
+
     (values (javni-nunvalsi-val-filter nunvalsi)
             (lerfu-porsi-string porsi)))
 
@@ -43,6 +60,9 @@
     ; always clear memoizations, which aren't valid when we get
     ; a new |porsi|.
     (genturfahi-tolmohi)
+
+    (cfisisku) ; if debugging is enabled, output the debugging report.
+    (junla)    ; if profiling is enabled, output the profiling report.
 
     (values (secuxna-nonmatch-token) (lerfu-porsi-string porsi)))
 
