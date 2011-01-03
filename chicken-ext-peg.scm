@@ -71,6 +71,7 @@
    samselpla-digit
    samselpla-graph
    samselpla-jbolehu
+   samselpla-jbocahu
    samselpla-lower
    samselpla-odigit
    samselpla-print

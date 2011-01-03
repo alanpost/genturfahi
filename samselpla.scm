@@ -382,7 +382,10 @@
 (define (samselpla-jbolehu)
   `(char-set-union
      (char-set-xor char-set:letter+digit (char-set #\q #\w))
-     (char-set #\' #\. #\,)))
+     (char-set #\' #\,)))
+
+(define (samselpla-jbocahu)
+  `(char-set-union char-set:whitespace (char-set #\.)))
 
 (define (samselpla-lower)
   'char-set:lower-case)
