@@ -185,7 +185,6 @@
 ;(require-extension srfi-95)
 (require-extension data-structures)
 (require-extension extras)
-(require-extension latch)
 (require-extension ports)
 
 (import srfi-1)          ; filter
@@ -200,7 +199,6 @@
 ;(import srfi-95)         ; sorting and merging
 (import data-structures) ; should be srfi-95
 (import extras)          ; format, pretty-print
-(import latch)           ; let-once
 (import ports)           ; Chicken Scheme srfi-6 and port extensions
 
 (include "chicken-platform.scm")
