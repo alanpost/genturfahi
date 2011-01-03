@@ -22,10 +22,9 @@
 ;;;
 
 (define-record-type javni-merli
-  (make-javni-merli temci klani mapti namapti)
+  (make-javni-merli temci mapti namapti)
   javni-merli?
   (temci   javni-merli-temci   set-javni-merli-temci!)
-  (klani   javni-merli-klani   set-javni-merli-klani!)
   (mapti   javni-merli-mapti   set-javni-merli-mapti!)
   (namapti javni-merli-namapti set-javni-merli-namapti!))
 
@@ -42,7 +41,6 @@
 
         (define (datni cmene javni-merli)
           (let ((temci   (javni-merli-temci   javni-merli))
-                (klani   (javni-merli-klani   javni-merli))
                 (mapti   (javni-merli-mapti   javni-merli))
                 (namapti (javni-merli-namapti javni-merli)))
 
@@ -52,7 +50,6 @@
             ; values.
             ;
             `(,cmene (("temci"   ,temci)
-                      ("klani"   ,klani)
                       ("mapti"   ,mapti)
                       ("namapti" ,namapti)))))
 
@@ -60,7 +57,7 @@
              (sort! (hash-table->alist rodamerli) hash->?)))
 
       (lambda (cmene javni)
-        (let ((javni-merli (make-javni-merli 0 0 0 0)))
+        (let ((javni-merli (make-javni-merli 0 0 0)))
           (define (javni-junla porsi mapti namapti #!rest cmene-sumti) 
                   ; start the timer
             (let ((cfari (time->seconds (current-time))))
@@ -68,10 +65,9 @@
               (define (sisti)
                       ; stop the timer
                 (let ((fanmo (time->seconds (current-time)))
-                      (temci (javni-merli-temci javni-merli))
-                      (klani (javni-merli-klani javni-merli)))
-                  (set-javni-merli-temci! javni-merli (+ temci (- fanmo cfari)))
-                  (set-javni-merli-klani! javni-merli (+ 1 klani))))
+                      (temci (javni-merli-temci javni-merli)))
+                  (set-javni-merli-temci! javni-merli
+                                          (+ temci (- fanmo cfari)))))
 
               (define (mapti-junla porsi nunvalsi)
                 (sisti)
