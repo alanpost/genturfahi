@@ -75,31 +75,31 @@
 
         ; toplevel definition with mulitple start productions
         ;
-        (define (suhorecmene-e-toplevel tamgau nunselci-cmene)
-          (map (lambda (tamgau cmene)
+        (define (suhorecmene-e-toplevel tamgau selci-cmene nunselci-cmene)
+          (map (lambda (tamgau cmene javni)
                   `(define
                      ,tamgau
-                     (nunjavni-secuxna (lambda () ,selci-cmene) ,cmene)))
-               tamgau nunselci-cmene))
+                     (nunjavni-secuxna (lambda () ,cmene) ,javni)))
+               tamgau selci-cmene nunselci-cmene))
 
         ; (let ...) definition with multiple start productions
         ;
-        (define (suhorecmene-enai-toplevel nunselci-cmene)
-          `((values ,@(map (lambda (tamgau cmene)
+        (define (suhorecmene-enai-toplevel selci-cmene nunselci-cmene)
+          `((values ,@(map (lambda (tamgau cmene javni)
                              `(nunjavni-secuxna
-                                (lambda () ,selci-cmene)
-                                ,cmene))))))
+                                (lambda () ,cmene) ,javni)
+                           tamgau selci-cmene nunselci-cmene)))))
 
         ; toplevel definition with a single start production.
         ;
-        (define (pacmene-e-toplevel tamgau nunselci-cmene)
+        (define (pacmene-e-toplevel tamgau selci-cmene nunselci-cmene)
           `((define
               ,tamgau
               (nunjavni-secuxna (lambda () selci-cmene) ,nunselci-cmene))))
 
         ; (let ...) definition with a single start production.
         ;
-        (define (pacmene-enai-toplevel nunselci-cmene)
+        (define (pacmene-enai-toplevel selci-cmene nunselci-cmene)
           `((nunjavni-secuxna (lambda () ,selci-cmene) ,nunselci-cmene)))
 
         ; reset the start production.
@@ -118,16 +118,22 @@
                             (nunselci-cmene
                               (map samselpla-cmene->symbol* selci-cmene)))
                         (if toplevel
-                            (suhorecmene-e-toplevel rodatamgau nunselci-cmene)
-                            (suhorecmene-enai-toplevel nunselci-cmene)))
+                            (suhorecmene-e-toplevel rodatamgau
+                                                    selci-cmene
+                                                    nunselci-cmene)
+                            (suhorecmene-enai-toplevel selci-cmene
+                                                       nunselci-cmene)))
 
                       (let ((rodatamgau
                               (string->symbol  rodatamgau))
                             (nunselci-cmene
                               (samselpla-cmene->symbol* selci-cmene)))
                         (if toplevel
-                            (pacmene-e-toplevel rodatamgau nunselci-cmene)
-                            (pacmene-enai-toplevel nunselci-cmene)))))
+                            (pacmene-e-toplevel rodatamgau
+                                                selci-cmene
+                                                nunselci-cmene)
+                            (pacmene-enai-toplevel selci-cmene
+                                                   nunselci-cmene)))))
             '())))
 
           (hash-table-clear! samselpla-hash-table)
