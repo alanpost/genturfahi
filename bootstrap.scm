@@ -752,11 +752,11 @@
           (morji-nunjavni-*
             (morji-nunjavni-je (morji-nunjavni-! CRLF-35) (morji-nunjavni-.)))
           (morji-nunjavni-jonai CRLF-35 (morji-nunjavni-& FAhO-4)))))
-    (define CR-73 (nunjavni-morji (morji-nunjavni-lerfu #\return)))
-    (define LF-74 (nunjavni-morji (morji-nunjavni-lerfu #\newline)))
+    (define CR-73 (morji-nunjavni-lerfu #\return))
+    (define LF-74 (morji-nunjavni-lerfu #\newline))
     (define CRLF-75
       (nunjavni-morji
         (morji-nunjavni-jonai (morji-nunjavni-je CR-36 LF-37) CR-36 LF-37)))
-    (define FAhO-76 (nunjavni-morji (morji-nunjavni-fanmo)))
+    (define FAhO-76 (morji-nunjavni-fanmo))
     (tolmohi-nunjavni)
     (nunjavni-secuxna (lambda () "cfari") cfari-39)))
