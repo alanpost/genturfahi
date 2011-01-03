@@ -17,7 +17,7 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
-(use genturfahi genturfahi-peg test)
+(use genturfahi genturfahi-peg test utils)
 
 (include "empty-string.scm")
 (include "empty-list.scm")
