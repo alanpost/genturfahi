@@ -64,6 +64,9 @@
     (cfisisku) ; if debugging is enabled, output the debugging report.
     (junla)    ; if profiling is enabled, output the profiling report.
 
+    ; set the exit status
+    (secuxna-exit-status 1)
+
     (values (secuxna-nonmatch-token) (lerfu-porsi-string porsi)))
 
   (lambda (lefpoi)
