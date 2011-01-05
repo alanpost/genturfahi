@@ -33,6 +33,7 @@
    make-lerfu-porsi-port
    make-lerfu-porsi-pabalvi-lerfu
    make-lerfu-porsi-pabalvi-valsi
+   make-lerfu-porsi-fanmo
    lerfu-porsi?
    lerfu-porsi-zva
    lerfu-porsi-poi
@@ -76,6 +77,8 @@
    ; nunjavni
    ;
    nunjavni-lerfu
+   nunjavni-.*
+   nunjavni-.+
    nunjavni-.
    nunjavni-e
    nunjavni-nil
@@ -108,6 +111,8 @@
    nunmorji-nunjavni
 
    morji-nunjavni-lerfu
+   morji-nunjavni-.*
+   morji-nunjavni-.+
    morji-nunjavni-.
    morji-nunjavni-e
    morji-nunjavni-nil

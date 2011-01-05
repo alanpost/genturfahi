@@ -39,6 +39,8 @@
    samselpla-nastura-javni
    samselpla-pajavni-cmene
    samselpla-jonai
+   samselpla-.*
+   samselpla-.+
    samselpla-?
    samselpla-*
    samselpla-+

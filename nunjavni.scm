@@ -38,6 +38,22 @@
 
 ;; selci: parse any single character. 
 ;;
+(define (nunjavni-.* #!key cmene nastura)
+  (let ((nunvalsi-.* (make-nunvalsi cmene nastura)))
+    (define (javni-.* porsi mapti ignore-namapti)
+        (mapti (make-lerfu-porsi-fanmo porsi)
+               (nunvalsi-.* (lerfu-porsi-string porsi))))
+    (nunjavni-secuxna (lambda () "#\\.*") javni-.*)))
+
+(define (nunjavni-.+ #!key cmene nastura)
+  (let ((nunvalsi-.+ (make-nunvalsi cmene nastura)))
+    (define (javni-.+ porsi mapti namapti)
+      (if (lerfu-porsi-fanmo? porsi)
+          (namapti porsi)
+          (mapti (make-lerfu-porsi-fanmo porsi)
+                 (nunvalsi-.+ (lerfu-porsi-string porsi)))))
+    (nunjavni-secuxna (lambda () "#\\.+") javni-.+)))
+
 (define (nunjavni-. #!key cmene nastura)
   (let ((nunvalsi-. (make-nunvalsi cmene nastura)))
     (define (javni-. porsi mapti namapti)

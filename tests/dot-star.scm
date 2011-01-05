@@ -17,28 +17,38 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
-(use genturfahi genturfahi-peg test utils)
+;;;
+;;; dot-star expression: match the rest of the input file.
+;;;
+;;; dot-star <- .*
+;;;
+(define (dot-star)
+  (let ((genturfahi-.* (genturfahi* (nunjavni-.*))))
+    (dot-star-test genturfahi-.*)))
 
-(include "empty-string.scm")
-(include "empty-list.scm")
-(include "end-of-input.scm")
-(include "lerfu.scm")
-(include "dot.scm")
-(include "dot-star.scm")
-(include "dot-plus.scm")
-(include "valsi.scm")
-(include "optional.scm")
-(include "zero-or-more.scm")
-(include "one-or-more.scm")
-(include "je.scm")
-(include "jonai.scm")
-(include "and-predicate.scm")
-(include "not-predicate.scm")
-(include "jonai-naselci.scm")
-(include "samselpla.scm")
-(include "lerfu-klesi.scm")
-(include "mex.scm")
-(include "rrecursion.scm")
-(include "lrecursion.scm")
+(define (dot-star-peg)
+  (let* ((samselpla (call-with-input-file "dot-star.peg" genturfahi-peg))
+         (genturfahi-.* (genturfahi* (eval samselpla))))
+    (dot-star-test genturfahi-.*)))
 
-(test-exit)
+(define (dot-star-test genturfahi-.*)
+  (test '("a" "") (genturfahi-.* "a"))
+  (test '("b" "") (genturfahi-.* "b"))
+  (test '("c" "") (genturfahi-.* "c"))
+
+  (test '("ab" "") (genturfahi-.* "ab"))
+  (test '("bc" "") (genturfahi-.* "bc"))
+  (test '("ca" "") (genturfahi-.* "ca"))
+
+  (test '("abc" "") (genturfahi-.* "abc"))
+  (test '("bca" "") (genturfahi-.* "bca"))
+  (test '("cab" "") (genturfahi-.* "cab"))
+
+  (test '("" "") (genturfahi-.* ""))
+  0)
+
+(test-group "dot-star"
+  (dot-star))
+
+(test-group "dot-star (PEG)"
+  (dot-star-peg))

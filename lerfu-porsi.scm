@@ -87,6 +87,14 @@
     (make-lerfu-porsi (+ zva nilcla) poi)))
 
 
+;; return a new lerfu-porsi with the position advanced to
+;; the end of input.
+;;
+(define (make-lerfu-porsi-fanmo porsi)
+  (let ((poi (lerfu-porsi-poi porsi)))
+    (make-lerfu-porsi (- (string-length poi) 1) poi)))
+
+
 ;; convert a lerfu-porsi to a string.
 ;;
 (define (lerfu-porsi->string porsi)

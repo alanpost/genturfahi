@@ -111,7 +111,9 @@ nastura-pajavni <- #\` canlu #:javni pajavni
                 -> samselpla-nastura-javni
                  / pajavni
 
-pajavni         <- optional
+pajavni         <- dot-zero-or-more
+                 / dot-one-or-more
+                 / optional
                  / zero-or-more
                  / one-or-more
                  / and-predicate
@@ -120,6 +122,13 @@ pajavni         <- optional
                  / #:cmene cmene-sumti?
                    #:javni selci-javni
                 -> samselpla-pajavni-cmene
+
+dot-zero-or-more <- #:cmene cmene-sumti?
+                    #\. canlu #\* canlu
+                 -> {samselpla-.*}
+dot-one-or-more  <- #:cmene cmene-sumti?
+                    #\. canlu #\+ canlu
+                 -> {samselpla-.+}
 
 optional        <- #:cmene cmene-sumti?
                    #:javni selci-javni

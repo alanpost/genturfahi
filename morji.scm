@@ -65,6 +65,8 @@
 ;; Create memoizing versions of all of the operators.
 ;;
 (define morji-nunjavni-lerfu      (nunmorji-nunjavni nunjavni-lerfu))
+(define morji-nunjavni-.*         (nunmorji-nunjavni nunjavni-.*))
+(define morji-nunjavni-.+         (nunmorji-nunjavni nunjavni-.+))
 (define morji-nunjavni-.          (nunmorji-nunjavni nunjavni-.))
 (define morji-nunjavni-e          (nunmorji-nunjavni nunjavni-e))
 (define morji-nunjavni-nil        (nunmorji-nunjavni nunjavni-nil))

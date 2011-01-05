@@ -183,6 +183,8 @@
         ;
         (case (car javni)
           ((morji-nunjavni-lerfu
+            morji-nunjavni-.*
+            morji-nunjavni-.+
             morji-nunjavni-.
             morji-nunjavni-e
             morji-nunjavni-nil
@@ -271,6 +273,12 @@
 ;;
 (define (samselpla-jonai #!key cfari fanmo)
   `(morji-nunjavni-jonai ,cfari ,@fanmo))
+
+(define (samselpla-.* #!key cmene)
+  `(morji-nunjavni-.* ,@(if (string=? "" cmene) '() `(cmene: ,cmene))))
+
+(define (samselpla-.+ #!key cmene)
+  `(morji-nunjavni-.+ ,@(if (string=? "" cmene) '() `(cmene: ,cmene))))
 
 (define (samselpla-? #!key cmene javni)
   (let ((empty-string (secuxna-empty-string)))

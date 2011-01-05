@@ -19,163 +19,173 @@
 
 (define genturfahi-peg-gerna
   (let ()
-    (define cfari-38
+    (define cfari-40
       (nunjavni-secuxna
         (lambda () "cfari")
-        (lambda (porsi mapti namapti) (cfari-39 porsi mapti namapti))))
+        (lambda (porsi mapti namapti) (cfari-41 porsi mapti namapti))))
     (define cfari-samselpla-2
       (nunjavni-secuxna
         (lambda () "cfari-samselpla")
         (lambda (porsi mapti namapti)
-          (cfari-samselpla-40 porsi mapti namapti))))
+          (cfari-samselpla-42 porsi mapti namapti))))
     (define gerna-3
       (nunjavni-secuxna
         (lambda () "gerna")
-        (lambda (porsi mapti namapti) (gerna-41 porsi mapti namapti))))
+        (lambda (porsi mapti namapti) (gerna-43 porsi mapti namapti))))
     (define smuni-5
       (nunjavni-secuxna
         (lambda () "smuni")
-        (lambda (porsi mapti namapti) (smuni-42 porsi mapti namapti))))
+        (lambda (porsi mapti namapti) (smuni-44 porsi mapti namapti))))
     (define naselci-6
       (nunjavni-secuxna
         (lambda () "naselci")
-        (lambda (porsi mapti namapti) (naselci-43 porsi mapti namapti))))
+        (lambda (porsi mapti namapti) (naselci-45 porsi mapti namapti))))
     (define javni-7
       (nunjavni-secuxna
         (lambda () "javni")
-        (lambda (porsi mapti namapti) (javni-44 porsi mapti namapti))))
+        (lambda (porsi mapti namapti) (javni-46 porsi mapti namapti))))
     (define jonai-8
       (nunjavni-secuxna
         (lambda () "jonai")
-        (lambda (porsi mapti namapti) (jonai-45 porsi mapti namapti))))
+        (lambda (porsi mapti namapti) (jonai-47 porsi mapti namapti))))
     (define je-9
       (nunjavni-secuxna
         (lambda () "je")
-        (lambda (porsi mapti namapti) (je-46 porsi mapti namapti))))
+        (lambda (porsi mapti namapti) (je-48 porsi mapti namapti))))
     (define nastura-pajavni-10
       (nunjavni-secuxna
         (lambda () "nastura-pajavni")
         (lambda (porsi mapti namapti)
-          (nastura-pajavni-47 porsi mapti namapti))))
+          (nastura-pajavni-49 porsi mapti namapti))))
     (define pajavni-13
       (nunjavni-secuxna
         (lambda () "pajavni")
-        (lambda (porsi mapti namapti) (pajavni-48 porsi mapti namapti))))
-    (define optional-14
+        (lambda (porsi mapti namapti) (pajavni-50 porsi mapti namapti))))
+    (define dot-zero-or-more-14
+      (nunjavni-secuxna
+        (lambda () "dot-zero-or-more")
+        (lambda (porsi mapti namapti)
+          (dot-zero-or-more-51 porsi mapti namapti))))
+    (define dot-one-or-more-15
+      (nunjavni-secuxna
+        (lambda () "dot-one-or-more")
+        (lambda (porsi mapti namapti)
+          (dot-one-or-more-52 porsi mapti namapti))))
+    (define optional-16
       (nunjavni-secuxna
         (lambda () "optional")
-        (lambda (porsi mapti namapti) (optional-49 porsi mapti namapti))))
-    (define zero-or-more-15
+        (lambda (porsi mapti namapti) (optional-53 porsi mapti namapti))))
+    (define zero-or-more-17
       (nunjavni-secuxna
         (lambda () "zero-or-more")
-        (lambda (porsi mapti namapti) (zero-or-more-50 porsi mapti namapti))))
-    (define one-or-more-16
+        (lambda (porsi mapti namapti) (zero-or-more-54 porsi mapti namapti))))
+    (define one-or-more-18
       (nunjavni-secuxna
         (lambda () "one-or-more")
-        (lambda (porsi mapti namapti) (one-or-more-51 porsi mapti namapti))))
-    (define and-predicate-17
+        (lambda (porsi mapti namapti) (one-or-more-55 porsi mapti namapti))))
+    (define and-predicate-19
       (nunjavni-secuxna
         (lambda () "and-predicate")
-        (lambda (porsi mapti namapti) (and-predicate-52 porsi mapti namapti))))
-    (define end-of-input-18
+        (lambda (porsi mapti namapti) (and-predicate-56 porsi mapti namapti))))
+    (define end-of-input-20
       (nunjavni-secuxna
         (lambda () "end-of-input")
-        (lambda (porsi mapti namapti) (end-of-input-53 porsi mapti namapti))))
-    (define not-predicate-19
+        (lambda (porsi mapti namapti) (end-of-input-57 porsi mapti namapti))))
+    (define not-predicate-21
       (nunjavni-secuxna
         (lambda () "not-predicate")
-        (lambda (porsi mapti namapti) (not-predicate-54 porsi mapti namapti))))
+        (lambda (porsi mapti namapti) (not-predicate-58 porsi mapti namapti))))
     (define cmene-sumti-11
       (nunjavni-secuxna
         (lambda () "cmene-sumti")
-        (lambda (porsi mapti namapti) (cmene-sumti-55 porsi mapti namapti))))
-    (define selci-javni-20
+        (lambda (porsi mapti namapti) (cmene-sumti-59 porsi mapti namapti))))
+    (define selci-javni-22
       (nunjavni-secuxna
         (lambda () "selci-javni")
-        (lambda (porsi mapti namapti) (selci-javni-56 porsi mapti namapti))))
-    (define selci-naselci-21
+        (lambda (porsi mapti namapti) (selci-javni-60 porsi mapti namapti))))
+    (define selci-naselci-23
       (nunjavni-secuxna
         (lambda () "selci-naselci")
-        (lambda (porsi mapti namapti) (selci-naselci-57 porsi mapti namapti))))
-    (define lerfu-selci-22
+        (lambda (porsi mapti namapti) (selci-naselci-61 porsi mapti namapti))))
+    (define lerfu-selci-24
       (nunjavni-secuxna
         (lambda () "lerfu-selci")
-        (lambda (porsi mapti namapti) (lerfu-selci-58 porsi mapti namapti))))
-    (define lerfu-cmene-27
+        (lambda (porsi mapti namapti) (lerfu-selci-62 porsi mapti namapti))))
+    (define lerfu-cmene-29
       (nunjavni-secuxna
         (lambda () "lerfu-cmene")
-        (lambda (porsi mapti namapti) (lerfu-cmene-59 porsi mapti namapti))))
-    (define valsi-selci-23
+        (lambda (porsi mapti namapti) (lerfu-cmene-63 porsi mapti namapti))))
+    (define valsi-selci-25
       (nunjavni-secuxna
         (lambda () "valsi-selci")
-        (lambda (porsi mapti namapti) (valsi-selci-60 porsi mapti namapti))))
-    (define valsi-lerfu-28
+        (lambda (porsi mapti namapti) (valsi-selci-64 porsi mapti namapti))))
+    (define valsi-lerfu-30
       (nunjavni-secuxna
         (lambda () "valsi-lerfu")
-        (lambda (porsi mapti namapti) (valsi-lerfu-61 porsi mapti namapti))))
-    (define klesi-selci-24
+        (lambda (porsi mapti namapti) (valsi-lerfu-65 porsi mapti namapti))))
+    (define klesi-selci-26
       (nunjavni-secuxna
         (lambda () "klesi-selci")
-        (lambda (porsi mapti namapti) (klesi-selci-62 porsi mapti namapti))))
-    (define klesi-lerfu-29
+        (lambda (porsi mapti namapti) (klesi-selci-66 porsi mapti namapti))))
+    (define klesi-lerfu-31
       (nunjavni-secuxna
         (lambda () "klesi-lerfu")
-        (lambda (porsi mapti namapti) (klesi-lerfu-63 porsi mapti namapti))))
-    (define klesi-cmene-30
+        (lambda (porsi mapti namapti) (klesi-lerfu-67 porsi mapti namapti))))
+    (define klesi-cmene-32
       (nunjavni-secuxna
         (lambda () "klesi-cmene")
-        (lambda (porsi mapti namapti) (klesi-cmene-64 porsi mapti namapti))))
-    (define denpabu-25
+        (lambda (porsi mapti namapti) (klesi-cmene-68 porsi mapti namapti))))
+    (define denpabu-27
       (nunjavni-secuxna
         (lambda () "denpabu")
-        (lambda (porsi mapti namapti) (denpabu-65 porsi mapti namapti))))
+        (lambda (porsi mapti namapti) (denpabu-69 porsi mapti namapti))))
     (define samselpla-12
       (nunjavni-secuxna
         (lambda () "samselpla")
-        (lambda (porsi mapti namapti) (samselpla-66 porsi mapti namapti))))
-    (define samselpla-xadni-31
+        (lambda (porsi mapti namapti) (samselpla-70 porsi mapti namapti))))
+    (define samselpla-xadni-33
       (nunjavni-secuxna
         (lambda () "samselpla-xadni")
         (lambda (porsi mapti namapti)
-          (samselpla-xadni-67 porsi mapti namapti))))
-    (define samselpla-cmene-32
+          (samselpla-xadni-71 porsi mapti namapti))))
+    (define samselpla-cmene-34
       (nunjavni-secuxna
         (lambda () "samselpla-cmene")
         (lambda (porsi mapti namapti)
-          (samselpla-cmene-68 porsi mapti namapti))))
-    (define girzu-javni-26
+          (samselpla-cmene-72 porsi mapti namapti))))
+    (define girzu-javni-28
       (nunjavni-secuxna
         (lambda () "girzu-javni")
-        (lambda (porsi mapti namapti) (girzu-javni-69 porsi mapti namapti))))
+        (lambda (porsi mapti namapti) (girzu-javni-73 porsi mapti namapti))))
     (define canlu-1
       (nunjavni-secuxna
         (lambda () "canlu")
-        (lambda (porsi mapti namapti) (canlu-70 porsi mapti namapti))))
-    (define canlubu-33
+        (lambda (porsi mapti namapti) (canlu-74 porsi mapti namapti))))
+    (define canlubu-35
       (nunjavni-secuxna
         (lambda () "canlubu")
-        (lambda (porsi mapti namapti) (canlubu-71 porsi mapti namapti))))
-    (define totoi-34
+        (lambda (porsi mapti namapti) (canlubu-75 porsi mapti namapti))))
+    (define totoi-36
       (nunjavni-secuxna
         (lambda () "totoi")
-        (lambda (porsi mapti namapti) (totoi-72 porsi mapti namapti))))
-    (define CR-36
+        (lambda (porsi mapti namapti) (totoi-76 porsi mapti namapti))))
+    (define CR-38
       (nunjavni-secuxna
         (lambda () "CR")
-        (lambda (porsi mapti namapti) (CR-73 porsi mapti namapti))))
-    (define LF-37
+        (lambda (porsi mapti namapti) (CR-77 porsi mapti namapti))))
+    (define LF-39
       (nunjavni-secuxna
         (lambda () "LF")
-        (lambda (porsi mapti namapti) (LF-74 porsi mapti namapti))))
-    (define CRLF-35
+        (lambda (porsi mapti namapti) (LF-78 porsi mapti namapti))))
+    (define CRLF-37
       (nunjavni-secuxna
         (lambda () "CRLF")
-        (lambda (porsi mapti namapti) (CRLF-75 porsi mapti namapti))))
+        (lambda (porsi mapti namapti) (CRLF-79 porsi mapti namapti))))
     (define FAhO-4
       (nunjavni-secuxna
         (lambda () "FAhO")
-        (lambda (porsi mapti namapti) (FAhO-76 porsi mapti namapti))))
-    (define cfari-39
+        (lambda (porsi mapti namapti) (FAhO-80 porsi mapti namapti))))
+    (define cfari-41
       (nunjavni-morji
         (morji-nunjavni-samselpla
           samselpla-cfari
@@ -185,7 +195,7 @@
             canlu-1
             (morji-nunjavni-cmene gerna-3 cmene: "gerna")
             (morji-nunjavni-nastura FAhO-4)))))
-    (define cfari-samselpla-40
+    (define cfari-samselpla-42
       (nunjavni-morji
         (morji-nunjavni-samselpla-cabna
           samselpla-cfari-samselpla
@@ -200,8 +210,8 @@
               "rodalerfu")
             (morji-nunjavni-lerfu #\})
             canlu-1))))
-    (define gerna-41 (nunjavni-morji (morji-nunjavni-* smuni-5)))
-    (define smuni-42
+    (define gerna-43 (nunjavni-morji (morji-nunjavni-* smuni-5)))
+    (define smuni-44
       (nunjavni-morji
         (morji-nunjavni-samselpla
           samselpla-smuni
@@ -210,7 +220,7 @@
             (morji-nunjavni-valsi "<-")
             canlu-1
             (morji-nunjavni-cmene javni-7 cmene: "javni")))))
-    (define naselci-43
+    (define naselci-45
       (nunjavni-morji
         (morji-nunjavni-samselpla
           samselpla-naselci
@@ -250,8 +260,8 @@
               cmene:
               "fanmo")
             canlu-1))))
-    (define javni-44 (nunjavni-morji (morji-nunjavni-jonai jonai-8 je-9)))
-    (define jonai-45
+    (define javni-46 (nunjavni-morji (morji-nunjavni-jonai jonai-8 je-9)))
+    (define jonai-47
       (nunjavni-morji
         (morji-nunjavni-samselpla
           samselpla-jonai
@@ -261,7 +271,7 @@
               (morji-nunjavni-je (morji-nunjavni-lerfu #\/) canlu-1 je-9)
               cmene:
               "fanmo")))))
-    (define je-46
+    (define je-48
       (nunjavni-morji
         (morji-nunjavni-samselpla
           samselpla-je
@@ -269,7 +279,7 @@
             (morji-nunjavni-+ nastura-pajavni-10 cmene: "javni")
             (morji-nunjavni-? cmene-sumti-11 cmene: "cmene")
             (morji-nunjavni-? samselpla-12 cmene: "samselpla")))))
-    (define nastura-pajavni-47
+    (define nastura-pajavni-49
       (nunjavni-morji
         (morji-nunjavni-jonai
           (morji-nunjavni-samselpla
@@ -279,56 +289,78 @@
               canlu-1
               (morji-nunjavni-cmene pajavni-13 cmene: "javni")))
           pajavni-13)))
-    (define pajavni-48
+    (define pajavni-50
       (nunjavni-morji
         (morji-nunjavni-jonai
-          optional-14
-          zero-or-more-15
-          one-or-more-16
-          and-predicate-17
-          end-of-input-18
-          not-predicate-19
+          dot-zero-or-more-14
+          dot-one-or-more-15
+          optional-16
+          zero-or-more-17
+          one-or-more-18
+          and-predicate-19
+          end-of-input-20
+          not-predicate-21
           (morji-nunjavni-samselpla
             samselpla-pajavni-cmene
             (morji-nunjavni-je
               (morji-nunjavni-? cmene-sumti-11 cmene: "cmene")
-              (morji-nunjavni-cmene selci-javni-20 cmene: "javni"))))))
-    (define optional-49
+              (morji-nunjavni-cmene selci-javni-22 cmene: "javni"))))))
+    (define dot-zero-or-more-51
+      (nunjavni-morji
+        (morji-nunjavni-samselpla
+          samselpla-.*
+          (morji-nunjavni-je
+            (morji-nunjavni-? cmene-sumti-11 cmene: "cmene")
+            (morji-nunjavni-lerfu #\.)
+            canlu-1
+            (morji-nunjavni-lerfu #\*)
+            canlu-1))))
+    (define dot-one-or-more-52
+      (nunjavni-morji
+        (morji-nunjavni-samselpla
+          samselpla-.+
+          (morji-nunjavni-je
+            (morji-nunjavni-? cmene-sumti-11 cmene: "cmene")
+            (morji-nunjavni-lerfu #\.)
+            canlu-1
+            (morji-nunjavni-lerfu #\+)
+            canlu-1))))
+    (define optional-53
       (nunjavni-morji
         (morji-nunjavni-samselpla
           samselpla-?
           (morji-nunjavni-je
             (morji-nunjavni-? cmene-sumti-11 cmene: "cmene")
-            (morji-nunjavni-cmene selci-javni-20 cmene: "javni")
+            (morji-nunjavni-cmene selci-javni-22 cmene: "javni")
             (morji-nunjavni-lerfu #\?)
             canlu-1))))
-    (define zero-or-more-50
+    (define zero-or-more-54
       (nunjavni-morji
         (morji-nunjavni-samselpla
           samselpla-*
           (morji-nunjavni-je
             (morji-nunjavni-? cmene-sumti-11 cmene: "cmene")
-            (morji-nunjavni-cmene selci-javni-20 cmene: "javni")
+            (morji-nunjavni-cmene selci-javni-22 cmene: "javni")
             (morji-nunjavni-lerfu #\*)
             canlu-1))))
-    (define one-or-more-51
+    (define one-or-more-55
       (nunjavni-morji
         (morji-nunjavni-samselpla
           samselpla-+
           (morji-nunjavni-je
             (morji-nunjavni-? cmene-sumti-11 cmene: "cmene")
-            (morji-nunjavni-cmene selci-javni-20 cmene: "javni")
+            (morji-nunjavni-cmene selci-javni-22 cmene: "javni")
             (morji-nunjavni-lerfu #\+)
             canlu-1))))
-    (define and-predicate-52
+    (define and-predicate-56
       (nunjavni-morji
         (morji-nunjavni-samselpla
           samselpla-&
           (morji-nunjavni-je
             (morji-nunjavni-lerfu #\&)
             canlu-1
-            (morji-nunjavni-cmene selci-javni-20 cmene: "javni")))))
-    (define end-of-input-53
+            (morji-nunjavni-cmene selci-javni-22 cmene: "javni")))))
+    (define end-of-input-57
       (nunjavni-morji
         (morji-nunjavni-samselpla
           samselpla-fanmo
@@ -337,15 +369,15 @@
             canlu-1
             (morji-nunjavni-lerfu #\.)
             canlu-1))))
-    (define not-predicate-54
+    (define not-predicate-58
       (nunjavni-morji
         (morji-nunjavni-samselpla
           samselpla-!
           (morji-nunjavni-je
             (morji-nunjavni-lerfu #\!)
             canlu-1
-            (morji-nunjavni-cmene selci-javni-20 cmene: "javni")))))
-    (define cmene-sumti-55
+            (morji-nunjavni-cmene selci-javni-22 cmene: "javni")))))
+    (define cmene-sumti-59
       (nunjavni-morji
         (morji-nunjavni-samselpla
           samselpla-cmene-sumti
@@ -386,30 +418,30 @@
               cmene:
               "fanmo")
             canlu-1))))
-    (define selci-javni-56
+    (define selci-javni-60
       (nunjavni-morji
         (morji-nunjavni-jonai
-          selci-naselci-21
-          lerfu-selci-22
-          valsi-selci-23
-          klesi-selci-24
-          denpabu-25
-          girzu-javni-26)))
-    (define selci-naselci-57
+          selci-naselci-23
+          lerfu-selci-24
+          valsi-selci-25
+          klesi-selci-26
+          denpabu-27
+          girzu-javni-28)))
+    (define selci-naselci-61
       (nunjavni-morji
         (morji-nunjavni-samselpla
           samselpla-selci-naselci
           (morji-nunjavni-je
             (morji-nunjavni-cmene naselci-6 cmene: "naselci")
             (morji-nunjavni-! (morji-nunjavni-valsi "<-"))))))
-    (define lerfu-selci-58
+    (define lerfu-selci-62
       (nunjavni-morji
         (morji-nunjavni-jonai
           (morji-nunjavni-samselpla
             samselpla-stura-lerfu-selci
             (morji-nunjavni-je
               (morji-nunjavni-valsi ",#\\")
-              (morji-nunjavni-cmene lerfu-cmene-27 cmene: "lerfu")
+              (morji-nunjavni-cmene lerfu-cmene-29 cmene: "lerfu")
               canlu-1))
           (morji-nunjavni-samselpla
             samselpla-stura-lerfu-selci
@@ -421,7 +453,7 @@
             samselpla-lerfu-selci
             (morji-nunjavni-je
               (morji-nunjavni-valsi "#\\")
-              (morji-nunjavni-cmene lerfu-cmene-27 cmene: "lerfu")
+              (morji-nunjavni-cmene lerfu-cmene-29 cmene: "lerfu")
               canlu-1))
           (morji-nunjavni-samselpla
             samselpla-lerfu-selci
@@ -429,7 +461,7 @@
               (morji-nunjavni-valsi "#\\")
               (morji-nunjavni-. cmene: "lerfu")
               canlu-1)))))
-    (define lerfu-cmene-59
+    (define lerfu-cmene-63
       (nunjavni-morji
         (morji-nunjavni-jonai
           (morji-nunjavni-samselpla
@@ -450,7 +482,7 @@
           (morji-nunjavni-samselpla
             samselpla-lerfu-tab
             (morji-nunjavni-valsi "tab")))))
-    (define valsi-selci-60
+    (define valsi-selci-64
       (nunjavni-morji
         (morji-nunjavni-jonai
           (morji-nunjavni-samselpla
@@ -466,7 +498,7 @@
               (morji-nunjavni-+
                 (morji-nunjavni-je
                   (morji-nunjavni-! (morji-nunjavni-lerfu #\"))
-                  valsi-lerfu-28)
+                  valsi-lerfu-30)
                 cmene:
                 "valsi-lerfu")
               (morji-nunjavni-lerfu #\")
@@ -478,12 +510,12 @@
               (morji-nunjavni-+
                 (morji-nunjavni-je
                   (morji-nunjavni-! (morji-nunjavni-lerfu #\"))
-                  valsi-lerfu-28)
+                  valsi-lerfu-30)
                 cmene:
                 "valsi-lerfu")
               (morji-nunjavni-lerfu #\")
               canlu-1)))))
-    (define valsi-lerfu-61
+    (define valsi-lerfu-65
       (nunjavni-morji
         (morji-nunjavni-jonai
           (morji-nunjavni-samselpla
@@ -521,40 +553,40 @@
             (morji-nunjavni-je
               (morji-nunjavni-! (morji-nunjavni-lerfu #\\))
               (morji-nunjavni-. cmene: "lerfu"))))))
-    (define klesi-selci-62
+    (define klesi-selci-66
       (nunjavni-morji
         (morji-nunjavni-jonai
           (morji-nunjavni-samselpla
             samselpla-klesi-selci-*
             (morji-nunjavni-je
               (morji-nunjavni-lerfu #\[)
-              (morji-nunjavni-+ klesi-lerfu-29 cmene: "klesi-lerfu")
+              (morji-nunjavni-+ klesi-lerfu-31 cmene: "klesi-lerfu")
               (morji-nunjavni-valsi "]*")
               canlu-1))
           (morji-nunjavni-samselpla
             samselpla-klesi-selci-+
             (morji-nunjavni-je
               (morji-nunjavni-lerfu #\[)
-              (morji-nunjavni-+ klesi-lerfu-29 cmene: "klesi-lerfu")
+              (morji-nunjavni-+ klesi-lerfu-31 cmene: "klesi-lerfu")
               (morji-nunjavni-valsi "]+")
               canlu-1))
           (morji-nunjavni-samselpla
             samselpla-klesi-selci
             (morji-nunjavni-je
               (morji-nunjavni-lerfu #\[)
-              (morji-nunjavni-+ klesi-lerfu-29 cmene: "klesi-lerfu")
+              (morji-nunjavni-+ klesi-lerfu-31 cmene: "klesi-lerfu")
               (morji-nunjavni-lerfu #\])
               canlu-1)))))
-    (define klesi-lerfu-63
+    (define klesi-lerfu-67
       (nunjavni-morji
         (morji-nunjavni-jonai
-          klesi-cmene-30
+          klesi-cmene-32
           (morji-nunjavni-samselpla
             samselpla-klesi-lerfu
             (morji-nunjavni-je
               (morji-nunjavni-! (morji-nunjavni-lerfu #\]))
               (morji-nunjavni-. cmene: "klesi-lerfu"))))))
-    (define klesi-cmene-64
+    (define klesi-cmene-68
       (nunjavni-morji
         (morji-nunjavni-jonai
           (morji-nunjavni-samselpla
@@ -647,12 +679,12 @@
           (morji-nunjavni-samselpla
             samselpla-^xdigit
             (morji-nunjavni-valsi "[:^xdigit:]")))))
-    (define denpabu-65
+    (define denpabu-69
       (nunjavni-morji
         (morji-nunjavni-samselpla
           samselpla-denpabu
           (morji-nunjavni-je (morji-nunjavni-lerfu #\.) canlu-1))))
-    (define samselpla-66
+    (define samselpla-70
       (nunjavni-morji
         (morji-nunjavni-jonai
           (morji-nunjavni-samselpla
@@ -660,14 +692,14 @@
             (morji-nunjavni-je
               (morji-nunjavni-valsi "->")
               canlu-1
-              (morji-nunjavni-jonai samselpla-xadni-31 samselpla-cmene-32)))
+              (morji-nunjavni-jonai samselpla-xadni-33 samselpla-cmene-34)))
           (morji-nunjavni-samselpla
             samselpla-samselpla-cabna
             (morji-nunjavni-je
               (morji-nunjavni-valsi "-|")
               canlu-1
-              (morji-nunjavni-jonai samselpla-xadni-31 samselpla-cmene-32))))))
-    (define samselpla-xadni-67
+              (morji-nunjavni-jonai samselpla-xadni-33 samselpla-cmene-34))))))
+    (define samselpla-xadni-71
       (nunjavni-morji
         (morji-nunjavni-samselpla
           samselpla-samselpla-xadni
@@ -682,7 +714,7 @@
               "rodalerfu")
             (morji-nunjavni-lerfu #\})
             canlu-1))))
-    (define samselpla-cmene-68
+    (define samselpla-cmene-72
       (nunjavni-morji
         (morji-nunjavni-samselpla
           samselpla-samselpla-cmene
@@ -722,7 +754,7 @@
               cmene:
               "fanmo")
             canlu-1))))
-    (define girzu-javni-69
+    (define girzu-javni-73
       (nunjavni-morji
         (morji-nunjavni-jonai
           (morji-nunjavni-samselpla
@@ -734,29 +766,29 @@
             javni-7
             (morji-nunjavni-lerfu #\))
             canlu-1))))
-    (define canlu-70
+    (define canlu-74
       (nunjavni-morji
         (morji-nunjavni-*
-          (morji-nunjavni-jonai canlubu-33 totoi-34)
+          (morji-nunjavni-jonai canlubu-35 totoi-36)
           nastura:
           #t)))
-    (define canlubu-71
+    (define canlubu-75
       (nunjavni-morji
         (morji-nunjavni-jonai
           (morji-nunjavni-char-set char-set:whitespace)
-          CRLF-35)))
-    (define totoi-72
+          CRLF-37)))
+    (define totoi-76
       (nunjavni-morji
         (morji-nunjavni-je
           (morji-nunjavni-lerfu #\;)
           (morji-nunjavni-*
-            (morji-nunjavni-je (morji-nunjavni-! CRLF-35) (morji-nunjavni-.)))
-          (morji-nunjavni-jonai CRLF-35 (morji-nunjavni-& FAhO-4)))))
-    (define CR-73 (morji-nunjavni-lerfu #\return))
-    (define LF-74 (morji-nunjavni-lerfu #\newline))
-    (define CRLF-75
+            (morji-nunjavni-je (morji-nunjavni-! CRLF-37) (morji-nunjavni-.)))
+          (morji-nunjavni-jonai CRLF-37 (morji-nunjavni-& FAhO-4)))))
+    (define CR-77 (morji-nunjavni-lerfu #\return))
+    (define LF-78 (morji-nunjavni-lerfu #\newline))
+    (define CRLF-79
       (nunjavni-morji
-        (morji-nunjavni-jonai (morji-nunjavni-je CR-36 LF-37) CR-36 LF-37)))
-    (define FAhO-76 (morji-nunjavni-fanmo))
+        (morji-nunjavni-jonai (morji-nunjavni-je CR-38 LF-39) CR-38 LF-39)))
+    (define FAhO-80 (morji-nunjavni-fanmo))
     (tolmohi-nunjavni)
-    (nunjavni-secuxna (lambda () "cfari") cfari-39)))
+    (nunjavni-secuxna (lambda () "cfari") cfari-41)))
