@@ -63,7 +63,7 @@
     (string-copy poi
                  (lerfu-porsi-zva porsi)
                  ; skip the sentinel
-                 (- (string-length poi) 1))))
+                 (fx- (string-length poi) 1))))
 
 
 ;; return a new lerfu-porsi with the position advanced one
@@ -73,7 +73,7 @@
   (let ((zva (lerfu-porsi-zva porsi))
         (poi (lerfu-porsi-poi porsi)))
     ; create a new lerfu-porsi incrementing |zva| by |1|.
-    (make-lerfu-porsi (+ zva 1) poi)))
+    (make-lerfu-porsi (fx+ zva 1) poi)))
 
 
 ;; return a new lerfu-porsi with the position advanced by
@@ -84,7 +84,7 @@
         (poi (lerfu-porsi-poi porsi)))
     ; create a new lerfu-porsi incrementing |zva| by
     ; |nilcla|
-    (make-lerfu-porsi (+ zva nilcla) poi)))
+    (make-lerfu-porsi (fx+ zva nilcla) poi)))
 
 
 ;; return a new lerfu-porsi with the position advanced to
@@ -92,7 +92,7 @@
 ;;
 (define (make-lerfu-porsi-fanmo porsi)
   (let ((poi (lerfu-porsi-poi porsi)))
-    (make-lerfu-porsi (- (string-length poi) 1) poi)))
+    (make-lerfu-porsi (fx- (string-length poi) 1) poi)))
 
 
 ;; convert a lerfu-porsi to a string.
@@ -115,5 +115,5 @@
 ;; return #t if this |lerfu-porsi| is EOF
 ;;
 (define (lerfu-porsi-fanmo? porsi)
-  (eq? (+ (lerfu-porsi-zva porsi) 1)
+  (eq? (fx+ (lerfu-porsi-zva porsi) 1)
        (string-length (lerfu-porsi-poi porsi))))

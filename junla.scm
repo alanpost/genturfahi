@@ -72,13 +72,13 @@
               (define (mapti-junla porsi nunvalsi)
                 (sisti)
                 (let ((mapti-klani (javni-merli-mapti javni-merli)))
-                  (set-javni-merli-mapti! javni-merli (+ 1 mapti-klani)))
+                  (set-javni-merli-mapti! javni-merli (fx+ 1 mapti-klani)))
                 (mapti porsi nunvalsi))
 
               (define (namapti-junla porsi)
                 (sisti)
                 (let ((namapti-klani (javni-merli-namapti javni-merli)))
-                  (set-javni-merli-namapti! javni-merli (+ 1 namapti-klani)))
+                  (set-javni-merli-namapti! javni-merli (fx+ 1 namapti-klani)))
                 (namapti porsi))
 
               (apply javni porsi mapti-junla namapti-junla cmene-sumti)))

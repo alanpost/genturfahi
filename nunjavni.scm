@@ -111,7 +111,7 @@
                             0
                             nilcla
                             zva
-                            (- (string-length poi) 1))
+                            (fx- (string-length poi) 1))
             (mapti (make-lerfu-porsi-pabalvi-valsi porsi nilcla)
                    (nunvalsi-valsi valsi))
             (namapti porsi))))
@@ -130,12 +130,12 @@
                                          (zva (lerfu-porsi-zva porsi)))
       (define (mapti-char-set-* zva)
         (let ((puzva (lerfu-porsi-zva porsi)))
-          (mapti (make-lerfu-porsi-pabalvi-valsi porsi (- zva puzva))
+          (mapti (make-lerfu-porsi-pabalvi-valsi porsi (fx- zva puzva))
                  (nunvalsi-char-set-* (string-copy poi puzva zva)))))
 
       (define (char-set-* poi zva)
         (if (char-set-contains? char-set (string-ref poi zva))
-            (char-set-* poi (+ 1 zva))
+            (char-set-* poi (fx+ 1 zva))
             zva))
 
       (mapti-char-set-* (char-set-* poi zva)))
@@ -156,7 +156,7 @@
                               mapti
                               namapti
                               poi
-                              (+ 1 zva))
+                              (fx+ 1 zva))
             (namapti porsi))))
     (nunjavni-secuxna
       (lambda () (string-append "[" (char-set->string char-set) "]+"))
