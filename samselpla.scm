@@ -138,6 +138,7 @@
 
           (hash-table-clear! samselpla-hash-table)
           (hash-table-clear! samselpla-hash-table*)
+          (hash-table-clear! samselpla-namorji)
 
           jalge)))))
 
