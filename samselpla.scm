@@ -151,6 +151,10 @@
     ; update the list of non-terminals that we don't memoize
     ;
     (let ((no-memoize (secuxna-no-memoize)))
+      (if (string? no-memoize)
+          (begin
+            (hash-table-set! samselpla-namorji no-memoize #t)
+            (secuxna-no-memoize #f)))
       (if (list? no-memoize)
           (begin
             (for-each (lambda (naselci)
