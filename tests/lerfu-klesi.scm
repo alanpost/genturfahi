@@ -25,26 +25,20 @@
 ;;; alpha <- [:alpha:]+
 ;;; FAhO  <- !.
 ;;;
-(define (test-samselpla-lerfu-klesi #!key gerna)
-  gerna)
-
 (define (lerfu-klesi)
   (let ((genturfahi-lerfu-klesi
     (letrec
       ((gerna (nunjavni-morji
-                (nunjavni-samselpla
-                  test-samselpla-lerfu-klesi
-                  (nunjavni-je
-                    (nunjavni-*
-                      (nunjavni-jonai
-                        (lambda (porsi mapti namapti)
-                          (digit porsi mapti namapti))
-                        (lambda (porsi mapti namapti)
-                          (alpha porsi mapti namapti)))
-                      cmene: "gerna")
-                    (nunjavni-nastura
+                (nunjavni-je
+                  (nunjavni-*
+                    (nunjavni-jonai
                       (lambda (porsi mapti namapti)
-                        (FAhO porsi mapti namapti)))))))
+                        (digit porsi mapti namapti))
+                      (lambda (porsi mapti namapti)
+                        (alpha porsi mapti namapti))))
+                  (nunjavni-nastura
+                    (lambda (porsi mapti namapti)
+                      (FAhO porsi mapti namapti))))))
        (digit (nunjavni-morji
                 (nunjavni-char-set-+ char-set:digit)))
        (alpha (nunjavni-morji
