@@ -89,7 +89,7 @@
 ;; Should this rule return the sentinel character, or should there
 ;; be a separate option for the value to return at the end of the file?
 ;;
-(define (nunjavni-fanmo #!key cmene nastura (sentinel #\nul))
+(define (nunjavni-fanmo #!key cmene (nastura #t) (sentinel #\nul))
   (let ((nunvalsi-fanmo (make-nunvalsi cmene nastura)))
     (define (javni-fanmo porsi mapti namapti)
       (if (lerfu-porsi-fanmo? porsi)

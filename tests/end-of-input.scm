@@ -35,7 +35,7 @@
   ; The end of file only matches when we're at the end of
   ; the parse input.
   ;
-  (test '(#\nul "") (genturfahi-eof ""))
+  (test '(() "") (genturfahi-eof ""))
 
   ; it doesn't match if here are any characters left.
   ;
