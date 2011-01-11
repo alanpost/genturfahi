@@ -55,10 +55,11 @@
    javni-nastura?
 
    javni-nunvalsi-val
+   javni-rodanunvalsi-val
    javni-rodavalsi-val
 
-   ; a version that removes the predicate *-val, for use
-   ; when returning to code outside of genturfa'i.
+   ; a version that removes the predicate secuxna-nastura,
+   ; for use when returning to code outside of genturfa'i.
    ;
    javni-nunvalsi-val-filter
    javni-rodavalsi-val-filter
@@ -168,6 +169,8 @@
    secuxna-sentinel
    secuxna-empty-string
    secuxna-empty-list
+   secuxna-?-default
+   secuxna-*-default
    secuxna-nonmatch-token
    secuxna-nastura)
 

@@ -179,29 +179,32 @@
 
 ;; zero-or-more: parse zero or more javni out of the |lerfu-porsi|.
 ;;
-(define (nunjavni-* javni #!key cmene nastura)
+(define (nunjavni-* javni #!key cmene nastura (default '()))
         ; we merge the results differently when we have a cmene.
         ; generate the merge routine based on this.
-  (let ((vejmina (venunjmina-rodanunvalsi cmene nastura)))
-    (define (javni-* porsi
-                     mapti
-                     namapti
-                            ; a "dummy head" is a linked-list
-                            ; optimization we'll return the cdr
-                            ; of this list, but by using this
-                            ; extra cons we avoid checking for
-                            ; the beginning of the list below.
-                            ;
-                     #!key (cfari (list '()))
-                           (fanmo cfari))
+  (let ((vejmina   (venunjmina-rodanunvalsi cmene nastura))
+        (novejmina (if nastura
+                       (lambda () (make-javni-valsi cmene secuxna-nastura))
+                       (lambda () (make-javni-valsi cmene default)))))
+    (define (suhopa-javni-* porsi
+                            mapti
+                            namapti
+                                   ; a "dummy head" is a linked-list
+                                   ; optimization we'll return the cdr
+                                   ; of this list, but by using this
+                                   ; extra cons we avoid checking for
+                                   ; the beginning of the list below.
+                                   ;
+                            #!key (cfari (list '()))
+                                  (fanmo cfari))
       (define (mapti-* porsi nunvalsi)
         ; append this result to the result list
         (set-cdr! fanmo (list nunvalsi))
-        (javni-* porsi
-                 mapti
-                 namapti
-                 cfari: cfari
-                 fanmo: (cdr fanmo)))
+        (suhopa-javni-* porsi
+                        mapti
+                        namapti
+                        cfari: cfari
+                        fanmo: (cdr fanmo)))
 
       (define (namapti-* porsi)
         ; ignore the failure in |ignore-nunjavni|, as
@@ -212,32 +215,68 @@
         (mapti porsi (vejmina (cdr cfari))))
 
       (javni porsi mapti-* namapti-*))
-    (nunjavni-secuxna (lambda () "*") javni-*)))
+
+    (define (pamoi-javni-* porsi
+                           mapti
+                           namapti
+                                  ; a "dummy head" is a linked-list
+                                  ; optimization we'll return the cdr
+                                  ; of this list, but by using this
+                                  ; extra cons we avoid checking for
+                                  ; the beginning of the list below.
+                                  ;
+                           #!key (cfari (list '()))
+                                 (fanmo cfari))
+      (define (mapti-* porsi nunvalsi)
+        ; append this result to the result list
+        (set-cdr! fanmo (list nunvalsi))
+        (suhopa-javni-* porsi
+                        mapti
+                        namapti
+                        cfari: cfari
+                        fanmo: (cdr fanmo)))
+
+      (define (namapti-* porsi)
+        ; ignore the failure in |ignore-nunjavni|, as
+        ; this javni cannot fail.  |porsi| is not advanced
+        ; on failure, so we can use it, capturing any
+        ; cases that did succeed.
+        ;
+        (mapti porsi novejmina))
+
+      (javni porsi mapti-* namapti-*))
+
+    (values (nunjavni-secuxna (lambda () "*") pamoi-javni-*)
+            (nunjavni-secuxna (lambda () "*") suhopa-javni-*))))
 
 
 ;; one-or-more: parse one or more javni out of the |lerfu-porsi|.
 ;;
 (define (nunjavni-+ javni #!key cmene nastura)
-  (let ((javni-* (nunjavni-* javni cmene: cmene nastura: nastura)))
+  (let ((javni-* (call-with-values
+                   (lambda ()
+                     (nunjavni-* javni cmene: cmene nastura: nastura))
+                   (lambda (pamoi suhopa)
+                     suhopa))))
     (define (javni-+ porsi mapti namapti)
       (define (mapti-+ porsi nunvalsi)
         (let ((fanmo (list nunvalsi)))
           (javni-* porsi
                    mapti
                    namapti
-                   cfari: (cons (list '()) fanmo)
-                   fanmo: fanmo)))
+                   cfari:   (cons '() fanmo)
+                   fanmo:   fanmo)))
       (javni porsi mapti-+ namapti))
     (nunjavni-secuxna (lambda () "+") javni-+)))
 
 
 ;; optional: parse an optional javni out of the |lerfu-porsi|.
 ;;
-(define (nunjavni-? javni #!key cmene nastura (empty-string ""))
+(define (nunjavni-? javni #!key cmene nastura (default ""))
   (let ((vejmina (venunjmina-nunvalsi cmene nastura))
         (novejmina (if nastura
                        (lambda () (make-javni-valsi cmene secuxna-nastura))
-                       (lambda () (make-javni-valsi cmene empty-string)))))
+                       (lambda () (make-javni-valsi cmene default)))))
     (define (javni-? porsi mapti ignore-namapti)
 
       (define (mapti-? porsi nunvalsi)
@@ -470,8 +509,10 @@
             (let ((key (append-map!
                          (lambda (javni)
                            `(,(string->keyword (javni-valsi-cme javni))
-                             ,(javni-valsi-val javni)))
-                         cmesumti))
+                             ,(javni-rodavalsi-val-filter javni)))
+                         (remove (lambda (javni)
+                                   (javni-nastura? (javni-valsi-val javni)))
+                                 cmesumti)))
                   (rest (javni-rodavalsi-val-filter sumti)))
               (append! (if (list? rest) rest `(,rest)) key)))))
 

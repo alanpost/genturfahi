@@ -48,6 +48,8 @@
 (define secuxna-sentinel         (make-parameter #\nul))
 (define secuxna-empty-list       (make-parameter '()))
 (define secuxna-empty-string     (make-parameter ""))
+(define secuxna-?-default        (make-parameter ""))
+(define secuxna-*-default        (make-parameter '()))
 (define secuxna-nonmatch-token   (make-parameter #f))
 
 ;; The predicate symbol is not a parameter, as changing

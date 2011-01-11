@@ -70,7 +70,7 @@
 ;;
 (define (vejmina-rodanunvalsi cmene . rodanunvalsi)
   (lambda ()
-    (make-javni-valsi cmene (map javni-nunvalsi-val rodanunvalsi))))
+    (make-javni-valsi cmene (javni-rodanunvalsi-val rodanunvalsi))))
 
 ;; with no cmene, return a list of results
 ;;

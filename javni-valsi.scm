@@ -32,35 +32,41 @@
 (define (javni-nunvalsi-val nunvalsi)
   (javni-rodavalsi-val (nunvalsi)))
 
+(define (javni-rodanunvalsi-val nunvalsi)
+  (javni-rodavalsi-val (map (lambda (nunvalsi) (nunvalsi)) nunvalsi)))
+
 (define (javni-nunvalsi-val-filter nunvalsi)
   (javni-rodavalsi-val-filter (nunvalsi)))
 
 (define (javni-rodavalsi-val valsi)
-  (if (javni-valsi? valsi)
-      (javni-valsi-val valsi)
-      (call-with-values
+  (let ((val (if (javni-valsi? valsi)
+                 (javni-valsi-val valsi)
+                 (map javni-rodavalsi-val valsi))))
+    (if (not (list? val))
+        val
+        (call-with-values
 
-        ; remove predicate javni-valsi from the list.
-        ;
-        (lambda () (partition javni-nastura? (map javni-rodavalsi-val valsi)))
+          ; remove predicate javni-valsi from the list.
+          ;
+          (lambda () (partition javni-nastura? val))
 
-        (lambda (nastura jalge)
-          ; if there is only a single non-predicate element
-          ; in a list that contained predicate elements, 
-          ; return the single element rather than a list with
-          ; that element.
-          ;
-          ; If all of the elements were predicate elements,
-          ; return a predicate element.  (which will be removed
-          ; later.)
-          ;
-          (if (null? nastura)
-              jalge
-              (if (null? jalge)
-                  secuxna-nastura
-                  (if (null? (cdr jalge))
-                      (car jalge)
-                      jalge)))))))
+          (lambda (nastura jalge)
+            ; if there is only a single non-predicate element
+            ; in a list that contained predicate elements, 
+            ; return the single element rather than a list with
+            ; that element.
+            ;
+            ; If all of the elements were predicate elements,
+            ; return a predicate element.  (which will be removed
+            ; later.)
+            ;
+            (if (null? nastura)
+                jalge
+                (if (null? jalge)
+                    secuxna-nastura
+                    (if (null? (cdr jalge))
+                        (car jalge)
+                        jalge))))))))
 
 (define (javni-rodavalsi-val-filter valsi)
   ; if the only result was a predicate marker, return the empty

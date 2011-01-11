@@ -286,19 +286,26 @@
   `(morji-nunjavni-.+ ,@(if (string=? "" cmene) '() `(cmene: ,cmene))))
 
 (define (samselpla-? #!key cmene javni)
-  (let ((empty-string (secuxna-empty-string)))
+  (let ((default (secuxna-?-default)))
     `(morji-nunjavni-? ,javni
                        ,@(if (string=? "" cmene)
                              '()
                              `(cmene: ,cmene))
-                       ,@(if (string=? "" empty-string)
+                       ,@(if (equal? "" default)
                              '()
-                             `(empty-string: ,empty-string)))))
+                             `(default: ,default)))))
 
 ;; zero-or-more
 ;;
 (define (samselpla-* #!key cmene javni)
-  `(morji-nunjavni-* ,javni ,@(if (string=? "" cmene) '() `(cmene: ,cmene))))
+  (let ((default (secuxna-*-default)))
+    `(morji-nunjavni-* ,javni
+                       ,@(if (string=? "" cmene)
+                             '()
+                             `(cmene: ,cmene))
+                       ,@(if (null? default)
+                             '()
+                             `(default: ,default)))))
 
 ;; one-or-more
 ;;

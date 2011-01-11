@@ -89,5 +89,20 @@
 
 (safe-environment-set!
   genturfahi-env
+  '?-default
+  secuxna-?-default)
+
+(safe-environment-set!
+  genturfahi-env
+  '*-default
+  secuxna-*-default)
+
+(safe-environment-set!
+  genturfahi-env
   'nonmatch-token
   secuxna-nonmatch-token)
+
+(safe-environment-set!
+  genturfahi-env
+  'ignore
+  'secuxna-nastura)
