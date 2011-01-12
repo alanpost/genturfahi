@@ -41,8 +41,7 @@
       ;; memoization routine.
       ;;
       (lambda (nunjavni)
-        ; XXX: "equal?" causes infinite recursion on Chicken Scheme
-        (let ((morji (make-hash-table eq?)))
+        (let ((morji (make-hash-table equal?)))
           (define (morji-nunjavni . sumti)
             (hash-table-ref morji
                             sumti
