@@ -17,11 +17,12 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
-(define (debug option name arg . seeds)
+(define (debug option name arg seed)
   (if arg (sexuna-debug-file arg))
-  (secuxna-debug #t))
+  (secuxna-debug #t)
+  (or seed #f))
 
-(define (help option name arg . seeds)
+(define (help option name arg seed)
   (print #<<EOS
 usage: genturfahi [-:?]
                   [-d | --debug]
@@ -39,34 +40,42 @@ EOS
   )
   (exit 0))
 
-(define (define-name option name arg . seeds)
-  (secuxna-define-name arg))
+(define (define-name option name arg seed)
+  (secuxna-define-name arg)
+  (or seed #f))
 
-(define (define-toplevel option name arg . seeds)
-  (secuxna-define-toplevel #t))
+(define (define-toplevel option name arg seed)
+  (secuxna-define-toplevel #t)
+  (or seed #f))
 
-(define (input-file option name arg . seeds)
-  (call-with-input-file arg current-input-port))
+(define (input-file option name arg seed)
+  (call-with-input-file arg current-input-port)
+  (or seed #f))
 
-(define (no-memoize option name arg . seeds)
-  (secuxna-memoize #f))
+(define (no-memoize option name arg seed)
+  (secuxna-memoize #f)
+  (or seed #f))
 
-(define (output-file option name arg . seeds)
-  (call-with-output-file arg current-output-port))
+(define (output-file option name arg seed)
+  (call-with-output-file arg current-output-port)
+  (or seed #f))
 
-(define (profile option name arg . seeds)
+
+(define (profile option name arg seed)
   (if arg (sexuna-profile-file arg))
-  (secuxna-profile #t))
+  (secuxna-profile #t)
+  (or seed #f))
 
-(define (start-production option name arg . seeds)
-  (secuxna-start-production arg))
+(define (start-production option name arg seed)
+  (secuxna-start-production arg)
+  (or seed #f))
 
-(define (version option name arg . seeds)
+(define (version option name arg seed)
   (print (format "genturfa'i version ~a" genturfahi-version))
   (exit 0))
 
 ; handled by the Chicken runtime.
-(define (runtime option name arg . seeds)
+(define (runtime option name arg seed)
   '())
 
 (define options
@@ -82,11 +91,11 @@ EOS
         (option '(#\v "version")          #f #f version)
         (option '(#\:)                    #t #f runtime)))
 
-(define (usage option name args . seeds)
+(define (usage option name args seed)
   (error (format "unrecognized option \"~a\"" name)))
 
-(define (peg name . seeds)
-  (call-with-input-file name for-port))
+(define (for-file name seed)
+  (or seed (call-with-input-file name for-port)))
 
 (define (for-port port)
   (let ((jalge    (genturfahi-peg port))
@@ -102,10 +111,11 @@ EOS
           (if (pair? tamgau)
               `(define-values ,(map string->symbol tamgau) ,jalge)
               `(define ,(string->symbol tamgau) ,jalge))
-          port))))
+          port))
+    #t))
 
 (define (main)
   (let ((args (cdr (argv))))
-    (if (null? args)
-        (for-port (current-input-port))
-        (args-fold args options usage peg))))
+    (and (not (args-fold args options usage for-file #f))
+         (for-port (current-input-port)))
+    (exit (secuxna-exit-status))))
