@@ -2,7 +2,7 @@
 ;;;; genturfahi - lo la .ckim. ke pe'a jajgau ratcu ke'e genturfa'i
 ;;;;            `-> A Scheme packrat parser.
 ;;;;
-;;;; Copyright (c) 2010 ".alyn.post." <alyn.post@lodockikumazvati.org>
+;;;; Copyright (c) 2011 ".alyn.post." <alyn.post@lodockikumazvati.org>
 ;;;;
 ;;;; Permission to use, copy, modify, and/or distribute this software for any
 ;;;; purpose with or without fee is hereby granted, provided that the above
@@ -17,29 +17,7 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
-(use genturfahi genturfahi-peg test utils)
-
-(include "empty-string.scm")
-(include "empty-list.scm")
-(include "end-of-input.scm")
-(include "lerfu.scm")
-(include "dot.scm")
-(include "dot-star.scm")
-(include "dot-plus.scm")
-(include "valsi.scm")
-(include "optional.scm")
-(include "zero-or-more.scm")
-(include "one-or-more.scm")
-(include "je.scm")
-(include "jonai.scm")
-(include "and-predicate.scm")
-(include "not-predicate.scm")
-(include "jonai-naselci.scm")
-(include "samselpla.scm")
-(include "samselpla-cabna.scm")
-(include "lerfu-klesi.scm")
-(include "mex.scm")
-(include "rrecursion.scm")
-(include "lrecursion.scm")
-
-(test-exit)
+; require the first |ab| to match the second |ab|
+;
+gerna <- ab ab -| test-samselpla-samselpla-cabna
+ab    <- [ab]
