@@ -513,8 +513,8 @@
                          (remove (lambda (javni)
                                    (javni-nastura? (javni-valsi-val javni)))
                                  cmesumti)))
-                  (rest (javni-rodavalsi-val-filter sumti)))
-              (append! (if (list? rest) rest `(,rest)) key)))))
+                  (rest (javni-rodavalsi-suhore-val sumti)))
+              (append! rest key)))))
 
       (define (nunvalsi-samselpla)
         (let* ((rodavalsi (nunvalsi))

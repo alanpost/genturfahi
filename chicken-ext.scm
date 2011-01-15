@@ -56,7 +56,8 @@
 
    javni-nunvalsi-val
    javni-rodanunvalsi-val
-   javni-rodavalsi-val
+   javni-rodavalsi-pa-val
+   javni-rodavalsi-suhore-val
 
    ; a version that removes the predicate secuxna-nastura,
    ; for use when returning to code outside of genturfa'i.

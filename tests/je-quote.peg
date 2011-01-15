@@ -17,30 +17,12 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
-(use genturfahi genturfahi-peg test utils)
-
-(include "empty-string.scm")
-(include "empty-list.scm")
-(include "end-of-input.scm")
-(include "lerfu.scm")
-(include "dot.scm")
-(include "dot-star.scm")
-(include "dot-plus.scm")
-(include "valsi.scm")
-(include "optional.scm")
-(include "zero-or-more.scm")
-(include "one-or-more.scm")
-(include "je.scm")
-(include "je-quote.scm")
-(include "jonai.scm")
-(include "and-predicate.scm")
-(include "not-predicate.scm")
-(include "jonai-naselci.scm")
-(include "samselpla.scm")
-(include "samselpla-cabna.scm")
-(include "lerfu-klesi.scm")
-(include "mex.scm")
-(include "rrecursion.scm")
-(include "lrecursion.scm")
-
-(test-exit)
+je <- ( abc / xyz ) `xyz -> test-je-quote-samselpla
+abc  <- a b `c           -> test-je-quote-rodalerfu
+a    <- ,#\a             -> test-je-quote-lerfu
+b    <- ,#\b             -> test-je-quote-lerfu
+c    <- ,#\c             -> test-je-quote-lerfu
+xyz  <- x y `z           -> test-je-quote-rodalerfu
+x    <- ,#\x             -> test-je-quote-lerfu
+y    <- ,#\y             -> test-je-quote-lerfu
+z    <- ,#\z             -> test-je-quote-lerfu

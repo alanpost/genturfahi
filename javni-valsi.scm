@@ -30,18 +30,18 @@
   (eq? secuxna-nastura javni))
 
 (define (javni-nunvalsi-val nunvalsi)
-  (javni-rodavalsi-val (nunvalsi)))
+  (javni-rodavalsi-pa-val (nunvalsi)))
 
 (define (javni-rodanunvalsi-val nunvalsi)
-  (javni-rodavalsi-val (map (lambda (nunvalsi) (nunvalsi)) nunvalsi)))
+  (javni-rodavalsi-pa-val (map (lambda (nunvalsi) (nunvalsi)) nunvalsi)))
 
 (define (javni-nunvalsi-val-filter nunvalsi)
   (javni-rodavalsi-val-filter (nunvalsi)))
 
-(define (javni-rodavalsi-val valsi)
+(define (javni-rodavalsi-pa-val valsi)
   (let ((val (if (javni-valsi? valsi)
                  (javni-valsi-val valsi)
-                 (map javni-rodavalsi-val valsi))))
+                 (map javni-rodavalsi-pa-val valsi))))
     (if (not (list? val))
         val
         (call-with-values
@@ -68,11 +68,34 @@
                         (car jalge)
                         jalge))))))))
 
+(define (javni-rodavalsi-suhore-val valsi)
+  (let ((val (if (javni-valsi? valsi)
+                 (let ((val (javni-valsi-val valsi)))
+                   (if (list? val) val (list val)))
+                 (map javni-rodavalsi-pa-val valsi))))
+      (call-with-values
+
+        ; remove predicate javni-valsi from the list.
+        ;
+        (lambda () (partition javni-nastura? val))
+
+        (lambda (nastura jalge)
+          ; if there is only a single non-predicate element
+          ; in a list that contained predicate elements, 
+          ; return the single element rather than a list with
+          ; that element.
+          ;
+          ; If all of the elements were predicate elements,
+          ; return a predicate element.  (which will be removed
+          ; later.)
+          ;
+          jalge))))
+
 (define (javni-rodavalsi-val-filter valsi)
   ; if the only result was a predicate marker, return the empty
   ; list instead.
   ;
-  (let ((val (javni-rodavalsi-val valsi)))
+  (let ((val (javni-rodavalsi-pa-val valsi)))
     (if (javni-nastura? val)
         '()
         val)))
