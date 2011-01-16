@@ -220,7 +220,7 @@ klesi-selci      <- #\[ #:klesi-lerfu klesi-lerfu+ "]*" canlu
                  -> samselpla-klesi-selci
 
 klesi-lerfu      <- klesi-cmene
-                  / (!#\] #:klesi-lerfu . -> samselpla-klesi-lerfu)
+                  / !#\] #:klesi-lerfu . -> samselpla-klesi-lerfu
 klesi-cmene     <- "[:alnum:]"   -> samselpla-alnum
                  / "[:alpha:]"   -> samselpla-alpha
                  / "[:ascii:]"   -> samselpla-ascii
