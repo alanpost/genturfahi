@@ -31,14 +31,14 @@
       ((gerna (nunjavni-morji
                 (nunjavni-je
                   (nunjavni-*
-                    (nunjavni-jonai
-                      (lambda (porsi mapti namapti)
-                        (digit porsi mapti namapti))
-                      (lambda (porsi mapti namapti)
-                        (alpha porsi mapti namapti))))
-                  (nunjavni-nastura
-                    (lambda (porsi mapti namapti)
-                      (FAhO porsi mapti namapti))))))
+                    (nunjavni-girzu
+                      (nunjavni-jonai
+                        (lambda (porsi mapti namapti)
+                          (digit porsi mapti namapti))
+                        (lambda (porsi mapti namapti)
+                          (alpha porsi mapti namapti)))))
+                  (lambda (porsi mapti namapti)
+                    (FAhO porsi mapti namapti)))))
        (digit (nunjavni-morji
                 (nunjavni-char-set-+ char-set:digit)))
        (alpha (nunjavni-morji
