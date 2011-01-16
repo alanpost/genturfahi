@@ -203,9 +203,10 @@
             (morji-nunjavni-lerfu #\{)
             canlu-1
             (morji-nunjavni-+
-              (morji-nunjavni-je
-                (morji-nunjavni-! (morji-nunjavni-lerfu #\}))
-                (morji-nunjavni-.))
+              (morji-nunjavni-girzu
+                (morji-nunjavni-je
+                  (morji-nunjavni-! (morji-nunjavni-lerfu #\}))
+                  (morji-nunjavni-.)))
               cmene:
               "rodalerfu")
             (morji-nunjavni-lerfu #\})
@@ -268,7 +269,8 @@
           (morji-nunjavni-je
             (morji-nunjavni-cmene je-9 cmene: "cfari")
             (morji-nunjavni-+
-              (morji-nunjavni-je (morji-nunjavni-lerfu #\/) canlu-1 je-9)
+              (morji-nunjavni-girzu
+                (morji-nunjavni-je (morji-nunjavni-lerfu #\/) canlu-1 je-9))
               cmene:
               "fanmo")))))
     (define je-48
@@ -496,9 +498,10 @@
             (morji-nunjavni-je
               (morji-nunjavni-valsi ",\"")
               (morji-nunjavni-+
-                (morji-nunjavni-je
-                  (morji-nunjavni-! (morji-nunjavni-lerfu #\"))
-                  valsi-lerfu-30)
+                (morji-nunjavni-girzu
+                  (morji-nunjavni-je
+                    (morji-nunjavni-! (morji-nunjavni-lerfu #\"))
+                    valsi-lerfu-30))
                 cmene:
                 "valsi-lerfu")
               (morji-nunjavni-lerfu #\")
@@ -508,9 +511,10 @@
             (morji-nunjavni-je
               (morji-nunjavni-lerfu #\")
               (morji-nunjavni-+
-                (morji-nunjavni-je
-                  (morji-nunjavni-! (morji-nunjavni-lerfu #\"))
-                  valsi-lerfu-30)
+                (morji-nunjavni-girzu
+                  (morji-nunjavni-je
+                    (morji-nunjavni-! (morji-nunjavni-lerfu #\"))
+                    valsi-lerfu-30))
                 cmene:
                 "valsi-lerfu")
               (morji-nunjavni-lerfu #\")
@@ -581,11 +585,12 @@
       (nunjavni-morji
         (morji-nunjavni-jonai
           klesi-cmene-32
-          (morji-nunjavni-samselpla
-            samselpla-klesi-lerfu
-            (morji-nunjavni-je
-              (morji-nunjavni-! (morji-nunjavni-lerfu #\]))
-              (morji-nunjavni-. cmene: "klesi-lerfu"))))))
+          (morji-nunjavni-girzu
+            (morji-nunjavni-samselpla
+              samselpla-klesi-lerfu
+              (morji-nunjavni-je
+                (morji-nunjavni-! (morji-nunjavni-lerfu #\]))
+                (morji-nunjavni-. cmene: "klesi-lerfu")))))))
     (define klesi-cmene-68
       (nunjavni-morji
         (morji-nunjavni-jonai
@@ -692,13 +697,17 @@
             (morji-nunjavni-je
               (morji-nunjavni-valsi "->")
               canlu-1
-              (morji-nunjavni-jonai samselpla-xadni-33 samselpla-cmene-34)))
+              (morji-nunjavni-girzu
+                (morji-nunjavni-jonai samselpla-xadni-33 samselpla-cmene-34))))
           (morji-nunjavni-samselpla
             samselpla-samselpla-cabna
             (morji-nunjavni-je
               (morji-nunjavni-valsi "-|")
               canlu-1
-              (morji-nunjavni-jonai samselpla-xadni-33 samselpla-cmene-34))))))
+              (morji-nunjavni-girzu
+                (morji-nunjavni-jonai
+                  samselpla-xadni-33
+                  samselpla-cmene-34)))))))
     (define samselpla-xadni-71
       (nunjavni-morji
         (morji-nunjavni-samselpla
@@ -707,9 +716,10 @@
             (morji-nunjavni-lerfu #\{)
             canlu-1
             (morji-nunjavni-+
-              (morji-nunjavni-je
-                (morji-nunjavni-! (morji-nunjavni-lerfu #\}))
-                (morji-nunjavni-.))
+              (morji-nunjavni-girzu
+                (morji-nunjavni-je
+                  (morji-nunjavni-! (morji-nunjavni-lerfu #\}))
+                  (morji-nunjavni-.)))
               cmene:
               "rodalerfu")
             (morji-nunjavni-lerfu #\})
@@ -765,13 +775,13 @@
             (morji-nunjavni-je
               (morji-nunjavni-lerfu #\()
               canlu-1
-              jonai-8
+              javni-7
               (morji-nunjavni-lerfu #\))
               canlu-1)))))
     (define canlu-74
       (nunjavni-morji
         (morji-nunjavni-*
-          (morji-nunjavni-jonai canlubu-35 totoi-36)
+          (morji-nunjavni-girzu (morji-nunjavni-jonai canlubu-35 totoi-36))
           nastura:
           #t)))
     (define canlubu-75
@@ -784,8 +794,12 @@
         (morji-nunjavni-je
           (morji-nunjavni-lerfu #\;)
           (morji-nunjavni-*
-            (morji-nunjavni-je (morji-nunjavni-! CRLF-37) (morji-nunjavni-.)))
-          (morji-nunjavni-jonai CRLF-37 (morji-nunjavni-& FAhO-4)))))
+            (morji-nunjavni-girzu
+              (morji-nunjavni-je
+                (morji-nunjavni-! CRLF-37)
+                (morji-nunjavni-.))))
+          (morji-nunjavni-girzu
+            (morji-nunjavni-jonai CRLF-37 (morji-nunjavni-& FAhO-4))))))
     (define CR-77 (morji-nunjavni-lerfu #\return))
     (define LF-78 (morji-nunjavni-lerfu #\newline))
     (define CRLF-79

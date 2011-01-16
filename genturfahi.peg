@@ -276,7 +276,7 @@ samselpla-cmene <- #:cfari [[:alnum:]$%:=>^~_@]
 
 girzu-javni     <- "()" canlu
                 -> samselpla-empty-list
-                 / #\( canlu jonai #\) canlu
+                 / #\( canlu javni #\) canlu
                 -> samselpla-girzu-javni
 
 canlu           <- `(canlubu / totoi)*
