@@ -585,5 +585,5 @@
 
   (if (or (secuxna-debug) (secuxna-profile))
       (let ((cmene (nuncmene)))
-            (cfisisku cmene (junla cmene javni)))
+        (cfisisku cmene (junla cmene javni)))
       javni))
