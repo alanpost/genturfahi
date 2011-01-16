@@ -46,10 +46,22 @@
 
 (define (vejmina-nunvalsi cmene nunvalsi)
   (lambda ()
-    (make-javni-valsi cmene (javni-nunvalsi-val nunvalsi))))
+    (make-javni-valsi cmene (javni-nunvalsi-pa-val nunvalsi))))
 
 (define (vejmina-nunvalsi-nacmene nunvalsi)
   nunvalsi)
+
+;; splice merge a single nunvalsi with or without a cmene
+;;
+(define (venunjmina-nungirzu cmene nastura)
+  (if nastura
+      (lambda (ignore-nunvalsi)
+        (lambda () (make-javni-valsi cmene secuxna-nastura)))
+      (lambda (nunvalsi)
+        (lambda ()
+          (make-javni-valsi
+            cmene
+            (make-javni-girzu (javni-nunvalsi-suhore-val nunvalsi)))))))
 
 
 ;; merge multiple nunvalsi with or without a cmene
@@ -70,7 +82,7 @@
 ;;
 (define (vejmina-rodanunvalsi cmene . rodanunvalsi)
   (lambda ()
-    (make-javni-valsi cmene (javni-rodanunvalsi-val rodanunvalsi))))
+    (make-javni-valsi cmene (javni-rodanunvalsi-pa-val rodanunvalsi))))
 
 ;; with no cmene, return a list of results
 ;;

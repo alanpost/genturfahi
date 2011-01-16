@@ -20,21 +20,16 @@
 ;;;
 ;;; ordered sequence
 ;;;
-;;; je <- ( abc / xyz ) `xyz -> test-je-quote-samselpla
-;;; abc  <- a b `c           -> test-je-quote-rodalerfu
-;;; a    <- ,#\a             -> test-je-quote-lerfu
-;;; b    <- ,#\b             -> test-je-quote-lerfu
-;;; c    <- ,#\c             -> test-je-quote-lerfu
-;;; xyz  <- x y `z           -> test-je-quote-rodalerfu
-;;; x    <- ,#\x             -> test-je-quote-lerfu
-;;; y    <- ,#\y             -> test-je-quote-lerfu
-;;; z    <- ,#\z             -> test-je-quote-lerfu
+;;; je   <- ( a b `c / x y `z ) `x -> test-je-quote-samselpla
+;;; a    <- ,#\a                   -> test-je-quote-lerfu
+;;; b    <- ,#\b                   -> test-je-quote-lerfu
+;;; c    <- ,#\c                   -> test-je-quote-lerfu
+;;; x    <- ,#\x                   -> test-je-quote-lerfu
+;;; y    <- ,#\y                   -> test-je-quote-lerfu
+;;; z    <- ,#\z                   -> test-je-quote-lerfu
 ;;;
 
-(define (test-je-quote-samselpla abc-or-xyz)
-  abc-or-xyz)
-
-(define (test-je-quote-rodalerfu pamoi remoi)
+(define (test-je-quote-samselpla pamoi remoi)
   `(,pamoi ,remoi))
 
 (define (test-je-quote-lerfu lerfu)
@@ -47,25 +42,27 @@
                  (nunjavni-samselpla
                    test-je-quote-samselpla
                    (nunjavni-je
-                     (nunjavni-jonai
-                       (lambda (porsi mapti namapti)
-                         (abc porsi mapti namapti))
-                       (lambda (porsi mapti namapti)
-                         (xyz porsi mapti namapti)))
+                     (nunjavni-girzu
+                       (nunjavni-jonai
+                         (nunjavni-je
+                           (lambda (porsi mapti namapti)
+                             (a porsi mapti namapti))
+                           (lambda (porsi mapti namapti)
+                             (b porsi mapti namapti))
+                           (nunjavni-nastura
+                             (lambda (porsi mapti namapti)
+                               (c porsi mapti namapti))))
+                         (nunjavni-je
+                           (lambda (porsi mapti namapti)
+                             (x porsi mapti namapti))
+                           (lambda (porsi mapti namapti)
+                             (y porsi mapti namapti))
+                           (nunjavni-nastura
+                             (lambda (porsi mapti namapti)
+                               (z porsi mapti namapti))))))
                      (nunjavni-nastura
                        (lambda (porsi mapti namapti)
-                         (xyz porsi mapti namapti)))))))
-             (abc (nunjavni-morji
-                    (nunjavni-samselpla
-                      test-je-quote-rodalerfu
-                      (nunjavni-je
-                        (lambda (porsi mapti namapti)
-                          (a porsi mapti namapti))
-                        (lambda (porsi mapti namapti)
-                          (b porsi mapti namapti))
-                        (nunjavni-nastura
-                          (lambda (porsi mapti namapti)
-                            (c porsi mapti namapti)))))))
+                         (x porsi mapti namapti)))))))
              (a   (nunjavni-morji
                     (nunjavni-samselpla
                       test-je-quote-lerfu
@@ -78,17 +75,6 @@
                     (nunjavni-samselpla
                       test-je-quote-lerfu
                       (nunjavni-lerfu #\c nastura: #f))))
-             (xyz (nunjavni-morji
-                    (nunjavni-samselpla
-                      test-je-quote-rodalerfu
-                      (nunjavni-je
-                        (lambda (porsi mapti namapti)
-                          (x porsi mapti namapti))
-                        (lambda (porsi mapti namapti)
-                          (y porsi mapti namapti))
-                        (nunjavni-nastura
-                          (lambda (porsi mapti namapti)
-                            (z porsi mapti namapti)))))))
              (x   (nunjavni-morji
                     (nunjavni-samselpla
                       test-je-quote-lerfu
@@ -112,8 +98,8 @@
 (define (je-quote-test genturfahi-je-quote)
   ; matches each lerfu in sequence 
   ;
-  (test '((#\a #\b) "") (genturfahi-je-quote "abcxyz"))
-  (test '((#\x #\y) "") (genturfahi-je-quote "xyzxyz"))
+  (test '((#\a #\b) "") (genturfahi-je-quote "abcx"))
+  (test '((#\x #\y) "") (genturfahi-je-quote "xyzx"))
   0)
 
 (test-group "je-quote"

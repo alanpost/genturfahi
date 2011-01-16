@@ -81,6 +81,7 @@
 (define morji-nunjavni-!          (nunmorji-nunjavni nunjavni-!))
 (define morji-nunjavni-je         (nunmorji-nunjavni nunjavni-je))
 (define morji-nunjavni-jonai      (nunmorji-nunjavni nunjavni-jonai))
+(define morji-nunjavni-girzu      (nunmorji-nunjavni nunjavni-girzu))
 
 (define morji-nunjavni-samselpla  (nunmorji-nunjavni nunjavni-samselpla))
 (define morji-nunjavni-samselpla-cabna

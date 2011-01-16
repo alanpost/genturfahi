@@ -103,7 +103,8 @@
    samselpla-samselpla-cabna
    samselpla-stura-empty-string
    samselpla-empty-string
-   samselpla-empty-list)
+   samselpla-empty-list
+   samselpla-girzu-javni)
 
 (import chicken)
 (import scheme)

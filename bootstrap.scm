@@ -760,12 +760,14 @@
           (morji-nunjavni-samselpla
             samselpla-empty-list
             (morji-nunjavni-je (morji-nunjavni-valsi "()") canlu-1))
-          (morji-nunjavni-je
-            (morji-nunjavni-lerfu #\()
-            canlu-1
-            jonai-8
-            (morji-nunjavni-lerfu #\))
-            canlu-1))))
+          (morji-nunjavni-samselpla
+            samselpla-girzu-javni
+            (morji-nunjavni-je
+              (morji-nunjavni-lerfu #\()
+              canlu-1
+              jonai-8
+              (morji-nunjavni-lerfu #\))
+              canlu-1)))))
     (define canlu-74
       (nunjavni-morji
         (morji-nunjavni-*

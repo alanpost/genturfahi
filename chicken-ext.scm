@@ -52,29 +52,28 @@
    javni-valsi-cme
    javni-valsi-val
 
+   make-javni-girzu
+   javni-girzu?
+   javni-girzu-val
+
    javni-nastura?
 
-   javni-nunvalsi-val
-   javni-rodanunvalsi-val
+   javni-nunvalsi-pa-val
+   javni-nunvalsi-suhore-val
+
+   javni-rodanunvalsi-pa-val
+
    javni-rodavalsi-pa-val
    javni-rodavalsi-suhore-val
 
    ; a version that removes the predicate secuxna-nastura,
    ; for use when returning to code outside of genturfa'i.
    ;
-   javni-nunvalsi-val-filter
-   javni-rodavalsi-val-filter
+   javni-nunvalsi-pa-val-filter
+   javni-rodavalsi-pa-val-filter
 
    javni-valsi->string
 
-
-   ; nunvalsi
-   ;
-   make-nunvalsi
-   venunjmina-nunvalsi
-   vejmina-nunvalsi
-   vejmina-rodanunvalsi
-   vejmina-rodanunvalsi-nacmene
 
    ; nunjavni
    ;
@@ -96,6 +95,7 @@
    nunjavni-!
    nunjavni-je
    nunjavni-jonai
+   nunjavni-girzu
 
    genturfahi-semorji
    genturfahi-tolmohi
@@ -130,6 +130,7 @@
    morji-nunjavni-!
    morji-nunjavni-je
    morji-nunjavni-jonai
+   morji-nunjavni-girzu
 
    morji-nunjavni-samselpla
    morji-nunjavni-samselpla-cabna
@@ -139,7 +140,10 @@
 
    ; nunvalsi
    ;
+   make-nunvalsi
+
    venunjmina-nunvalsi
+   venunjmina-nungirzu
    vejmina-nunvalsi
    vejmina-nunvalsi-nacmene
 

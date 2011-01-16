@@ -279,6 +279,9 @@
 (define (samselpla-jonai #!key cfari fanmo)
   `(morji-nunjavni-jonai ,cfari ,@fanmo))
 
+(define (samselpla-girzu-javni javni)
+  `(morji-nunjavni-girzu ,javni))
+
 (define (samselpla-.* #!key cmene)
   `(morji-nunjavni-.* ,@(if (string=? "" cmene) '() `(cmene: ,cmene))))
 

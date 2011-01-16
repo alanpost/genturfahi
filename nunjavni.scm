@@ -410,6 +410,18 @@
     (nunjavni-secuxna (lambda () "jonai") javni-jonai)))
 
 
+;; (): grouping operator.
+;;
+(define (nunjavni-girzu javni #!key cmene nastura)
+  (let ((vejmina (venunjmina-nungirzu cmene nastura)))
+    (define (javni-girzu porsi mapti namapti)
+      (define (mapti-girzu porsi nunvalsi)
+        (mapti porsi (vejmina nunvalsi)))
+
+      (javni porsi mapti-girzu namapti))
+    (nunjavni-secuxna (lambda () "girzu") javni-girzu)))
+
+
 ;; morji: memoization is done to ensure we run in linear time.
 ;;        Any javni can be memoized, though the compiler only
 ;;        memoizes non-terminals above a certain level of
@@ -509,7 +521,7 @@
             (let ((key (append-map!
                          (lambda (javni)
                            `(,(string->keyword (javni-valsi-cme javni))
-                             ,(javni-rodavalsi-val-filter javni)))
+                             ,(javni-rodavalsi-pa-val-filter javni)))
                          (remove (lambda (javni)
                                    (javni-nastura? (javni-valsi-val javni)))
                                  cmesumti)))
@@ -531,7 +543,7 @@
   (let ((javni-samselpla (nunjavni-samselpla samselpla javni)))
     (define (javni-samselpla-cabna porsi mapti namapti)
       (define (mapti-samselpla-cabna mapti-porsi nunvalsi)
-        (let ((jalge (javni-nunvalsi-val nunvalsi)))
+        (let ((jalge (javni-nunvalsi-pa-val nunvalsi)))
           (if (eq? (secuxna-nonmatch-token) jalge)
               (namapti porsi)
               (mapti mapti-porsi (lambda () (make-javni-valsi cmene jalge))))))
@@ -543,7 +555,7 @@
   (let ((nunvalsi-cmene (make-nunvalsi cmene nastura)))
     (define (javni-cmene porsi mapti namapti)
       (define (mapti-cmene porsi nunvalsi)
-        (mapti porsi (nunvalsi-cmene (javni-nunvalsi-val nunvalsi))))
+        (mapti porsi (nunvalsi-cmene (javni-nunvalsi-pa-val nunvalsi))))
       (javni porsi mapti-cmene namapti))
     javni-cmene))
 

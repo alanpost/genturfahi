@@ -17,12 +17,10 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
-je <- ( abc / xyz ) `xyz -> test-je-quote-samselpla
-abc  <- a b `c           -> test-je-quote-rodalerfu
-a    <- ,#\a             -> test-je-quote-lerfu
-b    <- ,#\b             -> test-je-quote-lerfu
-c    <- ,#\c             -> test-je-quote-lerfu
-xyz  <- x y `z           -> test-je-quote-rodalerfu
-x    <- ,#\x             -> test-je-quote-lerfu
-y    <- ,#\y             -> test-je-quote-lerfu
-z    <- ,#\z             -> test-je-quote-lerfu
+je <- ( a b `c / x y `z ) `x -> test-je-quote-samselpla
+a    <- ,#\a                 -> test-je-quote-lerfu
+b    <- ,#\b                 -> test-je-quote-lerfu
+c    <- ,#\c                 -> test-je-quote-lerfu
+x    <- ,#\x                 -> test-je-quote-lerfu
+y    <- ,#\y                 -> test-je-quote-lerfu
+z    <- ,#\z                 -> test-je-quote-lerfu
