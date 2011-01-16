@@ -763,7 +763,7 @@
           (morji-nunjavni-je
             (morji-nunjavni-lerfu #\()
             canlu-1
-            javni-7
+            jonai-8
             (morji-nunjavni-lerfu #\))
             canlu-1))))
     (define canlu-74
