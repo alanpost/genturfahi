@@ -24,9 +24,21 @@
 ;;;
 (define (jonai)
   (let ((genturfahi-jonai
-    (genturfahi* (nunjavni-jonai (nunjavni-lerfu #\a nastura: #f)
-                                 (nunjavni-lerfu #\b nastura: #f)
-                                 (nunjavni-lerfu #\c nastura: #f)))))
+    (letrec ((gerna
+      (let ()
+        (define jonai-1
+          (nunjavni-secuxna
+            (lambda () "jonai")
+            (lambda (porsi mapti namapti) (jonai-2 porsi mapti namapti))))
+        (define jonai-2
+          (nunjavni-morji
+            (morji-nunjavni-jonai
+              (list (morji-nunjavni-lerfu #\a nastura: #f)
+                    (morji-nunjavni-lerfu #\b nastura: #f)
+                    (morji-nunjavni-lerfu #\c nastura: #f)))))
+        (tolmohi-nunjavni)
+        (nunjavni-secuxna (lambda () "jonai") jonai-2))))
+      (genturfahi* gerna))))
     (jonai-test genturfahi-jonai)))
 
 (define (jonai-peg)

@@ -207,12 +207,17 @@
     (list `(define ,symbol-nunselci
              (nunjavni-secuxna
                (lambda () ,naselci)
-               (lambda (porsi mapti namapti)
-                 (,symbol porsi mapti namapti))))
+                 (lambda (porsi mapti namapti)
+                   (,symbol porsi mapti namapti))))
 
           ; inner let (which stores grammar rules)
           ;
           `(define ,symbol
+                   ; If a non-terminal production is a sequence, wrap that
+                   ; call in a javni-valsi so that the non-terminal only
+                   ; returns a single value when it is used in other
+                   ; productions.
+                   ;
             ,(if (or (samselpla-namorji? naselci) (secuxna-no-memoize))
                  javni
                  `(nunjavni-morji ,javni))))))
@@ -228,29 +233,99 @@
 ;;           this is where we attach code to a production as well,
 ;;
 (define (samselpla-je #!key cmene samselpla javni)
-  ; if there is more than one javni, wrap in a sequence operator.
-  ;
-  (define (nunje javni)
-    (if (null? (cdr javni))
-        (car javni)
-        `(morji-nunjavni-je ,@javni)))
+         ; if any of the rules are in a group (denoted by the
+         ; porsumti flag being true), distributed a porja'e flag
+         ; to all of the rules so we can splice the group.
+         ;
+  (let ((porsumti?  (fold (lambda (x y) (or x y)) #f
+                      (map
+                        (match-lambda
+                          ; XXX: match bug.
+                          ((? symbol? _) #f)
+                          ((_ ... 'porsumti: #t) #t)
+                          (_ #f))
+                        javni)))
 
-  ; if code was specified, wrap in a code operator.
-  ;
-  (define (nunsamselpla samselpla javni)
-    (if (and (string? samselpla) (string=? "" samselpla))
-        javni
-        `(,@samselpla ,javni)))
+         ; a single rule?
+         ;
+        (pavjavni?  (null? (cdr javni)))
 
-  ; if this production is named, attach the name to the rule,
-  ; sequence operator, or code.
-  ;
-  (define (nuncmene cmene javni)
-    (if (string=? "" cmene)
-        javni
-        `(,@javni cmene: ,cmene)))
+         ; is there code to attach?
+         ;
+        (samselpla? (not (and (string? samselpla) (string=? "" samselpla))))
 
-  (nuncmene cmene (nunsamselpla samselpla (nunje javni))))
+         ; is there a name to attach?
+         ;
+        (cmene?     (not (string=? "" cmene))))
+
+      ; if any of the javni are a group, have all javni return their
+      ; result as a list so we can splice the group.
+      ;
+      (define (nunporjahe javni)
+        (define (porjahe javni)
+          (if (symbol? javni)
+              `(morji-nunjavni-porjahe ,javni)
+              `(,@javni porjahe: #t)))
+
+            ; a single javni doesn't need to distributed porjahe
+            ; flags, exclude them.
+            ;
+        (if (and porsumti? (not pavjavni?))
+            (map porjahe javni)
+            javni))
+
+      ; if there is more than one javni, wrap it in a sequence operator.
+      ; After this point there is only a single javni, though we
+      ; still might treat it differently.
+      ;
+      (define (nunpavjavni javni)
+        (if pavjavni?
+            (car javni)
+            `(morji-nunjavni-je (list ,@javni))))
+
+      ; if we have code to attach, do that.  The routine returning
+      ; to the code must have porjahe set to true, but that might
+      ; have been done before we got here.
+      ;
+      (define (nunsamselpla samselpla javni)
+        (if samselpla?
+            `(,@samselpla
+               ,(match javni
+                  ; if we have a symbol, wrap it
+                  ;
+                  ((? symbol? _) `(morji-nunjavni-porjahe ,javni))
+
+                  ; if porjahe is already set, either
+                  ; as a wrap or a #!key argument, don't
+                  ; set it twice.
+                  ;
+                  (`(morji-nunjavni-porjahe ,_) javni)
+                  ((_ ... 'porjahe: #t) javni)
+
+                  ; if we have a rule, set the porjahe
+                  ; flag.
+                  ;
+                  (_ `(,@javni porjahe: #t))))
+            javni))
+
+      ; if this production is named, attach the name to the rule,
+      ; sequence operator, or code.
+      ;
+      (define (nuncmene cmene javni)
+        (if cmene?
+                ; If we have a single rule and it hasn't been
+                ; wrapped in another rule, wrap it in a cmene.
+                ; Otherwise pass the cmene in as a #!key.
+                ;
+            (if (symbol? javni)
+                `(morji-nunjavni-cmene ,javni cmene: ,cmene)
+                `(,@javni cmene: ,cmene))
+            javni))
+
+    (nuncmene cmene
+      (nunsamselpla samselpla
+        (nunpavjavni
+          (nunporjahe javni))))))
 
 ;; backquote: the following operator should not modify the parse tree.
 ;;
@@ -277,10 +352,34 @@
 ;; ordered choice: the passed in rules are an ordered choice.
 ;;
 (define (samselpla-jonai #!key cfari fanmo)
-  `(morji-nunjavni-jonai ,cfari ,@fanmo))
+  `(morji-nunjavni-jonai (list ,cfari ,@fanmo)))
 
 (define (samselpla-girzu-javni javni)
-  `(morji-nunjavni-girzu ,javni))
+  ; with nested parenthesis, we may try to
+  ; decorate a rule more than once.  Detect
+  ; that case and skip adding the porjahe
+  ; flag.
+  ;
+  (define (porjahe javni)
+    (match javni
+      ((? symbol? _)                `(morji-nunjavni-porjahe ,javni))
+      (`(morji-nunjavni-porjahe ,_) javni)
+      ((_ ... 'porjahe: #t)         javni)
+      (_                            `(,@javni porjahe: #t))))
+
+  (match javni
+    (((or 'morji-nunjavni-je
+          'morji-nunjavni-jonai) . _)
+
+     `(,(car javni)
+       (list ,@(map (lambda (javni) (porjahe javni)) (cdadr javni)))
+       ,@(cddr javni)
+       porsumti: #t))
+
+    ; anything else means the () was optional, and can be skipped.
+    ;
+    (_ javni)))
+
 
 (define (samselpla-.* #!key cmene)
   `(morji-nunjavni-.* ,@(if (string=? "" cmene) '() `(cmene: ,cmene))))
@@ -289,26 +388,48 @@
   `(morji-nunjavni-.+ ,@(if (string=? "" cmene) '() `(cmene: ,cmene))))
 
 (define (samselpla-? #!key cmene javni)
+  (define porsumti? (match javni
+                      ; XXX: match bug.
+                      ((? symbol? _) #f)
+                      ((_ ... 'porsumti: #t) #t)
+                      (_ #f)))
+
   (let ((default (secuxna-?-default)))
-    `(morji-nunjavni-? ,javni
+    `(morji-nunjavni-? ,(if porsumti?
+                            `(,@javni porjahe: #t)
+                            javni)
                        ,@(if (string=? "" cmene)
                              '()
                              `(cmene: ,cmene))
                        ,@(if (equal? "" default)
                              '()
-                             `(default: ,default)))))
+                             `(default: ,default))
+                       ,@(if porsumti?
+                             '(porsumti: #t)
+                             '()))))
 
 ;; zero-or-more
 ;;
 (define (samselpla-* #!key cmene javni)
+  (define porsumti? (match javni
+                      ; XXX: match bug.
+                      ((? symbol? _) #f)
+                      ((_ ... 'porsumti: #t) #t)
+                      (_ #f)))
+
   (let ((default (secuxna-*-default)))
-    `(morji-nunjavni-* ,javni
+    `(morji-nunjavni-* ,(if porsumti?
+                            `(,@javni porjahe: #t)
+                            javni)
                        ,@(if (string=? "" cmene)
                              '()
                              `(cmene: ,cmene))
                        ,@(if (null? default)
                              '()
-                             `(default: ,default)))))
+                             `(default: ,default))
+                       ,@(if porsumti?
+                             '(porsumti: #t)
+                             '()))))
 
 ;; one-or-more
 ;;

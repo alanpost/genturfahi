@@ -27,26 +27,45 @@
 ;;;
 (define (lerfu-klesi)
   (let ((genturfahi-lerfu-klesi
-    (letrec
-      ((gerna (nunjavni-morji
-                (nunjavni-je
-                  (nunjavni-*
-                    (nunjavni-girzu
-                      (nunjavni-jonai
-                        (lambda (porsi mapti namapti)
-                          (digit porsi mapti namapti))
-                        (lambda (porsi mapti namapti)
-                          (alpha porsi mapti namapti)))))
-                  (lambda (porsi mapti namapti)
-                    (FAhO porsi mapti namapti)))))
-       (digit (nunjavni-morji
-                (nunjavni-char-set-+ char-set:digit)))
-       (alpha (nunjavni-morji
-                (nunjavni-char-set-+ char-set:letter)))
-       (FAhO  (nunjavni-morji
-                (nunjavni-fanmo))))
+    (letrec ((gerna
+      (let ()
+        (define gerna-4
+          (nunjavni-secuxna
+            (lambda () "gerna")
+            (lambda (porsi mapti namapti) (gerna-5 porsi mapti namapti))))
+        (define digit-1
+          (nunjavni-secuxna
+            (lambda () "digit")
+            (lambda (porsi mapti namapti) (digit-6 porsi mapti namapti))))
+        (define alpha-2
+          (nunjavni-secuxna
+            (lambda () "alpha")
+            (lambda (porsi mapti namapti) (alpha-7 porsi mapti namapti))))
+        (define FAhO-3
+          (nunjavni-secuxna
+            (lambda () "FAhO")
+            (lambda (porsi mapti namapti) (FAhO-8 porsi mapti namapti))))
+        (define gerna-5
+          (nunjavni-morji
+            (morji-nunjavni-je
+              (list (morji-nunjavni-*
+                      (morji-nunjavni-jonai
+                        (list (morji-nunjavni-porjahe digit-1)
+                              (morji-nunjavni-porjahe alpha-2))
+                        porjahe:
+                        #t
+                        porsumti:
+                        #t))
+                    FAhO-3))))
+        (define digit-6
+          (nunjavni-morji (morji-nunjavni-char-set-+ char-set:digit)))
+        (define alpha-7
+          (nunjavni-morji (morji-nunjavni-char-set-+ char-set:letter)))
+        (define FAhO-8 (morji-nunjavni-fanmo))
+        (tolmohi-nunjavni)
+        (nunjavni-secuxna (lambda () "gerna") gerna-5))))
       (genturfahi* gerna))))
-  (lerfu-klesi-test genturfahi-lerfu-klesi)))
+    (lerfu-klesi-test genturfahi-lerfu-klesi)))
 
 (define (lerfu-klesi-read)
   (let* ((samselpla

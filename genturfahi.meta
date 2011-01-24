@@ -2,6 +2,6 @@
  (category parsing)
  (doc-from-wiki)
  (license "ISC")
- (depends sandbox srfi-14 srfi-37 srfi-69)
+ (depends matchable sandbox srfi-14 srfi-37 srfi-69)
  (test-depends test utils)
  (synopsis "lo ke pe'a jajgau ratcu ke'e genturfa'i"))

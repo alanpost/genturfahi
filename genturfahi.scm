@@ -53,7 +53,7 @@
     (cfisisku) ; if debugging is enabled, output the debugging report.
     (junla)    ; if profiling is enabled, output the profiling report.
 
-    (values (javni-nunvalsi-pa-val-filter nunvalsi)
+    (values (javni-nunvalsi-val nunvalsi)
             (lerfu-porsi-string porsi)))
 
   (define (namapti porsi)

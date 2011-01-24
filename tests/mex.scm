@@ -47,57 +47,68 @@
 
 (define (mex)
   (let ((genturfahi-mex
-    (letrec
-      ((expr   (nunjavni-morji
-                 (nunjavni-jonai
-                   (nunjavni-samselpla
-                     test-samselpla-+
-                     (nunjavni-je
-                       (nunjavni-cmene
-                         (lambda (porsi mapti namapti)
-                           (mulexp porsi mapti namapti))
-                         cmene: "a")
-                       (nunjavni-lerfu #\+)
-                       (nunjavni-cmene
-                         (lambda (porsi mapti namapti)
-                           (mulexp porsi mapti namapti))
-                         cmene: "b")))
-                   (lambda (porsi mapti namapti)
-                     (mulexp porsi mapti namapti)))))
-       (mulexp (nunjavni-morji
-                 (nunjavni-jonai
-                   (nunjavni-samselpla
-                     test-samselpla-*
-                     (nunjavni-je
-                       (nunjavni-cmene
-                         (lambda (porsi mapti namapti)
-                           (simple porsi mapti namapti))
-                         cmene: "a")
-                       (nunjavni-lerfu #\*)
-                       (nunjavni-cmene
-                         (lambda (porsi mapti namapti)
-                           (simple porsi mapti namapti))
-                         cmene: "b")))
-                   (lambda (porsi mapti namapti)
-                     (simple porsi mapti namapti)))))
-       (simple (nunjavni-morji
-                 (nunjavni-jonai
-                   (lambda (porsi mapti namapti)
-                     (digits porsi mapti namapti))
-                   (nunjavni-samselpla
-                     test-samselpla-simple
-                     (nunjavni-je
-                       (nunjavni-lerfu #\()
-                       (nunjavni-cmene
-                         (lambda (porsi mapti namapti)
-                           (expr porsi mapti namapti))
-                         cmene: "expr")
-                       (nunjavni-lerfu #\)))))))
-       (digits (nunjavni-morji
-                 (nunjavni-samselpla
-                   test-samselpla-digits
-                   (nunjavni-char-set-+ char-set:digit cmene: "x")))))
-      (genturfahi expr))))
+    (letrec ((gerna
+      (let ()
+      (define expr-4
+        (nunjavni-secuxna
+          (lambda () "expr")
+          (lambda (porsi mapti namapti) (expr-5 porsi mapti namapti))))
+      (define mulexp-1
+        (nunjavni-secuxna
+          (lambda () "mulexp")
+          (lambda (porsi mapti namapti) (mulexp-6 porsi mapti namapti))))
+      (define simple-2
+        (nunjavni-secuxna
+          (lambda () "simple")
+          (lambda (porsi mapti namapti) (simple-7 porsi mapti namapti))))
+      (define digits-3
+        (nunjavni-secuxna
+          (lambda () "digits")
+          (lambda (porsi mapti namapti) (digits-8 porsi mapti namapti))))
+      (define expr-5
+        (nunjavni-morji
+          (morji-nunjavni-jonai
+            (list (morji-nunjavni-samselpla
+                    test-samselpla-+
+                    (morji-nunjavni-je
+                      (list (morji-nunjavni-cmene mulexp-1 cmene: "a")
+                            (morji-nunjavni-lerfu #\+)
+                            (morji-nunjavni-cmene mulexp-1 cmene: "b"))
+                      porjahe:
+                      #t))
+                  mulexp-1))))
+      (define mulexp-6
+        (nunjavni-morji
+          (morji-nunjavni-jonai
+            (list (morji-nunjavni-samselpla
+                    test-samselpla-*
+                    (morji-nunjavni-je
+                      (list (morji-nunjavni-cmene simple-2 cmene: "a")
+                            (morji-nunjavni-lerfu #\*)
+                            (morji-nunjavni-cmene simple-2 cmene: "b"))
+                      porjahe:
+                      #t))
+                  simple-2))))
+      (define simple-7
+        (nunjavni-morji
+          (morji-nunjavni-jonai
+            (list digits-3
+                  (morji-nunjavni-samselpla
+                    test-samselpla-simple
+                    (morji-nunjavni-je
+                      (list (morji-nunjavni-lerfu #\()
+                            (morji-nunjavni-cmene expr-4 cmene: "expr")
+                            (morji-nunjavni-lerfu #\)))
+                      porjahe:
+                      #t))))))
+      (define digits-8
+        (nunjavni-morji
+          (morji-nunjavni-samselpla
+            test-samselpla-digits
+            (morji-nunjavni-char-set-+ char-set:digit cmene: "x" porjahe: #t))))
+      (tolmohi-nunjavni)
+      (nunjavni-secuxna (lambda () "expr") expr-5))))
+    (genturfahi gerna))))
   (mex-test genturfahi-mex)))
 
 (define (mex-read)

@@ -24,108 +24,97 @@
   (make-javni-valsi cme val)
   javni-valsi?
   (cme javni-valsi-cme)
-  (val javni-valsi-val))
-
-; for splicing a grouped operator into a list
-; that otherwise contains non-tree modifying
-; operations.
-;
-(define-record-type javni-girzu
-  (make-javni-girzu val)
-  javni-girzu?
-  (val javni-girzu-val))
+  (val javni-valsi-val*))
 
 (define (javni-nastura? javni)
   (eq? secuxna-nastura javni))
 
-(define (javni-nunvalsi-pa-val nunvalsi)
-  (javni-rodavalsi-pa-val (nunvalsi)))
+(define (javni-valsi-val javni-valsi)
+  (let ((val (javni-valsi-val* javni-valsi)))
+    (if (javni-nastura? val)
+        '()
+        val)))
 
-(define (javni-nunvalsi-suhore-val nunvalsi)
-  (javni-rodavalsi-suhore-val (nunvalsi)))
+(define (javni-nunvalsi-val* nunvalsi)
+  (javni-valsi-val* (nunvalsi)))
 
-(define (javni-rodanunvalsi-pa-val nunvalsi)
-  (javni-rodavalsi-pa-val (map (lambda (nunvalsi) (nunvalsi)) nunvalsi)))
+(define (javni-nunvalsi-val nunvalsi)
+  (javni-valsi-val (nunvalsi)))
 
-(define (javni-nunvalsi-pa-val-filter nunvalsi)
-  (javni-rodavalsi-pa-val-filter (nunvalsi)))
+(define (javni-rodanunvalsi-val rodanunvalsi)
+  (javni-rodavalsi-val (map (lambda (nunvalsi) (nunvalsi)) rodanunvalsi)))
 
-(define (javni-rodavalsi-pa-val valsi)
-  (let ((val (if (javni-valsi? valsi)
-                 (javni-valsi-val valsi)
-                 (map javni-rodavalsi-pa-val valsi))))
-    (if (not (list? val))
-        val
-        (call-with-values
+(define (javni-rodanunvalsi-je-val rodanunvalsi)
+  (javni-rodavalsi-je-val (map (lambda (nunvalsi) (nunvalsi)) rodanunvalsi)))
 
-          ; remove predicate javni-valsi from the list.
-          ;
-          (lambda () (partition javni-nastura? val))
+(define (javni-rodavalsi-val rodavalsi)
+  (define (vejmina javni-valsi)
+    (if (list? javni-valsi)
+        (append-map vejmina javni-valsi)
+        `(,javni-valsi)))
 
-          (lambda (nastura jalge)
-            ; if there is only a single non-predicate element
-            ; in a list that contained predicate elements, 
-            ; return the single element rather than a list with
-            ; that element.
-            ;
-            ; If all of the elements were predicate elements,
-            ; return a predicate element.  (which will be removed
-            ; later.)
-            ;
-            (if (null? nastura)
-                jalge
-                (if (null? jalge)
-                    secuxna-nastura
-                    (if (null? (cdr jalge))
-                        (car jalge)
-                        jalge))))))))
-
-(define (javni-rodavalsi-suhore-val valsi)
-  (let ((val (if (javni-valsi? valsi)
-                 (let ((val (javni-valsi-val valsi)))
-                   (if (list? val) val (list val)))
-                 (map javni-rodavalsi-pa-val valsi))))
+  (let* ((rodavalsi (append-map vejmina rodavalsi))
+         (rodaval   (map javni-valsi-val* rodavalsi)))
     (call-with-values
-
-      ; remove predicate javni-valsi from the list.
-      ;
-      (lambda () (partition javni-nastura? val))
+      ; remove non-structure elements
+      (lambda () (partition javni-nastura? rodaval))
 
       (lambda (nastura jalge)
-        (define (vejmina val)
-          (if (javni-girzu? val)
-              (javni-girzu-val val)
-              `(,val)))
+        (if (null? jalge)
+            secuxna-nastura
+            jalge)))))
 
-        ; splice any group operators and append other
-        ; lists to create the result.
+;; A routine used by the nunjavni-je procedure.  It returns
+;; a single element if there is only one nastura in the result
+;; list.
+;;
+(define (javni-rodavalsi-je-val rodavalsi)
+  (define (vejmina javni-valsi)
+    (if (list? javni-valsi)
+        (append-map vejmina javni-valsi)
+        `(,javni-valsi)))
+
+  (let* ((rodavalsi (append-map vejmina rodavalsi))
+         (rodaval   (map javni-valsi-val* rodavalsi)))
+    (call-with-values
+      ; remove non-structure elements
+      (lambda () (partition javni-nastura? rodaval))
+
+      (lambda (nastura jalge)
+        ; if we *only* have nastura elements, return
+        ; a secuxna-nastura token.
         ;
-        (append-map vejmina jalge)))))
+        ; if there is only one element in the list,
+        ; assume the others were secuxna-nastura and
+        ; convert the list to a single element.
+        ;
+        ; otherwise, return the result list.
+        ;
+        (if (null? jalge)
+            secuxna-nastura
+            (if (null? (cdr jalge))
+                (car jalge)
+                jalge))))))
 
-(define (javni-rodavalsi-pa-val-filter valsi)
-  (define (vejmina val)
-    (if (javni-girzu? val)
-        (javni-girzu-val val)
-        `(,val)))
+;; A routine used by the nunjavni-samselpla procedure.  It returns
+;; a null list rather than a |secuxna-nastura| procedure.
+;;
+(define (javni-rodavalsi-samselpla-val rodavalsi)
+  (define (vejmina javni-valsi)
+    (if (list? javni-valsi)
+        (append-map vejmina javni-valsi)
+        `(,javni-valsi)))
 
-  (define (girzu valsi)
-    (let ((val (javni-girzu-val valsi)))
-      (if (null? (cdr val))
-          (car val)
-          val)))
+  (let* ((rodavalsi (append-map vejmina rodavalsi))
+         (rodaval   (map javni-valsi-val* rodavalsi)))
+    (call-with-values
+      ; remove non-structure elements
+      (lambda () (partition javni-nastura? rodaval))
 
-  (let ((val (javni-rodavalsi-pa-val valsi)))
-           ; if the only result was a predicate marker, return the empty
-           ; list instead.
-           ;
-    (cond ((javni-nastura? val) '())
-           ; if we have a javni-girzu, fetch it's value.
-           ;
-          ((javni-girzu?   val) (girzu val))
-          ((list?          val) (append-map vejmina val))
-          (else                 val))))
+      (lambda (nastura jalge)
+        jalge))))
 
 (define (javni-valsi->string valsi)
   (format "{cmene:~a valsi:~s}"
           (javni-valsi-cme valsi)
-          (javni-valsi-val valsi)))
+          (javni-valsi-val* valsi)))

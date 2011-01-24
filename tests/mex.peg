@@ -17,10 +17,14 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
-expr   <- #:a mulexp #\+ #:b mulexp -> {test-samselpla-+}
+expr   <- #:a mulexp #\+ #:b mulexp
+       -> {test-samselpla-+}
         / mulexp
-mulexp <- #:a simple #\* #:b simple -> {test-samselpla-*}
+mulexp <- #:a simple #\* #:b simple
+       -> {test-samselpla-*}
         / simple
 simple <- digits
-        / #\( #:expr expr #\)       -> test-samselpla-simple
-digits <- #:x [[:digit:]]+          -> test-samselpla-digits
+        / #\( #:expr expr #\)
+       -> test-samselpla-simple
+digits <- #:x [[:digit:]]+
+       -> test-samselpla-digits

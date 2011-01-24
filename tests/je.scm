@@ -24,9 +24,9 @@
 ;;;
 (define (je)
   (let ((genturfahi-je
-    (genturfahi* (nunjavni-je (nunjavni-lerfu #\a nastura: #f)
-                              (nunjavni-lerfu #\b nastura: #f)
-                              (nunjavni-lerfu #\c nastura: #f)))))
+    (genturfahi* (nunjavni-je (list (nunjavni-lerfu #\a nastura: #f)
+                                    (nunjavni-lerfu #\b nastura: #f)
+                                    (nunjavni-lerfu #\c nastura: #f))))))
     (je-test genturfahi-je)))
 
 (define (je-peg)

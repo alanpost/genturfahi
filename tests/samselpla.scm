@@ -38,29 +38,30 @@
   (let ((genturfahi-samselpla
     (letrec ((gerna (nunjavni-morji
                ; concatenate the strings
-               (nunjavni-samselpla test-samselpla-samselpla
+               (nunjavni-samselpla
+                 test-samselpla-samselpla
                  (nunjavni-je
-                   (nunjavni-cmene
-                     (lambda (porsi mapti namapti)
-                       (a porsi mapti namapti))
-                     cmene: "a")
-                   (nunjavni-cmene
-                     (lambda (porsi mapti namapti)
-                       (b porsi mapti namapti)))
-                   (nunjavni-cmene
-                     (lambda (porsi mapti namapti)
-                       (c porsi mapti namapti))
-                     cmene: "c")))))
+                   (list (nunjavni-cmene
+                           (lambda (porsi mapti namapti)
+                             (a porsi mapti namapti))
+                           cmene: "a")
+                         (lambda (porsi mapti namapti)
+                           (b porsi mapti namapti))
+                         (nunjavni-cmene
+                           (lambda (porsi mapti namapti)
+                             (c porsi mapti namapti))
+                           cmene: "c"))
+                   porjahe: #t))))
              (a (nunjavni-morji
                ; convert each character to a string.
                (nunjavni-samselpla test-samselpla-lerfu
-                 (nunjavni-lerfu #\a nastura: #f))))
+                 (nunjavni-lerfu #\a nastura: #f porjahe: #t))))
              (b (nunjavni-morji
                (nunjavni-samselpla test-samselpla-valsi
-                 (nunjavni-valsi "b" nastura: #f))))
+                 (nunjavni-valsi "b" nastura: #f porjahe: #t))))
              (c (nunjavni-morji
                (nunjavni-samselpla test-samselpla-lerfu
-                 (nunjavni-char-set (char-set #\c))))))
+                 (nunjavni-char-set (char-set #\c) porjahe: #t)))))
       (genturfahi* gerna))))
     (samselpla-test genturfahi-samselpla)))
 
@@ -73,6 +74,8 @@
   ; The code runs only after a a syntax tree is successfully
   ; generated.
   ;
+  (genturfahi-samselpla "abc")
+
   (test '("abc" "") (genturfahi-samselpla "abc"))
 
   ; It doesn't run at all if we fail to parse.

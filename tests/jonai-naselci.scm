@@ -30,28 +30,46 @@
 (define (jonai-naselci)
   (let ((genturfahi-jonai-naselci
     (letrec ((gerna
-               (nunjavni-morji
-                 (nunjavni-jonai (lambda (porsi mapti namapti)
-                                   (a porsi mapti namapti))
-                                 (lambda (porsi mapti namapti)
-                                   (b porsi mapti namapti))
-                                 (lambda (porsi mapti namapti)
-                                   (c porsi mapti namapti)))))
-             (a (nunjavni-morji
-                  (nunjavni-je
-                    (nunjavni-! (nunjavni-lerfu #\e))
-                    (nunjavni-! (nunjavni-lerfu #\i))
-                    (nunjavni-! (nunjavni-lerfu #\o))
-                    (nunjavni-! (nunjavni-lerfu #\u))
-                    (nunjavni-lerfu #\a nastura: #f))))
-             (b (nunjavni-morji
-                  (nunjavni-je
-                    (nunjavni-& (nunjavni-lerfu #\b))
-                    (nunjavni-lerfu #\b nastura: #f))))
-             (c (nunjavni-morji
-                  (nunjavni-je
-                    (nunjavni-& (nunjavni-lerfu #\c))
-                    (nunjavni-lerfu #\c nastura: #f)))))
+      (let ()
+        (define jonai-4
+          (nunjavni-secuxna
+            (lambda () "jonai")
+            (lambda (porsi mapti namapti) (jonai-5 porsi mapti namapti))))
+        (define a-1
+          (nunjavni-secuxna
+            (lambda () "a")
+            (lambda (porsi mapti namapti) (a-6 porsi mapti namapti))))
+        (define b-2
+          (nunjavni-secuxna
+            (lambda () "b")
+            (lambda (porsi mapti namapti) (b-7 porsi mapti namapti))))
+        (define c-3
+          (nunjavni-secuxna
+            (lambda () "c")
+            (lambda (porsi mapti namapti) (c-8 porsi mapti namapti))))
+        (define jonai-5
+          (nunjavni-morji
+            (morji-nunjavni-jonai (list a-1 b-2 c-3))))
+        (define a-6
+          (nunjavni-morji
+            (morji-nunjavni-je
+              (list (morji-nunjavni-! (morji-nunjavni-lerfu #\e))
+                    (morji-nunjavni-! (morji-nunjavni-lerfu #\i))
+                    (morji-nunjavni-! (morji-nunjavni-lerfu #\o))
+                    (morji-nunjavni-! (morji-nunjavni-lerfu #\u))
+                    (morji-nunjavni-lerfu #\a nastura: #f)))))
+        (define b-7
+          (nunjavni-morji
+            (morji-nunjavni-je
+              (list (morji-nunjavni-& (morji-nunjavni-lerfu #\b))
+                    (morji-nunjavni-lerfu #\b nastura: #f)))))
+        (define c-8
+          (nunjavni-morji
+            (morji-nunjavni-je
+              (list (morji-nunjavni-& (morji-nunjavni-lerfu #\c))
+                    (morji-nunjavni-lerfu #\c nastura: #f)))))
+        (tolmohi-nunjavni)
+        (nunjavni-secuxna (lambda () "jonai") jonai-5))))
       (genturfahi* gerna))))
     (jonai-naselci-test genturfahi-jonai-naselci)))
 

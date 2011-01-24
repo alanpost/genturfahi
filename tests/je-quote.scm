@@ -38,55 +38,88 @@
 (define (je-quote)
   (let ((genturfahi-je-quote
     (letrec ((gerna
-               (nunjavni-morji
-                 (nunjavni-samselpla
-                   test-je-quote-samselpla
-                   (nunjavni-je
-                     (nunjavni-girzu
-                       (nunjavni-jonai
-                         (nunjavni-je
-                           (lambda (porsi mapti namapti)
-                             (a porsi mapti namapti))
-                           (lambda (porsi mapti namapti)
-                             (b porsi mapti namapti))
-                           (nunjavni-nastura
-                             (lambda (porsi mapti namapti)
-                               (c porsi mapti namapti))))
-                         (nunjavni-je
-                           (lambda (porsi mapti namapti)
-                             (x porsi mapti namapti))
-                           (lambda (porsi mapti namapti)
-                             (y porsi mapti namapti))
-                           (nunjavni-nastura
-                             (lambda (porsi mapti namapti)
-                               (z porsi mapti namapti))))))
-                     (nunjavni-nastura
-                       (lambda (porsi mapti namapti)
-                         (x porsi mapti namapti)))))))
-             (a   (nunjavni-morji
-                    (nunjavni-samselpla
-                      test-je-quote-lerfu
-                      (nunjavni-lerfu #\a nastura: #f))))
-             (b   (nunjavni-morji
-                    (nunjavni-samselpla
-                      test-je-quote-lerfu
-                      (nunjavni-lerfu #\b nastura: #f))))
-             (c   (nunjavni-morji
-                    (nunjavni-samselpla
-                      test-je-quote-lerfu
-                      (nunjavni-lerfu #\c nastura: #f))))
-             (x   (nunjavni-morji
-                    (nunjavni-samselpla
-                      test-je-quote-lerfu
-                      (nunjavni-lerfu #\x nastura: #f))))
-             (y   (nunjavni-morji
-                    (nunjavni-samselpla
-                      test-je-quote-lerfu
-                      (nunjavni-lerfu #\y nastura: #f))))
-             (z   (nunjavni-morji
-                    (nunjavni-samselpla
-                      test-je-quote-lerfu
-                      (nunjavni-lerfu #\z nastura: #f)))))
+      (let ()
+        (define je-7
+          (nunjavni-secuxna
+            (lambda () "je")
+            (lambda (porsi mapti namapti) (je-8 porsi mapti namapti))))
+        (define a-1
+          (nunjavni-secuxna
+            (lambda () "a")
+            (lambda (porsi mapti namapti) (a-9 porsi mapti namapti))))
+        (define b-2
+          (nunjavni-secuxna
+            (lambda () "b")
+            (lambda (porsi mapti namapti) (b-10 porsi mapti namapti))))
+        (define c-3
+          (nunjavni-secuxna
+            (lambda () "c")
+            (lambda (porsi mapti namapti) (c-11 porsi mapti namapti))))
+        (define x-4
+          (nunjavni-secuxna
+            (lambda () "x")
+            (lambda (porsi mapti namapti) (x-12 porsi mapti namapti))))
+        (define y-5
+          (nunjavni-secuxna
+            (lambda () "y")
+            (lambda (porsi mapti namapti) (y-13 porsi mapti namapti))))
+        (define z-6
+          (nunjavni-secuxna
+            (lambda () "z")
+            (lambda (porsi mapti namapti) (z-14 porsi mapti namapti))))
+        (define je-8
+          (nunjavni-morji
+            (morji-nunjavni-samselpla
+              test-je-quote-samselpla
+              (morji-nunjavni-je
+                (list (morji-nunjavni-jonai
+                        (list (morji-nunjavni-je
+                                (list a-1 b-2 (morji-nunjavni-nastura c-3))
+                                porjahe:
+                                #t)
+                              (morji-nunjavni-je
+                                (list x-4 y-5 (morji-nunjavni-nastura z-6))
+                                porjahe:
+                                #t))
+                        porjahe:
+                        #t
+                        porsumti:
+                        #t)
+                      (morji-nunjavni-nastura x-4))
+                porjahe:
+                #t))))
+        (define a-9
+          (nunjavni-morji
+            (morji-nunjavni-samselpla
+              test-je-quote-lerfu
+              (morji-nunjavni-lerfu #\a nastura: #f porjahe: #t))))
+        (define b-10
+          (nunjavni-morji
+            (morji-nunjavni-samselpla
+              test-je-quote-lerfu
+              (morji-nunjavni-lerfu #\b nastura: #f porjahe: #t))))
+        (define c-11
+          (nunjavni-morji
+            (morji-nunjavni-samselpla
+              test-je-quote-lerfu
+              (morji-nunjavni-lerfu #\c nastura: #f porjahe: #t))))
+        (define x-12
+          (nunjavni-morji
+            (morji-nunjavni-samselpla
+              test-je-quote-lerfu
+              (morji-nunjavni-lerfu #\x nastura: #f porjahe: #t))))
+        (define y-13
+          (nunjavni-morji
+            (morji-nunjavni-samselpla
+              test-je-quote-lerfu
+              (morji-nunjavni-lerfu #\y nastura: #f porjahe: #t))))
+        (define z-14
+          (nunjavni-morji
+            (morji-nunjavni-samselpla
+              test-je-quote-lerfu
+              (morji-nunjavni-lerfu #\z nastura: #f porjahe: #t))))
+        (tolmohi-nunjavni)
+        (nunjavni-secuxna (lambda () "je") je-8))))
       (genturfahi* gerna))))
     (je-quote-test genturfahi-je-quote)))
 

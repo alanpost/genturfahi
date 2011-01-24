@@ -50,27 +50,18 @@
    make-javni-valsi
    javni-valsi?
    javni-valsi-cme
-   javni-valsi-val
-
-   make-javni-girzu
-   javni-girzu?
-   javni-girzu-val
+   javni-valsi-val*
 
    javni-nastura?
 
-   javni-nunvalsi-pa-val
-   javni-nunvalsi-suhore-val
-
-   javni-rodanunvalsi-pa-val
-
-   javni-rodavalsi-pa-val
-   javni-rodavalsi-suhore-val
-
-   ; a version that removes the predicate secuxna-nastura,
-   ; for use when returning to code outside of genturfa'i.
-   ;
-   javni-nunvalsi-pa-val-filter
-   javni-rodavalsi-pa-val-filter
+   javni-valsi-val
+   javni-rodavalsi-val
+   javni-rodavalsi-je-val
+   javni-rodavalsi-samselpla-val
+   javni-nunvalsi-val*
+   javni-nunvalsi-val
+   javni-rodanunvalsi-val
+   javni-rodanunvalsi-je-val
 
    javni-valsi->string
 
@@ -95,7 +86,7 @@
    nunjavni-!
    nunjavni-je
    nunjavni-jonai
-   nunjavni-girzu
+   nunjavni-porjahe
 
    genturfahi-semorji
    genturfahi-tolmohi
@@ -130,7 +121,7 @@
    morji-nunjavni-!
    morji-nunjavni-je
    morji-nunjavni-jonai
-   morji-nunjavni-girzu
+   morji-nunjavni-porjahe
 
    morji-nunjavni-samselpla
    morji-nunjavni-samselpla-cabna
@@ -141,15 +132,11 @@
    ; nunvalsi
    ;
    make-nunvalsi
-
+   make-nunvalsi-predicate
    venunjmina-nunvalsi
-   venunjmina-nungirzu
-   vejmina-nunvalsi
-   vejmina-nunvalsi-nacmene
-
-   venunjmina-rodanunvalsi
-   vejmina-rodanunvalsi
-   vejmina-rodanunvalsi-nacmene
+   venunjmina-rodanunvalsi-*
+   venunjmina-rodanunvalsi-je
+   novejmina-nunvalsi
 
 
    ; cfiselsisku
@@ -198,6 +185,7 @@
 ;(require-extension srfi-95)
 (require-extension data-structures)
 (require-extension extras)
+(require-extension matchable)
 (require-extension ports)
 
 (import srfi-1)          ; filter
@@ -212,6 +200,7 @@
 ;(import srfi-95)         ; sorting and merging
 (import data-structures) ; should be srfi-95
 (import extras)          ; format, pretty-print
+(import matchable)
 (import ports)           ; Chicken Scheme srfi-6 and port extensions
 
 (include "chicken-platform.scm")

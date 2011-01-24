@@ -42,5 +42,6 @@
 (include "mex.scm")
 (include "rrecursion.scm")
 (include "lrecursion.scm")
+(include "girzu.scm")
 
 (test-exit)
