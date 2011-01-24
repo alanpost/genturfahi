@@ -185,7 +185,6 @@ lerfu-cmene     <- "space"    -> samselpla-lerfu-space
                  / "return"   -> samselpla-lerfu-return
                  / "linefeed" -> samselpla-lerfu-linefeed
                  / "newline"  -> samselpla-lerfu-newline
-                 / "return"   -> samselpla-lerfu-return
                  / "tab"      -> samselpla-lerfu-tab
 
 valsi-selci     <- ",\"\""
