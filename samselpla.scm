@@ -369,7 +369,7 @@
                       (_ #f)))
 
   (define niljavni (match javni
-                     (('morji-nunjavni-je `(list ... ,javni) . _)
+                     (('morji-nunjavni-je `(list . ,javni) . _)
                       (length javni))
                      (_ #f)))
 
