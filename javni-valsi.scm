@@ -53,7 +53,9 @@
 
 (define (javni-rodavalsi-val rodavalsi)
   (define (vejmina javni-valsi)
-    (if (list? javni-valsi) javni-valsi `(,javni-valsi)))
+    (if (list? javni-valsi)
+        (append-map vejmina javni-valsi)
+        `(,javni-valsi)))
 
   (let* ((rodavalsi (append-map vejmina rodavalsi))
          (rodaval   (map javni-valsi-val* rodavalsi)))
@@ -72,7 +74,9 @@
 ;;
 (define (javni-rodavalsi-je-val rodavalsi)
   (define (vejmina javni-valsi)
-    (if (list? javni-valsi) javni-valsi `(,javni-valsi)))
+    (if (list? javni-valsi)
+        (append-map vejmina javni-valsi)
+        `(,javni-valsi)))
 
   (let* ((rodavalsi (append-map vejmina rodavalsi))
          (rodaval   (map javni-valsi-val* rodavalsi)))
@@ -101,7 +105,9 @@
 ;;
 (define (javni-rodavalsi-samselpla-val rodavalsi)
   (define (vejmina javni-valsi)
-    (if (list? javni-valsi) javni-valsi `(,javni-valsi)))
+    (if (list? javni-valsi)
+        (append-map vejmina javni-valsi)
+        `(,javni-valsi)))
 
   (let* ((rodavalsi (append-map vejmina rodavalsi))
          (rodaval   (map javni-valsi-val* rodavalsi)))
