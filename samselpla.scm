@@ -79,28 +79,23 @@
           (map (lambda (tamgau cmene javni)
                   `(define
                      ,tamgau
-                     (nunjavni-secuxna (lambda () ,cmene) ,javni)))
+                     ,javni))
                tamgau selci-cmene nunselci-cmene))
 
         ; (let ...) definition with multiple start productions
         ;
         (define (suhorecmene-enai-toplevel selci-cmene nunselci-cmene)
-          `((values ,@(map (lambda (tamgau cmene javni)
-                             `(nunjavni-secuxna
-                                (lambda () ,cmene) ,javni)
-                           tamgau selci-cmene nunselci-cmene)))))
+          `((values ,@(map (lambda (javni) javni) nunselci-cmene))))
 
         ; toplevel definition with a single start production.
         ;
         (define (pacmene-e-toplevel tamgau selci-cmene nunselci-cmene)
-          `((define
-              ,tamgau
-              (nunjavni-secuxna (lambda () selci-cmene) ,nunselci-cmene))))
+          `((define ,tamgau ,nunselci-cmene)))
 
         ; (let ...) definition with a single start production.
         ;
         (define (pacmene-enai-toplevel selci-cmene nunselci-cmene)
-          `((nunjavni-secuxna (lambda () ,selci-cmene) ,nunselci-cmene)))
+          `(,nunselci-cmene))
 
         ; reset the start production.
         (secuxna-start-production #f)
@@ -116,7 +111,7 @@
                       (let ((rodatamgau
                               (map string->symbol rodatamgau))
                             (nunselci-cmene
-                              (map samselpla-cmene->symbol* selci-cmene)))
+                              (map samselpla-cmene->symbol selci-cmene)))
                         (if toplevel
                             (suhorecmene-e-toplevel rodatamgau
                                                     selci-cmene
@@ -127,7 +122,7 @@
                       (let ((rodatamgau
                               (string->symbol  rodatamgau))
                             (nunselci-cmene
-                              (samselpla-cmene->symbol* selci-cmene)))
+                              (samselpla-cmene->symbol selci-cmene)))
                         (if toplevel
                             (pacmene-e-toplevel rodatamgau
                                                 selci-cmene
