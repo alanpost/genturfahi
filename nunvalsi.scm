@@ -131,9 +131,22 @@
 ;; non-structure token.  Used in cases when when not-matching the
 ;; input still counts as a match.
 ;;
-(define (novejmina-nunvalsi cmene nastura porjahe default)
-  (match `(,nastura ,porjahe)
-    ((#t #t) (lambda () `(,(make-javni-valsi cmene secuxna-nastura))))
-    ((#t #f) (lambda () (make-javni-valsi cmene secuxna-nastura)))
-    ((#f #t) (lambda () `(,(make-javni-valsi cmene default))))
-    ((#f #f) (lambda () (make-javni-valsi cmene default)))))
+(define (novejmina-nunvalsi cmene nastura porjahe default ni)
+  ;; evaluate |body ...| once and return a list with the value
+  ;; repeated |n| times.
+  ;;
+  (define-syntax repeat
+    (syntax-rules ()
+      ((_ n body ...)
+       (let ((r ((lambda () body ...))))
+         (unfold-right (lambda (x) (fx= x 0))
+                       (lambda (x) r)
+                       (lambda (x) (fx- x 1))
+                       n)))))
+
+  (let* ((val         (if nastura secuxna-nastura default))
+         (javni-valsi (if ni (repeat ni (make-javni-valsi cmene val))
+                             (make-javni-valsi cmene val))))
+    (if porjahe
+        (lambda () `(,javni-valsi))
+        (lambda () javni-valsi))))

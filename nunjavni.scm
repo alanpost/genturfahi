@@ -184,7 +184,7 @@
                                               nastura
                                               porjahe
                                               porsumti))
-        (novejmina (novejmina-nunvalsi cmene nastura porjahe default)))
+        (novejmina (novejmina-nunvalsi cmene nastura porjahe default #f)))
     (define (suhopa-javni-* porsi
                             mapti
                             namapti
@@ -275,9 +275,14 @@
 
 ;; optional: parse an optional javni out of the |lerfu-porsi|.
 ;;
-(define (nunjavni-? javni #!key cmene nastura porjahe porsumti (default ""))
+(define (nunjavni-? javni #!key cmene
+                                nastura
+                                porjahe
+                                porsumti
+                                (default "")
+                                ni)
   (let ((vejmina   (venunjmina-nunvalsi cmene nastura porjahe porsumti))
-        (novejmina (novejmina-nunvalsi cmene nastura porjahe default)))
+        (novejmina (novejmina-nunvalsi cmene nastura porjahe default ni)))
     (define (javni-? porsi mapti ignore-namapti)
 
       (define (mapti-? porsi nunvalsi)

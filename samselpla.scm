@@ -394,6 +394,11 @@
                       ((_ ... 'porsumti: #t) #t)
                       (_ #f)))
 
+  (define niljavni (match javni
+                     (('morji-nunjavni-je `(list ... ,javni) . _)
+                      (length javni))
+                     (_ #f)))
+
   (let ((default (secuxna-?-default)))
     `(morji-nunjavni-? ,(if porsumti?
                             `(,@javni porjahe: #t)
@@ -401,6 +406,9 @@
                        ,@(if (string=? "" cmene)
                              '()
                              `(cmene: ,cmene))
+                       ,@(if niljavni
+                             `(ni: ,niljavni)
+                             '())
                        ,@(if (equal? "" default)
                              '()
                              `(default: ,default))
