@@ -61,6 +61,7 @@
    javni-nunvalsi-val*
    javni-nunvalsi-val
    javni-rodanunvalsi-val
+   javni-rodanunvalsi-*-val
    javni-rodanunvalsi-je-val
 
    javni-valsi->string

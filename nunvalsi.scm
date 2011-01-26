@@ -89,7 +89,7 @@
                   (lambda ()
                     `(,(make-javni-valsi
                          cmene
-                         (javni-rodanunvalsi-val rodanunvalsi))))))
+                         (javni-rodanunvalsi-*-val rodanunvalsi))))))
     ((#f #t #f) (lambda (rodanunvalsi)
                   (lambda ()
                     `(,(make-javni-valsi
@@ -99,7 +99,7 @@
                   (lambda ()
                     (make-javni-valsi
                       cmene
-                      (javni-rodanunvalsi-val rodanunvalsi)))))
+                      (javni-rodanunvalsi-*-val rodanunvalsi)))))
     ((#f #f #f) (lambda (rodanunvalsi)
                   (lambda ()
                     (make-javni-valsi
