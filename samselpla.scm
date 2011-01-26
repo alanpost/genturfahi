@@ -442,7 +442,20 @@
 ;; one-or-more
 ;;
 (define (samselpla-+ #!key cmene javni)
-  `(morji-nunjavni-+ ,javni ,@(if (string=? "" cmene) '() `(cmene: ,cmene))))
+  (define porsumti? (match javni
+                      ((? symbol? _) #f)
+                      ((_ ... 'porsumti: #t) #t)
+                      (_ #f)))
+
+  `(morji-nunjavni-+ ,(if porsumti?
+                          `(,@javni porjahe: #t)
+                          javni)
+                     ,@(if (string=? "" cmene)
+                           '()
+                           `(cmene: ,cmene))
+                     ,@(if porsumti?
+                           '(porsumti: #t)
+                           '())))
 
 ;; and-predicate
 ;;
