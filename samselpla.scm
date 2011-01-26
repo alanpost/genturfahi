@@ -227,7 +227,7 @@
 ;;
 ;;           this is where we attach code to a production as well,
 ;;
-(define (samselpla-je #!key cmene samselpla javni)
+(define (samselpla-je #!key samselpla javni)
          ; if any of the rules are in a group (denoted by the
          ; porsumti flag being true), distributed a porja'e flag
          ; to all of the rules so we can splice the group.
@@ -247,11 +247,7 @@
 
          ; is there code to attach?
          ;
-        (samselpla? (not (and (string? samselpla) (string=? "" samselpla))))
-
-         ; is there a name to attach?
-         ;
-        (cmene?     (not (string=? "" cmene))))
+        (samselpla? (not (and (string? samselpla) (string=? "" samselpla)))))
 
       ; if any of the javni are a group, have all javni return their
       ; result as a list so we can splice the group.
@@ -303,24 +299,7 @@
                   (_ `(,@javni porjahe: #t))))
             javni))
 
-      ; if this production is named, attach the name to the rule,
-      ; sequence operator, or code.
-      ;
-      (define (nuncmene cmene javni)
-        (if cmene?
-                ; If we have a single rule and it hasn't been
-                ; wrapped in another rule, wrap it in a cmene.
-                ; Otherwise pass the cmene in as a #!key.
-                ;
-            (if (symbol? javni)
-                `(morji-nunjavni-cmene ,javni cmene: ,cmene)
-                `(,@javni cmene: ,cmene))
-            javni))
-
-    (nuncmene cmene
-      (nunsamselpla samselpla
-        (nunpavjavni
-          (nunporjahe javni))))))
+    (nunsamselpla samselpla (nunpavjavni (nunporjahe javni)))))
 
 ;; backquote: the following operator should not modify the parse tree.
 ;;
