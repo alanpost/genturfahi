@@ -235,8 +235,6 @@
   (let ((porsumti?  (fold (lambda (x y) (or x y)) #f
                       (map
                         (match-lambda
-                          ; XXX: match bug.
-                          ((? symbol? _) #f)
                           ((_ ... 'porsumti: #t) #t)
                           (_ #f))
                         javni)))
@@ -363,8 +361,6 @@
 
 (define (samselpla-? #!key cmene javni)
   (define porsumti? (match javni
-                      ; XXX: match bug.
-                      ((? symbol? _) #f)
                       ((_ ... 'porsumti: #t) #t)
                       (_ #f)))
 
@@ -394,8 +390,6 @@
 ;;
 (define (samselpla-* #!key cmene javni)
   (define porsumti? (match javni
-                      ; XXX: match bug.
-                      ((? symbol? _) #f)
                       ((_ ... 'porsumti: #t) #t)
                       (_ #f)))
 
@@ -417,7 +411,6 @@
 ;;
 (define (samselpla-+ #!key cmene javni)
   (define porsumti? (match javni
-                      ((? symbol? _) #f)
                       ((_ ... 'porsumti: #t) #t)
                       (_ #f)))
 
