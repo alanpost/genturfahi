@@ -364,9 +364,51 @@
                       ((_ ... 'porsumti: #t) #t)
                       (_ #f)))
 
+  (define (nilnarstura javni)
+    ; some rules don't modify the parse tree by default.
+    ;
+    (define (stura? sumti jalge)
+      (or jalge (match sumti (`(nastura: #f . ,_) #t) (_ #f))))
+
+    ; other rules do modify the parse tree by default.
+    ;
+    (define (narstura? sumti jalge)
+      (or jalge (match sumti (`(nastura: #t . ,_) #t) (_ #f))))
+
+    (match javni
+       ; look for backquoted non-terminal rules.
+       ;
+      (`(morji-nunjavni-nastura . ,_)
+        0)
+
+       ; these rules don't return a result, unless nastura is #f.
+       ;
+      (((or 'morji-nunjavni-lerfu
+            'morji-nunjavni-e
+            'morji-nunjavni-fanmo
+            'morji-nunjavni-valsi) _ . sumti)
+         (if (pair-fold stura? #f sumti) 1 0))
+
+       ; check if nastura is true.
+       ;
+      ((_ . sumti)
+         (if (pair-fold narstura? #f sumti) 0 1))))
+
+
+  ; |#f| if we don't need to pass a count.  Otherwise, the count
+  ; of elements to return when this rule doesn't match.
+  ;
+  ; XXX: we miss one case here, which is where we have a
+  ;      non-terminal rule that isn't backquoted, but the rule
+  ;      itself doesn't modify the tree.  We could determine
+  ;      whether we have one of these by loking at the definition
+  ;      of the rule, but we can't do that here--it needs to wait
+  ;      until the full grammar is parsed.  As there is a workaround
+  ;      (backquote a non-terminal) I don't yet solve this problem.
+  ;
   (define niljavni (match javni
                      (('morji-nunjavni-je `(list . ,javni) . _)
-                      (length javni))
+                      (fold fx+ 0 (map nilnarstura javni)))
                      (_ #f)))
 
   (let ((default (secuxna-?-default)))
