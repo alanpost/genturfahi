@@ -386,7 +386,9 @@
       (((or 'morji-nunjavni-lerfu
             'morji-nunjavni-e
             'morji-nunjavni-fanmo
-            'morji-nunjavni-valsi) _ . sumti)
+            'morji-nunjavni-valsi
+            'morji-nunjavni-&
+            'morji-nunjavni-!) _ . sumti)
          (if (pair-fold stura? #f sumti) 1 0))
 
        ; check if nastura is true.
