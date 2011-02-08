@@ -375,6 +375,11 @@
     (define (narstura? sumti jalge)
       (or jalge (match sumti (`(nastura: #t . ,_) #t) (_ #f))))
 
+    ; if an embedded rule has a ni #!key, return that count so
+    ; we can sum it with our own.
+    (define (nilstura sumti jalge)
+      (match sumti (`(ni: ,klani . ,_) klani) (_ jalge)))
+
     (match javni
        ; look for backquoted non-terminal rules.
        ;
@@ -390,6 +395,9 @@
             'morji-nunjavni-&
             'morji-nunjavni-!) _ . sumti)
          (if (pair-fold stura? #f sumti) 1 0))
+
+     (`(morji-nunjavni-? . ,sumti)
+         (pair-fold nilstura 1 sumti))
 
        ; check if nastura is true.
        ;
