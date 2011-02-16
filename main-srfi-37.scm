@@ -57,7 +57,7 @@ EOS
   (or seed #f))
 
 (define (output-file option name arg seed)
-  (call-with-output-file arg current-output-port)
+  (current-output-port (open-output-file arg))
   (or seed #f))
 
 
