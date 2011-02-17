@@ -56,11 +56,13 @@
    samselpla-lerfu-newline
    samselpla-lerfu-return
    samselpla-lerfu-tab
+   samselpla-lerfu-page
    samselpla-stura-valsi-selci
    samselpla-valsi-selci
    samselpla-valsi-newline
    samselpla-valsi-linefeed
    samselpla-valsi-tab
+   samselpla-valsi-page
    samselpla-valsi-backslash
    samselpla-valsi-single-quote
    samselpla-valsi-double-quote

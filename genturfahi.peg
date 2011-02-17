@@ -185,6 +185,7 @@ lerfu-cmene     <- "space"    -> samselpla-lerfu-space
                  / "linefeed" -> samselpla-lerfu-linefeed
                  / "newline"  -> samselpla-lerfu-newline
                  / "tab"      -> samselpla-lerfu-tab
+                 / "page"     -> samselpla-lerfu-page
 
 valsi-selci     <- ",\"\""
                    canlu
@@ -205,6 +206,7 @@ valsi-selci     <- ",\"\""
 valsi-lerfu     <- #\\ #\n        -> samselpla-valsi-newline
                  / #\\ #\r        -> samselpla-valsi-linefeed
                  / #\\ #\t        -> samselpla-valsi-tab
+                 / #\\ #\f        -> samselpla-valsi-page
                  / #\\ #\\        -> samselpla-valsi-backslash
                  / #\\ #\'        -> samselpla-valsi-single-quote
                  / #\\ #\"        -> samselpla-valsi-double-quote

@@ -544,7 +544,10 @@
                   (morji-nunjavni-valsi "newline" porjahe: #t))
                 (morji-nunjavni-samselpla
                   samselpla-lerfu-tab
-                  (morji-nunjavni-valsi "tab" porjahe: #t))))))
+                  (morji-nunjavni-valsi "tab" porjahe: #t))
+                (morji-nunjavni-samselpla
+                  samselpla-lerfu-page
+                  (morji-nunjavni-valsi "page" porjahe: #t))))))
     (define valsi-selci-64
       (nunjavni-morji
         (morji-nunjavni-jonai
@@ -632,6 +635,13 @@
                   (morji-nunjavni-je
                     (list (morji-nunjavni-lerfu #\\)
                           (morji-nunjavni-lerfu #\t))
+                    porjahe:
+                    #t))
+                (morji-nunjavni-samselpla
+                  samselpla-valsi-page
+                  (morji-nunjavni-je
+                    (list (morji-nunjavni-lerfu #\\)
+                          (morji-nunjavni-lerfu #\f))
                     porjahe:
                     #t))
                 (morji-nunjavni-samselpla

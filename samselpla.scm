@@ -521,6 +521,9 @@
 (define (samselpla-lerfu-tab)
   #\tab)
 
+(define (samselpla-lerfu-page)
+  #\page)
+
 (define (samselpla-stura-valsi-selci #!key valsi-lerfu)
   `(morji-nunjavni-valsi ,(apply string-append valsi-lerfu) nastura: #f))
 
@@ -535,6 +538,9 @@
 
 (define (samselpla-valsi-tab)
   "\\t")
+
+(define (samselpla-valsi-page)
+  "\\f")
 
 (define (samselpla-valsi-backslash)
   "\\")
