@@ -10,16 +10,56 @@ Sprint Backlog
 Product Backlog
 ---------------
 
+Bugs:
+
+ * [] sometimes we want to return a list, sometimes we want to
+      return a single value from a samselpla rule.  We don't
+      indicate what the return type of samselpla is, and so
+      we get different results depending on whether that return
+      is processed by another samselpla rule or not.
+ * [] ()? will sometimes return the ? symbol even if the production
+      returns a no-modify parse-tree token.
+
+Optimization:
+
+ * [] I would like to convert non-terminal rules referring to
+      terminal rules but that have '*' or '+' to be optimized
+      to call the terminal versions of those rules.
+
+Release 1.x:
+
+ * [] Develop an speg interface, where one can write PEG expressions
+      directly in Scheme, rather than writing a .peg file and
+      compiling it to Scheme.
+ * [] Develop tree-manipulation operators for common operations:
+       * Type coercion
+       * String/List concatenation
+       * ???
+
 Release 1.1:
 
  * [] gensym'd symbols passed through write are not guaranteed to be
       unique when read.
  * [] Port to a second Scheme implementation. 
+ * [] Threading
+       * run ordered choice rules in parallel.
+       * run sequence of ! or & predicates in parallel.
+ * [] Improve initialization performance for large grammars.
+       * enable rule memoization 
+       * Use vector rather than list to store memoization hashes.
+       * initialize the memoization structure on first use, rather
+         than on init?
+ * [] remove hand crafted tests and replace with pre-compiled .scm
+      files.
  * [] Write tests for PEG file parser.
  * [] extend the character class test to test all character
       classes.
  * [] Implement left recursion.
  * [] Implement error reporting.
+ * [] Look at the char-set-literals egg for a read-syntax that
+      converts character ranges to a charset, and implement
+      character ranges.
+
 
 Release 1.0:
 
@@ -33,6 +73,7 @@ Release 1.0:
        + Is a record-type or cons faster?
        + Inline input buffer access routines.
  * [] Write PEG parser application manpage. 
+ * [done] Add atoms for .* and .+ productions.
  * [done] Add runtime debug output of parse.
  * [done] Add runtime profiling of parse.
  * [done] Ignore & and ! rather than returning the empty string.  This
