@@ -249,35 +249,28 @@
             (list (morji-nunjavni-char-set
                     (char-set-union
                       char-set:letter+digit
-                      (char-set #\$)
-                      (char-set #\%)
-                      (char-set #\:)
-                      (char-set #\=)
-                      (char-set #\>)
-                      (char-set #\^)
-                      (char-set #\~)
-                      (char-set #\_)
-                      (char-set #\@))
+                      (char-set #\$ #\% #\: #\= #\> #\^ #\~ #\_ #\@))
                     cmene:
                     "cfari")
                   (morji-nunjavni-char-set-*
                     (char-set-union
                       char-set:letter+digit
-                      (char-set #\$)
-                      (char-set #\%)
-                      (char-set #\:)
-                      (char-set #\=)
-                      (char-set #\>)
-                      (char-set #\^)
-                      (char-set #\~)
-                      (char-set #\_)
-                      (char-set #\@)
-                      (char-set #\.)
-                      (char-set #\!)
-                      (char-set #\&)
-                      (char-set #\/)
-                      (char-set #\\)
-                      (char-set #\-))
+                      (char-set
+                        #\$
+                        #\%
+                        #\:
+                        #\=
+                        #\>
+                        #\^
+                        #\~
+                        #\_
+                        #\@
+                        #\.
+                        #\!
+                        #\&
+                        #\/
+                        #\\
+                        #\-))
                     cmene:
                     "fanmo")
                   canlu-1)
@@ -444,35 +437,28 @@
                   (morji-nunjavni-char-set
                     (char-set-union
                       char-set:letter+digit
-                      (char-set #\$)
-                      (char-set #\%)
-                      (char-set #\:)
-                      (char-set #\=)
-                      (char-set #\>)
-                      (char-set #\^)
-                      (char-set #\~)
-                      (char-set #\_)
-                      (char-set #\@))
+                      (char-set #\$ #\% #\: #\= #\> #\^ #\~ #\_ #\@))
                     cmene:
                     "cfari")
                   (morji-nunjavni-char-set-*
                     (char-set-union
                       char-set:letter+digit
-                      (char-set #\$)
-                      (char-set #\%)
-                      (char-set #\:)
-                      (char-set #\=)
-                      (char-set #\>)
-                      (char-set #\^)
-                      (char-set #\~)
-                      (char-set #\_)
-                      (char-set #\@)
-                      (char-set #\.)
-                      (char-set #\!)
-                      (char-set #\&)
-                      (char-set #\/)
-                      (char-set #\\)
-                      (char-set #\-))
+                      (char-set
+                        #\$
+                        #\%
+                        #\:
+                        #\=
+                        #\>
+                        #\^
+                        #\~
+                        #\_
+                        #\@
+                        #\.
+                        #\!
+                        #\&
+                        #\/
+                        #\\
+                        #\-))
                     cmene:
                     "fanmo")
                   canlu-1)
@@ -947,35 +933,28 @@
             (list (morji-nunjavni-char-set
                     (char-set-union
                       char-set:letter+digit
-                      (char-set #\$)
-                      (char-set #\%)
-                      (char-set #\:)
-                      (char-set #\=)
-                      (char-set #\>)
-                      (char-set #\^)
-                      (char-set #\~)
-                      (char-set #\_)
-                      (char-set #\@))
+                      (char-set #\$ #\% #\: #\= #\> #\^ #\~ #\_ #\@))
                     cmene:
                     "cfari")
                   (morji-nunjavni-char-set-*
                     (char-set-union
                       char-set:letter+digit
-                      (char-set #\$)
-                      (char-set #\%)
-                      (char-set #\:)
-                      (char-set #\=)
-                      (char-set #\>)
-                      (char-set #\^)
-                      (char-set #\~)
-                      (char-set #\_)
-                      (char-set #\@)
-                      (char-set #\.)
-                      (char-set #\!)
-                      (char-set #\&)
-                      (char-set #\/)
-                      (char-set #\\)
-                      (char-set #\-))
+                      (char-set
+                        #\$
+                        #\%
+                        #\:
+                        #\=
+                        #\>
+                        #\^
+                        #\~
+                        #\_
+                        #\@
+                        #\.
+                        #\!
+                        #\&
+                        #\/
+                        #\\
+                        #\-))
                     cmene:
                     "fanmo")
                   canlu-1)

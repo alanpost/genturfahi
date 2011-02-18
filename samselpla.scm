@@ -666,48 +666,53 @@
                  (char-set ,(secuxna-sentinel))))
 
 (define (samselpla-klesi-newline)
-  '(char-set #\newline))
+  #\newline)
 
 (define (samselpla-klesi-linefeed)
-  '(char-set #\linefeed))
+  #\linefeed)
 
 (define (samselpla-klesi-tab)
-  '(char-set #\tab))
+  #\tab)
 
 (define (samselpla-klesi-page)
-  '(char-set #\page))
+  #\page)
 
 (define (samselpla-klesi-lbracket)
-  '(char-set #\[))
+  #\[)
 
 (define (samselpla-klesi-rbracket)
-  '(char-set #\]))
+  #\])
 
 (define (samselpla-klesi-backslash)
-  '(char-set #\\))
-
+  #\\)
 
 (define (samselpla-klesi-lerfu #!key klesi-lerfu)
-  `(char-set ,klesi-lerfu))
+  klesi-lerfu)
 
 
 (define (samselpla-klesi-selci-* #!key klesi-lerfu)
-  (let ((char-set-* (if (null? (cdr klesi-lerfu))
-                        (car klesi-lerfu)
-                        `(char-set-union ,@klesi-lerfu))))
-    `(morji-nunjavni-char-set-* ,char-set-*)))
+  (samselpla-klesi-selci klesi-lerfu: klesi-lerfu
+                         javni: 'morji-nunjavni-char-set-*))
 
 (define (samselpla-klesi-selci-+ #!key klesi-lerfu)
-  (let ((char-set-+ (if (null? (cdr klesi-lerfu))
-                        (car klesi-lerfu)
-                        `(char-set-union ,@klesi-lerfu))))
-    `(morji-nunjavni-char-set-+ ,char-set-+)))
+  (samselpla-klesi-selci klesi-lerfu: klesi-lerfu
+                         javni: 'morji-nunjavni-char-set-+))
 
-(define (samselpla-klesi-selci #!key klesi-lerfu)
-  (let ((char-set (if (null? (cdr klesi-lerfu))
-                      (car klesi-lerfu)
-                      `(char-set-union ,@klesi-lerfu))))
-    `(morji-nunjavni-char-set ,char-set)))
+(define (samselpla-klesi-selci #!key klesi-lerfu
+                                     (javni 'morji-nunjavni-char-set))
+  (define (union char-sets)
+    (call-with-values
+      (lambda ()
+        (partition char? char-sets))
+
+      (lambda (char char-set)
+        (let ((cs `(,@char-set
+                    ,@(if (null? char) '() `((char-set ,@char))))))
+          (if (null? (cdr cs))
+              (car cs)
+              `(char-set-union ,@cs))))))
+
+  `(,javni ,(union klesi-lerfu)))
 
 
 (define (samselpla-denpabu)
