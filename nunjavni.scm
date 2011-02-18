@@ -163,6 +163,40 @@
       (lambda () (string-append "[" (char-set->string char-set) "]+"))
       javni-char-set-+)))
 
+(define (nunjavni-char-set-kuspe char-set #!key cmene
+                                                nastura
+                                                porjahe
+                                                (my 0)
+                                                (ny most-positive-fixnum))
+  (let ((nunvalsi-char-set-kuspe (make-nunvalsi cmene nastura porjahe)))
+    (define (javni-char-set-kuspe porsi
+                                  mapti
+                                  namapti
+                                  #!optional (poi (lerfu-porsi-poi porsi))
+                                             (zva (lerfu-porsi-zva porsi)))
+      (define (mapti-char-set-kuspe klani)
+        (mapti (make-lerfu-porsi-pabalvi-valsi porsi klani)
+               (nunvalsi-char-set-kuspe (string-copy poi
+                                                     zva
+                                                     (fx+ zva klani)))))
+
+      (define (char-set-kuspe poi zva klani)
+        (if (and (fx< klani ny)
+                 (char-set-contains? char-set (string-ref poi zva)))
+            (char-set-kuspe poi (fx+ 1 zva) (fx+ 1 klani))
+            klani))
+
+      (let ((klani (char-set-kuspe poi zva 0)))
+        (if (fx>= klani my)
+            (mapti-char-set-kuspe klani)
+            (namapti porsi))))
+
+    (nunjavni-secuxna
+      (lambda () (string-append "[" (char-set->string char-set) "]"
+                                "{" (number->string ny)
+                                "," (number->string my) "}"))
+      javni-char-set-kuspe)))
+
 (define (nunjavni-char-set char-set #!key cmene nastura porjahe)
   (let ((nunvalsi-char-set (make-nunvalsi cmene nastura porjahe)))
     (define (javni-char-set porsi mapti namapti)
@@ -271,6 +305,101 @@
                    fanmo:   fanmo)))
       (javni porsi mapti-+ namapti))
     (nunjavni-secuxna (lambda () "+") javni-+)))
+
+
+;; range: parse N,M javni out of the |lerfu-porsi|.
+;
+;; javni{n,m}                 => match at least m and no more than n times.
+;; javni{m}   => javni{n,n}   => match exactly m times.
+;; javni{m,}  => javni{n,inf} => match m or more times.
+;; javni{,n}  => javni{0,n}   => match zero to n times.
+;; javni{,}   => javni{0,inf} => match zero-or-more times.
+;; javni{}    => javni{0,inf} => match zero-or-more times.
+;;
+(define (nunjavni-kuspe javni #!key cmene
+                                    nastura
+                                    porjahe
+                                    porsumti
+                                    (default '())
+                                    (my 0)
+                                    (ny most-positive-fixnum))
+  (let ((vejmina (venunjmina-rodanunvalsi-* cmene
+                                            nastura
+                                            porjahe
+                                            porsumti))
+        (novejmina (novejmina-nunvalsi cmene nastura porjahe default #f)))
+    (define (suhopa-javni-kuspe porsi
+                                mapti
+                                namapti
+                                        ; a "dummy head" is a linked-list
+                                        ; optimization we'll return the cdr
+                                        ; of this list, but by using this
+                                        ; extra cons we avoid checking for
+                                        ; the beginning of the list below.
+                                        ;
+                                 #!key (cfari (list '()))
+                                       (fanmo cfari)
+                                       (klani 1))
+      (define (mapti-kuspe porsi nunvalsi)
+        ; append this result to the result list
+        (set-cdr! fanmo (list nunvalsi))
+
+        ; if we have matched up to our limit, succeed.
+        ; otherwise keep matching.
+        ;
+        (if (fx= ny klani)
+            (mapti porsi (vejmina (cdr cfari)))
+            (suhopa-javni-kuspe porsi
+                                mapti
+                                namapti
+                                cfari: cfari
+                                fanmo: (cdr fanmo)
+                                klani: (fx+ 1 klani))))
+
+      (define (namapti-kuspe porsi)
+        (if (fx> klani my)
+            (mapti porsi (vejmina (cdr cfari)))
+            (namapti porsi)))
+
+      (javni porsi mapti-kuspe namapti-kuspe))
+
+    (define (pamoi-javni-kuspe porsi
+                               mapti
+                               namapti
+                                       ; a "dummy head" is a linked-list
+                                       ; optimization we'll return the cdr
+                                       ; of this list, but by using this
+                                       ; extra cons we avoid checking for
+                                       ; the beginning of the list below.
+                                       ;
+                                #!key (cfari (list '()))
+                                      (fanmo cfari)
+                                      (klani 1))
+      (define (mapti-kuspe porsi nunvalsi)
+        ; append this result to the result list
+        (set-cdr! fanmo (list nunvalsi))
+
+        ; if we have matched up to our limit, succeed.
+        ; otherwise keep matching.
+        ;
+        (if (fx= ny klani)
+            (mapti porsi (vejmina (cdr cfari)))
+            (suhopa-javni-kuspe porsi
+                                mapti
+                                namapti
+                                cfari: cfari
+                                fanmo: (cdr fanmo)
+                                klani: (fx+ 1 klani))))
+
+      (define (namapti-kuspe porsi)
+        (if (fx> klani my)
+            (mapti porsi novejmina)
+            (namapti porsi)))
+
+      (javni porsi mapti-kuspe namapti-kuspe))
+
+    (nunjavni-secuxna (lambda () "kuspe") pamoi-javni-kuspe)))
+
 
 
 ;; optional: parse an optional javni out of the |lerfu-porsi|.

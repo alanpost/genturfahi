@@ -476,6 +476,39 @@
                            '(porsumti: #t)
                            '())))
 
+;; range
+;;
+(define (samselpla-kuspe #!key cmene javni my slakabu ny)
+  ; if I have a single range with no comma, match exactly that many
+  ; times.
+  ;
+  (if (not (or slakabu (string=? "" my)))
+      (set! ny my))
+
+  (define porsumti? (match javni
+                      ((_ ... 'porsumti: #t) #t)
+                      (_ #f)))
+
+  (let ((default (secuxna-*-default)))
+    `(morji-nunjavni-kuspe ,(if porsumti?
+                                `(,@javni porjahe: #t)
+                                javni)
+                           ,@(if (string=? "" cmene)
+                                 '()
+                                 `(cmene: ,cmene))
+                           ,@(if (null? default)
+                                 '()
+                                 `(default: ,default))
+                           ,@(if porsumti?
+                                 '(porsumti: #t)
+                                 '())
+                           ,@(if (string=? "" my)
+                                 '()
+                                 `(my: ,(string->number my)))
+                           ,@(if (string=? "" ny)
+                                 '()
+                                 `(ny: ,(string->number ny))))))
+
 ;; and-predicate
 ;;
 (define (samselpla-& #!key javni)
@@ -699,7 +732,8 @@
                          javni: 'morji-nunjavni-char-set-+))
 
 (define (samselpla-klesi-selci #!key klesi-lerfu
-                                     (javni 'morji-nunjavni-char-set))
+                                     (javni 'morji-nunjavni-char-set)
+                                     (key '()))
   (define (union char-sets)
     (call-with-values
       (lambda ()
@@ -712,7 +746,24 @@
               (car cs)
               `(char-set-union ,@cs))))))
 
-  `(,javni ,(union klesi-lerfu)))
+  `(,javni ,(union klesi-lerfu) ,@key))
+
+(define (samselpla-klesi-selci-kuspe #!key klesi-lerfu my slakabu ny)
+  ; if I have a single range with no comma, match exactly that many
+  ; times.
+  ;
+  (if (not (or slakabu (string=? "" my)))
+      (set! ny my))
+
+  (let ((key `(,@(if (string=? "" my)
+                     '()
+                     `(my: ,(string->number my)))
+               ,@(if (string=? "" ny)
+                     '()
+                     `(ny: ,(string->number ny))))))
+    (samselpla-klesi-selci klesi-lerfu: klesi-lerfu
+                           javni:       'morji-nunjavni-char-set-kuspe
+                           key:         key)))
 
 
 (define (samselpla-denpabu)

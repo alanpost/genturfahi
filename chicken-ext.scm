@@ -79,9 +79,11 @@
    nunjavni-valsi
    nunjavni-char-set-*
    nunjavni-char-set-+
+   nunjavni-char-set-kuspe
    nunjavni-char-set
    nunjavni-*
    nunjavni-+
+   nunjavni-kuspe
    nunjavni-?
    nunjavni-&
    nunjavni-!
@@ -114,9 +116,11 @@
    morji-nunjavni-valsi
    morji-nunjavni-char-set-*
    morji-nunjavni-char-set-+
+   morji-nunjavni-char-set-kuspe
    morji-nunjavni-char-set
    morji-nunjavni-*
    morji-nunjavni-+
+   morji-nunjavni-kuspe
    morji-nunjavni-?
    morji-nunjavni-&
    morji-nunjavni-!

@@ -44,6 +44,7 @@
    samselpla-?
    samselpla-*
    samselpla-+
+   samselpla-kuspe
    samselpla-&
    samselpla-fanmo
    samselpla-!
@@ -105,6 +106,9 @@
    samselpla-klesi-rbracket
    samselpla-klesi-backslash
    samselpla-klesi-selci
+   samselpla-klesi-selci-*
+   samselpla-klesi-selci-+
+   samselpla-klesi-selci-kuspe
    samselpla-denpabu
    samselpla-samselpla-xadni
    samselpla-samselpla-cmene

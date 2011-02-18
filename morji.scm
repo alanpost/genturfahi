@@ -73,9 +73,12 @@
 (define morji-nunjavni-valsi      (nunmorji-nunjavni nunjavni-valsi))
 (define morji-nunjavni-char-set-* (nunmorji-nunjavni nunjavni-char-set-*))
 (define morji-nunjavni-char-set-+ (nunmorji-nunjavni nunjavni-char-set-+))
+(define morji-nunjavni-char-set-kuspe
+                                  (nunmorji-nunjavni nunjavni-char-set-kuspe))
 (define morji-nunjavni-char-set   (nunmorji-nunjavni nunjavni-char-set))
 (define morji-nunjavni-*          (nunmorji-nunjavni nunjavni-*))
 (define morji-nunjavni-+          (nunmorji-nunjavni nunjavni-+))
+(define morji-nunjavni-kuspe      (nunmorji-nunjavni nunjavni-kuspe))
 (define morji-nunjavni-?          (nunmorji-nunjavni nunjavni-?))
 (define morji-nunjavni-&          (nunmorji-nunjavni nunjavni-&))
 (define morji-nunjavni-!          (nunmorji-nunjavni nunjavni-!))

@@ -31,6 +31,7 @@
 (include "optional.scm")
 (include "zero-or-more.scm")
 (include "one-or-more.scm")
+(include "kuspe.scm")
 (include "je.scm")
 (include "je-quote.scm")
 (include "jonai.scm")

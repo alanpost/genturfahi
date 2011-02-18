@@ -1,0 +1,73 @@
+;;;;
+;;;; genturfahi - lo la .ckim. ke pe'a jajgau ratcu ke'e genturfa'i
+;;;;            `-> A Scheme packrat parser.
+;;;;
+;;;; Copyright (c) 2010 ".alyn.post." <alyn.post@lodockikumazvati.org>
+;;;;
+;;;; Permission to use, copy, modify, and/or distribute this software for any
+;;;; purpose with or without fee is hereby granted, provided that the above
+;;;; copyright notice and this permission notice appear in all copies.
+;;;;
+;;;; THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+;;;; WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+;;;; MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+;;;; ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+;;;; WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+;;;; ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+;;;;
+
+;; range: parse N,M javni
+;
+;; javni{m,n}                 => match at least n and no more than m times.
+;; javni{m}   => javni{m,m}   => match exactly m times.
+;; javni{m,}  => javni{m,inf} => match m or more times.
+;; javni{,n}  => javni{0,n}   => match zero to n times.
+;; javni{,}   => javni{0,inf} => match zero-or-more times.
+;; javni{}    => javni{0,inf} => match zero-or-more times.
+;;
+kuspe <- ,"1-to-3: "           1-to-3
+       / ,"2-to-3: "           2-to-3
+       / ,"1: "                1
+       / ,"2: "                2
+       / ,"3: "                3
+       / ,"1-or-more: "        1-or-more
+       / ,"2-or-more: "        2-or-more
+       / ,"3-or-more: "        3-or-more
+       / ,"zero-to-1: "        zero-to-1
+       / ,"zero-to-2: "        zero-to-2
+       / ,"zero-to-3: "        zero-to-3
+       / ,"zero-to-1-b: "      zero-to-1-b
+       / ,"zero-to-2-b: "      zero-to-2-b
+       / ,"zero-to-3-b: "      zero-to-3-b
+       / ,"zero-or-more: "     zero-or-more
+       / ,"zero-or-more-b: "   zero-or-more-b
+       / ,"zero-or-more-2: "   zero-or-more-2
+       / ,"zero-or-more-2-b: " zero-or-more-2-b
+
+1-to-3           <- a{1,3} / [b]{1,3}
+2-to-3           <- a{2,3} / [b]{2,3}
+
+1                <- a{1} / [b]{1}
+2                <- a{2} / [b]{2}
+3                <- a{3} / [b]{3}
+
+1-or-more        <- a{1,} / [b]{1,}
+2-or-more        <- a{2,} / [b]{2,}
+3-or-more        <- a{3,} / [b]{3,}
+
+zero-to-1        <- a{,1}
+zero-to-2        <- a{,2}
+zero-to-3        <- a{,3}
+
+zero-to-1-b      <- [b]{,1}
+zero-to-2-b      <- [b]{,2}
+zero-to-3-b      <- [b]{,3}
+
+zero-or-more     <- a{,}
+zero-or-more-b   <- [b]{,}
+
+zero-or-more-2   <- a{}
+zero-or-more-2-b <- [b]{}
+
+a <- [a]

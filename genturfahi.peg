@@ -115,6 +115,7 @@ pajavni         <- dot-zero-or-more
                  / optional
                  / zero-or-more
                  / one-or-more
+                 / kuspe
                  / and-predicate
                  / end-of-input
                  / not-predicate
@@ -144,6 +145,12 @@ one-or-more     <- #:cmene cmene-sumti?
                    #\+
                    canlu
                 -> {samselpla-+}
+kuspe           <- #:cmene cmene-sumti?
+                   #:javni selci-javni
+                   #\{ canlu
+                   #:my namcu? ( #:slakabu ,#\, canlu )? #:ny namcu?
+                   #\} canlu
+                -> {samselpla-kuspe}
 and-predicate   <- #\&
                    canlu
                    #:javni selci-javni
@@ -216,6 +223,11 @@ klesi-selci      <- #\[ #:klesi-lerfu klesi-lerfu+ "]*" canlu
                  -> {samselpla-klesi-selci-*}
                   / #\[ #:klesi-lerfu klesi-lerfu+ "]+" canlu
                  -> {samselpla-klesi-selci-+}
+                  / #\[ #:klesi-lerfu klesi-lerfu+ "]" canlu
+                    #\{ canlu
+                   #:my namcu? ( #:slakabu ,#\, canlu )? #:ny namcu?
+                    #\} canlu
+                 -> {samselpla-klesi-selci-kuspe}
                   / #\[ #:klesi-lerfu klesi-lerfu+ #\]  canlu
                  -> samselpla-klesi-selci
 
@@ -286,6 +298,8 @@ girzu-javni     <- "()" canlu
                 -> samselpla-empty-list
                  / #\( canlu javni #\) canlu
                 -> samselpla-girzu-javni
+
+namcu           <- [[:digit:]]+ canlu
 
 canlu           <- `(canlubu / totoi)*
 
