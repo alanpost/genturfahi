@@ -17,32 +17,34 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
-(use genturfahi genturfahi-peg test utils)
+(define (string-escape-peg)
+  (let* ((samselpla (call-with-input-file "string-escape.peg" genturfahi-peg))
+         (genturfahi-string-escape (genturfahi (eval samselpla))))
+    (string-escape-test genturfahi-string-escape)))
 
-(include "empty-string.scm")
-(include "empty-list.scm")
-(include "end-of-input.scm")
-(include "lerfu.scm")
-(include "dot.scm")
-(include "dot-star.scm")
-(include "dot-plus.scm")
-(include "valsi.scm")
-(include "string-escape.scm")
-(include "optional.scm")
-(include "zero-or-more.scm")
-(include "one-or-more.scm")
-(include "je.scm")
-(include "je-quote.scm")
-(include "jonai.scm")
-(include "and-predicate.scm")
-(include "not-predicate.scm")
-(include "jonai-naselci.scm")
-(include "samselpla.scm")
-(include "samselpla-cabna.scm")
-(include "lerfu-klesi.scm")
-(include "mex.scm")
-(include "rrecursion.scm")
-(include "lrecursion.scm")
-(include "girzu.scm")
+(define (string-escape-test genturfahi-string-escape)
+  (test '(#\\
+          #\\
+          #\[
+          #\] 
+          "\""
+          #\return
+          #\return
+          #\return
+          #\newline
+          #\newline
+          #\newline
+          #\page
+          #\page
+          #\page
+          #\newline
+          #\newline
+          #\newline
+          #\space
+          #\tab
+          #\tab
+          #\tab)
+        (genturfahi-string-escape "\\\\[]\"\r\r\r\n\n\n\f\f\f\n\n\n \t\t\t")))
 
-(test-exit)
+(test-group "string escape (PEG)"
+  (string-escape-peg))

@@ -97,6 +97,13 @@
    samselpla-^space
    samselpla-^upper
    samselpla-^xdigit
+   samselpla-klesi-newline
+   samselpla-klesi-linefeed
+   samselpla-klesi-tab
+   samselpla-klesi-page
+   samselpla-klesi-lbracket
+   samselpla-klesi-rbracket
+   samselpla-klesi-backslash
    samselpla-klesi-selci
    samselpla-denpabu
    samselpla-samselpla-xadni

@@ -531,25 +531,25 @@
   `(morji-nunjavni-valsi ,(apply string-append valsi-lerfu)))
 
 (define (samselpla-valsi-newline)
-  "\\n")
+  "\n")
 
 (define (samselpla-valsi-linefeed)
-  "\\r")
+  (make-string 1 #\linefeed))
 
 (define (samselpla-valsi-tab)
-  "\\t")
+  (make-string 1 #\tab))
 
 (define (samselpla-valsi-page)
-  "\\f")
+  (make-string 1 #\page))
 
 (define (samselpla-valsi-backslash)
-  "\\")
+  (make-string 1 #\\))
 
 (define (samselpla-valsi-single-quote)
-  "\'")
+  (make-string 1 #\'))
 
 (define (samselpla-valsi-double-quote)
-  "\"")
+  (make-string 1 #\"))
 
 (define (samselpla-valsi-lerfu #!key lerfu)
   (make-string 1 lerfu))
@@ -664,6 +664,27 @@
 (define (samselpla-^xdigit)
   `(char-set-xor (char-set-complement char-set:hex-digit)
                  (char-set ,(secuxna-sentinel))))
+
+(define (samselpla-klesi-newline)
+  '(char-set #\newline))
+
+(define (samselpla-klesi-linefeed)
+  '(char-set #\linefeed))
+
+(define (samselpla-klesi-tab)
+  '(char-set #\tab))
+
+(define (samselpla-klesi-page)
+  '(char-set #\page))
+
+(define (samselpla-klesi-lbracket)
+  '(char-set #\[))
+
+(define (samselpla-klesi-rbracket)
+  '(char-set #\]))
+
+(define (samselpla-klesi-backslash)
+  '(char-set #\\))
 
 
 (define (samselpla-klesi-lerfu #!key klesi-lerfu)
