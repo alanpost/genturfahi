@@ -45,7 +45,9 @@
   (javni-rodavalsi-val (map (lambda (nunvalsi) (nunvalsi)) rodanunvalsi)))
 
 (define (javni-rodanunvalsi-*-val rodanunvalsi)
-  (map (lambda (nunvalsi) (javni-rodavalsi-je-val (nunvalsi))) rodanunvalsi))
+  (remove javni-nastura?
+          (map (lambda (nunvalsi) (javni-rodavalsi-je-val (nunvalsi)))
+               rodanunvalsi)))
 
 (define (javni-rodanunvalsi-je-val rodanunvalsi)
   (javni-rodavalsi-je-val (map (lambda (nunvalsi) (nunvalsi)) rodanunvalsi)))
