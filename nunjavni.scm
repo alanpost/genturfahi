@@ -41,8 +41,8 @@
 (define (nunjavni-.* #!key cmene nastura porjahe)
   (let ((nunvalsi-.* (make-nunvalsi cmene nastura porjahe)))
     (define (javni-.* porsi mapti ignore-namapti)
-        (mapti (make-lerfu-porsi-fanmo porsi)
-               (nunvalsi-.* (lerfu-porsi-string porsi))))
+      (mapti (make-lerfu-porsi-fanmo porsi)
+             (nunvalsi-.* (lerfu-porsi-string porsi))))
     (nunjavni-secuxna (lambda () "#\\.*") javni-.*)))
 
 (define (nunjavni-.+ #!key cmene nastura porjahe)
