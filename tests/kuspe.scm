@@ -33,6 +33,11 @@
   (test '(("1-to-3: " "bbb") "")  (genturfahi-kuspe "1-to-3: bbb"))
   (test '(("1-to-3: " "bbb") "b") (genturfahi-kuspe "1-to-3: bbbb"))
 
+  (test '(("1-to-3: " "c") "")    (genturfahi-kuspe "1-to-3: c"))
+  (test '(("1-to-3: " "cc") "")   (genturfahi-kuspe "1-to-3: cc"))
+  (test '(("1-to-3: " "ccc") "")  (genturfahi-kuspe "1-to-3: ccc"))
+  (test '(("1-to-3: " "ccc") "c") (genturfahi-kuspe "1-to-3: cccc"))
+
 
   (test '(#f "2-to-3: a")                 (genturfahi-kuspe "2-to-3: a"))
   (test '(("2-to-3: " (#\a #\a)) "")      (genturfahi-kuspe "2-to-3: aa"))
@@ -44,6 +49,11 @@
   (test '(("2-to-3: " "bbb") "")  (genturfahi-kuspe "2-to-3: bbb"))
   (test '(("2-to-3: " "bbb") "b") (genturfahi-kuspe "2-to-3: bbbb"))
 
+  (test '(#f "2-to-3: c")         (genturfahi-kuspe "2-to-3: c"))
+  (test '(("2-to-3: " "cc") "")   (genturfahi-kuspe "2-to-3: cc"))
+  (test '(("2-to-3: " "ccc") "")  (genturfahi-kuspe "2-to-3: ccc"))
+  (test '(("2-to-3: " "ccc") "c") (genturfahi-kuspe "2-to-3: cccc"))
+
 
   (test '(#f "1: ")          (genturfahi-kuspe "1: "))
   (test '(("1: " (#\a)) "")  (genturfahi-kuspe "1: a"))
@@ -52,6 +62,10 @@
   (test '(#f "1: ")        (genturfahi-kuspe "1: "))
   (test '(("1: " "b") "")  (genturfahi-kuspe "1: b"))
   (test '(("1: " "b") "b") (genturfahi-kuspe "1: bb"))
+
+  (test '(#f "1: ")        (genturfahi-kuspe "1: "))
+  (test '(("1: " "c") "")  (genturfahi-kuspe "1: c"))
+  (test '(("1: " "c") "c") (genturfahi-kuspe "1: cc"))
 
 
   (test '(#f "2: ")              (genturfahi-kuspe "2: "))
@@ -63,6 +77,11 @@
   (test '(#f "2: b")        (genturfahi-kuspe "2: b"))
   (test '(("2: " "bb") "")  (genturfahi-kuspe "2: bb"))
   (test '(("2: " "bb") "b") (genturfahi-kuspe "2: bbb"))
+
+  (test '(#f "2: ")         (genturfahi-kuspe "2: "))
+  (test '(#f "2: c")        (genturfahi-kuspe "2: c"))
+  (test '(("2: " "cc") "")  (genturfahi-kuspe "2: cc"))
+  (test '(("2: " "cc") "c") (genturfahi-kuspe "2: ccc"))
 
 
   (test '(#f "3: ")                  (genturfahi-kuspe "3: "))
@@ -77,6 +96,12 @@
   (test '(("3: " "bbb") "")  (genturfahi-kuspe "3: bbb"))
   (test '(("3: " "bbb") "b") (genturfahi-kuspe "3: bbbb"))
 
+  (test '(#f "3: ")          (genturfahi-kuspe "3: "))
+  (test '(#f "3: c")         (genturfahi-kuspe "3: c"))
+  (test '(#f "3: cc")        (genturfahi-kuspe "3: cc"))
+  (test '(("3: " "ccc") "")  (genturfahi-kuspe "3: ccc"))
+  (test '(("3: " "ccc") "c") (genturfahi-kuspe "3: cccc"))
+
 
   (test '(("1-or-more: " (#\a)) "")         (genturfahi-kuspe "1-or-more: a"))
   (test '(("1-or-more: " (#\a #\a)) "")     (genturfahi-kuspe "1-or-more: aa"))
@@ -85,6 +110,10 @@
   (test '(("1-or-more: " "b") "")   (genturfahi-kuspe "1-or-more: b"))
   (test '(("1-or-more: " "bb") "")  (genturfahi-kuspe "1-or-more: bb"))
   (test '(("1-or-more: " "bbb") "") (genturfahi-kuspe "1-or-more: bbb"))
+
+  (test '(("1-or-more: " "c") "")   (genturfahi-kuspe "1-or-more: c"))
+  (test '(("1-or-more: " "cc") "")  (genturfahi-kuspe "1-or-more: cc"))
+  (test '(("1-or-more: " "ccc") "") (genturfahi-kuspe "1-or-more: ccc"))
 
 
   (test '(#f "2-or-more: a")                (genturfahi-kuspe "2-or-more: a"))
@@ -97,6 +126,12 @@
   (test '(("2-or-more: " "bb") "")   (genturfahi-kuspe "2-or-more: bb"))
   (test '(("2-or-more: " "bbb") "")  (genturfahi-kuspe "2-or-more: bbb"))
   (test '(("2-or-more: " "bbbb") "") (genturfahi-kuspe "2-or-more: bbbb"))
+
+  (test '(#f "2-or-more: c")         (genturfahi-kuspe "2-or-more: c"))
+  (test '(("2-or-more: " "cc") "")   (genturfahi-kuspe "2-or-more: cc"))
+  (test '(("2-or-more: " "ccc") "")  (genturfahi-kuspe "2-or-more: ccc"))
+  (test '(("2-or-more: " "cccc") "") (genturfahi-kuspe "2-or-more: cccc"))
+
 
   (test '(#f "3-or-more: a")                (genturfahi-kuspe "3-or-more: a"))
   (test '(#f "3-or-more: aa")               (genturfahi-kuspe "3-or-more: aa"))
@@ -112,6 +147,13 @@
   (test '(("3-or-more: " "bbbb") "")  (genturfahi-kuspe "3-or-more: bbbb"))
   (test '(("3-or-more: " "bbbbb") "") (genturfahi-kuspe "3-or-more: bbbbb"))
 
+  (test '(#f "3-or-more: c")          (genturfahi-kuspe "3-or-more: c"))
+  (test '(#f "3-or-more: cc")         (genturfahi-kuspe "3-or-more: cc"))
+  (test '(("3-or-more: " "ccc") "")   (genturfahi-kuspe "3-or-more: ccc"))
+  (test '(("3-or-more: " "cccc") "")  (genturfahi-kuspe "3-or-more: cccc"))
+  (test '(("3-or-more: " "ccccc") "") (genturfahi-kuspe "3-or-more: ccccc"))
+
+
   (test '(("zero-to-1: " ()) "")     (genturfahi-kuspe "zero-to-1: "))
   (test '(("zero-to-1: " (#\a)) "")  (genturfahi-kuspe "zero-to-1: a"))
   (test '(("zero-to-1: " (#\a)) "a") (genturfahi-kuspe "zero-to-1: aa"))
@@ -119,6 +161,11 @@
   (test '(("zero-to-1-b: " "") "")   (genturfahi-kuspe "zero-to-1-b: "))
   (test '(("zero-to-1-b: " "b") "")  (genturfahi-kuspe "zero-to-1-b: b"))
   (test '(("zero-to-1-b: " "b") "b") (genturfahi-kuspe "zero-to-1-b: bb"))
+
+  (test '(("zero-to-1-dot: " "") "")   (genturfahi-kuspe "zero-to-1-dot: "))
+  (test '(("zero-to-1-dot: " "c") "")  (genturfahi-kuspe "zero-to-1-dot: c"))
+  (test '(("zero-to-1-dot: " "c") "c") (genturfahi-kuspe "zero-to-1-dot: cc"))
+
 
   (test '(("zero-to-2: " ()) "")         (genturfahi-kuspe "zero-to-2: "))
   (test '(("zero-to-2: " (#\a)) "")      (genturfahi-kuspe "zero-to-2: a"))
@@ -129,6 +176,14 @@
   (test '(("zero-to-2-b: " "b") "")   (genturfahi-kuspe "zero-to-2-b: b"))
   (test '(("zero-to-2-b: " "bb") "")  (genturfahi-kuspe "zero-to-2-b: bb"))
   (test '(("zero-to-2-b: " "bb") "b") (genturfahi-kuspe "zero-to-2-b: bbb"))
+
+  (test '(("zero-to-2-dot: " "") "")  (genturfahi-kuspe "zero-to-2-dot: "))
+  (test '(("zero-to-2-dot: " "c") "") (genturfahi-kuspe "zero-to-2-dot: c"))
+  (test '(("zero-to-2-dot: " "cc") "")
+                                      (genturfahi-kuspe "zero-to-2-dot: cc"))
+  (test '(("zero-to-2-dot: " "cc") "c")
+                                      (genturfahi-kuspe "zero-to-2-dot: ccc"))
+
 
   (test '(("zero-to-3: " ()) "")       (genturfahi-kuspe "zero-to-3: "))
   (test '(("zero-to-3: " (#\a)) "")    (genturfahi-kuspe "zero-to-3: a"))
@@ -145,6 +200,16 @@
   (test '(("zero-to-3-b: " "bbb") "")  (genturfahi-kuspe "zero-to-3-b: bbb"))
   (test '(("zero-to-3-b: " "bbb") "b") (genturfahi-kuspe "zero-to-3-b: bbbb"))
 
+  (test '(("zero-to-3-dot: " "") "") (genturfahi-kuspe "zero-to-3-dot: "))
+  (test '(("zero-to-3-dot: " "c") "")
+                                     (genturfahi-kuspe "zero-to-3-dot: c"))
+  (test '(("zero-to-3-dot: " "cc") "")
+                                     (genturfahi-kuspe "zero-to-3-dot: cc"))
+  (test '(("zero-to-3-dot: " "ccc") "")
+                                     (genturfahi-kuspe "zero-to-3-dot: ccc"))
+  (test '(("zero-to-3-dot: " "ccc") "c")
+                                     (genturfahi-kuspe "zero-to-3-dot: cccc"))
+
 
   (test '(("zero-or-more: " ()) "")    (genturfahi-kuspe "zero-or-more: "))
   (test '(("zero-or-more: " (#\a)) "") (genturfahi-kuspe "zero-or-more: a"))
@@ -160,6 +225,15 @@
                                       (genturfahi-kuspe "zero-or-more-b: bb"))
   (test '(("zero-or-more-b: " "bbb") "")
                                       (genturfahi-kuspe "zero-or-more-b: bbb"))
+
+  (test '(("zero-or-more-dot: " "") "")
+                                   (genturfahi-kuspe "zero-or-more-dot: "))
+  (test '(("zero-or-more-dot: " "c") "")
+                                   (genturfahi-kuspe "zero-or-more-dot: c"))
+  (test '(("zero-or-more-dot: " "cc") "")
+                                   (genturfahi-kuspe "zero-or-more-dot: cc"))
+  (test '(("zero-or-more-dot: " "ccc") "")
+                                   (genturfahi-kuspe "zero-or-more-dot: ccc"))
 
 
   (test '(("zero-or-more-2: " ()) "")
@@ -178,7 +252,17 @@
   (test '(("zero-or-more-2-b: " "bb") "")
                                   (genturfahi-kuspe "zero-or-more-2-b: bb"))
   (test '(("zero-or-more-2-b: " "bbb") "")
-                                  (genturfahi-kuspe "zero-or-more-2-b: bbb")))
+                                  (genturfahi-kuspe "zero-or-more-2-b: bbb"))
+
+  (test '(("zero-or-more-2-dot: " "") "")
+                                (genturfahi-kuspe "zero-or-more-2-dot: "))
+  (test '(("zero-or-more-2-dot: " "c") "")
+                                (genturfahi-kuspe "zero-or-more-2-dot: c"))
+  (test '(("zero-or-more-2-dot: " "cc") "")
+                                (genturfahi-kuspe "zero-or-more-2-dot: cc"))
+  (test '(("zero-or-more-2-dot: " "ccc") "")
+                                (genturfahi-kuspe "zero-or-more-2-dot: ccc"))
+  0)
 
 (test-group "kuspe (PEG)"
   (kuspe-peg))

@@ -54,6 +54,23 @@
                  (nunvalsi-.+ (lerfu-porsi-string porsi)))))
     (nunjavni-secuxna (lambda () "#\\.+") javni-.+)))
 
+(define (nunjavni-.kuspe #!key cmene
+                               nastura
+                               porjahe
+                               (my 0)
+                               (ny most-positive-fixnum))
+  (let ((nunvalsi-.kuspe (make-nunvalsi cmene nastura porjahe)))
+    (define (javni-.kuspe porsi mapti namapti)
+      (let* ((poi (lerfu-porsi-poi porsi))
+             (zva (lerfu-porsi-zva porsi))
+             (fam (fx- (fx- (string-length poi) 1) zva)))
+        (if (fx>= fam my)
+            (let ((stali (min fam ny)))
+              (mapti (make-lerfu-porsi-pabalvi-valsi porsi stali)
+                     (nunvalsi-.kuspe (string-copy poi zva (fx+ zva stali)))))
+            (namapti porsi))))
+    (nunjavni-secuxna (lambda () "#\\.kuspe") javni-.kuspe)))
+
 (define (nunjavni-. #!key cmene nastura porjahe)
   (let ((nunvalsi-. (make-nunvalsi cmene nastura porjahe)))
     (define (javni-. porsi mapti namapti)

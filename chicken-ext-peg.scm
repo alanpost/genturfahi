@@ -41,6 +41,7 @@
    samselpla-jonai
    samselpla-.*
    samselpla-.+
+   samselpla-.kuspe
    samselpla-?
    samselpla-*
    samselpla-+

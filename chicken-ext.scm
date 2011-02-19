@@ -72,6 +72,7 @@
    nunjavni-lerfu
    nunjavni-.*
    nunjavni-.+
+   nunjavni-.kuspe
    nunjavni-.
    nunjavni-e
    nunjavni-nil
@@ -109,6 +110,7 @@
    morji-nunjavni-lerfu
    morji-nunjavni-.*
    morji-nunjavni-.+
+   morji-nunjavni-.kuspe
    morji-nunjavni-.
    morji-nunjavni-e
    morji-nunjavni-nil

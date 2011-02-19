@@ -185,6 +185,7 @@
           ((morji-nunjavni-lerfu
             morji-nunjavni-.*
             morji-nunjavni-.+
+            morji-nunjavni-.kuspe
             morji-nunjavni-.
             morji-nunjavni-e
             morji-nunjavni-nil
@@ -358,6 +359,23 @@
 
 (define (samselpla-.+ #!key cmene)
   `(morji-nunjavni-.+ ,@(if (string=? "" cmene) '() `(cmene: ,cmene))))
+
+(define (samselpla-.kuspe #!key cmene my slakabu ny)
+  ; if I have a single range with no comma, match exactly that many
+  ; times.
+  ;
+  (if (not (or slakabu (string=? "" my)))
+      (set! ny my))
+
+  `(morji-nunjavni-.kuspe ,@(if (string=? "" cmene)
+                                '()
+                                `(cmene: ,cmene))
+                          ,@(if (string=? "" my)
+                                '()
+                                `(my: ,(string->number my)))
+                          ,@(if (string=? "" ny)
+                                '()
+                               `(ny: ,(string->number ny)))))
 
 (define (samselpla-? #!key cmene javni)
   (define porsumti? (match javni

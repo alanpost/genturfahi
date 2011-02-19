@@ -66,6 +66,7 @@
 (define morji-nunjavni-lerfu      (nunmorji-nunjavni nunjavni-lerfu))
 (define morji-nunjavni-.*         (nunmorji-nunjavni nunjavni-.*))
 (define morji-nunjavni-.+         (nunmorji-nunjavni nunjavni-.+))
+(define morji-nunjavni-.kuspe     (nunmorji-nunjavni nunjavni-.kuspe))
 (define morji-nunjavni-.          (nunmorji-nunjavni nunjavni-.))
 (define morji-nunjavni-e          (nunmorji-nunjavni nunjavni-e))
 (define morji-nunjavni-nil        (nunmorji-nunjavni nunjavni-nil))
