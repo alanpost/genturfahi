@@ -26,14 +26,11 @@
     (girzu-test genturfahi-girzu)))
 
 (define (girzu-test genturfahi-girzu)
-  ; I currently only support detection and failure of left recursive
-  ; grammar.  These tests demonstrate that.
-  ;
   (test '(((#\a #\b #\c)
            (#\a #\b #\c)
            (#\a #\b #\c)) "")
          (genturfahi-girzu "abcabcabc"))
   0)
 
-(test-group "left recursion"
+(test-group "girzu"
   (girzu))
