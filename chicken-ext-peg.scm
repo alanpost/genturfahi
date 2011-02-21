@@ -62,7 +62,7 @@
    samselpla-stura-valsi-selci
    samselpla-valsi-selci
    samselpla-valsi-newline
-   samselpla-valsi-linefeed
+   samselpla-valsi-return
    samselpla-valsi-tab
    samselpla-valsi-page
    samselpla-valsi-backslash
@@ -100,7 +100,7 @@
    samselpla-^upper
    samselpla-^xdigit
    samselpla-klesi-newline
-   samselpla-klesi-linefeed
+   samselpla-klesi-return
    samselpla-klesi-tab
    samselpla-klesi-page
    samselpla-klesi-lbracket

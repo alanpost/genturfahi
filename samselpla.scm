@@ -584,8 +584,8 @@
 (define (samselpla-valsi-newline)
   "\n")
 
-(define (samselpla-valsi-linefeed)
-  (make-string 1 #\linefeed))
+(define (samselpla-valsi-return)
+  (make-string 1 #\return))
 
 (define (samselpla-valsi-tab)
   (make-string 1 #\tab))
@@ -719,8 +719,8 @@
 (define (samselpla-klesi-newline)
   #\newline)
 
-(define (samselpla-klesi-linefeed)
-  #\linefeed)
+(define (samselpla-klesi-return)
+  #\return)
 
 (define (samselpla-klesi-tab)
   #\tab)

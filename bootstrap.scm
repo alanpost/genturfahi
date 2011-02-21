@@ -706,7 +706,7 @@
                     porjahe:
                     #t))
                 (morji-nunjavni-samselpla
-                  samselpla-valsi-linefeed
+                  samselpla-valsi-return
                   (morji-nunjavni-je
                     (list (morji-nunjavni-lerfu #\\)
                           (morji-nunjavni-lerfu #\r))
@@ -950,7 +950,7 @@
                     porjahe:
                     #t))
                 (morji-nunjavni-samselpla
-                  samselpla-klesi-linefeed
+                  samselpla-klesi-return
                   (morji-nunjavni-je
                     (list (morji-nunjavni-lerfu #\\)
                           (morji-nunjavni-lerfu #\r))

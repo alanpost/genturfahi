@@ -218,7 +218,7 @@ valsi-selci     <- ",\"\""
                    canlu
                 -> samselpla-valsi-selci
 valsi-lerfu     <- #\\ #\n        -> samselpla-valsi-newline
-                 / #\\ #\r        -> samselpla-valsi-linefeed
+                 / #\\ #\r        -> samselpla-valsi-return
                  / #\\ #\t        -> samselpla-valsi-tab
                  / #\\ #\f        -> samselpla-valsi-page
                  / #\\ #\\        -> samselpla-valsi-backslash
@@ -272,7 +272,7 @@ klesi-cmene     <- "[:alnum:]"   -> samselpla-alnum
                  / "[:^upper:]"  -> samselpla-^upper
                  / "[:^xdigit:]" -> samselpla-^xdigit
 klesi-binxo     <- #\\ #\n       -> samselpla-klesi-newline
-                 / #\\ #\r       -> samselpla-klesi-linefeed
+                 / #\\ #\r       -> samselpla-klesi-return
                  / #\\ #\t       -> samselpla-klesi-tab
                  / #\\ #\f       -> samselpla-klesi-page
                  / #\\ #\[       -> samselpla-klesi-lbracket
