@@ -30,95 +30,51 @@
   (eq? secuxna-nastura javni))
 
 (define (javni-valsi-val javni-valsi)
-  (let ((val (javni-valsi-val* javni-valsi)))
-    (if (javni-nastura? val)
-        '()
-        val)))
+  (if (javni-nastura? javni-valsi)
+      '()
+      javni-valsi))
 
-(define (javni-nunvalsi-val* nunvalsi)
-  (javni-valsi-val* (nunvalsi)))
+;; When we have multiple incoming valsi, but we're producing a
+;; single valsi as a result.
+;;
+(define (javni-rodavalsi rodavalsi)
+  (remove javni-nastura? rodavalsi))
 
-(define (javni-nunvalsi-val nunvalsi)
-  (javni-valsi-val (nunvalsi)))
+(define (javni-rodavalsi-girzu rodavalsi)
+  (let* ((jalge (remove javni-nastura? rodavalsi)))
+    (if (null? jalge) secuxna-nastura jalge)))
 
-(define (javni-rodanunvalsi-val rodanunvalsi)
-  (javni-rodavalsi-val (map (lambda (nunvalsi) (nunvalsi)) rodanunvalsi)))
-
-(define (javni-rodanunvalsi-*-val rodanunvalsi)
-  (remove javni-nastura?
-          (map (lambda (nunvalsi) (javni-rodavalsi-je-val (nunvalsi)))
-               rodanunvalsi)))
-
-(define (javni-rodanunvalsi-je-val rodanunvalsi)
-  (javni-rodavalsi-je-val (map (lambda (nunvalsi) (nunvalsi)) rodanunvalsi)))
-
-
-(define (javni-rodavalsi-val rodavalsi)
-  (define (vejmina javni-valsi)
-    (if (list? javni-valsi)
-        (append-map vejmina javni-valsi)
-        `(,javni-valsi)))
-
-  (let* ((rodavalsi (append-map vejmina rodavalsi))
-         (rodaval   (map javni-valsi-val* rodavalsi)))
-    (call-with-values
-      ; remove non-structure elements
-      (lambda () (partition javni-nastura? rodaval))
-
-      (lambda (nastura jalge)
-        (if (null? jalge)
-            secuxna-nastura
-            jalge)))))
 
 ;; A routine used by the nunjavni-je procedure.  It returns
 ;; a single element if there is only one nastura in the result
 ;; list.
 ;;
-(define (javni-rodavalsi-je-val rodavalsi)
-  (define (vejmina javni-valsi)
-    (if (list? javni-valsi)
-        (append-map vejmina javni-valsi)
-        `(,javni-valsi)))
+(define (javni-rodavalsi-je rodavalsi)
+  (let* ((jalge (remove javni-nastura? rodavalsi)))
+    ; if we *only* have nastura elements, return
+    ; a secuxna-nastura token.
+    ;
+    ; if there is only one element in the list,
+    ; assume the others were secuxna-nastura and
+    ; convert the list to a single element.
+    ;
+    ; otherwise, return the result list.
+    ;
+    (if (null? jalge)
+        secuxna-nastura
+        (if (null? (cdr jalge))
+            (car jalge)
+            jalge))))
 
-  (let* ((rodavalsi (append-map vejmina rodavalsi))
-         (rodaval   (map javni-valsi-val* rodavalsi)))
-    (call-with-values
-      ; remove non-structure elements
-      (lambda () (partition javni-nastura? rodaval))
+(define (javni-rodavalsi-* rodavalsi)
+  (remove javni-nastura? (map javni-rodavalsi-je rodavalsi)))
 
-      (lambda (nastura jalge)
-        ; if we *only* have nastura elements, return
-        ; a secuxna-nastura token.
-        ;
-        ; if there is only one element in the list,
-        ; assume the others were secuxna-nastura and
-        ; convert the list to a single element.
-        ;
-        ; otherwise, return the result list.
-        ;
-        (if (null? jalge)
-            secuxna-nastura
-            (if (null? (cdr jalge))
-                (car jalge)
-                jalge))))))
 
 ;; A routine used by the nunjavni-samselpla procedure.  It returns
 ;; a null list rather than a |secuxna-nastura| procedure.
 ;;
-(define (javni-rodavalsi-samselpla-val rodavalsi)
-  (define (vejmina javni-valsi)
-    (if (list? javni-valsi)
-        (append-map vejmina javni-valsi)
-        `(,javni-valsi)))
-
-  (let* ((rodavalsi (append-map vejmina rodavalsi))
-         (rodaval   (map javni-valsi-val* rodavalsi)))
-    (call-with-values
-      ; remove non-structure elements
-      (lambda () (partition javni-nastura? rodaval))
-
-      (lambda (nastura jalge)
-        jalge))))
+(define (javni-rodavalsi-samselpla rodavalsi)
+  (remove javni-nastura? rodavalsi))
 
 (define (javni-valsi->string valsi)
   (format "{cmene:~a valsi:~s}"

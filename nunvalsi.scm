@@ -26,24 +26,20 @@
 ;; appropriate constructor, depending on that flag.
 ;;
 (define (make-nunvalsi cmene nastura porjahe)
-  (match `(,nastura ,porjahe)
-    ((#t #t) (lambda (ignore-valsi)
-               (lambda () `(,(make-javni-valsi cmene secuxna-nastura)))))
-    ((#t #f) (lambda (ignore-valsi)
-               (lambda () (make-javni-valsi cmene secuxna-nastura))))
-    ((#f #t) (lambda (valsi)
-               (lambda () `(,(make-javni-valsi cmene valsi)))))
-    ((#f #f) (lambda (valsi)
-               (lambda () (make-javni-valsi cmene valsi))))))
+  (match `(,cmene ,nastura ,porjahe)
+    ((_  #t #t) (lambda (ignore-valsi) `(,secuxna-nastura)))
+    ((_  #t #f) (lambda (ignore-valsi) secuxna-nastura))
+    ((#f #f #t) (lambda (valsi) `(,valsi)))
+    ((_  #f #t) (lambda (valsi) `(,(make-javni-valsi cmene valsi))))
+    ((#f #f #f) (lambda (valsi) valsi))
+    ((_  #f #f) (lambda (valsi) (make-javni-valsi cmene valsi)))))
 
 
 ;; predicate rules (& and !) don't have names and never modify the
 ;; tree.  We sometimes do want to return lists, however.
 ;;
 (define (make-nunvalsi-predicate porjahe)
-  (match porjahe
-    (#t (lambda () `(,(make-javni-valsi #f secuxna-nastura))))
-    (#f (lambda () (make-javni-valsi #f secuxna-nastura)))))
+  (if porjahe `(,secuxna-nastura) secuxna-nastura))
 
 
 ;; non-terminal rules are given a nunvalsi, rather than a valsi.
@@ -51,80 +47,86 @@
 ;; the name, ignoring the token, &c.
 ;;
 (define (venunjmina-nunvalsi cmene nastura porjahe porsumti)
-  (match `(,nastura ,porjahe ,porsumti)
-    ((#t #t (or #t #f)) (lambda (ignore-nunvalsi)
-                          (lambda ()
-                            `(,(make-javni-valsi cmene secuxna-nastura)))))
-    ((#t #f (or #t #f)) (lambda (ignore-nunvalsi)
-                          (lambda ()
-                            (make-javni-valsi cmene secuxna-nastura))))
 
-    ((#f #t #t) (lambda (nunvalsi)
-                  nunvalsi))
-    ((#f #t #f) (lambda (nunvalsi)
-                  (lambda ()
-                    `(,(make-javni-valsi cmene
-                                         (javni-nunvalsi-val* nunvalsi))))))
-    ((#f #f #t) (lambda (nunvalsi)
-                  (lambda ()
-                    (make-javni-valsi cmene
-                                      (javni-rodavalsi-val (nunvalsi))))))
-    ((#f #f #f) (lambda (nunvalsi)
-                  (lambda ()
-                    (make-javni-valsi cmene
-                                      (javni-nunvalsi-val* nunvalsi)))))))
+  (match `(,cmene ,nastura ,porjahe ,porsumti)
+    ; ignore cmene, it can't be combined with secuxna-nastura
+    ;
+    ((_  #t #t (or #t #f)) (lambda (ignore-valsi) `(,secuxna-nastura)))
+    ((_  #t #f (or #t #f)) (lambda (ignore-valsi) secuxna-nastura))
+
+    ; XXX: a cmene is not valid when returning a list?  Or I should
+    ;      return a list with a single named element?
+    ((#f #f #t #t) (lambda (rodavalsi) (remove javni-nastura? rodavalsi)))
+    ((_  #f #t #t) (lambda (rodavalsi) (remove javni-nastura? rodavalsi)))
+
+    ((#f #f #t #f) (lambda (valsi) `(,valsi)))
+    ((_  #f #t #f) (lambda (valsi) `(,(make-javni-valsi cmene valsi))))
+
+    ((#f #f #f #t) (lambda (rodavalsi)
+                     (javni-rodavalsi-girzu rodavalsi)))
+    ((_  #f #f #t) (lambda (rodavalsi)
+                     (make-javni-valsi cmene
+                                       (javni-rodavalsi-girzu rodavalsi))))
+
+    ((#f #f #f #f) (lambda (valsi) valsi))
+    ((_  #f #f #f) (lambda (valsi) (make-javni-valsi cmene valsi)))))
 
 
 ;; merge multiple nunvalsi with or without a cmene
 ;;
-(define (venunjmina-rodanunvalsi-* cmene nastura porjahe porsumti)
-  (match `(,nastura ,porjahe ,porsumti)
-    ((#t #t (or #t #f)) (lambda (ignore-rodanunvalsi)
-                          (lambda ()
-                            `(,(make-javni-valsi cmene secuxna-nastura)))))
-    ((#t #f (or #t #f)) (lambda (ignore-rodanunvalsi)
-                           (lambda ()
-                             (make-javni-valsi cmene secuxna-nastura))))
-    ((#f #t #t) (lambda (rodanunvalsi)
-                  (lambda ()
-                    `(,(make-javni-valsi
-                         cmene
-                         (javni-rodanunvalsi-*-val rodanunvalsi))))))
-    ((#f #t #f) (lambda (rodanunvalsi)
-                  (lambda ()
-                    `(,(make-javni-valsi
-                         cmene
-                         (javni-rodanunvalsi-val rodanunvalsi))))))
-    ((#f #f #t) (lambda (rodanunvalsi)
-                  (lambda ()
-                    (make-javni-valsi
-                      cmene
-                      (javni-rodanunvalsi-*-val rodanunvalsi)))))
-    ((#f #f #f) (lambda (rodanunvalsi)
-                  (lambda ()
-                    (make-javni-valsi
-                      cmene
-                      (javni-rodanunvalsi-val rodanunvalsi)))))))
+(define (venunjmina-rodavalsi-* cmene nastura porjahe porsumti)
+  (match `(,cmene ,nastura ,porjahe ,porsumti)
+    ((_  #t #t (or #t #f)) (lambda (ignore-rodavalsi) `(,secuxna-nastura)))
+    ((_  #t #f (or #t #f)) (lambda (ignore-rodavalsi) secuxna-nastura))
+
+    ((#f #f #t #t) (lambda (rodavalsi) `(,(javni-rodavalsi-* rodavalsi))))
+    ((_  #f #t #t) (lambda (rodavalsi)
+                     `(,(make-javni-valsi
+                          cmene
+                          (javni-rodavalsi-* rodavalsi)))))
+
+    ((#f #f #t #f) (lambda (rodavalsi) `(,(javni-rodavalsi rodavalsi))))
+    ((_  #f #t #f) (lambda (rodavalsi)
+                     `(,(make-javni-valsi
+                          cmene
+                          (javni-rodavalsi rodavalsi)))))
+
+    ((#f #f #f #t) (lambda (rodavalsi) (javni-rodavalsi-* rodavalsi)))
+    ((_  #f #f #t) (lambda (rodavalsi)
+                     (make-javni-valsi
+                       cmene
+                       (javni-rodavalsi-* rodavalsi))))
+
+    ((#f #f #f #f) (lambda (rodavalsi) (javni-rodavalsi rodavalsi)))
+    ((_  #f #f #f) (lambda (rodavalsi)
+                     (make-javni-valsi
+                       cmene
+                       (javni-rodavalsi rodavalsi))))))
 
 
-(define (venunjmina-rodanunvalsi-je cmene nastura porjahe ignore-porsumti)
-  (match `(,nastura ,porjahe)
-    ((#t #t) (lambda (ignore-rodanunvalsi)
-               (lambda ()
-                 `(,(make-javni-valsi cmene secuxna-nastura)))))
-    ((#t #f) (lambda (ignore-rodanunvalsi)
-               (lambda ()
-                 (make-javni-valsi cmene secuxna-nastura))))
+(define (venunjmina-rodavalsi-je cmene nastura porjahe porsumti)
+  (match `(,cmene ,nastura ,porjahe ,porsumti)
+    ((_  #t #t (or #t #f)) (lambda (ignore-rodavalsi) `(,secuxna-nastura)))
+    ((_  #t #f (or #t #f)) (lambda (ignore-rodavalsi) secuxna-nastura))
 
-             ; cmene is ignored in this case.
-    ((#f #t) (lambda (rodanunvalsi)
-               (lambda ()
-                 (map (lambda (nunvalsi) (nunvalsi)) rodanunvalsi))))
-    ((#f #f) (lambda (rodanunvalsi)
-               (lambda ()
-                 (make-javni-valsi
-                   cmene
-                   (javni-rodanunvalsi-je-val rodanunvalsi)))))))
+                   ; cmene is ignored in this case.
+    ((_  #f #t #t) (lambda (rodavalsi) (apply append rodavalsi)))
+    ((_  #f #t #f) (lambda (rodavalsi) rodavalsi))
+
+    ((#f #f #f #t) (lambda (rodavalsi)
+                     (javni-rodavalsi-je (apply append rodavalsi))))
+    ((#f #f #f #f) (lambda (rodavalsi)
+                     (javni-rodavalsi-je rodavalsi)))
+
+    ((_  #f #f #t) (lambda (rodavalsi)
+                     (make-javni-valsi
+                       cmene
+                       (javni-rodavalsi-je (apply append rodavalsi)))))
+    ((_  #f #f #f) (lambda (rodavalsi)
+                     (make-javni-valsi
+                       cmene
+                       (javni-rodavalsi-je rodavalsi))))))
+
 
 
 ;; called when the choice is between returning the default and the
@@ -145,8 +147,7 @@
                        n)))))
 
   (let* ((val         (if nastura secuxna-nastura default))
-         (javni-valsi (if ni (repeat ni (make-javni-valsi cmene val))
-                             (make-javni-valsi cmene val))))
-    (if porjahe
-        (lambda () `(,javni-valsi))
-        (lambda () javni-valsi))))
+         (jalge       (if cmene (make-javni-valsi cmene val) val)))
+    ; repeat acts like a porjahe flag, don't apply it twice.
+    (if ni (repeat ni jalge)
+           (if porjahe `(,jalge) jalge))))

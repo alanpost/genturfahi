@@ -227,10 +227,10 @@
 ;; zero-or-more: parse zero or more javni out of the |lerfu-porsi|.
 ;;
 (define (nunjavni-* javni #!key cmene nastura porjahe porsumti (default '()))
-  (let ((vejmina   (venunjmina-rodanunvalsi-* cmene
-                                              nastura
-                                              porjahe
-                                              porsumti))
+  (let ((vejmina   (venunjmina-rodavalsi-* cmene
+                                           nastura
+                                           porjahe
+                                           porsumti))
         (novejmina (novejmina-nunvalsi cmene nastura porjahe default #f)))
     (define (suhopa-javni-* porsi
                             zvati
@@ -341,10 +341,10 @@
                                     (default '())
                                     (my 0)
                                     (ny most-positive-fixnum))
-  (let ((vejmina (venunjmina-rodanunvalsi-* cmene
-                                            nastura
-                                            porjahe
-                                            porsumti))
+  (let ((vejmina (venunjmina-rodavalsi-* cmene
+                                         nastura
+                                         porjahe
+                                         porsumti))
         (novejmina (novejmina-nunvalsi cmene nastura porjahe default #f)))
     (define (suhopa-javni-kuspe porsi
                                 zvati
@@ -485,7 +485,7 @@
 ;;           if any of the do not match, none of them match.
 ;;
 (define (nunjavni-je rodajavni #!key cmene nastura porjahe porsumti)
-  (let ((vejmina (venunjmina-rodanunvalsi-je cmene nastura porjahe porsumti)))
+  (let ((vejmina (venunjmina-rodavalsi-je cmene nastura porjahe porsumti)))
     (define (javni-je porsi
                       zvati
                       mapti
@@ -576,7 +576,7 @@
 (define (nunjavni-porjahe javni)
   (define (javni-porjahe porsi zvati mapti namapti)
     (define (mapti-porjahe porsi zvati nunvalsi)
-      (mapti porsi zvati (lambda () `(,(nunvalsi)))))
+      (mapti porsi zvati `(,nunvalsi)))
 
     (javni porsi zvati mapti-porjahe namapti))
 
@@ -665,34 +665,24 @@
         (define (samselpla-sumti rodavalsi)
           (call-with-values
             (lambda ()
-              (define (vejmina javni-valsi)
-                (if (list? javni-valsi)
-                    (append-map vejmina javni-valsi)
-                    `(,javni-valsi)))
-
-              (let ((rodavalsi (append-map vejmina rodavalsi)))
-                (partition (lambda (javni) (javni-valsi-cme javni)) rodavalsi)))
+              (partition javni-valsi? rodavalsi))
           
             (lambda (cmesumti sumti)
               (let ((key (append-map
                            (lambda (javni)
                              (let ((cme (javni-valsi-cme javni))
                                    (val (javni-valsi-val* javni)))
-                               (if (javni-nastura? val)
-                                   '()
-                                   `(,(string->keyword cme) ,val))))
+                               `(,(string->keyword cme) ,val)))
                            cmesumti))
-                    (rest (javni-rodavalsi-samselpla-val sumti)))
+                    (rest (javni-rodavalsi-samselpla sumti)))
                 (append rest key)))))
 
         (define (samselpla-nunvalsi)
-          (let* ((rodavalsi (nunvalsi))
-                 (rodaval   (samselpla-sumti rodavalsi))
+          (let* ((rodaval   (samselpla-sumti nunvalsi))
                  (valsi     (apply samselpla rodaval)))
-             ; call the generator immediately.
-             ((nunvalsi-samselpla valsi))))
+             (nunvalsi-samselpla valsi)))
 
-        (mapti porsi zvati samselpla-nunvalsi))
+        (mapti porsi zvati (samselpla-nunvalsi)))
 
       (javni porsi zvati mapti-samselpla namapti))
     javni-samselpla))
@@ -703,12 +693,11 @@
                                                        porjahe: porjahe)))
     (define (javni-samselpla-cabna porsi zvati mapti namapti)
       (define (mapti-samselpla-cabna mapti-porsi mapti-zvati nunvalsi)
-        (let ((val (javni-nunvalsi-val* nunvalsi)))
-          (if (eq? (secuxna-nonmatch-token) val)
-              (namapti porsi zvati)
-              (mapti mapti-porsi
-                     mapti-zvati
-                     (nunvalsi-samselpla-cabna val)))))
+        (if (eq? (secuxna-nonmatch-token) nunvalsi)
+            (namapti porsi zvati)
+            (mapti mapti-porsi
+                   mapti-zvati
+                   (nunvalsi-samselpla-cabna nunvalsi))))
 
       (javni-samselpla porsi zvati mapti-samselpla-cabna namapti))
     javni-samselpla-cabna))
@@ -719,7 +708,7 @@
       (define (mapti-cmene porsi zvati nunvalsi)
         (mapti porsi
                zvati
-               (nunvalsi-cmene (javni-nunvalsi-val* nunvalsi))))
+               (nunvalsi-cmene nunvalsi)))
       (javni porsi zvati mapti-cmene namapti))
     javni-cmene))
 

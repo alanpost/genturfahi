@@ -45,14 +45,11 @@
    javni-nastura?
 
    javni-valsi-val
-   javni-rodavalsi-val
-   javni-rodavalsi-je-val
-   javni-rodavalsi-samselpla-val
-   javni-nunvalsi-val*
-   javni-nunvalsi-val
-   javni-rodanunvalsi-val
-   javni-rodanunvalsi-*-val
-   javni-rodanunvalsi-je-val
+   javni-rodavalsi
+   javni-rodavalsi-girzu
+   javni-rodavalsi-je
+   javni-rodavalsi-*
+   javni-rodavalsi-samselpla
 
    javni-valsi->string
 
@@ -131,8 +128,8 @@
    make-nunvalsi
    make-nunvalsi-predicate
    venunjmina-nunvalsi
-   venunjmina-rodanunvalsi-*
-   venunjmina-rodanunvalsi-je
+   venunjmina-rodavalsi-*
+   venunjmina-rodavalsi-je
    novejmina-nunvalsi
 
 

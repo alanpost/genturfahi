@@ -41,11 +41,7 @@
           (lambda (port)
             (pretty-print (junla-datni) port)))))
 
-  ; generate the genturfa'i valsi.  Calling |nunvalsi| here
-  ; is where all of the samselpla specified in
-  ; |nunjavni-samselpla| executes.
-  ;
-  (define (mapti porsi zvati nunvalsi)
+  (define (mapti porsi zvati valsi)
     ; always clear memoizations, which aren't valid when we get
     ; a new |porsi|.
     (genturfahi-tolmohi)
@@ -53,7 +49,7 @@
     (cfisisku) ; if debugging is enabled, output the debugging report.
     (junla)    ; if profiling is enabled, output the profiling report.
 
-    (values (javni-nunvalsi-val nunvalsi)
+    (values (javni-valsi-val valsi)
             (lerfu-porsi-string porsi zvati)))
 
   (define (namapti porsi zvati)
@@ -67,14 +63,14 @@
     ; set the exit status
     (secuxna-exit-status 1)
 
-    (values (secuxna-nonmatch-token) (lerfu-porsi-string porsi)))
+    (values (secuxna-nonmatch-token) (lerfu-porsi-string porsi zvati)))
 
   (lambda (lefpoi)
     (let ((porsi (if (port? lefpoi)
                      (make-lerfu-porsi-port lefpoi)
                      (make-lerfu-porsi-string lefpoi))))
-      (genturfahi-semorji (string-length (lerfu-porsi-poi porsi)))
-      (javni porsi mapti namapti))))
+      (genturfahi-semorji (string-length porsi))
+      (javni porsi 0 mapti namapti))))
 
 (define (genturfahi* javni)
   (let ((gerna (genturfahi javni)))

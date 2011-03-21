@@ -88,11 +88,13 @@
                                 (list x-4 y-5 (morji-nunjavni-nastura z-6))
                                 porjahe:
                                 #t))
-                        porjahe:
-                        #t
                         porsumti:
+                        #t
+                        porjahe:
                         #t)
-                      (morji-nunjavni-nastura x-4))
+                      (morji-nunjavni-nastura x-4 porjahe: #t))
+                porsumti:
+                #t
                 porjahe:
                 #t))))
         (define a-9
@@ -126,8 +128,8 @@
               test-je-quote-lerfu
               (morji-nunjavni-lerfu #\z nastura: #f porjahe: #t))))
         (tolmohi-nunjavni)
-        (nunjavni-secuxna (lambda () "je") je-8))))
-      (genturfahi* gerna))))
+        je-7)))
+          (genturfahi* gerna))))
     (je-quote-test genturfahi-je-quote)))
 
 (define (je-quote-peg)

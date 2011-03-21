@@ -157,7 +157,7 @@ kuspe           <- #:cmene cmene-sumti?
                    #\{ canlu
                    #:my namcu? ( #:slakabu ,#\, canlu )? #:ny namcu?
                    #\} canlu
-                -> {samselpla-kuspe}
+                -> samselpla-kuspe
 and-predicate   <- #\&
                    canlu
                    #:javni selci-javni

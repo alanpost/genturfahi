@@ -56,18 +56,24 @@
                       (morji-nunjavni-jonai
                         (list (morji-nunjavni-porjahe digit-1)
                               (morji-nunjavni-porjahe alpha-2))
-                        porjahe:
-                        #t
                         porsumti:
-                        #t))
-                    FAhO-3))))
+                        #t
+                        porjahe:
+                        #t)
+                      porsumti:
+                      #t
+                      porjahe:
+                      #t)
+                    (morji-nunjavni-porjahe FAhO-3))
+              porsumti:
+              #t)))
         (define digit-6
           (nunjavni-morji (morji-nunjavni-char-set-+ char-set:digit)))
         (define alpha-7
           (nunjavni-morji (morji-nunjavni-char-set-+ char-set:letter)))
         (define FAhO-8 (morji-nunjavni-fanmo))
         (tolmohi-nunjavni)
-        (nunjavni-secuxna (lambda () "gerna") gerna-5))))
+        gerna-4)))
       (genturfahi* gerna))))
     (lerfu-klesi-test genturfahi-lerfu-klesi)))
 

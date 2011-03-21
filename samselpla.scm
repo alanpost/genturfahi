@@ -269,9 +269,15 @@
       ; still might treat it differently.
       ;
       (define (nunpavjavni javni)
-        (if pavjavni?
-            (car javni)
-            `(morji-nunjavni-je (list ,@javni))))
+        (let ((javni (if pavjavni?
+                         (car javni)
+                         `(morji-nunjavni-je (list ,@javni)))))
+
+          ; if our rules are returning lists, join them together.
+          ;
+          (if (and porsumti? (not pavjavni?))
+              `(,@javni porsumti: #t)
+              javni)))
 
       ; if we have code to attach, do that.  The routine returning
       ; to the code must have porjahe set to true, but that might
@@ -340,6 +346,11 @@
       ((_ ... 'porjahe: #t)         javni)
       (_                            `(,@javni porjahe: #t))))
 
+  ; check for an existing porsumti #!key before writing one.
+  ;
+  (define (porsumti? sumti jalge)
+    (or jalge (match sumti (`(porsumti: #t . ,_) #t) (_ #f))))
+
   (match javni
     (((or 'morji-nunjavni-je
           'morji-nunjavni-jonai) . _)
@@ -347,7 +358,8 @@
      `(,(car javni)
        (list ,@(map (lambda (javni) (porjahe javni)) (cdadr javni)))
        ,@(cddr javni)
-       porsumti: #t))
+       ; set the porsumti flag, unless it has been set already.
+       ,@(if (pair-fold porsumti? #f (cddr javni)) '() '(porsumti: #t))))
 
     ; anything else means the () was optional, and can be skipped.
     ;
