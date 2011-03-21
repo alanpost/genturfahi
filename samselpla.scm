@@ -203,8 +203,8 @@
     (list `(define ,symbol-nunselci
              (nunjavni-secuxna
                (lambda () ,naselci)
-                 (lambda (porsi mapti namapti)
-                   (,symbol porsi mapti namapti))))
+                 (lambda (porsi zvati mapti namapti)
+                   (,symbol porsi zvati mapti namapti))))
 
           ; inner let (which stores grammar rules)
           ;

@@ -25,11 +25,10 @@
 ;;
 (define (nunjavni-lerfu lerfu #!key cmene (nastura #t) porjahe)
   (let ((nunvalsi-lerfu (make-nunvalsi cmene nastura porjahe)))
-    (define (javni-lerfu porsi mapti namapti)
-      (if (char=? lerfu (lerfu-porsi-lerfu porsi))
-          (mapti (make-lerfu-porsi-pabalvi-lerfu porsi)
-                 (nunvalsi-lerfu lerfu))
-          (namapti porsi)))
+    (define (javni-lerfu porsi zvati mapti namapti)
+      (if (char=? lerfu (string-ref porsi zvati))
+          (mapti porsi (fx+ 1 zvati) (nunvalsi-lerfu lerfu))
+          (namapti porsi zvati)))
     (nunjavni-secuxna
       (lambda ()
         (string-append "#\\" (make-string 1 lerfu)))
@@ -40,18 +39,20 @@
 ;;
 (define (nunjavni-.* #!key cmene nastura porjahe)
   (let ((nunvalsi-.* (make-nunvalsi cmene nastura porjahe)))
-    (define (javni-.* porsi mapti ignore-namapti)
-      (mapti (make-lerfu-porsi-fanmo porsi)
-             (nunvalsi-.* (lerfu-porsi-string porsi))))
+    (define (javni-.* porsi zvati mapti ignore-namapti)
+      (mapti porsi
+             (fx- (string-length porsi) 1)
+             (nunvalsi-.* (lerfu-porsi-string porsi zvati))))
     (nunjavni-secuxna (lambda () "#\\.*") javni-.*)))
 
 (define (nunjavni-.+ #!key cmene nastura porjahe)
   (let ((nunvalsi-.+ (make-nunvalsi cmene nastura porjahe)))
-    (define (javni-.+ porsi mapti namapti)
-      (if (lerfu-porsi-fanmo? porsi)
-          (namapti porsi)
-          (mapti (make-lerfu-porsi-fanmo porsi)
-                 (nunvalsi-.+ (lerfu-porsi-string porsi)))))
+    (define (javni-.+ porsi zvati mapti namapti)
+      (if (lerfu-porsi-fanmo? porsi zvati)
+          (namapti porsi zvati)
+          (mapti porsi
+                 (fx- (string-length porsi) 1)
+                 (nunvalsi-.+ (lerfu-porsi-string porsi zvati)))))
     (nunjavni-secuxna (lambda () "#\\.+") javni-.+)))
 
 (define (nunjavni-.kuspe #!key cmene
@@ -60,24 +61,24 @@
                                (my 0)
                                (ny most-positive-fixnum))
   (let ((nunvalsi-.kuspe (make-nunvalsi cmene nastura porjahe)))
-    (define (javni-.kuspe porsi mapti namapti)
-      (let* ((poi (lerfu-porsi-poi porsi))
-             (zva (lerfu-porsi-zva porsi))
-             (fam (fx- (fx- (string-length poi) 1) zva)))
+    (define (javni-.kuspe porsi zvati mapti namapti)
+      (let ((fam (fx- (fx- (string-length porsi) 1) zvati)))
         (if (fx>= fam my)
             (let ((stali (min fam ny)))
-              (mapti (make-lerfu-porsi-pabalvi-valsi porsi stali)
-                     (nunvalsi-.kuspe (string-copy poi zva (fx+ zva stali)))))
-            (namapti porsi))))
+              (mapti porsi
+                     (fx+ zvati stali)
+                     (nunvalsi-.kuspe (string-copy porsi
+                                                   zvati
+                                                   (fx+ zvati stali)))))
+            (namapti porsi zvati))))
     (nunjavni-secuxna (lambda () "#\\.kuspe") javni-.kuspe)))
 
 (define (nunjavni-. #!key cmene nastura porjahe)
   (let ((nunvalsi-. (make-nunvalsi cmene nastura porjahe)))
-    (define (javni-. porsi mapti namapti)
-      (if (lerfu-porsi-fanmo? porsi)
-          (namapti porsi)
-          (mapti (make-lerfu-porsi-pabalvi-lerfu porsi)
-                 (nunvalsi-. (lerfu-porsi-lerfu porsi)))))
+    (define (javni-. porsi zvati mapti namapti)
+      (if (lerfu-porsi-fanmo? porsi zvati)
+          (namapti porsi zvati)
+          (mapti porsi (fx+ 1 zvati) (nunvalsi-.  (string-ref porsi zvati)))))
     (nunjavni-secuxna (lambda () "#\\.") javni-.)))
 
 
@@ -86,8 +87,8 @@
 ;;
 (define (nunjavni-e #!key cmene (nastura #t) porjahe (empty-string ""))
   (let ((nunvalsi-e (make-nunvalsi cmene nastura porjahe)))
-    (define (javni-e porsi mapti ignore-namapti)
-      (mapti porsi (nunvalsi-e empty-string)))
+    (define (javni-e porsi zvati mapti ignore-namapti)
+      (mapti porsi zvati (nunvalsi-e empty-string)))
     (nunjavni-secuxna (lambda () (make-string 2 #\")) javni-e)))
 
 
@@ -96,8 +97,8 @@
 ;;
 (define (nunjavni-nil #!key cmene nastura porjahe (empty-list '()))
   (let ((nunvalsi-nil (make-nunvalsi cmene nastura porjahe)))
-    (define (javni-nil porsi mapti ignore-namapti)
-      (mapti porsi (nunvalsi-nil empty-list)))
+    (define (javni-nil porsi zvati mapti ignore-namapti)
+      (mapti porsi zvati (nunvalsi-nil empty-list)))
     (nunjavni-secuxna (lambda () "()") javni-nil)))
 
 
@@ -108,10 +109,10 @@
 ;;
 (define (nunjavni-fanmo #!key cmene (nastura #t) porjahe (sentinel #\nul))
   (let ((nunvalsi-fanmo (make-nunvalsi cmene nastura porjahe)))
-    (define (javni-fanmo porsi mapti namapti)
-      (if (lerfu-porsi-fanmo? porsi)
-          (mapti porsi (nunvalsi-fanmo sentinel))
-          (namapti porsi)))
+    (define (javni-fanmo porsi zvati mapti namapti)
+      (if (lerfu-porsi-fanmo? porsi zvati)
+          (mapti porsi zvati (nunvalsi-fanmo sentinel))
+          (namapti porsi zvati)))
   (nunjavni-secuxna (lambda () "!.") javni-fanmo)))
 
 
@@ -120,18 +121,15 @@
 (define (nunjavni-valsi valsi #!key cmene (nastura #t) porjahe)
   (let ((nilcla (string-length valsi))
         (nunvalsi-valsi (make-nunvalsi cmene nastura porjahe)))
-    (define (javni-valsi porsi mapti namapti)
-      (let ((poi (lerfu-porsi-poi porsi))
-            (zva (lerfu-porsi-zva porsi)))
-        (if (string-prefix? valsi
-                            poi
-                            0
-                            nilcla
-                            zva
-                            (fx- (string-length poi) 1))
-            (mapti (make-lerfu-porsi-pabalvi-valsi porsi nilcla)
-                   (nunvalsi-valsi valsi))
-            (namapti porsi))))
+    (define (javni-valsi porsi zvati mapti namapti)
+      (if (string-prefix? valsi
+                          porsi
+                          0
+                          nilcla
+                          zvati
+                          (fx- (string-length porsi) 1))
+          (mapti porsi (fx+ zvati nilcla) (nunvalsi-valsi valsi))
+          (namapti porsi zvati)))
     (nunjavni-secuxna
       (lambda ()
         (string-append (make-string 1 #\") valsi (make-string 1 #\")))
@@ -141,21 +139,24 @@
 (define (nunjavni-char-set-* char-set #!key cmene nastura porjahe)
   (let ((nunvalsi-char-set-* (make-nunvalsi cmene nastura porjahe)))
     (define (javni-char-set-* porsi
+                              cfari-zvati
                               mapti
                               ignore-namapti
-                              #!optional (poi (lerfu-porsi-poi porsi))
-                                         (zva (lerfu-porsi-zva porsi)))
-      (define (mapti-char-set-* zva)
-        (let ((puzva (lerfu-porsi-zva porsi)))
-          (mapti (make-lerfu-porsi-pabalvi-valsi porsi (fx- zva puzva))
-                 (nunvalsi-char-set-* (string-copy poi puzva zva)))))
+                                         ; if we're matching one or
+                                         ; more, this will be advanced
+                                         ; by one.
+                              #!optional (zvati cfari-zvati))
+      (define (mapti-char-set-* zvati)
+        (mapti porsi
+               zvati
+               (nunvalsi-char-set-* (string-copy porsi cfari-zvati zvati))))
 
-      (define (char-set-* poi zva)
-        (if (char-set-contains? char-set (string-ref poi zva))
-            (char-set-* poi (fx+ 1 zva))
-            zva))
+      (define (char-set-* zvati)
+        (if (char-set-contains? char-set (string-ref porsi zvati))
+            (char-set-* (fx+ 1 zvati))
+            zvati))
 
-      (mapti-char-set-* (char-set-* poi zva)))
+      (mapti-char-set-* (char-set-* zvati)))
     (nunjavni-secuxna
       (lambda () (string-append "[" (char-set->string char-set) "]*"))
       javni-char-set-*)))
@@ -166,16 +167,14 @@
                                                cmene:   cmene
                                                nastura: nastura
                                                porjahe: porjahe)))
-    (define (javni-char-set-+ porsi mapti namapti)
-      (let ((poi        (lerfu-porsi-poi porsi))
-            (zva        (lerfu-porsi-zva porsi)))
-        (if (char-set-contains? char-set (string-ref poi zva))
-            (javni-char-set-* porsi
-                              mapti
-                              namapti
-                              poi
-                              (fx+ 1 zva))
-            (namapti porsi))))
+    (define (javni-char-set-+ porsi zvati mapti namapti)
+      (if (char-set-contains? char-set (string-ref porsi zvati))
+          (javni-char-set-* porsi
+                            zvati
+                            mapti
+                            namapti
+                            (fx+ 1 zvati))
+          (namapti porsi zvati)))
     (nunjavni-secuxna
       (lambda () (string-append "[" (char-set->string char-set) "]+"))
       javni-char-set-+)))
@@ -187,26 +186,26 @@
                                                 (ny most-positive-fixnum))
   (let ((nunvalsi-char-set-kuspe (make-nunvalsi cmene nastura porjahe)))
     (define (javni-char-set-kuspe porsi
+                                  zvati
                                   mapti
-                                  namapti
-                                  #!optional (poi (lerfu-porsi-poi porsi))
-                                             (zva (lerfu-porsi-zva porsi)))
+                                  namapti)
       (define (mapti-char-set-kuspe klani)
-        (mapti (make-lerfu-porsi-pabalvi-valsi porsi klani)
-               (nunvalsi-char-set-kuspe (string-copy poi
-                                                     zva
-                                                     (fx+ zva klani)))))
+        (mapti porsi
+               (fx+ zvati klani)
+               (nunvalsi-char-set-kuspe (string-copy porsi
+                                                     zvati
+                                                     (fx+ zvati klani)))))
 
-      (define (char-set-kuspe poi zva klani)
+      (define (char-set-kuspe zvati klani)
         (if (and (fx< klani ny)
-                 (char-set-contains? char-set (string-ref poi zva)))
-            (char-set-kuspe poi (fx+ 1 zva) (fx+ 1 klani))
+                 (char-set-contains? char-set (string-ref porsi zvati)))
+            (char-set-kuspe (fx+ 1 zvati) (fx+ 1 klani))
             klani))
 
-      (let ((klani (char-set-kuspe poi zva 0)))
+      (let ((klani (char-set-kuspe zvati 0)))
         (if (fx>= klani my)
             (mapti-char-set-kuspe klani)
-            (namapti porsi))))
+            (namapti porsi zvati))))
 
     (nunjavni-secuxna
       (lambda () (string-append "[" (char-set->string char-set) "]"
@@ -216,14 +215,11 @@
 
 (define (nunjavni-char-set char-set #!key cmene nastura porjahe)
   (let ((nunvalsi-char-set (make-nunvalsi cmene nastura porjahe)))
-    (define (javni-char-set porsi mapti namapti)
-
-      (let* ((poi        (lerfu-porsi-poi porsi))
-             (zva        (lerfu-porsi-zva porsi)))
-        (if (char-set-contains? char-set (string-ref poi zva))
-            (mapti (make-lerfu-porsi-pabalvi-lerfu porsi)
-                   (nunvalsi-char-set (lerfu-porsi-lerfu porsi)))
-            (namapti porsi))))
+    (define (javni-char-set porsi zvati mapti namapti)
+      (let ((lerfu (string-ref porsi zvati)))
+        (if (char-set-contains? char-set lerfu)
+            (mapti porsi (fx+ 1 zvati) (nunvalsi-char-set lerfu))
+            (namapti porsi zvati))))
     (nunjavni-secuxna
       (lambda () (string-append "[" (char-set->string char-set) "]"))
       javni-char-set)))
@@ -237,6 +233,7 @@
                                               porsumti))
         (novejmina (novejmina-nunvalsi cmene nastura porjahe default #f)))
     (define (suhopa-javni-* porsi
+                            zvati
                             mapti
                             namapti
                                    ; a "dummy head" is a linked-list
@@ -247,26 +244,28 @@
                                    ;
                             #!key (cfari (list '()))
                                   (fanmo cfari))
-      (define (mapti-* porsi nunvalsi)
+      (define (mapti-* porsi zvati nunvalsi)
         ; append this result to the result list
         (set-cdr! fanmo (list nunvalsi))
         (suhopa-javni-* porsi
+                        zvati
                         mapti
                         namapti
                         cfari: cfari
                         fanmo: (cdr fanmo)))
 
-      (define (namapti-* porsi)
+      (define (namapti-* porsi zvati)
         ; ignore the failure in |ignore-nunjavni|, as
         ; this javni cannot fail.  |porsi| is not advanced
         ; on failure, so we can use it, capturing any
         ; cases that did succeed.
         ;
-        (mapti porsi (vejmina (cdr cfari))))
+        (mapti porsi zvati (vejmina (cdr cfari))))
 
-      (javni porsi mapti-* namapti-*))
+      (javni porsi zvati mapti-* namapti-*))
 
     (define (pamoi-javni-* porsi
+                           zvati
                            mapti
                            namapti
                                   ; a "dummy head" is a linked-list
@@ -277,24 +276,25 @@
                                   ;
                            #!key (cfari (list '()))
                                  (fanmo cfari))
-      (define (mapti-* porsi nunvalsi)
+      (define (mapti-* porsi zvati nunvalsi)
         ; append this result to the result list
         (set-cdr! fanmo (list nunvalsi))
         (suhopa-javni-* porsi
+                        zvati
                         mapti
                         namapti
                         cfari: cfari
                         fanmo: (cdr fanmo)))
 
-      (define (namapti-* porsi)
+      (define (namapti-* porsi zvati)
         ; ignore the failure in |ignore-nunjavni|, as
         ; this javni cannot fail.  |porsi| is not advanced
         ; on failure, so we can use it, capturing any
         ; cases that did succeed.
         ;
-        (mapti porsi novejmina))
+        (mapti porsi zvati novejmina))
 
-      (javni porsi mapti-* namapti-*))
+      (javni porsi zvati mapti-* namapti-*))
 
     (values (nunjavni-secuxna (lambda () "*") pamoi-javni-*)
             (nunjavni-secuxna (lambda () "*") suhopa-javni-*))))
@@ -312,15 +312,16 @@
                                  porsumti: porsumti))
                    (lambda (pamoi suhopa)
                      suhopa))))
-    (define (javni-+ porsi mapti namapti)
-      (define (mapti-+ porsi nunvalsi)
+    (define (javni-+ porsi zvati mapti namapti)
+      (define (mapti-+ porsi zvati nunvalsi)
         (let ((fanmo (list nunvalsi)))
           (javni-* porsi
+                   zvati
                    mapti
                    namapti
                    cfari:   (cons '() fanmo)
                    fanmo:   fanmo)))
-      (javni porsi mapti-+ namapti))
+      (javni porsi zvati mapti-+ namapti))
     (nunjavni-secuxna (lambda () "+") javni-+)))
 
 
@@ -346,6 +347,7 @@
                                             porsumti))
         (novejmina (novejmina-nunvalsi cmene nastura porjahe default #f)))
     (define (suhopa-javni-kuspe porsi
+                                zvati
                                 mapti
                                 namapti
                                         ; a "dummy head" is a linked-list
@@ -357,7 +359,7 @@
                                  #!key (cfari (list '()))
                                        (fanmo cfari)
                                        (klani 1))
-      (define (mapti-kuspe porsi nunvalsi)
+      (define (mapti-kuspe porsi zvati nunvalsi)
         ; append this result to the result list
         (set-cdr! fanmo (list nunvalsi))
 
@@ -365,22 +367,24 @@
         ; otherwise keep matching.
         ;
         (if (fx= ny klani)
-            (mapti porsi (vejmina (cdr cfari)))
+            (mapti porsi zvati (vejmina (cdr cfari)))
             (suhopa-javni-kuspe porsi
+                                zvati
                                 mapti
                                 namapti
                                 cfari: cfari
                                 fanmo: (cdr fanmo)
                                 klani: (fx+ 1 klani))))
 
-      (define (namapti-kuspe porsi)
+      (define (namapti-kuspe porsi zvati)
         (if (fx> klani my)
-            (mapti porsi (vejmina (cdr cfari)))
-            (namapti porsi)))
+            (mapti porsi zvati (vejmina (cdr cfari)))
+            (namapti porsi zvati)))
 
-      (javni porsi mapti-kuspe namapti-kuspe))
+      (javni porsi zvati mapti-kuspe namapti-kuspe))
 
     (define (pamoi-javni-kuspe porsi
+                               zvati
                                mapti
                                namapti
                                        ; a "dummy head" is a linked-list
@@ -392,7 +396,7 @@
                                 #!key (cfari (list '()))
                                       (fanmo cfari)
                                       (klani 1))
-      (define (mapti-kuspe porsi nunvalsi)
+      (define (mapti-kuspe porsi zvati nunvalsi)
         ; append this result to the result list
         (set-cdr! fanmo (list nunvalsi))
 
@@ -400,20 +404,21 @@
         ; otherwise keep matching.
         ;
         (if (fx= ny klani)
-            (mapti porsi (vejmina (cdr cfari)))
+            (mapti porsi zvati (vejmina (cdr cfari)))
             (suhopa-javni-kuspe porsi
+                                zvati
                                 mapti
                                 namapti
                                 cfari: cfari
                                 fanmo: (cdr fanmo)
                                 klani: (fx+ 1 klani))))
 
-      (define (namapti-kuspe porsi)
+      (define (namapti-kuspe porsi zvati)
         (if (fx> klani my)
-            (mapti porsi novejmina)
-            (namapti porsi)))
+            (mapti porsi zvati novejmina)
+            (namapti porsi zvati)))
 
-      (javni porsi mapti-kuspe namapti-kuspe))
+      (javni porsi zvati mapti-kuspe namapti-kuspe))
 
     (nunjavni-secuxna (lambda () "kuspe") pamoi-javni-kuspe)))
 
@@ -429,19 +434,19 @@
                                 ni)
   (let ((vejmina   (venunjmina-nunvalsi cmene nastura porjahe porsumti))
         (novejmina (novejmina-nunvalsi cmene nastura porjahe default ni)))
-    (define (javni-? porsi mapti ignore-namapti)
+    (define (javni-? porsi zvati mapti ignore-namapti)
 
-      (define (mapti-? porsi nunvalsi)
-        (mapti porsi (vejmina nunvalsi)))
+      (define (mapti-? porsi zvati nunvalsi)
+        (mapti porsi zvati (vejmina nunvalsi)))
 
-      (define (namapti-? porsi)
+      (define (namapti-? porsi zvati)
         ; ignore the failure in |ignore-nunvalsi|, as
         ; this javni cannot fail.  |porsi| is not advanced
         ; on failure, so we can use it.
         ;
-        (mapti porsi novejmina))
+        (mapti porsi zvati novejmina))
 
-      (javni porsi mapti-? namapti-?))
+      (javni porsi zvati mapti-? namapti-?))
     (nunjavni-secuxna (lambda () "?") javni-?)))
 
 
@@ -449,14 +454,14 @@
 ;;
 (define (nunjavni-& javni #!key porjahe)
   (let ((nunvalsi-& (make-nunvalsi-predicate porjahe)))
-    (define (javni-& porsi mapti namapti)
-      (define (mapti-& ignore-porsi ignore-nunvalsi)
-        (mapti porsi nunvalsi-&))
+    (define (javni-& porsi zvati mapti namapti)
+      (define (mapti-& ignore-porsi ignore-zvati ignore-nunvalsi)
+        (mapti porsi zvati nunvalsi-&))
 
-      (define (namapti-& ignore-porsi)
-        (namapti porsi))
+      (define (namapti-& ignore-porsi ignore-zvati)
+        (namapti porsi zvati))
 
-      (javni porsi mapti-& namapti-&))
+      (javni porsi zvati mapti-& namapti-&))
     (nunjavni-secuxna (lambda () "&") javni-&)))
 
 
@@ -465,14 +470,14 @@
 ;;
 (define (nunjavni-! javni #!key porjahe)
   (let ((nunvalsi-! (make-nunvalsi-predicate porjahe)))
-    (define (javni-! porsi mapti namapti)
-      (define (mapti-! ignore-porsi ignore-nunvalsi)
-        (namapti porsi))
+    (define (javni-! porsi zvati mapti namapti)
+      (define (mapti-! ignore-porsi ignore-zvati ignore-nunvalsi)
+        (namapti porsi zvati))
 
-      (define (namapti-! ignore-porsi)
-        (mapti porsi nunvalsi-!))
+      (define (namapti-! ignore-porsi ignore-zvati)
+        (mapti porsi zvati nunvalsi-!))
 
-      (javni porsi mapti-! namapti-!))
+      (javni porsi zvati mapti-! namapti-!))
     (nunjavni-secuxna (lambda () "!") javni-!)))
 
 
@@ -482,12 +487,14 @@
 (define (nunjavni-je rodajavni #!key cmene nastura porjahe porsumti)
   (let ((vejmina (venunjmina-rodanunvalsi-je cmene nastura porjahe porsumti)))
     (define (javni-je porsi
+                      zvati
                       mapti
                       namapti
                                  ; capture the initial position, and
                                  ; then continue to pass it as we
                                  ; call ourselves recursively.
                       #!key     (cfari-porsi porsi)
+                                (cfari-zvati zvati)
                                  ; the current rule we're trying.
                                 (rodajavni rodajavni)
                                  ; a "dummy head" is a linked-list
@@ -504,30 +511,32 @@
       ; porsi passed to us and use the one from
       ; the start of this parse rule.
       ;
-      (define (namapti-je ignore-porsi)
-        (namapti cfari-porsi))
+      (define (namapti-je ignore-porsi ignore-zvati)
+        (namapti cfari-porsi cfari-zvati))
 
       (let ((javni (car rodajavni))
             (rest (cdr rodajavni)))
         (if (null? rest)
 
             ; called at the end of the list
-            (let ((mapti-je (lambda (porsi nunvalsi)
+            (let ((mapti-je (lambda (porsi zvati nunvalsi)
                                (set-cdr! fanmo (list nunvalsi))
-                               (mapti porsi (vejmina (cdr cfari))))))
-              (javni porsi mapti-je namapti-je))
+                               (mapti porsi zvati (vejmina (cdr cfari))))))
+              (javni porsi zvati mapti-je namapti-je))
 
             ; called when there are still elements in the list
-            (let ((mapti-je (lambda (porsi nunvalsi)
+            (let ((mapti-je (lambda (porsi zvati nunvalsi)
                                (set-cdr! fanmo (list nunvalsi))
                                (javni-je porsi
+                                         zvati
                                          mapti
                                          namapti
                                          cfari-porsi: cfari-porsi
+                                         cfari-zvati: cfari-zvati
                                          rodajavni: rest
                                          cfari: cfari
                                          fanmo: (cdr fanmo)))))
-              (javni porsi mapti-je namapti-je)))))
+              (javni porsi zvati mapti-je namapti-je)))))
   (nunjavni-secuxna (lambda () "je") javni-je)))
 
 
@@ -537,22 +546,27 @@
 (define (nunjavni-jonai rodajavni #!key cmene nastura porjahe porsumti)
   (let ((vejmina   (venunjmina-nunvalsi cmene nastura porjahe porsumti)))
     (define (javni-jonai porsi
+                         zvati
                          mapti
                          namapti
                          #!optional (rodajavni rodajavni))
-      (define (mapti-jonai porsi nunvalsi)
-        (mapti porsi (vejmina nunvalsi)))
+      (define (mapti-jonai porsi zvati nunvalsi)
+        (mapti porsi zvati (vejmina nunvalsi)))
 
       (let ((javni (car rodajavni))
             (rest (cdr rodajavni)))
         (if (null? rest)
             ; called at the end of the list
-            (javni porsi mapti-jonai namapti)
+            (javni porsi zvati mapti-jonai namapti)
 
             ; called when there are still elements in the list
-            (let ((namapti-jonai (lambda (porsi)
-                                  (javni-jonai porsi mapti namapti rest))))
-              (javni porsi mapti-jonai namapti-jonai)))))
+            (let ((namapti-jonai (lambda (porsi zvati)
+                                   (javni-jonai porsi
+                                                zvati
+                                                mapti
+                                                namapti
+                                                rest))))
+              (javni porsi zvati mapti-jonai namapti-jonai)))))
     (nunjavni-secuxna (lambda () "jonai") javni-jonai)))
 
 
@@ -560,11 +574,11 @@
 ;; rules
 ;;
 (define (nunjavni-porjahe javni)
-  (define (javni-porjahe porsi mapti namapti)
-    (define (mapti-porjahe porsi nunvalsi)
-      (mapti porsi (lambda () `(,(nunvalsi)))))
+  (define (javni-porjahe porsi zvati mapti namapti)
+    (define (mapti-porjahe porsi zvati nunvalsi)
+      (mapti porsi zvati (lambda () `(,(nunvalsi)))))
 
-    (javni porsi mapti-porjahe namapti))
+    (javni porsi zvati mapti-porjahe namapti))
 
   (nunjavni-secuxna (lambda () "porja'e") javni-porjahe))
 
@@ -593,53 +607,45 @@
           (define (tolmohi)
             (set! morji '()))
 
-          (define (javni-morji morji-porsi mapti namapti)
+          (define (javni-morji morji-porsi morji-zvati mapti namapti)
             ;; mapti
-            (define (set-mapti-morji! porsi nunvalsi)
+            (define (set-mapti-morji! porsi zvati nunvalsi)
               (define (mapti-morji mapti ignore-namapti)
-                (mapti porsi nunvalsi))
+                (mapti porsi zvati nunvalsi))
 
-              (hash-table-set! morji
-                               (lerfu-porsi-zva morji-porsi)
-                               mapti-morji))
+              (hash-table-set! morji morji-zvati mapti-morji))
 
             ;; namapti
-            (define (set-namapti-morji! porsi)
+            (define (set-namapti-morji! porsi zvati)
               (define (namapti-morji ignore-mapti namapti)
-                (namapti porsi))
+                (namapti porsi zvati))
 
-              (hash-table-set! morji
-                               (lerfu-porsi-zva morji-porsi)
-                               namapti-morji))
+              (hash-table-set! morji morji-zvati namapti-morji))
 
             ;; recurse
             (define (set-recurse-morji!)
               (define (recurse-morji ignore-mapti namapti)
-                (namapti morji-porsi))
+                (namapti morji-porsi morji-zvati))
 
-              (hash-table-set! morji
-                               (lerfu-porsi-zva morji-porsi)
-                               recurse-morji))
+              (hash-table-set! morji morji-zvati recurse-morji))
 
             (define (javni-nomorji)
-              (define (mapti-morji porsi nunvalsi)
-                (set-mapti-morji! porsi nunvalsi)
-                (mapti porsi nunvalsi))
+              (define (mapti-morji porsi zvati nunvalsi)
+                (set-mapti-morji! porsi zvati nunvalsi)
+                (mapti porsi zvati nunvalsi))
 
-              (define (namapti-morji porsi)
-                (set-namapti-morji! porsi)
-                (namapti porsi))
+              (define (namapti-morji porsi zvati)
+                (set-namapti-morji! porsi zvati)
+                (namapti porsi zvati))
 
               ; register this parse position to detect left
               ; recursion.
               (set-recurse-morji!)
 
-              (javni morji-porsi mapti-morji namapti-morji))
+              (javni morji-porsi morji-zvati mapti-morji namapti-morji))
 
             (let ((nunjalge
-                    (hash-table-ref/default morji
-                                            (lerfu-porsi-zva morji-porsi)
-                                            #f)))
+                    (hash-table-ref/default morji morji-zvati #f)))
               (if nunjalge (nunjalge mapti namapti) (javni-nomorji))))
 
           ; register this cache so we can initialize and clear.
@@ -654,8 +660,8 @@
 
 (define (nunjavni-samselpla samselpla javni #!key cmene porjahe)
   (let ((nunvalsi-samselpla (make-nunvalsi cmene #f porjahe)))
-    (define (javni-samselpla porsi mapti namapti)
-      (define (mapti-samselpla porsi nunvalsi)
+    (define (javni-samselpla porsi zvati mapti namapti)
+      (define (mapti-samselpla porsi zvati nunvalsi)
         (define (samselpla-sumti rodavalsi)
           (call-with-values
             (lambda ()
@@ -686,41 +692,45 @@
              ; call the generator immediately.
              ((nunvalsi-samselpla valsi))))
 
-        (mapti porsi samselpla-nunvalsi))
+        (mapti porsi zvati samselpla-nunvalsi))
 
-      (javni porsi mapti-samselpla namapti))
+      (javni porsi zvati mapti-samselpla namapti))
     javni-samselpla))
 
 (define (nunjavni-samselpla-cabna samselpla javni #!key cmene porjahe)
   (let ((nunvalsi-samselpla-cabna (make-nunvalsi cmene #f porjahe))
         (javni-samselpla (nunjavni-samselpla samselpla javni
                                                        porjahe: porjahe)))
-    (define (javni-samselpla-cabna porsi mapti namapti)
-      (define (mapti-samselpla-cabna mapti-porsi nunvalsi)
+    (define (javni-samselpla-cabna porsi zvati mapti namapti)
+      (define (mapti-samselpla-cabna mapti-porsi mapti-zvati nunvalsi)
         (let ((val (javni-nunvalsi-val* nunvalsi)))
           (if (eq? (secuxna-nonmatch-token) val)
-              (namapti porsi)
-              (mapti mapti-porsi (nunvalsi-samselpla-cabna val)))))
+              (namapti porsi zvati)
+              (mapti mapti-porsi
+                     mapti-zvati
+                     (nunvalsi-samselpla-cabna val)))))
 
-      (javni-samselpla porsi mapti-samselpla-cabna namapti))
+      (javni-samselpla porsi zvati mapti-samselpla-cabna namapti))
     javni-samselpla-cabna))
 
 (define (nunjavni-cmene javni #!key cmene nastura porjahe)
   (let ((nunvalsi-cmene (make-nunvalsi cmene nastura porjahe)))
-    (define (javni-cmene porsi mapti namapti)
-      (define (mapti-cmene porsi nunvalsi)
-        (mapti porsi (nunvalsi-cmene (javni-nunvalsi-val* nunvalsi))))
-      (javni porsi mapti-cmene namapti))
+    (define (javni-cmene porsi zvati mapti namapti)
+      (define (mapti-cmene porsi zvati nunvalsi)
+        (mapti porsi
+               zvati
+               (nunvalsi-cmene (javni-nunvalsi-val* nunvalsi))))
+      (javni porsi zvati mapti-cmene namapti))
     javni-cmene))
 
 ;; backtick operator
 ;;
 (define (nunjavni-nastura javni #!key porjahe)
   (let ((nunvalsi-nastura (make-nunvalsi-predicate porjahe)))
-    (define (javni-nastura porsi mapti namapti)
-      (define (mapti-nastura porsi ignore-nunvalsi)
-        (mapti porsi nunvalsi-nastura))
-      (javni porsi mapti-nastura namapti))
+    (define (javni-nastura porsi zvati mapti namapti)
+      (define (mapti-nastura porsi zvati ignore-nunvalsi)
+        (mapti porsi zvati nunvalsi-nastura))
+      (javni porsi zvati mapti-nastura namapti))
     javni-nastura))
 
 ;; decorate each rule according to the options specified.

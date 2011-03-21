@@ -58,7 +58,7 @@
 
       (lambda (cmene javni)
         (let ((javni-merli (make-javni-merli 0 0 0)))
-          (define (javni-junla porsi mapti namapti #!rest cmene-sumti) 
+          (define (javni-junla porsi zvati mapti namapti #!rest cmene-sumti)
                   ; start the timer
             (let ((cfari (time->seconds (current-time))))
 
@@ -69,19 +69,19 @@
                   (set-javni-merli-temci! javni-merli
                                           (+ temci (- fanmo cfari)))))
 
-              (define (mapti-junla porsi nunvalsi)
+              (define (mapti-junla porsi zvati nunvalsi)
                 (sisti)
                 (let ((mapti-klani (javni-merli-mapti javni-merli)))
                   (set-javni-merli-mapti! javni-merli (fx+ 1 mapti-klani)))
-                (mapti porsi nunvalsi))
+                (mapti porsi zvati nunvalsi))
 
-              (define (namapti-junla porsi)
+              (define (namapti-junla porsi zvati)
                 (sisti)
                 (let ((namapti-klani (javni-merli-namapti javni-merli)))
                   (set-javni-merli-namapti! javni-merli (fx+ 1 namapti-klani)))
-                (namapti porsi))
+                (namapti porsi zvati))
 
-              (apply javni porsi mapti-junla namapti-junla cmene-sumti)))
+              (apply javni porsi zvati mapti-junla namapti-junla cmene-sumti)))
 
             ; register our profile metrics for the profile report.
             (hash-table-set! rodamerli cmene javni-merli)

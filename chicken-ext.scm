@@ -28,20 +28,10 @@
 
    ; lerfu-porsi
    ;
-   make-lerfu-porsi
    make-lerfu-porsi-string
    make-lerfu-porsi-port
-   make-lerfu-porsi-pabalvi-lerfu
-   make-lerfu-porsi-pabalvi-valsi
-   make-lerfu-porsi-fanmo
-   lerfu-porsi?
-   lerfu-porsi-zva
-   lerfu-porsi-poi
    lerfu-porsi-string
 
-   lerfu-porsi->string
-
-   lerfu-porsi-lerfu
    lerfu-porsi-fanmo?
 
 

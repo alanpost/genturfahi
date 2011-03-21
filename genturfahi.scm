@@ -45,7 +45,7 @@
   ; is where all of the samselpla specified in
   ; |nunjavni-samselpla| executes.
   ;
-  (define (mapti porsi nunvalsi)
+  (define (mapti porsi zvati nunvalsi)
     ; always clear memoizations, which aren't valid when we get
     ; a new |porsi|.
     (genturfahi-tolmohi)
@@ -54,9 +54,9 @@
     (junla)    ; if profiling is enabled, output the profiling report.
 
     (values (javni-nunvalsi-val nunvalsi)
-            (lerfu-porsi-string porsi)))
+            (lerfu-porsi-string porsi zvati)))
 
-  (define (namapti porsi)
+  (define (namapti porsi zvati)
     ; always clear memoizations, which aren't valid when we get
     ; a new |porsi|.
     (genturfahi-tolmohi)

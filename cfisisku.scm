@@ -29,7 +29,7 @@
         (if (null? jalge) jalge (car jalge)))
 
       (lambda (cmene javni)
-        (define (javni-cfisisku porsi mapti namapti #!rest cmene-sumti)
+        (define (javni-cfisisku porsi zvati mapti namapti #!rest cmene-sumti)
           (define (push!)
             (set! stack (cons jalge stack))
             (set! jalge '()))
@@ -38,19 +38,20 @@
             (set! jalge `(,@(car stack) (,cmene ,maptixu ,@jalge)))
             (set! stack (cdr stack)))
 
-          (define (mapti-cfisisku porsi nunvalsi)
+          (define (mapti-cfisisku porsi zvati nunvalsi)
             (pop! "mapti")
-            (mapti porsi nunvalsi))
+            (mapti porsi zvati nunvalsi))
 
-          (define (namapti-cfisisku porsi)
+          (define (namapti-cfisisku porsi zvati)
             (pop! "namapti")
-            (namapti porsi))
+            (namapti porsi zvati))
 
           (push!)
           (apply javni
                  porsi
+                 zvati
                  mapti-cfisisku
                  namapti-cfisisku
                  cmene-sumti))
 
-            javni-cfisisku))))
+          javni-cfisisku))))
