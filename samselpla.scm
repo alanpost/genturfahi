@@ -202,7 +202,7 @@
           ;
     (list `(define ,symbol-nunselci
              (nunjavni-secuxna
-               (lambda () ,naselci)
+               (lambda () ',(string->symbol naselci))
                  (lambda (porsi zvati mapti namapti)
                    (,symbol porsi zvati mapti namapti))))
 
