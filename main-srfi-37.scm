@@ -49,7 +49,7 @@ EOS
   (or seed #f))
 
 (define (input-file option name arg seed)
-  (call-with-input-file arg current-input-port)
+  (current-input-port (open-input-file arg))
   (or seed #f))
 
 (define (no-memoize option name arg seed)
