@@ -1,4 +1,4 @@
-(define genturfahi-version-major 0)
+(define genturfahi-version-major 1)
 (define genturfahi-version-minor 0)
 (define genturfahi-version-patch 1)
 
