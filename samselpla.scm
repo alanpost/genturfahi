@@ -445,7 +445,7 @@
          (if (pair-fold narstura? #f sumti) 0 1))))
 
 
-  ; |#f| if we don't need to pass a count.  Otherwise, the count
+  ; |1| if we don't need to pass a count.  Otherwise, the count
   ; of elements to return when this rule doesn't match.
   ;
   ; XXX: we miss one case here, which is where we have a
@@ -459,7 +459,9 @@
   (define niljavni (match javni
                      (('morji-nunjavni-je `(list . ,javni) . _)
                       (fold fx+ 0 (map nilnarstura javni)))
-                     (_ #f)))
+                     (('morji-nunjavni-jonai `(list . ,javni) . _)
+                      (apply fxmax (map nilnarstura javni)))
+                     (_ 1)))
 
   (let ((default (secuxna-?-default)))
     `(morji-nunjavni-? ,(if porsumti?
@@ -468,7 +470,7 @@
                        ,@(if (string=? "" cmene)
                              '()
                              `(cmene: ,cmene))
-                       ,@(if niljavni
+                       ,@(if (fx> niljavni 1)
                              `(ni: ,niljavni)
                              '())
                        ,@(if (equal? "" default)
