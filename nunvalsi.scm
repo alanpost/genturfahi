@@ -63,10 +63,9 @@
     ((_  #f #t #f) (lambda (valsi) `(,(make-javni-valsi cmene valsi))))
 
     ((#f #f #f #t) (lambda (rodavalsi)
-                     (javni-rodavalsi-girzu rodavalsi)))
+                     (javni-rodavalsi-je rodavalsi)))
     ((_  #f #f #t) (lambda (rodavalsi)
-                     (make-javni-valsi cmene
-                                       (javni-rodavalsi-girzu rodavalsi))))
+                     (make-javni-valsi cmene (javni-rodavalsi-je rodavalsi))))
 
     ((#f #f #f #f) (lambda (valsi) valsi))
     ((_  #f #f #f) (lambda (valsi) (make-javni-valsi cmene valsi)))))

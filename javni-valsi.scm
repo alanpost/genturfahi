@@ -37,17 +37,17 @@
 ;; When we have multiple incoming valsi, but we're producing a
 ;; single valsi as a result.
 ;;
+;; XXX: Ok, I have a difference between accepting an incoming
+;;      list and that list being a group operator?  Or does this
+;;      happen every time I accept a list when there are multiple
+;;      incoming words?
+;;
 (define (javni-rodavalsi rodavalsi)
   (remove javni-nastura? rodavalsi))
 
-(define (javni-rodavalsi-girzu rodavalsi)
-  (let* ((jalge (remove javni-nastura? rodavalsi)))
-    (if (null? jalge) secuxna-nastura jalge)))
-
-
-;; A routine used by the nunjavni-je procedure.  It returns
-;; a single element if there is only one nastura in the result
-;; list.
+;; A routine used by the nunjavni-je, nunjavni-jonai, and nunjavni-?
+;; procedures.  It returns a single element if there is only one
+;; nastura in the result list.
 ;;
 (define (javni-rodavalsi-je rodavalsi)
   (let* ((jalge (remove javni-nastura? rodavalsi)))

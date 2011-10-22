@@ -46,7 +46,6 @@
 
    javni-valsi-val
    javni-rodavalsi
-   javni-rodavalsi-girzu
    javni-rodavalsi-je
    javni-rodavalsi-*
    javni-rodavalsi-samselpla
