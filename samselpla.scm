@@ -355,10 +355,20 @@
     (((or 'morji-nunjavni-je
           'morji-nunjavni-jonai) . _)
 
+       ; morji-nunjavni-je or morji-nunjavni-jonai sequence
+       ;
      `(,(car javni)
+
+       ; set flags for each rule in the sequence
+       ;
        (list ,@(map (lambda (javni) (porjahe javni)) (cdadr javni)))
+
+       ; preserve rules that exist for the sequence rule
+       ;
        ,@(cddr javni)
+
        ; set the porsumti flag, unless it has been set already.
+       ;
        ,@(if (pair-fold porsumti? #f (cddr javni)) '() '(porsumti: #t))))
 
     ; anything else means the () was optional, and can be skipped.
