@@ -623,8 +623,20 @@
 (define (samselpla-valsi-single-quote)
   (make-string 1 #\'))
 
+(define (samselpla-valsi-left-single-quote)
+  (make-string 1 #\‘))
+
+(define (samselpla-valsi-right-single-quote)
+  (make-string 1 #\’))
+
 (define (samselpla-valsi-double-quote)
   (make-string 1 #\"))
+
+(define (samselpla-valsi-left-double-quote)
+  (make-string 1 #\“))
+
+(define (samselpla-valsi-right-double-quote)
+  (make-string 1 #\”))
 
 (define (samselpla-valsi-lerfu #!key lerfu)
   (make-string 1 lerfu))
@@ -652,7 +664,7 @@
 
 (define (samselpla-jbolehu)
   `(char-set-xor
-     (char-set-union char-set:letter+digit (char-set #\'))
+     (char-set-union char-set:letter+digit (char-set #\' #\’))
      (char-set #\q #\w)))
 
 (define (samselpla-jbocahu)

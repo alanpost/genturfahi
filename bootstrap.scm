@@ -287,10 +287,23 @@
         (morji-nunjavni-samselpla
           samselpla-smuni
           (morji-nunjavni-je
-            (list (morji-nunjavni-cmene naselci-10 cmene: "naselci")
-                  (morji-nunjavni-valsi "<-")
-                  canlu-1
-                  (morji-nunjavni-cmene javni-11 cmene: "javni"))
+            (list (morji-nunjavni-cmene
+                    naselci-10
+                    cmene:
+                    "naselci"
+                    porjahe:
+                    #t)
+                  (morji-nunjavni-jonai
+                    (list (morji-nunjavni-valsi "<-" porjahe: #t)
+                          (morji-nunjavni-lerfu #\u2190 porjahe: #t))
+                    porsumti:
+                    #t
+                    porjahe:
+                    #t)
+                  (morji-nunjavni-porjahe canlu-1)
+                  (morji-nunjavni-cmene javni-11 cmene: "javni" porjahe: #t))
+            porsumti:
+            #t
             porjahe:
             #t))))
     (define naselci-13
@@ -370,9 +383,22 @@
           (list (morji-nunjavni-samselpla
                   samselpla-nastura-javni
                   (morji-nunjavni-je
-                    (list (morji-nunjavni-lerfu #\`)
-                          canlu-1
-                          (morji-nunjavni-cmene pajavni-21 cmene: "javni"))
+                    (list (morji-nunjavni-jonai
+                            (list (morji-nunjavni-lerfu #\` porjahe: #t)
+                                  (morji-nunjavni-lerfu #\u2018 porjahe: #t))
+                            porsumti:
+                            #t
+                            porjahe:
+                            #t)
+                          (morji-nunjavni-porjahe canlu-1)
+                          (morji-nunjavni-cmene
+                            pajavni-21
+                            cmene:
+                            "javni"
+                            porjahe:
+                            #t))
+                    porsumti:
+                    #t
                     porjahe:
                     #t))
                 pajavni-21))))
@@ -617,7 +643,12 @@
           samselpla-selci-naselci
           (morji-nunjavni-je
             (list (morji-nunjavni-cmene naselci-10 cmene: "naselci")
-                  (morji-nunjavni-! (morji-nunjavni-valsi "<-")))
+                  (morji-nunjavni-!
+                    (morji-nunjavni-jonai
+                      (list (morji-nunjavni-valsi "<-" porjahe: #t)
+                            (morji-nunjavni-lerfu #\u2190 porjahe: #t))
+                      porsumti:
+                      #t)))
             porjahe:
             #t))))
     (define lerfu-selci-57
@@ -682,23 +713,53 @@
           (list (morji-nunjavni-samselpla
                   samselpla-stura-empty-string
                   (morji-nunjavni-je
-                    (list (morji-nunjavni-valsi ",\"\"") canlu-1)
+                    (list (morji-nunjavni-lerfu #\, porjahe: #t)
+                          (morji-nunjavni-jonai
+                            (list (morji-nunjavni-valsi "\"\"" porjahe: #t)
+                                  (morji-nunjavni-valsi "“”" porjahe: #t))
+                            porsumti:
+                            #t
+                            porjahe:
+                            #t)
+                          (morji-nunjavni-porjahe canlu-1))
+                    porsumti:
+                    #t
                     porjahe:
                     #t))
                 (morji-nunjavni-samselpla
                   samselpla-empty-string
                   (morji-nunjavni-je
-                    (list (morji-nunjavni-valsi "\"\"") canlu-1)
+                    (list (morji-nunjavni-jonai
+                            (list (morji-nunjavni-valsi "\"\"" porjahe: #t)
+                                  (morji-nunjavni-valsi "“”" porjahe: #t))
+                            porsumti:
+                            #t
+                            porjahe:
+                            #t)
+                          (morji-nunjavni-porjahe canlu-1))
+                    porsumti:
+                    #t
                     porjahe:
                     #t))
                 (morji-nunjavni-samselpla
                   samselpla-stura-valsi-selci
                   (morji-nunjavni-je
-                    (list (morji-nunjavni-valsi ",\"" porjahe: #t)
+                    (list (morji-nunjavni-lerfu #\, porjahe: #t)
+                          (morji-nunjavni-jonai
+                            (list (morji-nunjavni-lerfu #\" porjahe: #t)
+                                  (morji-nunjavni-lerfu #\u201c porjahe: #t))
+                            porsumti:
+                            #t
+                            porjahe:
+                            #t)
                           (morji-nunjavni-+
                             (morji-nunjavni-je
                               (list (morji-nunjavni-!
-                                      (morji-nunjavni-lerfu #\")
+                                      (morji-nunjavni-jonai
+                                        (list (morji-nunjavni-lerfu #\" porjahe: #t)
+                                              (morji-nunjavni-lerfu #\u201d porjahe: #t))
+                                        porsumti:
+                                        #t)
                                       porjahe:
                                       #t)
                                     (morji-nunjavni-porjahe valsi-lerfu-59))
@@ -712,7 +773,13 @@
                             #t
                             porjahe:
                             #t)
-                          (morji-nunjavni-lerfu #\" porjahe: #t)
+                          (morji-nunjavni-jonai
+                            (list (morji-nunjavni-lerfu #\" porjahe: #t)
+                                  (morji-nunjavni-lerfu #\u201d porjahe: #t))
+                            porsumti:
+                            #t
+                            porjahe:
+                            #t)
                           (morji-nunjavni-porjahe canlu-1))
                     porsumti:
                     #t
@@ -721,11 +788,21 @@
                 (morji-nunjavni-samselpla
                   samselpla-valsi-selci
                   (morji-nunjavni-je
-                    (list (morji-nunjavni-lerfu #\" porjahe: #t)
+                    (list (morji-nunjavni-jonai
+                            (list (morji-nunjavni-lerfu #\" porjahe: #t)
+                                  (morji-nunjavni-lerfu #\u201c porjahe: #t))
+                            porsumti:
+                            #t
+                            porjahe:
+                            #t)
                           (morji-nunjavni-+
                             (morji-nunjavni-je
                               (list (morji-nunjavni-!
-                                      (morji-nunjavni-lerfu #\")
+                                      (morji-nunjavni-jonai
+                                        (list (morji-nunjavni-lerfu #\" porjahe: #t)
+                                              (morji-nunjavni-lerfu #\u201d porjahe: #t))
+                                        porsumti:
+                                        #t)
                                       porjahe:
                                       #t)
                                     (morji-nunjavni-porjahe valsi-lerfu-59))
@@ -739,7 +816,13 @@
                             #t
                             porjahe:
                             #t)
-                          (morji-nunjavni-lerfu #\" porjahe: #t)
+                          (morji-nunjavni-jonai
+                            (list (morji-nunjavni-lerfu #\" porjahe: #t)
+                                  (morji-nunjavni-lerfu #\u201d porjahe: #t))
+                            porsumti:
+                            #t
+                            porjahe:
+                            #t)
                           (morji-nunjavni-porjahe canlu-1))
                     porsumti:
                     #t
@@ -791,10 +874,38 @@
                     porjahe:
                     #t))
                 (morji-nunjavni-samselpla
+                  samselpla-valsi-left-single-quote
+                  (morji-nunjavni-je
+                    (list (morji-nunjavni-lerfu #\\)
+                          (morji-nunjavni-lerfu #\u2018))
+                    porjahe:
+                    #t))
+                (morji-nunjavni-samselpla
+                  samselpla-valsi-right-single-quote
+                  (morji-nunjavni-je
+                    (list (morji-nunjavni-lerfu #\\)
+                          (morji-nunjavni-lerfu #\u2019))
+                    porjahe:
+                    #t))
+                (morji-nunjavni-samselpla
                   samselpla-valsi-double-quote
                   (morji-nunjavni-je
                     (list (morji-nunjavni-lerfu #\\)
                           (morji-nunjavni-lerfu #\"))
+                    porjahe:
+                    #t))
+                (morji-nunjavni-samselpla
+                  samselpla-valsi-left-double-quote
+                  (morji-nunjavni-je
+                    (list (morji-nunjavni-lerfu #\\)
+                          (morji-nunjavni-lerfu #\u201c))
+                    porjahe:
+                    #t))
+                (morji-nunjavni-samselpla
+                  samselpla-valsi-right-double-quote
+                  (morji-nunjavni-je
+                    (list (morji-nunjavni-lerfu #\\)
+                          (morji-nunjavni-lerfu #\u201d))
                     porjahe:
                     #t))
                 (morji-nunjavni-samselpla
@@ -1057,7 +1168,13 @@
           (list (morji-nunjavni-samselpla
                   samselpla-samselpla-balvi
                   (morji-nunjavni-je
-                    (list (morji-nunjavni-valsi "->" porjahe: #t)
+                    (list (morji-nunjavni-jonai
+                            (list (morji-nunjavni-valsi "->" porjahe: #t)
+                                  (morji-nunjavni-lerfu #\u2192 porjahe: #t))
+                            porsumti:
+                            #t
+                            porjahe:
+                            #t)
                           (morji-nunjavni-porjahe canlu-1)
                           (morji-nunjavni-jonai
                             (list (morji-nunjavni-porjahe samselpla-xadni-70)
@@ -1073,7 +1190,13 @@
                 (morji-nunjavni-samselpla
                   samselpla-samselpla-cabna
                   (morji-nunjavni-je
-                    (list (morji-nunjavni-valsi "-|" porjahe: #t)
+                    (list (morji-nunjavni-jonai
+                            (list (morji-nunjavni-valsi "-|" porjahe: #t)
+                                  (morji-nunjavni-lerfu #\u21e5 porjahe: #t))
+                            porsumti:
+                            #t
+                            porjahe:
+                            #t)
                           (morji-nunjavni-porjahe canlu-1)
                           (morji-nunjavni-jonai
                             (list (morji-nunjavni-porjahe samselpla-xadni-70)
