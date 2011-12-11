@@ -19,7 +19,7 @@
 
 (include "chicken-declare.scm")
 
-;(use utf8)
+(use utf8)
 (use srfi-28)    ; Basic Format Strings
 (use srfi-37)    ; args-fold
 (use extras)     ; pretty-print

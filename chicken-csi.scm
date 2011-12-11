@@ -17,17 +17,21 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
+(use utf8)
 (use srfi-1)
 (use srfi-9)
-(use srfi-13)    ; String Libraries
-(use srfi-14)    ; Character Classes
-(use srfi-28)    ; Basic Format Strings
-(use srfi-37)    ; args-fold
-(use srfi-39)    ; parameter objects
-(use srfi-69)    ; hash tables
-(use extras)     ; format, pretty-print
+(use utf8-srfi-13) ; String Libraries
+(use utf8-srfi-14) ; Character Classes
+(use srfi-28)      ; Basic Format Strings
+(use srfi-37)      ; args-fold
+(use srfi-39)      ; parameter objects
+(use srfi-69)      ; hash tables
+(use extras)       ; format, pretty-print
 (use matchable)
-(use sandbox)    ; safe-eval
+(use ports)
+(use stack)
+(use sandbox)      ; safe-eval
+(use test)         ; test environment.
 
 (include "chicken-platform.scm")
 

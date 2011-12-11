@@ -125,11 +125,11 @@
 
 (include "chicken-declare.scm")
 
-;(require-extension utf8)
+(require-extension utf8)
 
 (require-extension srfi-1)
-(require-extension srfi-13)
-(require-extension srfi-14)
+(require-extension utf8-srfi-13)
+(require-extension utf8-srfi-14)
 (require-extension srfi-69)
 (require-extension ports)
 ;(require-library extras)
@@ -137,9 +137,10 @@
 (require-library sandbox)
 (require-library genturfahi)
 
+(import utf8)
 (import srfi-1)          ; unzip2
-(import srfi-13)         ; string-append, string-copy
-(import srfi-14)         ; character set library
+(import utf8-srfi-13)    ; string-append, string-copy
+(import utf8-srfi-14)    ; character set library
 (import srfi-69)         ; basic hash tables
 (import ports)           ; Chicken Scheme srfi-6 and port extensions
 ;(import extras)         ; pretty-print, for debugging

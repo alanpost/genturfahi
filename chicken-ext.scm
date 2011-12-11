@@ -164,13 +164,13 @@
 
 (include "chicken-declare.scm")
 
-;(require-extension utf8)
+(require-extension utf8)
 
 (require-extension srfi-1)
 ;(require-extension srfi-6)         ; built-in
 ;(require-extension srfi-9)         ; built-in
-(require-extension srfi-13)
-(require-extension srfi-14)
+(require-extension utf8-srfi-13)
+(require-extension utf8-srfi-14)
 (require-extension srfi-18)
 ;(require-extension srfi-28)        ; built-in
 ;(require-extension srfi-39)        ; built-in
@@ -181,11 +181,12 @@
 (require-extension matchable)
 (require-extension ports)
 
+(import utf8)
 (import srfi-1)          ; filter
 ;(import srfi-6)          ; string ports
 ;(import srfi-9)          ; define-record-type
-(import srfi-13)         ; string-copy
-(import srfi-14)         ; character set library
+(import utf8-srfi-13)    ; string-copy
+(import utf8-srfi-14)    ; character set library
 (import srfi-18)         ; multi-threading support
 ;(import srfi-28)         ; basic format strings
 ;(import srfi-39)         ; parameter objects
