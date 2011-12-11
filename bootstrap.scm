@@ -21,222 +21,222 @@
   (let ()
     (define cfari-5
       (nunjavni-secuxna
-        (lambda () "cfari")
+        (lambda () 'cfari)
         (lambda (porsi zvati mapti namapti)
           (cfari-6 porsi zvati mapti namapti))))
     (define cfari-samselpla-2
       (nunjavni-secuxna
-        (lambda () "cfari-samselpla")
+        (lambda () 'cfari-samselpla)
         (lambda (porsi zvati mapti namapti)
           (cfari-samselpla-7 porsi zvati mapti namapti))))
     (define gerna-3
       (nunjavni-secuxna
-        (lambda () "gerna")
+        (lambda () 'gerna)
         (lambda (porsi zvati mapti namapti)
           (gerna-9 porsi zvati mapti namapti))))
     (define smuni-8
       (nunjavni-secuxna
-        (lambda () "smuni")
+        (lambda () 'smuni)
         (lambda (porsi zvati mapti namapti)
           (smuni-12 porsi zvati mapti namapti))))
     (define naselci-10
       (nunjavni-secuxna
-        (lambda () "naselci")
+        (lambda () 'naselci)
         (lambda (porsi zvati mapti namapti)
           (naselci-13 porsi zvati mapti namapti))))
     (define javni-11
       (nunjavni-secuxna
-        (lambda () "javni")
+        (lambda () 'javni)
         (lambda (porsi zvati mapti namapti)
           (javni-16 porsi zvati mapti namapti))))
     (define jonai-14
       (nunjavni-secuxna
-        (lambda () "jonai")
+        (lambda () 'jonai)
         (lambda (porsi zvati mapti namapti)
           (jonai-17 porsi zvati mapti namapti))))
     (define je-15
       (nunjavni-secuxna
-        (lambda () "je")
+        (lambda () 'je)
         (lambda (porsi zvati mapti namapti)
           (je-20 porsi zvati mapti namapti))))
     (define nastura-pajavni-18
       (nunjavni-secuxna
-        (lambda () "nastura-pajavni")
+        (lambda () 'nastura-pajavni)
         (lambda (porsi zvati mapti namapti)
           (nastura-pajavni-22 porsi zvati mapti namapti))))
     (define pajavni-21
       (nunjavni-secuxna
-        (lambda () "pajavni")
+        (lambda () 'pajavni)
         (lambda (porsi zvati mapti namapti)
           (pajavni-35 porsi zvati mapti namapti))))
     (define dot-zero-or-more-23
       (nunjavni-secuxna
-        (lambda () "dot-zero-or-more")
+        (lambda () 'dot-zero-or-more)
         (lambda (porsi zvati mapti namapti)
           (dot-zero-or-more-36 porsi zvati mapti namapti))))
     (define dot-one-or-more-24
       (nunjavni-secuxna
-        (lambda () "dot-one-or-more")
+        (lambda () 'dot-one-or-more)
         (lambda (porsi zvati mapti namapti)
           (dot-one-or-more-37 porsi zvati mapti namapti))))
     (define dot-kuspe-25
       (nunjavni-secuxna
-        (lambda () "dot-kuspe")
+        (lambda () 'dot-kuspe)
         (lambda (porsi zvati mapti namapti)
           (dot-kuspe-39 porsi zvati mapti namapti))))
     (define optional-26
       (nunjavni-secuxna
-        (lambda () "optional")
+        (lambda () 'optional)
         (lambda (porsi zvati mapti namapti)
           (optional-40 porsi zvati mapti namapti))))
     (define zero-or-more-27
       (nunjavni-secuxna
-        (lambda () "zero-or-more")
+        (lambda () 'zero-or-more)
         (lambda (porsi zvati mapti namapti)
           (zero-or-more-41 porsi zvati mapti namapti))))
     (define one-or-more-28
       (nunjavni-secuxna
-        (lambda () "one-or-more")
+        (lambda () 'one-or-more)
         (lambda (porsi zvati mapti namapti)
           (one-or-more-42 porsi zvati mapti namapti))))
     (define kuspe-29
       (nunjavni-secuxna
-        (lambda () "kuspe")
+        (lambda () 'kuspe)
         (lambda (porsi zvati mapti namapti)
           (kuspe-43 porsi zvati mapti namapti))))
     (define and-predicate-30
       (nunjavni-secuxna
-        (lambda () "and-predicate")
+        (lambda () 'and-predicate)
         (lambda (porsi zvati mapti namapti)
           (and-predicate-44 porsi zvati mapti namapti))))
     (define end-of-input-31
       (nunjavni-secuxna
-        (lambda () "end-of-input")
+        (lambda () 'end-of-input)
         (lambda (porsi zvati mapti namapti)
           (end-of-input-45 porsi zvati mapti namapti))))
     (define not-predicate-32
       (nunjavni-secuxna
-        (lambda () "not-predicate")
+        (lambda () 'not-predicate)
         (lambda (porsi zvati mapti namapti)
           (not-predicate-46 porsi zvati mapti namapti))))
     (define cmene-sumti-33
       (nunjavni-secuxna
-        (lambda () "cmene-sumti")
+        (lambda () 'cmene-sumti)
         (lambda (porsi zvati mapti namapti)
           (cmene-sumti-47 porsi zvati mapti namapti))))
     (define selci-javni-34
       (nunjavni-secuxna
-        (lambda () "selci-javni")
+        (lambda () 'selci-javni)
         (lambda (porsi zvati mapti namapti)
           (selci-javni-54 porsi zvati mapti namapti))))
     (define selci-naselci-48
       (nunjavni-secuxna
-        (lambda () "selci-naselci")
+        (lambda () 'selci-naselci)
         (lambda (porsi zvati mapti namapti)
           (selci-naselci-55 porsi zvati mapti namapti))))
     (define lerfu-selci-49
       (nunjavni-secuxna
-        (lambda () "lerfu-selci")
+        (lambda () 'lerfu-selci)
         (lambda (porsi zvati mapti namapti)
           (lerfu-selci-57 porsi zvati mapti namapti))))
     (define lerfu-cmene-56
       (nunjavni-secuxna
-        (lambda () "lerfu-cmene")
+        (lambda () 'lerfu-cmene)
         (lambda (porsi zvati mapti namapti)
           (lerfu-cmene-58 porsi zvati mapti namapti))))
     (define valsi-selci-50
       (nunjavni-secuxna
-        (lambda () "valsi-selci")
+        (lambda () 'valsi-selci)
         (lambda (porsi zvati mapti namapti)
           (valsi-selci-60 porsi zvati mapti namapti))))
     (define valsi-lerfu-59
       (nunjavni-secuxna
-        (lambda () "valsi-lerfu")
+        (lambda () 'valsi-lerfu)
         (lambda (porsi zvati mapti namapti)
           (valsi-lerfu-61 porsi zvati mapti namapti))))
     (define klesi-selci-51
       (nunjavni-secuxna
-        (lambda () "klesi-selci")
+        (lambda () 'klesi-selci)
         (lambda (porsi zvati mapti namapti)
           (klesi-selci-63 porsi zvati mapti namapti))))
     (define klesi-lerfu-62
       (nunjavni-secuxna
-        (lambda () "klesi-lerfu")
+        (lambda () 'klesi-lerfu)
         (lambda (porsi zvati mapti namapti)
           (klesi-lerfu-66 porsi zvati mapti namapti))))
     (define klesi-cmene-64
       (nunjavni-secuxna
-        (lambda () "klesi-cmene")
+        (lambda () 'klesi-cmene)
         (lambda (porsi zvati mapti namapti)
           (klesi-cmene-67 porsi zvati mapti namapti))))
     (define klesi-binxo-65
       (nunjavni-secuxna
-        (lambda () "klesi-binxo")
+        (lambda () 'klesi-binxo)
         (lambda (porsi zvati mapti namapti)
           (klesi-binxo-68 porsi zvati mapti namapti))))
     (define denpabu-52
       (nunjavni-secuxna
-        (lambda () "denpabu")
+        (lambda () 'denpabu)
         (lambda (porsi zvati mapti namapti)
           (denpabu-69 porsi zvati mapti namapti))))
     (define samselpla-19
       (nunjavni-secuxna
-        (lambda () "samselpla")
+        (lambda () 'samselpla)
         (lambda (porsi zvati mapti namapti)
           (samselpla-72 porsi zvati mapti namapti))))
     (define samselpla-xadni-70
       (nunjavni-secuxna
-        (lambda () "samselpla-xadni")
+        (lambda () 'samselpla-xadni)
         (lambda (porsi zvati mapti namapti)
           (samselpla-xadni-73 porsi zvati mapti namapti))))
     (define samselpla-cmene-71
       (nunjavni-secuxna
-        (lambda () "samselpla-cmene")
+        (lambda () 'samselpla-cmene)
         (lambda (porsi zvati mapti namapti)
           (samselpla-cmene-74 porsi zvati mapti namapti))))
     (define girzu-javni-53
       (nunjavni-secuxna
-        (lambda () "girzu-javni")
+        (lambda () 'girzu-javni)
         (lambda (porsi zvati mapti namapti)
           (girzu-javni-75 porsi zvati mapti namapti))))
     (define namcu-38
       (nunjavni-secuxna
-        (lambda () "namcu")
+        (lambda () 'namcu)
         (lambda (porsi zvati mapti namapti)
           (namcu-76 porsi zvati mapti namapti))))
     (define canlu-1
       (nunjavni-secuxna
-        (lambda () "canlu")
+        (lambda () 'canlu)
         (lambda (porsi zvati mapti namapti)
           (canlu-79 porsi zvati mapti namapti))))
     (define canlubu-77
       (nunjavni-secuxna
-        (lambda () "canlubu")
+        (lambda () 'canlubu)
         (lambda (porsi zvati mapti namapti)
           (canlubu-81 porsi zvati mapti namapti))))
     (define totoi-78
       (nunjavni-secuxna
-        (lambda () "totoi")
+        (lambda () 'totoi)
         (lambda (porsi zvati mapti namapti)
           (totoi-82 porsi zvati mapti namapti))))
     (define CR-83
       (nunjavni-secuxna
-        (lambda () "CR")
+        (lambda () 'CR)
         (lambda (porsi zvati mapti namapti)
           (CR-84 porsi zvati mapti namapti))))
     (define LF-85
       (nunjavni-secuxna
-        (lambda () "LF")
+        (lambda () 'LF)
         (lambda (porsi zvati mapti namapti)
           (LF-86 porsi zvati mapti namapti))))
     (define CRLF-80
       (nunjavni-secuxna
-        (lambda () "CRLF")
+        (lambda () 'CRLF)
         (lambda (porsi zvati mapti namapti)
           (CRLF-87 porsi zvati mapti namapti))))
     (define FAhO-4
       (nunjavni-secuxna
-        (lambda () "FAhO")
+        (lambda () 'FAhO)
         (lambda (porsi zvati mapti namapti)
           (FAhO-88 porsi zvati mapti namapti))))
     (define cfari-6
