@@ -31,8 +31,8 @@
       (define gerna-1
         (nunjavni-secuxna
           (lambda () 'gerna)
-          (lambda (porsi zvati mapti namapti)
-            (gerna-2 porsi zvati mapti namapti))))
+          (lambda (porsi mapti namapti)
+            (gerna-2 porsi mapti namapti))))
       (define gerna-2
         (nunjavni-morji
           (morji-nunjavni-samselpla

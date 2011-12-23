@@ -34,23 +34,23 @@
         (define jonai-4
           (nunjavni-secuxna
             (lambda () "jonai")
-            (lambda (porsi zvati mapti namapti)
-              (jonai-5 porsi zvati mapti namapti))))
+            (lambda (porsi mapti namapti)
+              (jonai-5 porsi mapti namapti))))
         (define a-1
           (nunjavni-secuxna
             (lambda () "a")
-            (lambda (porsi zvati mapti namapti)
-              (a-6 porsi zvati mapti namapti))))
+            (lambda (porsi mapti namapti)
+              (a-6 porsi mapti namapti))))
         (define b-2
           (nunjavni-secuxna
             (lambda () "b")
-            (lambda (porsi zvati mapti namapti)
-              (b-7 porsi zvati mapti namapti))))
+            (lambda (porsi mapti namapti)
+              (b-7 porsi mapti namapti))))
         (define c-3
           (nunjavni-secuxna
             (lambda () "c")
-            (lambda (porsi zvati mapti namapti)
-              (c-8 porsi zvati mapti namapti))))
+            (lambda (porsi mapti namapti)
+              (c-8 porsi mapti namapti))))
         (define jonai-5
           (nunjavni-morji
             (morji-nunjavni-jonai (list a-1 b-2 c-3))))

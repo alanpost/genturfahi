@@ -41,7 +41,7 @@
           (lambda (port)
             (pretty-print (junla-datni) port)))))
 
-  (define (mapti porsi zvati valsi)
+  (define (mapti porsi valsi)
     ; always clear memoizations, which aren't valid when we get
     ; a new |porsi|.
     (genturfahi-tolmohi)
@@ -50,9 +50,9 @@
     (junla)    ; if profiling is enabled, output the profiling report.
 
     (values (javni-valsi-val valsi)
-            (lerfu-porsi-string porsi zvati)))
+            (lerfu-porsi-string porsi)))
 
-  (define (namapti porsi zvati)
+  (define (namapti porsi)
     ; always clear memoizations, which aren't valid when we get
     ; a new |porsi|.
     (genturfahi-tolmohi)
@@ -69,8 +69,8 @@
     (let ((porsi (if (port? lefpoi)
                      (make-lerfu-porsi-port lefpoi)
                      (make-lerfu-porsi-string lefpoi))))
-      (genturfahi-semorji (string-length porsi))
-      (javni porsi 0 mapti namapti))))
+      (genturfahi-semorji (length porsi))
+      (javni porsi mapti namapti))))
 
 (define (genturfahi* javni)
   (let ((gerna (genturfahi javni)))

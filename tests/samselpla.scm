@@ -42,14 +42,14 @@
                  test-samselpla-samselpla
                  (nunjavni-je
                    (list (nunjavni-cmene
-                           (lambda (porsi zvati mapti namapti)
-                             (a porsi zvati mapti namapti))
+                           (lambda (porsi mapti namapti)
+                             (a porsi mapti namapti))
                            cmene: "a")
-                         (lambda (porsi zvati mapti namapti)
-                           (b porsi zvati mapti namapti))
+                         (lambda (porsi mapti namapti)
+                           (b porsi mapti namapti))
                          (nunjavni-cmene
-                           (lambda (porsi zvati mapti namapti)
-                             (c porsi zvati mapti namapti))
+                           (lambda (porsi mapti namapti)
+                             (c porsi mapti namapti))
                            cmene: "c"))
                    porjahe: #t))))
              (a (nunjavni-morji

@@ -21,7 +21,7 @@
 ;;
 (define (make-lerfu-porsi-string lefpoi)
   ;; Append a #\nul to the end of the string as a sentinel.
-  (string-append lefpoi (make-string 1 #\nul)))
+  (string->list (string-append lefpoi (make-string 1 #\nul))))
 
 
 ;; open a port as a lerfu-porsi
@@ -40,19 +40,51 @@
     ; copy the string from the port
     (get-output-string oport))
 
-  (port->string (open-output-string)))
+  (string->list (port->string (open-output-string))))
 
 
 ;; return the remaining characters in the parse input.
 ;;
-(define (lerfu-porsi-string porsi zvati)
-  (string-copy porsi
-               zvati
-               ; skip the sentinel
-               (fx- (string-length porsi) 1)))
+(define (lerfu-porsi-string porsi)
+  ; skip the sentinel
+  (list->string (drop-right porsi 1)))
 
 
 ;; return #t if this |lerfu-porsi| is EOF
 ;;
-(define (lerfu-porsi-fanmo? porsi zvati)
-  (eq? (fx+ zvati 1) (string-length porsi)))
+(define (lerfu-porsi-fanmo? porsi)
+  (null? (cdr porsi)))
+
+;; a version of span (from srfi-1) that has min/max values
+;; and calls continuations rather than returning multiple
+;; values.  |pred| also works on lists, rather than elements..
+;;
+;; basically, this is custom designed to solve a unique problem
+;; with the range operator.
+;;
+(define (span-kuspe pred?
+                    porsi
+                    mapti
+                    namapti
+                    #!key (my 0)
+                          (ny most-positive-fixnum)
+                          (klani 0)
+                          (cfari-porsi porsi)
+                          (cfari (list '()))
+                          (fanmo cfari))
+  (if (and (fx< klani ny) (pred? porsi))
+      (begin
+        (set-cdr! fanmo (list (car porsi)))
+        (span-kuspe pred?
+                    (cdr porsi)
+                    mapti
+                    namapti
+                    my: my
+                    ny: ny
+                    klani: (fx+ 1 klani)
+                    cfari-porsi: cfari-porsi
+                    cfari: cfari
+                    fanmo: (cdr fanmo)))
+      (if (fx>= klani my)
+          (mapti porsi (cdr cfari))
+          (namapti cfari-porsi))))

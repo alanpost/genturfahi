@@ -52,23 +52,23 @@
       (define expr-4
         (nunjavni-secuxna
           (lambda () "expr")
-          (lambda (porsi zvati mapti namapti)
-            (expr-5 porsi zvati mapti namapti))))
+          (lambda (porsi mapti namapti)
+            (expr-5 porsi mapti namapti))))
       (define mulexp-1
         (nunjavni-secuxna
           (lambda () "mulexp")
-          (lambda (porsi zvati mapti namapti)
-            (mulexp-6 porsi zvati mapti namapti))))
+          (lambda (porsi mapti namapti)
+            (mulexp-6 porsi mapti namapti))))
       (define simple-2
         (nunjavni-secuxna
           (lambda () "simple")
-          (lambda (porsi zvati mapti namapti)
-            (simple-7 porsi zvati mapti namapti))))
+          (lambda (porsi mapti namapti)
+            (simple-7 porsi mapti namapti))))
       (define digits-3
         (nunjavni-secuxna
           (lambda () "digits")
-          (lambda (porsi zvati mapti namapti)
-            (digits-8 porsi zvati mapti namapti))))
+          (lambda (porsi mapti namapti)
+            (digits-8 porsi mapti namapti))))
       (define expr-5
         (nunjavni-morji
           (morji-nunjavni-jonai

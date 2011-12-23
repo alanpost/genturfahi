@@ -42,38 +42,38 @@
         (define je-7
           (nunjavni-secuxna
             (lambda () "je")
-            (lambda (porsi zvati mapti namapti)
-              (je-8 porsi zvati mapti namapti))))
+            (lambda (porsi mapti namapti)
+              (je-8 porsi mapti namapti))))
         (define a-1
           (nunjavni-secuxna
             (lambda () "a")
-            (lambda (porsi zvati mapti namapti)
-              (a-9 porsi zvati mapti namapti))))
+            (lambda (porsi mapti namapti)
+              (a-9 porsi mapti namapti))))
         (define b-2
           (nunjavni-secuxna
             (lambda () "b")
-            (lambda (porsi zvati mapti namapti)
-              (b-10 porsi zvati mapti namapti))))
+            (lambda (porsi mapti namapti)
+              (b-10 porsi mapti namapti))))
         (define c-3
           (nunjavni-secuxna
             (lambda () "c")
-            (lambda (porsi zvati mapti namapti)
-              (c-11 porsi zvati mapti namapti))))
+            (lambda (porsi mapti namapti)
+              (c-11 porsi mapti namapti))))
         (define x-4
           (nunjavni-secuxna
             (lambda () "x")
-            (lambda (porsi zvati mapti namapti)
-              (x-12 porsi zvati mapti namapti))))
+            (lambda (porsi mapti namapti)
+              (x-12 porsi mapti namapti))))
         (define y-5
           (nunjavni-secuxna
             (lambda () "y")
-            (lambda (porsi zvati mapti namapti)
-              (y-13 porsi zvati mapti namapti))))
+            (lambda (porsi mapti namapti)
+              (y-13 porsi mapti namapti))))
         (define z-6
           (nunjavni-secuxna
             (lambda () "z")
-            (lambda (porsi zvati mapti namapti)
-              (z-14 porsi zvati mapti namapti))))
+            (lambda (porsi mapti namapti)
+              (z-14 porsi mapti namapti))))
         (define je-8
           (nunjavni-morji
             (morji-nunjavni-samselpla

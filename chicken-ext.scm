@@ -34,6 +34,7 @@
 
    lerfu-porsi-fanmo?
 
+   span-kuspe
 
    ; javni-valsi
    ;

@@ -32,23 +32,23 @@
         (define gerna-4
           (nunjavni-secuxna
             (lambda () "gerna")
-            (lambda (porsi zvati mapti namapti)
-              (gerna-5 porsi zvati mapti namapti))))
+            (lambda (porsi mapti namapti)
+              (gerna-5 porsi mapti namapti))))
         (define digit-1
           (nunjavni-secuxna
             (lambda () "digit")
-            (lambda (porsi zvati mapti namapti)
-              (digit-6 porsi zvati mapti namapti))))
+            (lambda (porsi mapti namapti)
+              (digit-6 porsi mapti namapti))))
         (define alpha-2
           (nunjavni-secuxna
             (lambda () "alpha")
-            (lambda (porsi zvati mapti namapti)
-              (alpha-7 porsi zvati mapti namapti))))
+            (lambda (porsi mapti namapti)
+              (alpha-7 porsi mapti namapti))))
         (define FAhO-3
           (nunjavni-secuxna
             (lambda () "FAhO")
-            (lambda (porsi zvati mapti namapti)
-              (FAhO-8 porsi zvati mapti namapti))))
+            (lambda (porsi mapti namapti)
+              (FAhO-8 porsi mapti namapti))))
         (define gerna-5
           (nunjavni-morji
             (morji-nunjavni-je
