@@ -613,8 +613,8 @@
           ; and we can free up a substantial amount of memory if
           ; we clear the caches after we're done parsing.
           ;
-          (stack-push! rodasemorji (cons semorji (stack-pop! rodasemorji)))
-          (stack-push! rodatolmohi (cons tolmohi (stack-pop! rodatolmohi)))
+          (set! rodasemorji (cons semorji rodasemorji))
+          (set! rodatolmohi (cons tolmohi rodatolmohi))
 
           javni-morji)))))
 
