@@ -63,7 +63,7 @@
     ; set the exit status
     (secuxna-exit-status 1)
 
-    (values (secuxna-nonmatch-token) (lerfu-porsi-string porsi zvati)))
+    (values (secuxna-nonmatch-token) (lerfu-porsi-string porsi)))
 
   (lambda (lefpoi)
     (let ((porsi (if (port? lefpoi)
