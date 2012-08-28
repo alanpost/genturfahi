@@ -17,6 +17,12 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
+;;
+;; A Chicken Scheme wrapper for creating the genturfahi-peg package.
+;; This package includes the PEG file parser written on top of the
+;; runtime library, genturfahi (in the file chicken-ext.scm)
+;;
+
 (module genturfahi-peg
   (genturfahi-env
 

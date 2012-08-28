@@ -17,6 +17,13 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
+;;
+;; A Chicken Scheme wrapper for creating the genturfahi package.
+;; This is the runtime library for genturfahi.  It does not include
+;; the ability to parse the PEG file format, that is genturfahi-peg
+;; (in the file chicken-ext-peg.scm).
+;;
+
 (module genturfahi
   (genturfahi
    genturfahi*

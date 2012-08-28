@@ -17,6 +17,10 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
+;;
+;; This is the Chicken Scheme wrapper for the genturfahi program.
+;;
+
 (include "chicken-declare.scm")
 
 (use utf8)

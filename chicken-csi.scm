@@ -17,6 +17,11 @@
 ;;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ;;;;
 
+;;
+;; A Chicken Scheme wrapper csi, so genturfahi can be used and
+;; tested from a dynamic environment on the command-line.
+;;
+
 (use utf8)
 (use srfi-1)
 (use srfi-9)
