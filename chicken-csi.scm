@@ -27,6 +27,7 @@
 (use srfi-39)      ; parameter objects
 (use srfi-69)      ; hash tables
 (use extras)       ; format, pretty-print
+(use moremacros)   ; for type-case
 (use matchable)
 (use ports)
 (use stack)

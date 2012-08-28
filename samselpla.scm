@@ -146,19 +146,25 @@
     ; update the list of non-terminals that we don't memoize
     ;
     (let ((no-memoize (secuxna-no-memoize)))
-      (if (string? no-memoize)
-          (begin
-            (hash-table-set! samselpla-namorji no-memoize #t)
-            (secuxna-no-memoize #f)))
-      (if (list? no-memoize)
-          (begin
-            (for-each (lambda (naselci)
-                        (hash-table-set! samselpla-namorji naselci #t))
-                      no-memoize)
-            ; since we've registered all of the rules not to
-            ; memoize, make sure we do memoize the rest of them.
-            ;
-            (secuxna-no-memoize #f))))))
+      ; since we've registered all of the rules not to
+      ; memoize, make sure we do memoize the rest of them.
+      ;
+      (secuxna-no-memoize #f)
+
+      (type-case no-memoize
+        (string (hash-table-set! samselpla-namorji no-memoize #t)
+                ; success
+                #t)
+        (list   (for-each (lambda (naselci)
+                            (hash-table-set! samselpla-namorji naselci #t))
+                          no-memoize)
+                ; success
+                #t)
+        ;;
+        ;; this should be an error case, but I haven't built an
+        ;; error handling framework for this system yet.
+        ;;
+        (else   #f)))))
 
 ;; emit the non-terminal with it's rule.
 ;;

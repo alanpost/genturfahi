@@ -179,6 +179,7 @@
 ;(require-extension srfi-95)
 (require-extension data-structures)
 (require-extension extras)
+(require-extension moremacros)
 (require-extension matchable)
 (require-extension ports)
 
@@ -195,6 +196,7 @@
 ;(import srfi-95)         ; sorting and merging
 (import data-structures) ; should be srfi-95
 (import extras)          ; format, pretty-print
+(import moremacros)      ; type-case
 (import matchable)
 (import ports)           ; Chicken Scheme srfi-6 and port extensions
 

@@ -133,6 +133,7 @@
 (require-extension srfi-69)
 (require-extension ports)
 ;(require-library extras)
+(require-library moremacros)
 (require-library matchable)
 (require-library sandbox)
 (require-library genturfahi)
@@ -144,6 +145,7 @@
 (import srfi-69)         ; basic hash tables
 (import ports)           ; Chicken Scheme srfi-6 and port extensions
 ;(import extras)         ; pretty-print, for debugging
+(import moremacros)      ; type-case
 (import matchable)
 (import sandbox)
 (import genturfahi)
