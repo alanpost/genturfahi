@@ -140,6 +140,13 @@
 
           jalge)))))
 
+;; This routine is called once for every {}-expr in a .peg file.
+;; Update our global state (and in the case of memoization, clear
+;; the global variable.) each time through.
+;;
+;; This routine must return #f if there is a problem with the sexpr
+;; in the {}-expr.
+;;
 (define (samselpla-cfari-samselpla #!key rodalerfu)
   (let* ((valsi     (apply string rodalerfu))
          (samselpla (call-with-input-string valsi read)))
@@ -156,18 +163,20 @@
 
       (type-case no-memoize
         (string (hash-table-set! samselpla-namorji no-memoize #t)
-                ; success
-                #t)
-        (list   (for-each (lambda (naselci)
-                            (hash-table-set! samselpla-namorji naselci #t))
-                          no-memoize)
-                ; success
-                #t)
+                 ; success
+                 #t)
+        (list    (for-each (lambda (naselci)
+                             (hash-table-set! samselpla-namorji naselci #t))
+                           no-memoize)
+                 ; success
+                 #t)
+                 ; success, default case
+        (boolean #t)
         ;;
         ;; this should be an error case, but I haven't built an
         ;; error handling framework for this system yet.
         ;;
-        (else   #f)))))
+        (else    #f)))))
 
 ;; emit the non-terminal with it's rule.
 ;;
