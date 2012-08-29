@@ -106,33 +106,30 @@
                 ,@smuni-nunselci
                 ,@smuni
                 (tolmohi-nunjavni)
-                ,@(type-case rodatamgau
-                    (string (let ((rodatamgau
-                                    (string->symbol rodatamgau))
-                                  (nunselci-cmene
-                                    (samselpla-cmene->symbol selci-cmene)))
-                              (if toplevel
-                                  (pacmene-e-toplevel rodatamgau
-                                                      selci-cmene
-                                                      nunselci-cmene)
-                                  (pacmene-enai-toplevel selci-cmene
-                                                         nunselci-cmene))))
-                    (list   (let ((rodatamgau
-                                    (map string->symbol rodatamgau))
-                                  (nunselci-cmene
-                                    (map samselpla-cmene->symbol selci-cmene)))
-                              (if toplevel
-                                  (suhorecmene-e-toplevel rodatamgau
-                                                          selci-cmene
-                                                          nunselci-cmene)
-                                  (suhorecmene-enai-toplevel selci-cmene
-                                                             nunselci-cmene))))
-                    ;;
-                    ;; this should be an error case, but I haven't built an
-                    ;; error handling framework for this system yet.
-                    ;;
-                    (else   '())))
-              '())))
+                ,@(if (list? rodatamgau)
+
+                      (let ((rodatamgau
+                              (map string->symbol rodatamgau))
+                            (nunselci-cmene
+                              (map samselpla-cmene->symbol selci-cmene)))
+                        (if toplevel
+                            (suhorecmene-e-toplevel rodatamgau
+                                                    selci-cmene
+                                                    nunselci-cmene)
+                            (suhorecmene-enai-toplevel selci-cmene
+                                                       nunselci-cmene)))
+
+                      (let ((rodatamgau
+                              (string->symbol  rodatamgau))
+                            (nunselci-cmene
+                              (samselpla-cmene->symbol selci-cmene)))
+                        (if toplevel
+                            (pacmene-e-toplevel rodatamgau
+                                                selci-cmene
+                                                nunselci-cmene)
+                            (pacmene-enai-toplevel selci-cmene
+                                                   nunselci-cmene)))))
+            '())))
 
           (hash-table-clear! samselpla-hash-table)
           (hash-table-clear! samselpla-hash-table*)
@@ -140,13 +137,6 @@
 
           jalge)))))
 
-;; This routine is called once for every {}-expr in a .peg file.
-;; Update our global state (and in the case of memoization, clear
-;; the global variable.) each time through.
-;;
-;; This routine must return #f if there is a problem with the sexpr
-;; in the {}-expr.
-;;
 (define (samselpla-cfari-samselpla #!key rodalerfu)
   (let* ((valsi     (apply string rodalerfu))
          (samselpla (call-with-input-string valsi read)))
@@ -163,20 +153,18 @@
 
       (type-case no-memoize
         (string (hash-table-set! samselpla-namorji no-memoize #t)
-                 ; success
-                 #t)
-        (list    (for-each (lambda (naselci)
-                             (hash-table-set! samselpla-namorji naselci #t))
-                           no-memoize)
-                 ; success
-                 #t)
-                 ; success, default case
-        (boolean #t)
+                ; success
+                #t)
+        (list   (for-each (lambda (naselci)
+                            (hash-table-set! samselpla-namorji naselci #t))
+                          no-memoize)
+                ; success
+                #t)
         ;;
         ;; this should be an error case, but I haven't built an
         ;; error handling framework for this system yet.
         ;;
-        (else    #f)))))
+        (else   #f)))))
 
 ;; emit the non-terminal with it's rule.
 ;;
