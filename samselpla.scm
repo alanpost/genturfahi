@@ -106,30 +106,33 @@
                 ,@smuni-nunselci
                 ,@smuni
                 (tolmohi-nunjavni)
-                ,@(if (list? rodatamgau)
-
-                      (let ((rodatamgau
-                              (map string->symbol rodatamgau))
-                            (nunselci-cmene
-                              (map samselpla-cmene->symbol selci-cmene)))
-                        (if toplevel
-                            (suhorecmene-e-toplevel rodatamgau
-                                                    selci-cmene
-                                                    nunselci-cmene)
-                            (suhorecmene-enai-toplevel selci-cmene
-                                                       nunselci-cmene)))
-
-                      (let ((rodatamgau
-                              (string->symbol  rodatamgau))
-                            (nunselci-cmene
-                              (samselpla-cmene->symbol selci-cmene)))
-                        (if toplevel
-                            (pacmene-e-toplevel rodatamgau
-                                                selci-cmene
-                                                nunselci-cmene)
-                            (pacmene-enai-toplevel selci-cmene
-                                                   nunselci-cmene)))))
-            '())))
+                ,@(type-case rodatamgau
+                    (string (let ((rodatamgau
+                                    (string->symbol rodatamgau))
+                                  (nunselci-cmene
+                                    (samselpla-cmene->symbol selci-cmene)))
+                              (if toplevel
+                                  (pacmene-e-toplevel rodatamgau
+                                                      selci-cmene
+                                                      nunselci-cmene)
+                                  (pacmene-enai-toplevel selci-cmene
+                                                         nunselci-cmene))))
+                    (list   (let ((rodatamgau
+                                    (map string->symbol rodatamgau))
+                                  (nunselci-cmene
+                                    (map samselpla-cmene->symbol selci-cmene)))
+                              (if toplevel
+                                  (suhorecmene-e-toplevel rodatamgau
+                                                          selci-cmene
+                                                          nunselci-cmene)
+                                  (suhorecmene-enai-toplevel selci-cmene
+                                                             nunselci-cmene))))
+                    ;;
+                    ;; this should be an error case, but I haven't built an
+                    ;; error handling framework for this system yet.
+                    ;;
+                    (else   '())))
+              '())))
 
           (hash-table-clear! samselpla-hash-table)
           (hash-table-clear! samselpla-hash-table*)
