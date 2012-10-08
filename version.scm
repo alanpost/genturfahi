@@ -6,4 +6,4 @@
 ;                             genturfahi-version-major
 ;                             genturfahi-version-minor
 ;                             genturfahi-version-patch))
-(define genturfahi-version "trunk")
+(define genturfahi-version "master")
