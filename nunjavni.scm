@@ -547,16 +547,43 @@
 ;;        memoizes non-terminals above a certain level of
 ;;        complexity.
 ;;
-(define-values (genturfahi-semorji genturfahi-tolmohi nunjavni-morji)
-  (let ((rodasemorji '())
-        (rodatolmohi '()))
+(define-values (genturfahi-morji-push!
+                genturfahi-morji-pop!
+                genturfahi-semorji
+                genturfahi-tolmohi
+                nunjavni-morji)
+  (let ((rodasemorji (let ((stack (make-stack)))
+                       (stack-push! stack '())
+                       stack))
+        (rodatolmohi (let ((stack (make-stack)))
+                       (stack-push! stack '())
+                       stack)))
     (values
-      (lambda (nilcla)
-        (map (lambda (semorji) (semorji nilcla)) rodasemorji))
-
+      ; genturfahi-morji-push!
+      ;
       (lambda ()
-        (map (lambda (tolmohi) (tolmohi)) rodatolmohi))
+        (stack-push! rodasemorji '())
+        (stack-push! rodatolmohi '()))
 
+      ; genturfahi-morji-pop!
+      ;
+      (lambda ()
+        (stack-pop! rodasemorji)
+        (stack-pop! rodatolmohi))
+
+      ; genturfahi-semorji
+      ;
+      (lambda (nilcla)
+        (map (lambda (semorji) (semorji nilcla))
+             (stack-peek rodasemorji)))
+
+      ; genturfahi-tolmohi
+      ;
+      (lambda ()
+        (map (lambda (tolmohi) (tolmohi)) (stack-peek rodatolmohi)))
+
+      ; nunjavni-morji
+      ;
       (lambda (javni)
         (let ((morji '()))
           (define (semorji nilcla)
@@ -613,8 +640,8 @@
           ; and we can free up a substantial amount of memory if
           ; we clear the caches after we're done parsing.
           ;
-          (set! rodasemorji (cons semorji rodasemorji))
-          (set! rodatolmohi (cons tolmohi rodatolmohi))
+          (stack-push! rodasemorji (cons semorji (stack-pop!  rodasemorji)))
+          (stack-push! rodatolmohi (cons tolmohi (stack-pop!  rodatolmohi)))
 
           javni-morji)))))
 

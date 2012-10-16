@@ -86,6 +86,8 @@
    nunjavni-jonai
    nunjavni-porjahe
 
+   genturfahi-morji-push!
+   genturfahi-morji-pop!
    genturfahi-semorji
    genturfahi-tolmohi
    nunjavni-morji
@@ -189,6 +191,7 @@
 (require-extension moremacros)
 (require-extension matchable)
 (require-extension ports)
+(require-extension stack)
 
 (import utf8)
 (import srfi-1)          ; filter
@@ -206,6 +209,7 @@
 (import moremacros)      ; type-case
 (import matchable)
 (import ports)           ; Chicken Scheme srfi-6 and port extensions
+(import stack)
 
 (include "chicken-platform.scm")
 
