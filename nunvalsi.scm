@@ -148,5 +148,6 @@
   (let* ((val         (if nastura secuxna-nastura default))
          (jalge       (if cmene (make-javni-valsi cmene val) val)))
     ; repeat acts like a porjahe flag, don't apply it twice.
-    (if ni (repeat ni jalge)
-           (if porjahe `(,jalge) jalge))))
+    (if ni
+        (repeat ni jalge)
+        (if porjahe `(,jalge) jalge))))
