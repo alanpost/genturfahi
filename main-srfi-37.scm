@@ -28,6 +28,7 @@ usage: genturfahi [-:?]
                   [-d | --debug]
                   [-h | --help]
                   [-i | --input-file NAME]
+                  [-L | --license]
                   [-m | --no-memoize]
                   [-n | --define-name NAME]
                   [-o | --output-file NAME]
@@ -70,6 +71,10 @@ EOS
   (secuxna-start-production arg)
   (or seed #f))
 
+(define (license option name arg seed)
+  (print genturfahi-license)
+  (exit 0))
+
 (define (version option name arg seed)
   (print (format "genturfa'i version ~a" genturfahi-version))
   (exit 0))
@@ -82,6 +87,7 @@ EOS
   (list (option '(#\d "debug")            #f #t debug)
         (option '(#\h "sidju" "help")     #f #f help)
         (option '(#\i "input-file")       #t #f input-file)
+        (option '(#\L "license")          #f #f license)
         (option '(#\m "no-memoize")       #f #f no-memoize)
         (option '(#\n "define-name")      #t #f define-name)
         (option '(#\o "output-file")      #t #f output-file)
