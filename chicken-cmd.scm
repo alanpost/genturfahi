@@ -18,7 +18,7 @@
 ;;;;
 
 ;;
-;; This is the Chicken Scheme wrapper for the genturfahi program.
+;; This is the Chicken Scheme wrapper for the genturfahi binary.
 ;;
 
 (include "chicken-declare.scm")
