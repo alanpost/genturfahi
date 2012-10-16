@@ -27,7 +27,6 @@
 (use srfi-28)      ; Basic Format Strings
 (use srfi-37)      ; args-fold
 (use extras)       ; pretty-print
-(use moremacros)   ; for type-case
 (use genturfahi)
 (use genturfahi-peg)
 
