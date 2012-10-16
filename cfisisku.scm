@@ -34,16 +34,21 @@
             (set! stack (cons jalge stack))
             (set! jalge '()))
 
-          (define (pop! maptixu)
-            (set! jalge `(,@(car stack) (,cmene ,maptixu ,@jalge)))
+          (define (pop! maptixu valsi porsi)
+            (set! jalge `(,@(car stack)
+                          (,cmene
+                           ,maptixu
+                           ,valsi
+                           ,porsi
+                           ,@jalge)))
             (set! stack (cdr stack)))
 
           (define (mapti-cfisisku porsi nunvalsi)
-            (pop! "mapti")
+            (pop! 'mapti nunvalsi porsi)
             (mapti porsi nunvalsi))
 
           (define (namapti-cfisisku porsi)
-            (pop! "namapti")
+            (pop! 'namapti #f porsi)
             (namapti porsi))
 
           (push!)
