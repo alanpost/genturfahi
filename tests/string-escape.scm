@@ -27,7 +27,12 @@
           #\\
           #\[
           #\] 
+          "“"
+          "”"
           "\""
+          "‘"
+          "’"
+          "'"
           #\return
           #\return
           #\return
@@ -44,7 +49,8 @@
           #\tab
           #\tab
           #\tab)
-        (genturfahi-string-escape "\\\\[]\"\r\r\r\n\n\n\f\f\f\n\n\n \t\t\t")))
+        (genturfahi-string-escape
+           "\\\\[]“”\"‘’'\r\r\r\n\n\n\f\f\f\n\n\n \t\t\t")))
 
 (test-group "string escape (PEG)"
   (string-escape-peg))

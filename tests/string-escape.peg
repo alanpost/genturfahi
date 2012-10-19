@@ -21,7 +21,12 @@ string-escape <- (backslash-0
                / backslash-1
                / l-bracket-0
                / r-bracket-0
+               / left-double-quote-1
+               / right-double-quote-1
                / double-quote-1
+               / left-single-quote-1
+               / right-single-quote-1
+               / single-quote-1
                / linefeed-0
                / linefeed-1
                / linefeed-2
@@ -45,7 +50,13 @@ backslash-1 <- ,"\\"
 l-bracket-0 <- [\[]
 r-bracket-0 <- [\]]
 
+left-double-quote-1 <- ,"\“"
+right-double-quote-1 <- ,"\”"
 double-quote-1 <- ,"\""
+
+left-single-quote-1 <- ,"\‘"
+right-single-quote-1 <- ,"\’"
+single-quote-1 <- ,"\'"
 
 linefeed-0 <- [\n]
 linefeed-1 <- ,"\n"
@@ -62,8 +73,6 @@ page-2 <- ,#\page
 return-0 <- [\r]
 return-1 <- ,"\r"
 return-2 <- ,#\return
-
-single-quote-1 <- "\'"
 
 space-2 <- ,#\space
 

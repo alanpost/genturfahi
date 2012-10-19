@@ -86,7 +86,7 @@ cfari-samselpla <- #\{ canlu #:rodalerfu (!#\} .)+ #\} canlu
 gerna           <- smuni*
 
 smuni           <- #:naselci naselci
-                   "<-"
+                   ( "<-" / "←" )
                    canlu
                    #:javni javni
                 -> samselpla-smuni
@@ -106,7 +106,7 @@ je              <- #:javni     nastura-pajavni+
                    #:samselpla samselpla?
                 -> samselpla-je
 
-nastura-pajavni <- #\` canlu #:javni pajavni
+nastura-pajavni <- ( #\` / #\‘ ) canlu #:javni pajavni
                 -> samselpla-nastura-javni
                  / pajavni
 
@@ -182,7 +182,7 @@ selci-javni     <- selci-naselci
                  / denpabu
                  / girzu-javni
 
-selci-naselci   <- #:naselci naselci !"<-"
+selci-naselci   <- #:naselci naselci !( "<-" / "←" )
                 -> samselpla-selci-naselci
 
 lerfu-selci     <- ",#\\" #:lerfu lerfu-cmene canlu
@@ -201,20 +201,20 @@ lerfu-cmene     <- "space"    -> samselpla-lerfu-space
                  / "tab"      -> samselpla-lerfu-tab
                  / "page"     -> samselpla-lerfu-page
 
-valsi-selci     <- ",\"\""
+valsi-selci     <- #\, ( "\"\"" / "\“\”" )
                    canlu
                 -> samselpla-stura-empty-string
-                 / "\"\""
+                 / ( "\"\"" / "\“\”" )
                    canlu
                 -> samselpla-empty-string
-                 / ",\""
-                   #:valsi-lerfu (!#\" valsi-lerfu)+
-                   #\"
+                 / #\, ( #\" / #\“ )
+                   #:valsi-lerfu (!( #\" / #\“ / #\” ) valsi-lerfu)+
+                   ( #\" / #\” )
                    canlu
                 -> samselpla-stura-valsi-selci
-                 / #\"
-                   #:valsi-lerfu (!#\" valsi-lerfu)+
-                   #\"
+                 / ( #\" / #\“ )
+                   #:valsi-lerfu ( !( #\" / #\“ / #\” ) valsi-lerfu )+
+                   ( #\" / #\” )
                    canlu
                 -> samselpla-valsi-selci
 valsi-lerfu     <- #\\ #\n        -> samselpla-valsi-newline
@@ -223,6 +223,10 @@ valsi-lerfu     <- #\\ #\n        -> samselpla-valsi-newline
                  / #\\ #\f        -> samselpla-valsi-page
                  / #\\ #\\        -> samselpla-valsi-backslash
                  / #\\ #\'        -> samselpla-valsi-single-quote
+                 / #\\ #\‘        -> samselpla-valsi-left-single-quote
+                 / #\\ #\’        -> samselpla-valsi-right-single-quote
+                 / #\\ #\“        -> samselpla-valsi-left-double-quote
+                 / #\\ #\”        -> samselpla-valsi-right-double-quote
                  / #\\ #\"        -> samselpla-valsi-double-quote
                  / !#\\ #:lerfu . -> samselpla-valsi-lerfu
 
@@ -282,12 +286,12 @@ klesi-binxo     <- #\\ #\n       -> samselpla-klesi-newline
 denpabu         <- #\. canlu
                 -> samselpla-denpabu
 
-samselpla       <- "->"
+samselpla       <- ( "->" / "→" )
                    canlu
                    ( samselpla-xadni
                    / samselpla-cmene )
                 -> samselpla-samselpla-balvi
-                 / "-|"
+                 / ( "-|" / "⇥" )
                    canlu
                    ( samselpla-xadni
                    / samselpla-cmene )

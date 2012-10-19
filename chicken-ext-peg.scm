@@ -73,7 +73,11 @@
    samselpla-valsi-page
    samselpla-valsi-backslash
    samselpla-valsi-single-quote
+   samselpla-valsi-left-single-quote
+   samselpla-valsi-right-single-quote
    samselpla-valsi-double-quote
+   samselpla-valsi-left-double-quote
+   samselpla-valsi-right-double-quote
    samselpla-valsi-lerfu
    samselpla-alnum
    samselpla-alpha
