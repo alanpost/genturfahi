@@ -2,6 +2,6 @@
  (category parsing)
  (doc-from-wiki)
  (license "ISC")
- (depends make matchable moremacros sandbox srfi-37 utf8)
+ (depends make matchable moremacros sandbox srfi-37 stack utf8)
  (test-depends test utils)
  (synopsis "lo ke pe'a jajgau ratcu ke'e genturfa'i"))
