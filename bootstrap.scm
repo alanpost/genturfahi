@@ -664,6 +664,9 @@
                   samselpla-lerfu-newline
                   (morji-nunjavni-valsi "newline" porjahe: #t))
                 (morji-nunjavni-samselpla
+                  samselpla-lerfu-nul
+                  (morji-nunjavni-valsi "nul" porjahe: #t))
+                (morji-nunjavni-samselpla
                   samselpla-lerfu-tab
                   (morji-nunjavni-valsi "tab" porjahe: #t))
                 (morji-nunjavni-samselpla
@@ -796,6 +799,13 @@
       (nunjavni-morji
         (morji-nunjavni-jonai
           (list (morji-nunjavni-samselpla
+                  samselpla-valsi-nul
+                  (morji-nunjavni-je
+                    (list (morji-nunjavni-lerfu #\\)
+                          (morji-nunjavni-lerfu #\0))
+                    porjahe:
+                    #t))
+                (morji-nunjavni-samselpla
                   samselpla-valsi-newline
                   (morji-nunjavni-je
                     (list (morji-nunjavni-lerfu #\\)
@@ -1070,6 +1080,13 @@
       (nunjavni-morji
         (morji-nunjavni-jonai
           (list (morji-nunjavni-samselpla
+                  samselpla-klesi-nul
+                  (morji-nunjavni-je
+                    (list (morji-nunjavni-lerfu #\\)
+                          (morji-nunjavni-lerfu #\0))
+                    porjahe:
+                    #t))
+                (morji-nunjavni-samselpla
                   samselpla-klesi-newline
                   (morji-nunjavni-je
                     (list (morji-nunjavni-lerfu #\\)

@@ -19,7 +19,13 @@
 
 (define (string-escape-peg)
   (let* ((samselpla (call-with-input-file "string-escape.peg" genturfahi-peg))
-         (genturfahi-string-escape (genturfahi (eval samselpla))))
+         (genturfahi-string-escape
+           ;
+           ; set a non-#\nul sentinel character, as this grammar
+           ; has a nul in it, and the sentinel character must
+           ; be a character that does not appear in a valid parse.
+           ;
+           (genturfahi (eval samselpla) sentinel: #\a)))
     (string-escape-test genturfahi-string-escape)))
 
 (define (string-escape-test genturfahi-string-escape)
@@ -45,12 +51,15 @@
           #\newline
           #\newline
           #\newline
+          #\nul
+          #\nul
+          #\nul
           #\space
           #\tab
           #\tab
           #\tab)
         (genturfahi-string-escape
-           "\\\\[]“”\"‘’'\r\r\r\n\n\n\f\f\f\n\n\n \t\t\t")))
+           "\\\\[]“”\"‘’'\r\r\r\n\n\n\f\f\f\n\n\n\x00\x00\x00 \t\t\t")))
 
 (test-group "string escape (PEG)"
   (string-escape-peg))

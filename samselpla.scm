@@ -608,6 +608,9 @@
 (define (samselpla-lerfu-newline)
   #\newline)
 
+(define (samselpla-lerfu-nul)
+  #\nul)
+
 (define (samselpla-lerfu-return)
   #\return)
 
@@ -622,6 +625,9 @@
 
 (define (samselpla-valsi-selci #!key valsi-lerfu)
   `(morji-nunjavni-valsi ,(apply string-append valsi-lerfu)))
+
+(define (samselpla-valsi-nul)
+  (make-string 1 #\nul))
 
 (define (samselpla-valsi-newline)
   "\n")
@@ -769,6 +775,9 @@
 (define (samselpla-^xdigit)
   `(char-set-xor (char-set-complement char-set:hex-digit)
                  (char-set ,(secuxna-sentinel))))
+
+(define (samselpla-klesi-nul)
+  #\nul)
 
 (define (samselpla-klesi-newline)
   #\newline)

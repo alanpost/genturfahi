@@ -198,6 +198,7 @@ lerfu-cmene     <- "space"    -> samselpla-lerfu-space
                  / "return"   -> samselpla-lerfu-return
                  / "linefeed" -> samselpla-lerfu-linefeed
                  / "newline"  -> samselpla-lerfu-newline
+                 / "nul"      -> samselpla-lerfu-nul
                  / "tab"      -> samselpla-lerfu-tab
                  / "page"     -> samselpla-lerfu-page
 
@@ -217,7 +218,8 @@ valsi-selci     <- #\, ( "\"\"" / "\“\”" )
                    ( #\" / #\” )
                    canlu
                 -> samselpla-valsi-selci
-valsi-lerfu     <- #\\ #\n        -> samselpla-valsi-newline
+valsi-lerfu     <- #\\ #\0        -> samselpla-valsi-nul
+                 / #\\ #\n        -> samselpla-valsi-newline
                  / #\\ #\r        -> samselpla-valsi-return
                  / #\\ #\t        -> samselpla-valsi-tab
                  / #\\ #\f        -> samselpla-valsi-page
@@ -275,7 +277,8 @@ klesi-cmene     <- "[:alnum:]"   -> samselpla-alnum
                  / "[:^space:]"  -> samselpla-^space
                  / "[:^upper:]"  -> samselpla-^upper
                  / "[:^xdigit:]" -> samselpla-^xdigit
-klesi-binxo     <- #\\ #\n       -> samselpla-klesi-newline
+klesi-binxo     <- #\\ #\0       -> samselpla-klesi-nul
+                 / #\\ #\n       -> samselpla-klesi-newline
                  / #\\ #\r       -> samselpla-klesi-return
                  / #\\ #\t       -> samselpla-klesi-tab
                  / #\\ #\f       -> samselpla-klesi-page

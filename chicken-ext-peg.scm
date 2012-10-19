@@ -60,6 +60,7 @@
    samselpla-stura-lerfu-selci
    samselpla-lerfu-selci
    samselpla-lerfu-space
+   samselpla-lerfu-nul
    samselpla-lerfu-linefeed
    samselpla-lerfu-newline
    samselpla-lerfu-return
@@ -67,6 +68,7 @@
    samselpla-lerfu-page
    samselpla-stura-valsi-selci
    samselpla-valsi-selci
+   samselpla-valsi-nul
    samselpla-valsi-newline
    samselpla-valsi-return
    samselpla-valsi-tab
@@ -109,6 +111,7 @@
    samselpla-^space
    samselpla-^upper
    samselpla-^xdigit
+   samselpla-klesi-nul
    samselpla-klesi-newline
    samselpla-klesi-return
    samselpla-klesi-tab
