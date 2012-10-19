@@ -1,11 +1,26 @@
 ni'o lo gafpoi
 ==============
 
+.i detri fa li renopare pi'e pano pi'e paso
+-------------------------------------------
+
+ * genturfa'i 1.0.4 is released.
+
+   + This release adds the stack egg dependency to the .meta file.
+     The nightly regression tests for 1.0.3 failed because this
+     was missing.
+   + Add support for nul characters to the grammar.  This also
+     required fixing a few more bugs in parameter handling around
+     the sentinel character.
+   + Restore some lost utf8 changes to the grammar.  I don't believe
+     this ever affected the compiled code, as the bootstrap code was
+     never reverted, it was just ahead of the source code.
+
 .i detri fa li renopare pi'e pano pi'e paxa
 -------------------------------------------
 
  * genturfa'i 1.0.3 is released.  This release also fixes some
-	 bugs in {}-exprs.
+   bugs in {}-exprs.
 
 .i detri fa li renopare pi'e nobi pi'e reso
 -------------------------------------------
