@@ -19,9 +19,9 @@
 
 ;; open a string as a lerfu-porsi
 ;;
-(define (make-lerfu-porsi-string lefpoi)
+(define (make-lerfu-porsi-string lefpoi #!key (sentinel #\nul))
   ;; Append a #\nul to the end of the string as a sentinel.
-  (string->list (string-append lefpoi (make-string 1 #\nul))))
+  (string->list (string-append lefpoi (make-string 1 sentinel))))
 
 
 ;; open a port as a lerfu-porsi
@@ -29,13 +29,13 @@
 ;; This procedure uses |copy-octet-port-to-octet-port|,
 ;; which must be defined in a *-platform.scm file.
 ;;
-(define (make-lerfu-porsi-port iport)
+(define (make-lerfu-porsi-port iport #!key (sentinel #\nul))
   (define (port->string oport)
     ; copy the input port to a string
     (copy-octet-port-to-octet-port iport oport)
 
     ; copy a #\nul to the end of the string as a sentinel.
-    (write-char #\nul oport)
+    (write-char sentinel oport)
 
     ; copy the string from the port
     (get-output-string oport))

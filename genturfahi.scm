@@ -26,7 +26,8 @@
 ;; continuation, as it instead generates and returns |val|
 ;; in |javni-valsi| to the caller.
 ;;
-(define (genturfahi javni #!key nonmatch-token)
+(define (genturfahi javni #!key (nonmatch-token #f)
+                                (sentinel #\nul))
   (define (cfisisku)
     (if (secuxna-debug)
         (call-with-output-file
@@ -67,13 +68,15 @@
 
   (lambda (lefpoi)
     (let ((porsi (if (port? lefpoi)
-                     (make-lerfu-porsi-port lefpoi)
-                     (make-lerfu-porsi-string lefpoi))))
+                     (make-lerfu-porsi-port lefpoi sentinel: sentinel)
+                     (make-lerfu-porsi-string lefpoi sentinel: sentinel))))
       (genturfahi-semorji (length porsi))
       (javni porsi mapti namapti))))
 
-(define (genturfahi* javni #!key nonmatch-token)
-  (let ((gerna (genturfahi javni nonmatch-token: nonmatch-token)))
+(define (genturfahi* javni #!key (nonmatch-token #f)
+                                 (sentinel #\nul))
+  (let ((gerna (genturfahi javni nonmatch-token: nonmatch-token
+																 sentinel: sentinel)))
     (lambda (lefpoi)
       (call-with-values
         (lambda () (gerna lefpoi))
